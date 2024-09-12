@@ -1,26 +1,26 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es5", // Определяет версию ECMAScript, до которой будет компилироваться код. ES5 гарантирует поддержку старых браузеров.
     "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "dom", // Типы для работы с DOM-элементами, такими как document, window, HTML-элементы и API браузера.
+      "dom.iterable", // Позволяет использовать методы итерации (например, for...of) для DOM-элементов.
+      "esnext" // Поддержка последних возможностей ECMAScript (ES2020+).
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "allowJs": true, // Разрешает включать JavaScript файлы в проект и компилировать их вместе с TypeScript.
+    "skipLibCheck": true, // Пропускает проверку типов в библиотеках (ускоряет компиляцию, полезно при работе с большими проектами).
+    "esModuleInterop": true, // Включает совместимость CommonJS и ES-модулей, чтобы можно было импортировать модули с использованием синтаксиса ES.
+    "allowSyntheticDefaultImports": true, // Позволяет использовать синтетический импорт по умолчанию, даже если библиотека не экспортирует значение по умолчанию.
+    "strict": true, // Включает строгий режим TypeScript (строгая проверка типов, обязательное указание типов в некоторых ситуациях и т.д.).
+    "forceConsistentCasingInFileNames": true, // Требует использования одного и того же регистра в именах файлов. Например, `App.tsx` и `app.tsx` будут считаться разными файлами, что предотвратит ошибки на разных платформах.
+    "noFallthroughCasesInSwitch": true, // Генерирует ошибку, если случай в операторе `switch` не завершён и продолжается в следующем случае.
+    "module": "esnext", // Указывает, какой стандарт модулей использовать (в данном случае ESNext для поддержки новейших возможностей модульной системы).
+    "moduleResolution": "node", // Использует алгоритм разрешения модулей, как в Node.js. Полезно для работы с пакетами и путями модулей.
+    "resolveJsonModule": true, // Позволяет импортировать JSON-файлы как модули, чтобы работать с ними внутри TypeScript.
+    "isolatedModules": true, // Требует, чтобы каждый файл был компилируем изолированно (без зависимостей на другие файлы).
+    "noEmit": true, // Запрещает генерировать выходные файлы после компиляции, то есть TypeScript проверяет код, но не создаёт результирующие `.js` файлы.
+    "jsx": "react-jsx" // Использует новую трансформацию JSX (React 17+), которая не требует импорта React в каждом файле.
   },
   "include": [
-    "src"
+    "src" // Включает все файлы в папке `src` для компиляции и проверки типов.
   ]
 }

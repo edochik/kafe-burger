@@ -1,0 +1,21 @@
+:root {
+	--font-family: 'Nunito', sans-serif;
+	--with-container: 1320px;
+	--padding-body: 15px 0;
+	--margin-0-auto: 0 auto;
+
+	--font-size-small: 12px;
+	--font-size-medium: 16px;
+	--font-size-large: 24px;
+	--font-size-xlarge: 32px;
+	--font-size-xxlarge: 40px;
+	--font-size-xxxlarge: 50px;
+
+	--main-color: #000000;
+	--color-white: #ffffff;
+	--accent-color: #ff5c00;
+	--accent-color-radio: #ffab08;
+
+
+	--main-background-color: #F9F9F9
+}

@@ -1,0 +1,49 @@
+.footer {
+	padding: 46px 0 40px 0;
+	display: flex;
+	justify-content: space-between;
+	max-width: var(--with-container);
+	padding: var(--padding-body);
+	margin: var(--margin-0-auto);
+
+	.column:first-child {
+		.logo {
+			display: inline-block;
+			margin-bottom: 54px;
+		}
+	}
+	.column:last-child {
+		display: flex;
+		column-gap: 125px;
+		.inner:first-child {
+			.text {
+				font-size: var(--font-size-large);
+				margin: 0 0 24px 0;
+			}
+			.phone {
+				color: inherit;
+				line-height: 1.3;
+				text-decoration: none;
+			}
+		}
+		.inner:last-of-type {
+			.text {
+				font-size: var(--font-size-large);
+				margin: 0 0 24px 0;
+			}
+			.list {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				column-gap: 16px;
+				.item {
+					.link {
+						.image {
+						}
+					}
+				}
+			}
+		}
+	}
+}

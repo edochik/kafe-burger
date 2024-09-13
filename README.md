@@ -11,6 +11,7 @@
    ├── widgets/
    │ ├── Footer/+
    │ ├── Header/+
+   │ └── Sidebar/+
    ├── entities/
    │ ├── Product/- пока нет
    │ └── Cart/- пока нет

@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className={s.footer}>
       <div className={s.column}>
         <a className={s.logo} href="#!">
-          <img src="./image/FooterLogoIcon.svg" alt="logo" />
+          <img src="./images/FooterLogoIcon.svg" alt="logo" />
         </a>
         <div>
           <div>© YouMeal, 2022</div>
@@ -24,14 +24,14 @@ const Footer = () => {
           <ul className={s.list}>
             <li className={s.item}>
               <a className={s.link} href="#!">
-                <img className={s.image} src="./image/vk.svg" alt="vk" />
+                <img className={s.image} src="./images/vk.svg" alt="vk" />
               </a>
             </li>
             <li className={s.item}>
               <a className={s.link} href="#!">
                 <img
                   className={s.image}
-                  src="./image/telegram.svg"
+                  src="./images/telegram.svg"
                   alt="telegram"
                 />
               </a>

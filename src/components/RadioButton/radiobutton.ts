@@ -3,7 +3,6 @@ export interface RadioButtonData {
   nameRu: string;
   nameEn: string;
   imageAddress: string;
-
 }
 
 export interface RadioButtonProps extends RadioButtonData {

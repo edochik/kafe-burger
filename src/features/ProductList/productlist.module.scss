@@ -1,0 +1,13 @@
+.section {
+	.title {
+		margin: 0 0 24px 0;
+		font-size: var(--font-size-xxlarge);
+		line-height: var(--line-height-small);
+		font-weight: var(--font-weight-semibold);
+	}
+	.wrapper {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 16px;
+	}
+}

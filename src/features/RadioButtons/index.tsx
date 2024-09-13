@@ -5,7 +5,6 @@ import { useState } from "react";
 
 const RadioButtons = () => {
   const [isChecked, setIsChecked] = useState(radioButtonData[0].nameEn);
-  console.log(isChecked);
   return (
     <div className={s.radiobuttons}>
       <fieldset className={s.fieldset}>

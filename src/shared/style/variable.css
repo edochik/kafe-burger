@@ -16,6 +16,19 @@
 	--accent-color: #ff5c00;
 	--accent-color-radio: #ffab08;
 
+	--button-bg-default-1: #f2f2f3;
+	--button-bg-default-2: #ff7020;
+	--button-bg-default-3: #ffab08;
+	--button-bg-hover: #ffab08;
+	--button-bg-selected: #f86310;
+
+	--line-height-small: 1.2;
+	--line-height-medium: 1.5;
+	--line-height-large: 1.8;
+
+	--font-weight-regular: 400;
+	--font-weight-semibold: 600;
+	--font-weight-extrabold: 800;
 
 	--main-background-color: #F9F9F9
 }

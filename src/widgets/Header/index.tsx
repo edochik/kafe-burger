@@ -3,10 +3,10 @@ const Header = () => {
   return (
     <header className={s.header}>
       <a className={s.logo} href="#!">
-        <img src="./image/HeaderLogoIcon.svg" alt="logo" />
+        <img src="./images/HeaderLogoIcon.svg" alt="logo" />
       </a>
       <div className={s.wrapper}>
-        <img className={s.image} src="./image/burger-img.png" alt="burger" />
+        <img className={s.image} src="./images/burger-img.png" alt="burger" />
         <div className={s.info}>
           <h1 className={s.title}>
             Только самые<br></br>{" "}

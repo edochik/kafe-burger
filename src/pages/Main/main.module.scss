@@ -1,3 +1,10 @@
 .main {
 	background-color: var(--main-background-color);
+	.wrapper {
+		max-width: var(--with-container);
+		padding: var(--padding-body);
+		margin: var(--margin-0-auto);
+		display: flex;
+		justify-content: space-between;
+	}
 }

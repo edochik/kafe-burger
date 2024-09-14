@@ -1,17 +1,25 @@
+import { CartItem } from "../../app/interface.js";
 import { ProductCart } from "../ProductCart/";
 import s from "./Cart.module.scss";
 interface CartProps {
   setToggleModalForm: (value: boolean) => void;
+  setCart: (updateFunction: (prev: CartItem[]) => CartItem[]) => void;
+  cart: CartItem[];
 }
-const Cart: React.FC<CartProps> = ({ setToggleModalForm }) => {
+const Cart = (props: CartProps) => {
+  const { setToggleModalForm, cart, setCart } = props;
+  const total = cart.reduce((acc, item) => acc + item.count, 0);
   return (
     <div className={s.cart}>
       <div className={s.wrapper_cart}>
         <h3 className={s.title}>Корзина</h3>
-        <p className={s.count}>0</p>
+        <p className={s.count}>{total}</p>
       </div>
       <div className={s.carts}>
-        <ProductCart />
+        {/* <ProductCart /> */}
+        {cart.map((product) => (
+          <ProductCart key={product.id} {...product} />
+        ))}
       </div>
       <div className={s.wrapper_total}>
         <p className={s.total}>Итого</p>

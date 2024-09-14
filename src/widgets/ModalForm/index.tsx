@@ -5,7 +5,8 @@ import { data } from "./ModalForm";
 interface ModalFormProps {
   setToggleModalForm: (value: boolean) => void;
 }
-const ModalForm: React.FC<ModalFormProps> = ({ setToggleModalForm }) => {
+const ModalForm = (props: ModalFormProps) => {
+  const { setToggleModalForm } = props;
   const [receiving, setReceiving] = useState("pickup");
   // const overlayRef = useRef(null);
   return (

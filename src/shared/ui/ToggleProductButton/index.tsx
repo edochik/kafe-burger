@@ -1,10 +1,12 @@
 import s from "./ToggleProductButton.module.scss";
-
-const ToggleProductButton = () => {
+interface ToggleProductButtonProps {
+  count?: number;
+}
+const ToggleProductButton = ({ count }: ToggleProductButtonProps) => {
   return (
     <div className={s.toggleproductbutton}>
       <button className={s.minus}>-</button>
-      <p className={s.count}>1</p>
+      <p className={s.count}>{count}</p>
       <button className={s.plus}>+</button>
     </div>
   );

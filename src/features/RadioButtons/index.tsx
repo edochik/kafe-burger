@@ -5,7 +5,7 @@ interface RadioButtonsProps {
   setFilterCategory: (value: string) => void;
   filterCategory: string;
 }
-const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
+const RadioButtons = (props: RadioButtonsProps) => {
   const { setFilterCategory, filterCategory } = props;
   return (
     <div className={s.radiobuttons}>

@@ -1,4 +1,4 @@
-import { ProductCardProps } from "../ProductCard/productcart";
+import { ProductCardProps } from "../ProductCard/interface";
 export const products: ProductCardProps[] = [
   {
     id: 1,

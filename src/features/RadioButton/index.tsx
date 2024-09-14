@@ -1,7 +1,7 @@
 import s from "./RadioButton.module.scss";
 import { RadioButtonProps } from "./radiobutton";
 
-const RadioButton: React.FC<RadioButtonProps> = (props) => {
+const RadioButton = (props: RadioButtonProps) => {
   const { id, nameRu, nameEn, imageAddress, value, onChange } = props;
 
   return (

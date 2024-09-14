@@ -1,4 +1,4 @@
-import { RadioButtonData } from "../../components/RadioButton/radiobutton";
+import { RadioButtonData } from "../RadioButton/radiobutton";
 export const radioButtonData: RadioButtonData[] = [
 	{
 		id: 'burger',

@@ -1,4 +1,4 @@
-import s from "./productcard.module.scss";
+import s from "./ProductCard.module.scss";
 import { ProductCardProps } from "./productcart.js";
 const ProductCard: React.FC<ProductCardProps> = (props) => {
   const { id, nameRu, nameEn, price, category, weight, imageAddress } = props;

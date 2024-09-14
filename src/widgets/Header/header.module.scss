@@ -3,13 +3,12 @@
 	padding: 24px 0 60px 0;
 	display: flex;
 	flex-direction: column;
-	background-color: var(--main-background-color);
+	background-color: var(--color-background-main);
 	.logo {
 		z-index: 9;
 		margin: 0 auto;
 		> img {
 			width: 152px;
-			height: 33px;
 		}
 	}
 	.wrapper {
@@ -25,7 +24,7 @@
 				color: var(--color-white);
 			}
 			.color {
-				color: var(--accent-color);
+				color: var(--color-accent);
 			}
 			.delivery {
 				color: var(--color-white);

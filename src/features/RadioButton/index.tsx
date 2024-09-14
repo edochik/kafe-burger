@@ -1,4 +1,4 @@
-import s from "./radiobutton.module.scss";
+import s from "./RadioButton.module.scss";
 import { RadioButtonProps } from "./radiobutton";
 
 const RadioButton: React.FC<RadioButtonProps> = (props) => {

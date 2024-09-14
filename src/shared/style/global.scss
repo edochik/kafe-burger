@@ -1,0 +1,22 @@
+@import url(./normalize.scss);
+@import url(./variable.scss);
+@import url(./fonts.scss);
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  color: var(--color-black);
+  font-size: var(--font-size-medium);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  overflow-x: hidden;
+}

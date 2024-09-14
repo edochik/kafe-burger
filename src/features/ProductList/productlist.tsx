@@ -1,4 +1,4 @@
-import { ProductCardProps } from "../../components/ProductCard/productcart";
+import { ProductCardProps } from "../ProductCard/productcart";
 export const products: ProductCardProps[] = [
   {
     id: 1,
@@ -140,12 +140,12 @@ export const products: ProductCardProps[] = [
     nameRu: "Комбо-4",
     nameEn: "Combo-4",
     price: 680,
-    weight:720 ,
+    weight: 720,
     category: "combo",
     imageAddress: "./images/combo-4.jpg",
   },
 ];
-//Комбо 4
+
 //Пицца 8
 //Вок 3
 //Десерт 2

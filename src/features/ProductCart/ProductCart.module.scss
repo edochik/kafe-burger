@@ -1,0 +1,39 @@
+.productcart {
+	padding: 16px 0;
+	display: grid;
+	grid-template-areas:
+		'image title button'
+		'image weight button'
+		'image price button';
+	.image {
+		border-radius: 8px;
+		grid-area: image;
+		align-self: center;
+		width: 64px;
+	}
+	.title,
+	.weight,
+	.price {
+		font-size: var(--font-size-small);
+	}
+	.title {
+		margin: 0;
+		grid-area: title;
+	}
+	.weight {
+		margin: 0;
+		grid-area: weight;
+		align-self: center;
+		color: var(--color-gray-dark);
+	}
+	.price {
+		margin: 0;
+		align-self: end;
+		grid-area: price;
+	}
+	.button {
+		grid-area: button;
+		justify-self: end;
+		align-self: center;
+	}
+}

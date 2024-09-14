@@ -1,7 +1,7 @@
 :root {
 	--font-family: 'Nunito', sans-serif;
 	--with-container: 1320px;
-	--padding-body: 15px 0;
+	--padding-body: 0 15px;
 	--margin-0-auto: 0 auto;
 
 	--font-size-small: 12px;
@@ -11,24 +11,31 @@
 	--font-size-xxlarge: 40px;
 	--font-size-xxxlarge: 50px;
 
-	--main-color: #000000;
+	--color-black: #000000;
 	--color-white: #ffffff;
-	--accent-color: #ff5c00;
-	--accent-color-radio: #ffab08;
+	--color-orange: #ffab08;
+	--color-accent: #ff5c00;
+	--color-gray-dark: #b1b1b1;
+	--color-gray-dark-light: #f2f2f3;
 
 	--button-bg-default-1: #f2f2f3;
 	--button-bg-default-2: #ff7020;
 	--button-bg-default-3: #ffab08;
-	--button-bg-hover: #ffab08;
+	--button-bg-hover-1: #ffab08;
+	--button-bg-hover-2: #f86310;
 	--button-bg-selected: #f86310;
+	--button-bg-disabled: #ffffff;
+	--button-color-default-1: #000000;
+	--button-color-default-2: #ffffff;
+	--button-color-disabled: #acacac;
 
-	--line-height-small: 1.2;
-	--line-height-medium: 1.5;
-	--line-height-large: 1.8;
+	--line-height-small: 1;
+	--line-height-medium: 1.2;
+	--line-height-large: 1.3;
 
 	--font-weight-regular: 400;
 	--font-weight-semibold: 600;
 	--font-weight-extrabold: 800;
 
-	--main-background-color: #F9F9F9
+	--color-background-main: #F9F9F9;
 }

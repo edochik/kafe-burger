@@ -1,0 +1,25 @@
+.toggleproductbutton {
+	width: 84px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	column-gap: 8px;
+	border-radius: 12px;
+	overflow: hidden;
+	background-color: var(--button-bg-default-1);
+	.plus,
+	.minus {
+		cursor: pointer;
+		border: none;
+		background-color: inherit;
+		height: 40px;
+	}
+	.plus {
+	}
+	.count {
+		margin: 0;
+	}
+	.minus {
+	}
+}

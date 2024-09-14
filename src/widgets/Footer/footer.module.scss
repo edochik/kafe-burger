@@ -1,14 +1,18 @@
 .footer {
-	padding: 51px 0 40px 0;
 	display: flex;
+	padding: var(--padding-body);
 	justify-content: space-between;
 	max-width: var(--with-container);
 	margin: var(--margin-0-auto);
-
+	padding-top: 50px;
+	padding-bottom: 50px;
 	.column:first-child {
 		.logo {
 			display: inline-block;
 			margin-bottom: 54px;
+			> img {
+				width: 300px;
+			}
 		}
 	}
 	.column:last-child {

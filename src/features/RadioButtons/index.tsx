@@ -1,5 +1,5 @@
-import s from "./radiobuttons.module.scss";
-import { RadioButton } from "../../components/RadioButton/";
+import s from "./RadioButtons.module.scss";
+import { RadioButton } from "../RadioButton";
 import { radioButtonData } from "./radiobuttons";
 import { useState } from "react";
 

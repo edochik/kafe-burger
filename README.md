@@ -5,34 +5,34 @@
 
    src/
    ├── app/
-   │ └── App.tsx +
+   │ ├── providers/ -
+   │ ├── routes/ -
+   │ └── App.tsx + // начала работы приложения входная точка
    ├── pages/
-   │ ├── Main/ +
+   │ └── Main/ + // основная страница с товарами корзиной и радиокнопками
    ├── widgets/
-   │ ├── Footer/+
-   │ ├── Header/+
-   │ └── Sidebar/+
+   │ ├── Footer/+ // footer который не меняется от страницы к странице, остается статичной widget
+   │ ├── Header/+ // header который не меняется от страницы к странице, остается статичной widget
+   │ └── Sidebar/+ // боковая панель в которой содержится товары, остается статично поэтому widget
    ├── entities/
-   │ ├── Product/- пока нет
-   │ └── Cart/- пока нет
    ├── features/
    │ ├── redux/ +
-   │ ├── RadioButtons/ +
-   │ ├── AddToCart/- пока нет
-   │ ├── Cart/- пока нет
-   │ ├── FilterProducts/- пока нет
-   │ └── Checkout/- пока нет
+   │ ├── RadioButtons/ + // список радиокнопок
+   │ ├── ProductList/ + // список товаров
+   │ ├── Cart/ + // корзина
+   │ ├── RadioButton/+ // переиспользуемая радио кнопка используется многократно в RadioButtons
+   │ └── ProductCard/+ // переиспользуемая карточка товара используется многократно в ProductList
    ├── shared/
+   │ ├── ui // здесь находятся компонент переиспользуемые 
    │ ├── assets
-   │ │ ├── fonts/+
-   │ │ └── icon/+
+   │ │ ├── fonts/+ // фон
+   │ │ ├── icon/+ // иконки
+   │ │ └── images/+ // изображения
    │ └── style
    │ . ├── fonts.css +
    │ . ├── global.css +
    │ . ├── normalize.css +
    │ . └── variable.css +
-   ├── components/
-   │ └── RadioButton/ +
    └── utils/
    └── index.tsx
 

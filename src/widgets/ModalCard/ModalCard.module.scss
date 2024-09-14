@@ -1,0 +1,79 @@
+@import '../../shared/style/mixin.scss';
+
+.overlay {
+	@include overlay-style();
+	.modal {
+		@include modal-style();
+		.title {
+			margin: 0 0 24px 0;
+			font-weight: var(--font-weight-semibold);
+			font-size: var(--font-size-xxlarge);
+			line-height: var(--line-height-medium);
+		}
+		.box {
+			display: grid;
+			gap: 40px 16px;
+			grid-template-areas:
+				'image info'
+				'button inner';
+			.image {
+				grid-area: image;
+				width: 276px;
+				border-radius: 16px;
+			}
+			.info {
+				grid-area: info;
+				.description {
+					margin: 0 0 10px 0;
+					line-height: var(--line-height-large);
+				}
+				.composition {
+					font-weight: var(--font-weight-semibold);
+					font-size: var(--font-size-small);
+					line-height: var(--line-height-large);
+					margin: 0 0 4px 0;
+				}
+				.list {
+					list-style: none;
+					margin: 0 0 4px 0;
+					padding: 0;
+					.item {
+						margin-bottom: 2px;
+						font-size: var(--font-size-small);
+						line-height: var(--line-height-large);
+					}
+					:last-child {
+						margin-bottom: 0;
+					}
+				}
+				.nutritional_info {
+					font-size: var(--font-size-small);
+					line-height: var(--line-height-large);
+					color: var(--color-gray-dark);
+				}
+			}
+			.button {
+				grid-area: button;
+			}
+			.inner {
+				grid-area: inner;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.price {
+					margin: 0;
+					font-size: var(--font-size-large);
+					font-weight: var(--font-weight-semibold);
+					line-height: var(--line-height-large);
+				}
+			}
+		}
+		.close {
+			cursor: pointer;
+			position: absolute;
+			content: '';
+			right: 22px;
+			top: 22px;
+		}
+	}
+}

@@ -2,6 +2,8 @@ export interface RadioButtonData {
   id: string;
   nameRu: string;
   nameEn: string;
+  // categoryRu: string;
+  // categoryEn: string;
   imageAddress: string;
 }
 

@@ -4,6 +4,8 @@
 	@include overlay-style();
 	.modal {
 		@include modal-style();
+		padding: 24px 24px 36px 24px;
+		background-color: var(--color-white);
 		.title {
 			margin: 0 0 24px 0;
 			font-weight: var(--font-weight-semibold);
@@ -54,6 +56,7 @@
 			}
 			.button {
 				grid-area: button;
+				@include button-style();
 			}
 			.inner {
 				grid-area: inner;

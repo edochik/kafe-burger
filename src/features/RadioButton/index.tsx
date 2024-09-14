@@ -3,11 +3,9 @@ import { RadioButtonProps } from "./radiobutton";
 
 const RadioButton: React.FC<RadioButtonProps> = (props) => {
   const { id, nameRu, nameEn, imageAddress, value, onChange } = props;
-  const onClickChooseProduct = () => {
-    onChange(nameEn);
-  };
+
   return (
-    <label className={s.label} onClick={onClickChooseProduct}>
+    <label className={s.label} onClick={() => onChange(nameEn)}>
       <input
         className={s.input}
         type="radio"

@@ -2,38 +2,42 @@
    --template typescript - создать проект с использованием готового шаблона, который включает TypeScript
 2. Иерархия папок по FSD
    семь папок app,pages,widgets,entities,features,shared,components,utils
-
+   если код относится только к одному компоненту, то он остается только в папке компонента
    src/
    ├── app/
    │ ├── providers/ -
    │ ├── routes/ -
-   │ └── App.tsx + // начала работы приложения входная точка
+   │ └── App.tsx +
    ├── pages/
-   │ └── Main/ + // основная страница с товарами корзиной и радиокнопками
+   │ └── Main/ +
    ├── widgets/
-   │ ├── Footer/+ // footer который не меняется от страницы к странице, остается статичной widget
-   │ ├── Header/+ // header который не меняется от страницы к странице, остается статичной widget
-   │ └── Sidebar/+ // боковая панель в которой содержится товары, остается статично поэтому widget
+   │ ├── Footer/+
+   │ ├── Header/+  
+   │ ├── ModalCard/+
+   │ ├── ModalForm/+
+   │ └── Sidebar/+
    ├── entities/
    ├── features/
    │ ├── redux/ +
-   │ ├── RadioButtons/ + // список радиокнопок
-   │ ├── ProductList/ + // список товаров
-   │ ├── Cart/ + // корзина
-   │ ├── RadioButton/+ // переиспользуемая радио кнопка используется многократно в RadioButtons
-   │ └── ProductCard/+ // переиспользуемая карточка товара используется многократно в ProductList
+   │ ├── Cart/+
+   │ ├── ProductCard/+
+   │ ├── ProductCart/+
+   │ ├── ProductList/ +
+   │ ├── RadioButton/+
+   │ ├── RadioButtons/ +
+   │ └── Cart/ +
    ├── shared/
-   │ ├── ui // здесь находятся компонент переиспользуемые 
+   │ ├── ui // переиспользуемые компоненты
    │ ├── assets
    │ │ ├── fonts/+ // фон
    │ │ ├── icon/+ // иконки
    │ │ └── images/+ // изображения
-   │ └── style
+   │ └── style // стили
    │ . ├── fonts.css +
    │ . ├── global.css +
    │ . ├── normalize.css +
    │ . └── variable.css +
-   └── utils/
+   ├── utils/
    └── index.tsx
 
 3. Подключить модульный scss

@@ -6,13 +6,20 @@ import { ModalForm } from "../widgets/ModalForm/";
 import { useState } from "react";
 const App = () => {
   const [toggleModalForm, setToggleModalForm] = useState(false);
+  const [filterCategory, setFilterCategory] = useState("burgers");
+  console.log(filterCategory);
+  // const [toggleModalForm, setToggleModalForm] = useState(false);
   return (
     <>
       <Header />
-      <Main setToggleModalForm={setToggleModalForm} />
+      <Main
+        setToggleModalForm={setToggleModalForm}
+        setFilterCategory={setFilterCategory}
+        filterCategory={filterCategory}
+      />
       <Footer />
-      <ModalCard />
-      {/* {toggleModalForm && <ModalForm setToggleModalForm={setToggleModalForm}/>} */}
+      {/* <ModalCard /> */}
+      {toggleModalForm && <ModalForm setToggleModalForm={setToggleModalForm} />}
     </>
   );
 };

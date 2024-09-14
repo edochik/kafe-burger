@@ -1,7 +1,16 @@
 import s from "./ProductCard.module.scss";
 import { ProductCardProps } from "./productcart.js";
 const ProductCard: React.FC<ProductCardProps> = (props) => {
-  const { id, nameRu, nameEn, price, category, weight, imageAddress } = props;
+  const {
+    id,
+    nameRu,
+    nameEn,
+    price,
+    categoryEn,
+    categoryRu,
+    weight,
+    imageAddress,
+  } = props;
   return (
     <div className={s.productcard}>
       <img className={s.image} src={imageAddress} alt={nameRu} />

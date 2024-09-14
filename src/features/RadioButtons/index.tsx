@@ -1,10 +1,12 @@
 import s from "./RadioButtons.module.scss";
 import { RadioButton } from "../RadioButton";
 import { radioButtonData } from "./radiobuttons";
-import { useState } from "react";
-
-const RadioButtons = () => {
-  const [isChecked, setIsChecked] = useState(radioButtonData[0].nameEn);
+interface RadioButtonsProps {
+  setFilterCategory: (value: string) => void;
+  filterCategory: string;
+}
+const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
+  const { setFilterCategory, filterCategory } = props;
   return (
     <div className={s.radiobuttons}>
       <fieldset className={s.fieldset}>
@@ -12,8 +14,8 @@ const RadioButtons = () => {
           <RadioButton
             key={data.id}
             {...data}
-            value={isChecked}
-            onChange={setIsChecked}
+            value={filterCategory}
+            onChange={setFilterCategory}
           />
         ))}
       </fieldset>

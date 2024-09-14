@@ -3,7 +3,8 @@ export interface ProductCardProps {
   nameRu: string;
   nameEn: string;
   price: number;
-  category: string;
+  categoryRu: string;
+  categoryEn: string;
   weight: number;
   imageAddress: string;
 }

@@ -1,19 +1,37 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import s from "./ModalForm.module.scss";
 import { data } from "./ModalForm";
-interface ModalFormProps {
-  setToggleModalForm: (value: boolean) => void;
-}
-const ModalForm = (props: ModalFormProps) => {
-  const { setToggleModalForm } = props;
+import { Link, useNavigate } from "react-router-dom";
+
+const ModalOrder = () => {
   const [receiving, setReceiving] = useState("pickup");
-  // const overlayRef = useRef(null);
+  const navigate = useNavigate();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        navigate("/");
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [navigate, inputRef]);
+  const onClickClose = () => {
+    navigate("/");
+  };
+
   return (
-    <div className={s.overlay} onClick={() => setToggleModalForm(false)}>
+    <div className={s.overlay} onClick={onClickClose}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
         <div className={s.column}>
-          <img className={s.image} src="./images/donut.png" alt="donut" />
+          <img className={s.image} src="/images/donut.png" alt="donut" />
         </div>
         <div className={s.column}>
           <h2 className={s.title}>Доставка</h2>
@@ -22,6 +40,7 @@ const ModalForm = (props: ModalFormProps) => {
               className={s.name}
               type="text"
               placeholder="Ваше имя"
+              ref={inputRef}
               required
             />
             <input
@@ -79,12 +98,12 @@ const ModalForm = (props: ModalFormProps) => {
             <button className={s.button}>Оформить</button>
           </form>
         </div>
-        <div className={s.close} onClick={() => setToggleModalForm(false)}>
+        <Link to="/" className={s.close}>
           <CloseIcon></CloseIcon>
-        </div>
+        </Link>
       </div>
     </div>
   );
 };
 
-export { ModalForm };
+export { ModalOrder };

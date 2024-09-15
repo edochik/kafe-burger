@@ -1,6 +1,7 @@
 .productcart {
 	padding: 16px 0;
 	display: grid;
+	grid-template-columns: auto 100px auto;
 	grid-template-areas:
 		'image title button'
 		'image weight button'
@@ -19,6 +20,7 @@
 	.title {
 		margin: 0;
 		grid-area: title;
+		width: 100px;
 	}
 	.weight {
 		margin: 0;

@@ -1,8 +1,8 @@
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
-import { ToggleProductButton } from "../../shared/ui/ToggleProductButton/";
+import { ToggleProductButton } from "../../shared/ui/ToggleProductButton";
 import s from "./ModalCard.module.scss";
 
-const ModalCard = () => {
+const ProductPage = () => {
   return (
     <div className={s.overlay}>
       <div className={s.modal}>
@@ -39,5 +39,4 @@ const ModalCard = () => {
   );
 };
 
-export { ModalCard };
-
+export { ProductPage };

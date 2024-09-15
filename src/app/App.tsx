@@ -1,32 +1,30 @@
 import { Footer } from "../widgets/Footer";
 import { Header } from "../widgets/Header";
 import { Main } from "../pages/Main";
-import { ModalCard } from "../widgets/ModalCard/";
-import { ModalForm } from "../widgets/ModalForm/";
 import { useState } from "react";
 import { CartItem } from "./interface";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { ProductPage } from "../widgets/ProductPage/";
+import { ModalOrder } from "../widgets/ModalOrder/";
 
 const App = () => {
-  const [toggleModalForm, setToggleModalForm] = useState(false);
   const [filterCategory, setFilterCategory] = useState("burgers");
   const [cart, setCart] = useState<CartItem[]>([]);
-  // console.log(cart);
-  // console.log(cart);
-  // const [toggleModalForm, setToggleModalForm] = useState(false);
   return (
-    <>
+    <Router>
       <Header />
       <Main
-        setToggleModalForm={setToggleModalForm}
         setFilterCategory={setFilterCategory}
         filterCategory={filterCategory}
         setCart={setCart}
         cart={cart}
       />
+      <Routes>
+        <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/modal/order" element={<ModalOrder />} />
+      </Routes>
       <Footer />
-      {/* <ModalCard /> */}
-      {toggleModalForm && <ModalForm setToggleModalForm={setToggleModalForm} />}
-    </>
+    </Router>
   );
 };
 

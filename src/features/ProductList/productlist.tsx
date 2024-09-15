@@ -8,7 +8,7 @@ export const products: ProductCardProps[] = [
     categoryEn: "burgers",
     categoryRu: "бургеры",
     weight: 520,
-    imageAddress: "./images/meat-bomb.jpg",
+    imageAddress: "/images/meat-bomb.jpg",
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ export const products: ProductCardProps[] = [
     categoryEn: "burgers",
     categoryRu: "бургеры",
     weight: 512,
-    imageAddress: "./images/super-cheesy.jpg",
+    imageAddress: "/images/super-cheesy.jpg",
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ export const products: ProductCardProps[] = [
     categoryEn: "burgers",
     categoryRu: "бургеры",
     weight: 580,
-    imageAddress: "./images/hearty.jpg",
+    imageAddress: "/images/hearty.jpg",
   },
   {
     id: 4,
@@ -38,7 +38,7 @@ export const products: ProductCardProps[] = [
     categoryEn: "burgers",
     categoryRu: "бургеры",
     weight: 470,
-    imageAddress: "./images/heavy-hit.jpg",
+    imageAddress: "/images/heavy-hit.jpg",
   },
   {
     id: 5,
@@ -48,7 +48,7 @@ export const products: ProductCardProps[] = [
     categoryEn: "burgers",
     categoryRu: "бургеры",
     weight: 450,
-    imageAddress: "./images/eternal-classic.jpg",
+    imageAddress: "/images/eternal-classic.jpg",
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ export const products: ProductCardProps[] = [
     categoryEn: "burgers",
     categoryRu: "бургеры",
     weight: 510,
-    imageAddress: "./images/italian.jpg",
+    imageAddress: "/images/italian.jpg",
   },
   {
     id: 7,
@@ -68,7 +68,7 @@ export const products: ProductCardProps[] = [
     weight: 220,
     categoryEn: "snacks",
     categoryRu: "закуски",
-    imageAddress: "./images/nachos.jpg",
+    imageAddress: "/images/nachos.jpg",
   },
   {
     id: 8,
@@ -78,7 +78,7 @@ export const products: ProductCardProps[] = [
     weight: 180,
     categoryEn: "snacks",
     categoryRu: "закуски",
-    imageAddress: "./images/french-fries.jpg",
+    imageAddress: "/images/french-fries.jpg",
   },
   {
     id: 9,
@@ -88,7 +88,7 @@ export const products: ProductCardProps[] = [
     weight: 160,
     categoryEn: "snacks",
     categoryRu: "закуски",
-    imageAddress: "./images/onion-rings.jpg",
+    imageAddress: "/images/onion-rings.jpg",
   },
   {
     id: 10,
@@ -98,7 +98,7 @@ export const products: ProductCardProps[] = [
     weight: 250,
     categoryEn: "hot-dogs",
     categoryRu: "хот-доги",
-    imageAddress: "./images/homemade-hot-dog.jpg",
+    imageAddress: "/images/homemade-hot-dog.jpg",
   },
   {
     id: 11,
@@ -108,7 +108,7 @@ export const products: ProductCardProps[] = [
     weight: 245,
     categoryEn: "hot-dogs",
     categoryRu: "хот-доги",
-    imageAddress: "./images/spicy-hot-dog.jpg",
+    imageAddress: "/images/spicy-hot-dog.jpg",
   },
   {
     id: 12,
@@ -118,7 +118,7 @@ export const products: ProductCardProps[] = [
     weight: 215,
     categoryEn: "hot-dogs",
     categoryRu: "хот-доги",
-    imageAddress: "./images/classic-hot-dog.jpg",
+    imageAddress: "/images/classic-hot-dog.jpg",
   },
   {
     id: 13,
@@ -128,7 +128,7 @@ export const products: ProductCardProps[] = [
     weight: 475,
     categoryEn: "combos",
     categoryRu: "комбо",
-    imageAddress: "./images/combo-1.jpg",
+    imageAddress: "/images/combo-1.jpg",
   },
   {
     id: 14,
@@ -138,7 +138,7 @@ export const products: ProductCardProps[] = [
     weight: 560,
     categoryEn: "combos",
     categoryRu: "комбо",
-    imageAddress: "./images/combo-2.jpg",
+    imageAddress: "/images/combo-2.jpg",
   },
   {
     id: 15,
@@ -148,7 +148,7 @@ export const products: ProductCardProps[] = [
     weight: 465,
     categoryEn: "combos",
     categoryRu: "комбо",
-    imageAddress: "./images/combo-3.jpg",
+    imageAddress: "/images/combo-3.jpg",
   },
   {
     id: 16,
@@ -158,7 +158,7 @@ export const products: ProductCardProps[] = [
     weight: 720,
     categoryEn: "combos",
     categoryRu: "комбо",
-    imageAddress: "./images/combo-4.jpg",
+    imageAddress: "/images/combo-4.jpg",
   },
 ];
 

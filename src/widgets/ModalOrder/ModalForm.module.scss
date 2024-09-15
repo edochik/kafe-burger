@@ -1,5 +1,6 @@
 @import '../../shared/style/mixin.scss';
 .overlay {
+
 	@include overlay-style();
 	.modal {
 		display: flex;

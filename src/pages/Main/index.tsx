@@ -10,12 +10,7 @@ interface MainProps {
   cart: CartItem[];
 }
 const Main = (props: MainProps) => {
-  const {
-    setFilterCategory,
-    filterCategory,
-    setCart,
-    cart,
-  } = props;
+  const { setFilterCategory, filterCategory, setCart, cart } = props;
   return (
     <main className={s.main}>
       <RadioButtons
@@ -23,10 +18,7 @@ const Main = (props: MainProps) => {
         filterCategory={filterCategory}
       />
       <div className={s.wrapper}>
-        <Sidebar
-          cart={cart}
-          setCart={setCart}
-        />
+        <Sidebar cart={cart} setCart={setCart} />
         <ProductList filterCategory={filterCategory} setCart={setCart} />
       </div>
     </main>

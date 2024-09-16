@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import { CartItem } from "../../app/interface";
 import s from "./ProductCard.module.scss";
-import { ProductCardProps } from "./interface";
+import { ProductCardProps } from "../../shared/data/productData";
 interface IProductCardProps extends ProductCardProps {
   setCart: (updateFunction: (prev: CartItem[]) => CartItem[]) => void;
 }
@@ -28,7 +29,10 @@ const ProductCard = (props: IProductCardProps) => {
 
   return (
     <div className={s.productcard}>
-      <img className={s.image} src={imageAddress} alt={nameRu} />
+      <Link to={`/product/${id}`}>
+        <img className={s.image} src={imageAddress} alt={nameRu} />
+      </Link>
+
       <p className={s.price}>{price}₽</p>
       <h3 className={s.title}>{nameRu}</h3>
       <p className={s.weight}>{weight}г</p>

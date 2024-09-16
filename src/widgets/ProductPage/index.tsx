@@ -1,39 +1,72 @@
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { ToggleProductButton } from "../../shared/ui/ToggleProductButton";
 import s from "./ModalCard.module.scss";
+import { useEffect } from "react";
+import { products } from "../../shared/data/productData";
 
 const ProductPage = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const product = products.filter((product) => product.id === Number(id));
+  const {
+    // id,
+    nameRu,
+    nameEn,
+    price,
+    description,
+    categoryEn,
+    categoryRu,
+    composition,
+    weight,
+    kilocalories,
+    imageAddress,
+  } = product[0];
+  useEffect(() => {
+    const handleCloseProductPage = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        navigate("/");
+      }
+    };
+    document.addEventListener("keydown", handleCloseProductPage);
+    return () => {
+      document.removeEventListener("keydown", handleCloseProductPage);
+    };
+  }, [navigate]);
+  const handleCloseProductPage = () => {
+    navigate("/");
+  };
   return (
-    <div className={s.overlay}>
-      <div className={s.modal}>
-        <h2 className={s.title}>Мясная бомба</h2>
+    <div className={s.overlay} onClick={handleCloseProductPage}>
+      <div className={s.modal} onClick={(e) => e.stopPropagation()}>
+        <h2 className={s.title}>{nameRu}</h2>
         <div className={s.box}>
-          <img className={s.image} src="./images/meat-bomb.jpg" alt="" />
+          <img
+            className={s.image}
+            src={imageAddress}
+            alt={`фотография ${nameRu}`}
+          />
           <div className={s.info}>
-            <p className={s.description}>
-              Супер мясное наслаждение! Большая рубленая котлета из свежего
-              говяжего мяса покорит вас своей сочностью, а хрустящие листья
-              салата добавят свежести.
-            </p>
+            <p className={s.description}>{description}</p>
             <p className={s.composition}>Состав:</p>
             <ul className={s.list}>
-              <li className={s.item}>Пшеничная булочка</li>
-              <li className={s.item}>Котлета из говядины</li>
-              <li className={s.item}>Красный лук</li>
-              <li className={s.item}>Листья салата</li>
-              <li className={s.item}>Соус горчичный</li>
+              {composition.map((item) => (
+                <li className={s.item}>{item}</li>
+              ))}
             </ul>
-            <div className={s.nutritional_info}>520г, ккал 430</div>
+            <div className={s.nutritional_info}>
+              {weight}г, ккал {kilocalories}
+            </div>
           </div>
           <div className={s.button}>Добавить</div>
           <div className={s.inner}>
             <ToggleProductButton />
-            <p className={s.price}>689₽</p>
+            <p className={s.price}>{price}₽</p>
           </div>
         </div>
-        <div className={s.close}>
+        <Link to="/" className={s.close}>
           <CloseIcon />
-        </div>
+        </Link>
       </div>
     </div>
   );

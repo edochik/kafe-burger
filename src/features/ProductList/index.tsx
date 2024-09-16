@@ -1,7 +1,7 @@
 import s from "./ProductList.module.scss";
 import { ProductCard } from "../ProductCard";
-import { products } from "./productlist";
 import { CartItem } from "../../app/interface";
+import { products } from "../../shared/data/productData";
 
 interface ProductListProps {
   setCart: (updateFunction: (prev: CartItem[]) => CartItem[]) => void;

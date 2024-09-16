@@ -17,7 +17,6 @@ const Cart = (props: CartProps) => {
         <p className={s.count}>{totalCount}</p>
       </div>
       <div className={s.carts}>
-        {/* <ProductCart /> */}
         {cart.map((product) => (
           <ProductCart key={product.id} {...product} />
         ))}

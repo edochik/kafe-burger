@@ -9,7 +9,7 @@ export interface ProductCardProps {
   composition: string[];
   weight: number;
   kilocalories: number;
-  imageAddress: string;
+  imageUrl: string;
 }
 
 export const products: ProductCardProps[] = [
@@ -28,7 +28,7 @@ export const products: ProductCardProps[] = [
       'Соус горчичный'],
     weight: 520,
     kilocalories: 430,
-    imageAddress: "/images/meat-bomb.jpg",
+    imageUrl: "/images/meat-bomb.jpg",
   },
   {
     id: 2,
@@ -48,7 +48,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 512,
     kilocalories: 610,
-    imageAddress: "/images/super-cheesy.jpg"
+    imageUrl: "/images/super-cheesy.jpg"
   },
   {
     id: 3,
@@ -68,7 +68,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 580,
     kilocalories: 520,
-    imageAddress: "/images/hearty.jpg"
+    imageUrl: "/images/hearty.jpg"
   },
   {
     id: 4,
@@ -88,7 +88,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 470,
     kilocalories: 580,
-    imageAddress: "/images/heavy-hit.jpg"
+    imageUrl: "/images/heavy-hit.jpg"
   },
   {
     id: 5,
@@ -109,7 +109,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 450, // Вес в граммах
     kilocalories: 490, // Калорийность
-    imageAddress: "/images/eternal-classic.jpg"
+    imageUrl: "/images/eternal-classic.jpg"
   },
   {
     id: 6,
@@ -129,7 +129,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 510, // Вес в граммах
     kilocalories: 530, // Калорийность
-    imageAddress: "/images/italian.jpg"
+    imageUrl: "/images/italian.jpg"
   },
   {
     id: 7,
@@ -146,7 +146,7 @@ export const products: ProductCardProps[] = [
     ],
     kilocalories: 350,
     weight: 220,
-    imageAddress: "/images/nachos.jpg"
+    imageUrl: "/images/nachos.jpg"
   },
   {
     id: 8,
@@ -163,7 +163,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 180,
     kilocalories: 320,
-    imageAddress: "/images/french-fries.jpg"
+    imageUrl: "/images/french-fries.jpg"
   },
   {
     id: 9,
@@ -181,7 +181,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 160,
     kilocalories: 310,
-    imageAddress: "/images/onion-rings.jpg"
+    imageUrl: "/images/onion-rings.jpg"
   },
   {
     id: 10,
@@ -201,7 +201,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 250,
     kilocalories: 420,
-    imageAddress: "/images/homemade-hot-dog.jpg"
+    imageUrl: "/images/homemade-hot-dog.jpg"
   },
   {
     id: 11,
@@ -223,7 +223,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 245,
     kilocalories: 430,
-    imageAddress: "/images/spicy-hot-dog.jpg"
+    imageUrl: "/images/spicy-hot-dog.jpg"
   },
   {
     id: 12,
@@ -243,7 +243,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 215,
     kilocalories: 410,
-    imageAddress: "/images/classic-hot-dog.jpg"
+    imageUrl: "/images/classic-hot-dog.jpg"
   },
   {
     id: 13,
@@ -261,7 +261,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 725, // Вес в граммах
     kilocalories: 850, // Калорийность
-    imageAddress: "/images/combo-1.jpg"
+    imageUrl: "/images/combo-1.jpg"
   },
   {
     id: 14,
@@ -278,7 +278,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 940,
     kilocalories: 1300,
-    imageAddress: "/images/combo-2.jpg",
+    imageUrl: "/images/combo-2.jpg",
   },
   {
     id: 15,
@@ -294,7 +294,7 @@ export const products: ProductCardProps[] = [
     ],
     weight: 900,
     kilocalories: 1200,
-    imageAddress: "/images/combo-3.jpg",
+    imageUrl: "/images/combo-3.jpg",
   },
   {
     id: 16,
@@ -311,6 +311,6 @@ export const products: ProductCardProps[] = [
     ],
     weight: 650,
     kilocalories: 700,
-    imageAddress: "/images/combo-4.jpg",
+    imageUrl: "/images/combo-4.jpg",
   },
 ];

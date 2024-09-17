@@ -1,5 +1,6 @@
 @import '../../shared/style/mixin.scss';
 .cart {
+	
 	border-radius: 18px;
 	padding: 24px 16px;
 	width: 300px;
@@ -37,29 +38,29 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		.total {
+		.text {
+			margin: 0;
 			line-height: var(--line-height-large);
 		}
-		.price {
+		.total {
+			margin: 0;
 			line-height: var(--line-height-large);
 		}
 	}
-	.button {
+	.link {
 		margin-bottom: 8px;
-		@include button-style();
+		display: block;
 	}
 	.info {
 		position: relative;
 		margin: 0 0 0 32px;
 		&:before {
-			position: absolute;
+			@include absoluteCenter();
 			content: '';
 			background-image: url('../../shared/assets/icon/delivery.png');
 			width: 24px;
 			height: 24px;
 			left: -32px;
-			top: 50%;
-			translate: 0 -50%;
 		}
 	}
 }

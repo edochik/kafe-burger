@@ -2,7 +2,7 @@ import s from "./RadioButton.module.scss";
 import { RadioButtonProps } from "./radiobutton";
 
 const RadioButton = (props: RadioButtonProps) => {
-  const { id, nameRu, nameEn, imageAddress, value, onChange } = props;
+  const { id, nameRu, nameEn, imageUrl, value, onChange } = props;
 
   return (
     <label className={s.label} onClick={() => onChange(nameEn)}>
@@ -15,7 +15,7 @@ const RadioButton = (props: RadioButtonProps) => {
       />
       <span className={s.radio}></span>
       <span className={s.name}>{nameRu}</span>
-      <img className={s.image} src={imageAddress} alt={`logo ${nameEn}`} />
+      <img className={s.image} src={imageUrl} alt={`logo ${nameEn}`} />
     </label>
   );
 };

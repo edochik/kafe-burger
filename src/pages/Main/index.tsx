@@ -1,8 +1,8 @@
 import s from "./main.module.scss";
 import { RadioButtons } from "../../features/RadioButtons/";
-import { Sidebar } from "../../widgets/Sidebar/";
 import { ProductList } from "../../features/ProductList/";
 import { CartItem } from "../../app/interface.js";
+import { Cart } from "../../features/Cart/";
 interface MainProps {
   setFilterCategory: (value: string) => void;
   setCart: (updateFunction: (prev: CartItem[]) => CartItem[]) => void;
@@ -16,9 +16,9 @@ const Main = (props: MainProps) => {
       <RadioButtons
         setFilterCategory={setFilterCategory}
         filterCategory={filterCategory}
-      />
+      /> 
       <div className={s.wrapper}>
-        <Sidebar cart={cart} setCart={setCart} />
+        <Cart cart={cart} setCart={setCart} />
         <ProductList filterCategory={filterCategory} setCart={setCart} />
       </div>
     </main>

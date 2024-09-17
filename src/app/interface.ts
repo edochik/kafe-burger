@@ -3,6 +3,6 @@ export interface CartItem {
 	nameRu: string;
 	price: number;
 	weight: number;
-	imageAddress: string;
+	imageUrl: string;
 	count: number;
 }

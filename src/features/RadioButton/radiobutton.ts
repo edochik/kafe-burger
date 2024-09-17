@@ -4,7 +4,7 @@ export interface RadioButtonData {
   nameEn: string;
   // categoryRu: string;
   // categoryEn: string;
-  imageAddress: string;
+  imageUrl: string;
 }
 
 export interface RadioButtonProps extends RadioButtonData {

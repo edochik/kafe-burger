@@ -5,7 +5,7 @@ import { useState } from "react";
 import { CartItem } from "./interface";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ProductPage } from "../widgets/ProductPage/";
-import { ModalOrder } from "../widgets/ModalOrder/";
+import { Modal } from "../widgets/Modal";
 
 const App = () => {
   const [filterCategory, setFilterCategory] = useState("burgers");
@@ -21,7 +21,7 @@ const App = () => {
       />
       <Routes>
         <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/modal/order" element={<ModalOrder />} />
+        <Route path="/modal/:type" element={<Modal />} />
       </Routes>
       <Footer />
     </Router>

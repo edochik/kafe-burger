@@ -4,6 +4,7 @@ import { ToggleProductButton } from "../../shared/ui/ToggleProductButton";
 import s from "./ModalCard.module.scss";
 import { useEffect } from "react";
 import { products } from "../../shared/data/productData";
+import { Button } from "../../shared/ui/Button/";
 
 const ProductPage = () => {
   const navigate = useNavigate();
@@ -12,15 +13,15 @@ const ProductPage = () => {
   const {
     // id,
     nameRu,
-    nameEn,
+    // nameEn,
     price,
     description,
-    categoryEn,
-    categoryRu,
+    // categoryEn,
+    // categoryRu,
     composition,
     weight,
     kilocalories,
-    imageAddress,
+    imageUrl,
   } = product[0];
   useEffect(() => {
     const handleCloseProductPage = (event: KeyboardEvent) => {
@@ -43,7 +44,7 @@ const ProductPage = () => {
         <div className={s.box}>
           <img
             className={s.image}
-            src={imageAddress}
+            src={imageUrl}
             alt={`фотография ${nameRu}`}
           />
           <div className={s.info}>
@@ -54,11 +55,11 @@ const ProductPage = () => {
                 <li className={s.item}>{item}</li>
               ))}
             </ul>
-            <div className={s.nutritional_info}>
+            <p className={s.nutritional_info}>
               {weight}г, ккал {kilocalories}
-            </div>
+            </p>
           </div>
-          <div className={s.button}>Добавить</div>
+          <Button content="добавить" variant="secondary" />
           <div className={s.inner}>
             <ToggleProductButton />
             <p className={s.price}>{price}₽</p>

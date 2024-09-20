@@ -3,7 +3,12 @@ import { Header } from "../widgets/Header";
 import { Main } from "../pages/Main";
 import { useState } from "react";
 import { CartItem } from "./interface";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  Outlet,
+} from "react-router-dom";
 import { ProductPage } from "../widgets/ProductPage/";
 import { Modal } from "../widgets/Modal";
 
@@ -20,8 +25,10 @@ const App = () => {
         cart={cart}
       />
       <Routes>
+        {/* Исчезла ошибка что нет '/' домашней страницы*/}
+        <Route path="/" element={<Outlet />} />
         <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/modal/:type" element={<Modal />} />
+        <Route path="/:type" element={<Modal />} />
       </Routes>
       <Footer />
     </Router>

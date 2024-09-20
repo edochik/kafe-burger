@@ -11,6 +11,7 @@ const Cart = (props: CartProps) => {
   const { cart, setCart } = props;
   const totalCount = cart.reduce((acc, item) => acc + item.count, 0);
   const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
+
   return (
     <aside>
       <div className={s.cart}>
@@ -27,7 +28,7 @@ const Cart = (props: CartProps) => {
           <p className={s.text}>Итого</p>
           <p className={s.total}>{totalPrice}₽</p>
         </div>
-        <Link className={s.link} to="/modal/order">
+        <Link className={s.link} to="/order">
           <Button content="оформить заказ" variant="secondary" />
         </Link>
         <p className={s.info}>Бесплатная доставка</p>

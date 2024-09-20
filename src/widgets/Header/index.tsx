@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
 import s from "./header.module.scss";
+import { LogoIcon } from "../../shared/ui/SVGIcons/LogoIcon";
 const Header = () => {
   return (
     <header className={s.header}>
       <div className={s.top} style={{ zIndex: 99 }}>
         <a className={s.logo} href="#!">
-          <img src="/images/HeaderLogoIcon.svg" alt="logo" />
+          <LogoIcon
+            style={{ width: 153, height: 35 }}
+            mainColor={"white"}
+            optionalColor={"#FFA132"}
+          />
         </a>
-        <Link className={s.link} to="/modal/authorization">
+        <Link className={s.link} to="/authorization">
           Войти
         </Link>
       </div>

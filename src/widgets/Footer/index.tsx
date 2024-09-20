@@ -1,3 +1,4 @@
+import { LogoIcon } from "../../shared/ui/SVGIcons/LogoIcon";
 import s from "./footer.module.scss";
 
 const Footer = () => {
@@ -5,7 +6,11 @@ const Footer = () => {
     <footer className={s.footer}>
       <div className={s.column}>
         <a className={s.logo} href="#!">
-          <img src="/images/FooterLogoIcon.svg" alt="logo" />
+          <LogoIcon
+            style={{ width: 304, height: 66 }}
+            mainColor={"#FF7020"}
+            optionalColor={"white"}
+          />
         </a>
         <div>
           <div>© YouMeal, 2022</div>

@@ -3,32 +3,13 @@ import { CartItem } from "../../app/interface";
 import s from "./ProductCard.module.scss";
 import { ProductCardProps } from "../../shared/data/productData";
 import { Button } from "../../shared/ui/Button";
-import classNames from "classnames";
-interface IProductCardProps extends ProductCardProps {
+import { addProduct } from "./helper";
+export interface IProductCardProps extends ProductCardProps {
   setCart: (updateFunction: (prev: CartItem[]) => CartItem[]) => void;
 }
 const ProductCard = (props: IProductCardProps) => {
   const { id, nameRu, price, weight, imageUrl, setCart } = props;
-  const onClickAddCard = () => {
-    setCart((prev: CartItem[]) => {
-      const ids = prev.map((product) => product.id);
-      if (!ids.includes(id)) {
-        return [
-          ...prev,
-          {
-            id,
-            nameRu,
-            price,
-            weight,
-            imageUrl,
-            count: 1,
-          },
-        ];
-      }
-      return prev;
-    });
-  };
-
+  // console.log(props);
   return (
     <div className={s.productcard}>
       <Link to={`/product/${id}`}>
@@ -37,7 +18,11 @@ const ProductCard = (props: IProductCardProps) => {
       <p className={s.price}>{price}₽</p>
       <h3 className={s.title}>{nameRu}</h3>
       <p className={s.weight}>{weight}г</p>
-      <Button variant="button_primary" content="Добавить" onClick={onClickAddCard} />
+      <Button
+        variant="button_primary"
+        content="Добавить"
+        onClick={() => setCart((prev: CartItem[]) => addProduct(prev, props))}
+      />
     </div>
   );
 };

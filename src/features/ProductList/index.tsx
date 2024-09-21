@@ -1,14 +1,12 @@
 import s from "./ProductList.module.scss";
 import { ProductCard } from "../ProductCard";
-import { CartItem } from "../../app/interface";
 import { products } from "../../shared/data/productData";
 
 interface ProductListProps {
-  setCart: (updateFunction: (prev: CartItem[]) => CartItem[]) => void;
   filterCategory: string;
 }
 const ProductList = (props: ProductListProps) => {
-  const { filterCategory, setCart } = props;
+  const { filterCategory } = props;
   const filterProduct = products.filter(
     (product) => product.categoryEn === filterCategory
   );
@@ -22,7 +20,7 @@ const ProductList = (props: ProductListProps) => {
       <h2 className={s.title}>{categoryName}</h2>
       <div className={s.wrapper}>
         {filterProduct.map((product) => (
-          <ProductCard key={product.id} {...product} setCart={setCart} />
+          <ProductCard key={product.id} {...product}  />
         ))}
       </div>
     </section>

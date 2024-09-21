@@ -5,24 +5,32 @@ import s from "./ModalCard.module.scss";
 import { useEffect } from "react";
 import { products } from "../../shared/data/productData";
 import { Button } from "../../shared/ui/Button/";
+import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
+import { addProductCart } from "../../features/Cart/cartSlice";
 
 const ProductPage = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const product = products.filter((product) => product.id === Number(id));
+  const { id: productId } = useParams();
+  const dispatch = useAppDispatch();
+  const count = useAppSelector((state) => state.productsInCart).filter(
+    (product) => product.id === Number(productId)
+  )[0]?.count;
+  const product = products.filter(
+    (product) => product.id === Number(productId)
+  );
   const {
-    // id,
+    id,
     nameRu,
-    // nameEn,
     price,
     description,
-    // categoryEn,
-    // categoryRu,
     composition,
     weight,
     kilocalories,
     imageUrl,
   } = product[0];
+  const onClickAppProduct = () => {
+    dispatch(addProductCart({ id, nameRu, price, weight, imageUrl, count: 1 }));
+  };
   useEffect(() => {
     const handleCloseProductPage = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -59,9 +67,13 @@ const ProductPage = () => {
               {weight}г, ккал {kilocalories}
             </p>
           </div>
-          <Button content="добавить" variant="secondary" />
+          <Button
+            content="добавить"
+            variant="secondary"
+            onClick={onClickAppProduct}
+          />
           <div className={s.inner}>
-            <ToggleProductButton />
+            {count && <ToggleProductButton count={count} />}
             <p className={s.price}>{price}₽</p>
           </div>
         </div>

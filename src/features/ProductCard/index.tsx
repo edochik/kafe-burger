@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
-import { CartItem } from "../../app/interface";
 import s from "./ProductCard.module.scss";
 import { ProductCardProps } from "../../shared/data/productData";
 import { Button } from "../../shared/ui/Button";
-import { addProduct } from "./helper";
+import { addProductCart } from "../Cart/cartSlice";
+import { useAppDispatch } from "../../shared/lib/hooks/hooks";
 export interface IProductCardProps extends ProductCardProps {
-  setCart: (updateFunction: (prev: CartItem[]) => CartItem[]) => void;
 }
 const ProductCard = (props: IProductCardProps) => {
-  const { id, nameRu, price, weight, imageUrl, setCart } = props;
-  // console.log(props);
+  const { id, nameRu, price, weight, imageUrl } = props;
+  const dispatch = useAppDispatch();
+  const onClickAppProduct = () => {
+    dispatch(addProductCart({ id, nameRu, price, weight, imageUrl, count: 1 }));
+  };
   return (
     <div className={s.productcard}>
       <Link to={`/product/${id}`}>
@@ -21,7 +23,7 @@ const ProductCard = (props: IProductCardProps) => {
       <Button
         variant="button_primary"
         content="Добавить"
-        onClick={() => setCart((prev: CartItem[]) => addProduct(prev, props))}
+        onClick={() => onClickAppProduct()}
       />
     </div>
   );

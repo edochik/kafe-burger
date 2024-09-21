@@ -1,5 +1,5 @@
-import { CartItem } from "../../app/interface.js";
 import { ToggleProductButton } from "../../shared/ui/ToggleProductButton/";
+import { CartItem } from "../Cart/cartSlice.js";
 import s from "./ProductCart.module.scss";
 
 const ProductCart = (props: CartItem) => {

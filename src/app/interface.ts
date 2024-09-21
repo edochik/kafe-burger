@@ -6,3 +6,11 @@ export interface CartItem {
 	imageUrl: string;
 	count: number;
 }
+
+export interface Location {
+	pathname: string;
+	search: string;
+	hash: string;
+	state: unknown;
+	key: string;
+}

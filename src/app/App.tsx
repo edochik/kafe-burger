@@ -1,35 +1,42 @@
 import { Footer } from "../widgets/Footer";
 import { Header } from "../widgets/Header";
-import { Main } from "../pages/Main";
 import { useState } from "react";
 import { CartItem } from "./interface";
+import { AppRouter } from "./router";
 import {
-  Route,
   BrowserRouter as Router,
-  Routes,
-  Outlet,
+  useLocation,
+  useParams,
 } from "react-router-dom";
-import { ProductPage } from "../widgets/ProductPage/";
-import { Modal } from "../widgets/Modal";
-
+import { Main } from "../pages/Main/";
+import { NotFoundPage } from "../pages/NotFoundPage/";
+const paths = [
+  "/order",
+  "/authorization",
+  "/registration",
+  "/product",
+  "/",
+  "",
+];
 const App = () => {
   const [filterCategory, setFilterCategory] = useState("burgers");
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [path, setPath] = useState("");
+
   return (
     <Router>
       <Header />
-      <Main
-        setFilterCategory={setFilterCategory}
-        filterCategory={filterCategory}
-        setCart={setCart}
-        cart={cart}
-      />
-      <Routes>
-        {/* Исчезла ошибка что нет '/' домашней страницы*/}
-        <Route path="/" element={<Outlet />} />
-        <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/:type" element={<Modal />} />
-      </Routes>
+      {paths.includes(path) ? (
+        <Main
+          setFilterCategory={setFilterCategory}
+          filterCategory={filterCategory}
+          setCart={setCart}
+          cart={cart}
+        />
+      ) : (
+        <NotFoundPage />
+      )}
+      <AppRouter setPath={setPath} />
       <Footer />
     </Router>
   );

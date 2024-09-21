@@ -32,7 +32,7 @@ const Modal = () => {
   };
   if (type === "order") {
     return (
-      <div className={s.overlay}>
+      <div className={s.overlay} onClick={onClickClose}>
         <div className={s.modal} onClick={(e) => e.stopPropagation()}>
           <div className={s.column}>
             <DonutIcon />
@@ -94,7 +94,7 @@ const Modal = () => {
   }
   if (type === "authorization") {
     return (
-      <div className={s.overlay}>
+      <div className={s.overlay} onClick={onClickClose}>
         <div className={s.modal} onClick={(e) => e.stopPropagation()}>
           <div className={s.column}>
             <UserIcon />
@@ -124,44 +124,50 @@ const Modal = () => {
       </div>
     );
   }
-  return (
-    <div className={s.overlay}>
-      <div className={s.modal} onClick={(e) => e.stopPropagation()}>
-        <div className={s.column}>
-          <UserIcon />
+  if (type === "registration") {
+    return (
+      <div className={s.overlay} onClick={onClickClose}>
+        <div className={s.modal} onClick={(e) => e.stopPropagation()}>
+          <div className={s.column}>
+            <UserIcon />
+          </div>
+          <div className={s.column}>
+            <h3 className={s.title}>Регистрация</h3>
+            <form className={s.form}>
+              <Input
+                placeholder="Имя"
+                ref={inputRef}
+                style={{ marginBottom: 8 }}
+              />
+              <Input placeholder="Фамилия" style={{ marginBottom: 8 }} />
+              <Input placeholder="Email" style={{ marginBottom: 8 }} />
+              <Input placeholder="Телефон" style={{ marginBottom: 16 }} />
+              <h4 className={s.subtitle}>Адрес доставки</h4>
+              <Input
+                placeholder="Улица, дом, квартира"
+                style={{ marginBottom: 8 }}
+              />
+              <div className={s.wrapper}>
+                <Input placeholder="Этаж" />
+                <Input placeholder="Домофон" />
+              </div>
+              <h4 className={s.subtitle}>Введите пароль</h4>
+              <Input placeholder="Пароль" style={{ marginBottom: 8 }} />
+              <Input
+                placeholder="Повторите пароль"
+                style={{ marginBottom: 8 }}
+              />
+              <Button content="Зарегистрироваться" variant="secondary" />
+            </form>
+          </div>
+          <Link to="/" className={s.close}>
+            <CloseIcon></CloseIcon>
+          </Link>
         </div>
-        <div className={s.column}>
-          <h3 className={s.title}>Регистрация</h3>
-          <form className={s.form}>
-            <Input
-              placeholder="Имя"
-              ref={inputRef}
-              style={{ marginBottom: 8 }}
-            />
-            <Input placeholder="Фамилия" style={{ marginBottom: 8 }} />
-            <Input placeholder="Email" style={{ marginBottom: 8 }} />
-            <Input placeholder="Телефон" style={{ marginBottom: 16 }} />
-            <h4 className={s.subtitle}>Адрес доставки</h4>
-            <Input
-              placeholder="Улица, дом, квартира"
-              style={{ marginBottom: 8 }}
-            />
-            <div className={s.wrapper}>
-              <Input placeholder="Этаж" />
-              <Input placeholder="Домофон" />
-            </div>
-            <h4 className={s.subtitle}>Введите пароль</h4>
-            <Input placeholder="Пароль" style={{ marginBottom: 8 }} />
-            <Input placeholder="Повторите пароль" style={{ marginBottom: 8 }} />
-            <Button content="Зарегистрироваться" variant="secondary" />
-          </form>
-        </div>
-        <Link to="/" className={s.close}>
-          <CloseIcon></CloseIcon>
-        </Link>
       </div>
-    </div>
-  );
+    );
+  }
+  return null;
 };
 
 export { Modal };

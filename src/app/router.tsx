@@ -1,0 +1,27 @@
+// src/app/router.tsx
+import { Routes, Route, Outlet, useLocation } from "react-router-dom";
+import { ProductPage } from "../widgets/ProductPage";
+import { Modal } from "../widgets/Modal";
+import { NotFoundPage } from "../pages/NotFoundPage/";
+import { useEffect } from "react";
+import { Location } from "./interface.js";
+interface AppRouterProps {
+  setPath: (arg: string) => void;
+}
+
+export const AppRouter = (props: AppRouterProps) => {
+  const { setPath } = props;
+  const location: Location = useLocation();
+  useEffect(() => {
+    setPath(location.pathname);
+  }, [setPath, location.pathname]);
+
+  return (
+    <Routes>
+      <Route path="/*" element={<NotFoundPage />} />
+      <Route path="/" element={<Outlet />} />
+      <Route path="/product/:id" element={<ProductPage />} />
+      <Route path="/:type" element={<Modal />} />
+    </Routes>
+  );
+};

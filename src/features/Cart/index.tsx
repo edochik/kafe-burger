@@ -6,9 +6,11 @@ import { useAppSelector } from "../../shared/lib/hooks/hooks";
 
 const Cart = () => {
   const productsInCart = useAppSelector((state) => state.productsInCart);
-  console.log(productsInCart);
   const totalCount = productsInCart.reduce((acc, item) => acc + item.count, 0);
-  const totalPrice = productsInCart.reduce((acc, item) => acc + item.price, 0);
+  const totalPrice = productsInCart.reduce(
+    (acc, item) => acc + item.price * item.count,
+    0
+  );
 
   return (
     <aside>

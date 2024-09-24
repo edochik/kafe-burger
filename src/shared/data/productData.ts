@@ -1,4 +1,4 @@
-export interface ProductCardProps {
+export interface Product {
   id: number;
   nameRu: string;
   nameEn: string;
@@ -6,13 +6,14 @@ export interface ProductCardProps {
   description: string;
   categoryRu: string;
   categoryEn: string;
+  categoryImg: string;
   composition: string[];
   weight: number;
   kilocalories: number;
   imageUrl: string;
 }
 
-export const products: ProductCardProps[] = [
+export const products: Product[] = [
   {
     id: 1,
     nameRu: "Мясная бомба",
@@ -21,6 +22,7 @@ export const products: ProductCardProps[] = [
     description: 'Супер мясное наслаждение! Большая рубленая котлета из свежего говяжего мяса покорит вас своей сочностью, а хрустящие листья салата добавят свежести.',
     categoryEn: "burgers",
     categoryRu: "бургеры",
+    categoryImg: '/images/icons/burger.png',
     composition: ['Пшеничная булочка',
       'Котлета из говядины',
       'Красный лук',
@@ -38,6 +40,7 @@ export const products: ProductCardProps[] = [
     description: 'Нежный бургер с расплавленным сыром, который подарит вам наслаждение на каждом укусе. Мягкая булочка, хрустящие овощи и насыщенный сырный вкус — идеальное сочетание для любителей сыра.',
     categoryEn: "burgers",
     categoryRu: "бургеры",
+    categoryImg: '/images/icons/burger.png',
     composition: [
       'Пшеничная булочка',
       'Котлета из говядины',
@@ -58,6 +61,7 @@ export const products: ProductCardProps[] = [
     description: 'Большой и насыщенный бургер для тех, кто хочет хорошо подкрепиться. Сытная котлета из говядины, свежие овощи и ароматный соус делают этот бургер идеальным выбором для настоящих гурманов.',
     categoryEn: "burgers",
     categoryRu: "бургеры",
+    categoryImg: '/images/icons/burger.png',
     composition: [
       'Пшеничная булочка',
       'Котлета из говядины',
@@ -78,6 +82,7 @@ export const products: ProductCardProps[] = [
     description: 'Сочный бургер с двойной котлетой и усиленным вкусом для тех, кто хочет получить настоящий удар по голоду. Великолепное сочетание мясной начинки и пикантного соуса подарит вам незабываемые ощущения.',
     categoryEn: "burgers",
     categoryRu: "бургеры",
+    categoryImg: '/images/icons/burger.png',
     composition: [
       'Пшеничная булочка',
       'Две котлеты из говядины',
@@ -94,6 +99,7 @@ export const products: ProductCardProps[] = [
     id: 5,
     nameRu: "Вечная классика",
     nameEn: "Eternal Classic",
+    categoryImg: '/images/icons/burger.png',
     price: 450,
     description: 'Настоящий классический бургер, который сочетает в себе сочную котлету, свежие овощи и насыщенный соус. Идеальный выбор для тех, кто ценит проверенные временем вкусы.',
     categoryEn: "burgers",
@@ -119,6 +125,7 @@ export const products: ProductCardProps[] = [
     description: 'Бургер с итальянским акцентом — свежий базилик, ароматный соус песто и тянущийся сыр моцарелла. Идеальный выбор для тех, кто любит итальянскую кухню в новом формате.',
     categoryEn: "burgers",
     categoryRu: "бургеры",
+    categoryImg: '/images/icons/burger.png',
     composition: [
       'Пшеничная булочка',
       'Котлета из говядины',
@@ -139,6 +146,7 @@ export const products: ProductCardProps[] = [
     description: 'Хрустящие кукурузные начос, обжаренные до золотистой корочки. Подаются с острым соусом чили и сырным соусом для настоящих любителей мексиканских закусок.',
     categoryEn: "snacks",
     categoryRu: "закуски",
+    categoryImg: '/images/icons/snacks.png',
     composition: [
       'Кукурузные чипсы',
       'Соус чили',
@@ -156,6 +164,7 @@ export const products: ProductCardProps[] = [
     description: 'Классическая картошка фри, обжаренная до хрустящей золотистой корочки. Подаётся с кетчупом или любым другим соусом на ваш выбор.',
     categoryEn: "snacks",
     categoryRu: "закуски",
+    categoryImg: '/images/icons/snacks.png',
     composition: [
       'Картофель',
       'Растительное масло',
@@ -173,6 +182,7 @@ export const products: ProductCardProps[] = [
     description: 'Хрустящие луковые кольца в золотистой панировке, идеально подходящие в качестве закуски. Подаются с пикантным соусом для усиления вкуса.',
     categoryEn: "snacks",
     categoryRu: "закуски",
+    categoryImg: '/images/icons/snacks.png',
     composition: [
       'Лук',
       'Панировочные сухари',
@@ -191,6 +201,7 @@ export const products: ProductCardProps[] = [
     description: 'Аппетитный хот-дог с сочной сосиской, свежими овощами и классическими соусами. Идеальный выбор для тех, кто любит простую, но сытную еду.',
     categoryEn: "hot-dogs",
     categoryRu: "хот-доги",
+    categoryImg: '/images/icons/hot-dog.png',
     composition: [
       'Булочка для хот-дога',
       'Сосиска',
@@ -211,6 +222,7 @@ export const products: ProductCardProps[] = [
     description: 'Острый хот-дог с пикантной сосиской и соусом чили для настоящих любителей острых вкусов. Подается с хрустящими овощами и яркими соусами.',
     categoryEn: "hot-dogs",
     categoryRu: "хот-доги",
+    categoryImg: '/images/icons/hot-dog.png',
     composition: [
       'Булочка для хот-дога',
       'Острая сосиска',
@@ -233,6 +245,7 @@ export const products: ProductCardProps[] = [
     description: 'Простой и вкусный классический хот-дог с сочной сосиской, свежими овощами и классическими соусами. Отличный выбор для быстрого перекуса.',
     categoryEn: "hot-dogs",
     categoryRu: "хот-доги",
+    categoryImg: '/images/icons/hot-dog.png',
     composition: [
       'Булочка для хот-дога',
       'Сосиска',
@@ -253,6 +266,7 @@ export const products: ProductCardProps[] = [
     description: 'Выгодное комбо для настоящих гурманов: бургер, картошка фри,стрипсы и прохладительный напиток. Идеальный выбор для сытного обеда или ужина.',
     categoryEn: "combos",
     categoryRu: "комбо",
+    categoryImg: '/images/icons/combo.png',
     composition: [
       'Бургер "Мясная бомба"',
       'Картошка фри',
@@ -271,6 +285,7 @@ export const products: ProductCardProps[] = [
     description: 'Выгодное комбо для двоих: шашлык, картошка фри, хлеб и соусы. Идеальный выбор для сытного обеда.',
     categoryEn: "combos",
     categoryRu: "комбо",
+    categoryImg: '/images/icons/combo.png',
     composition: [
       'Шашлык"',
       'Картошка фри',
@@ -288,6 +303,7 @@ export const products: ProductCardProps[] = [
     description: 'Выгодное комбо для двоих: шашлык, картошка фри, хлеб и соусы. Идеальный выбор для сытного обеда.',
     categoryEn: "combos",
     categoryRu: "комбо",
+    categoryImg: '/images/icons/combo.png',
     composition: [
       'Шашлык"',
       'Картошка фри',
@@ -304,6 +320,7 @@ export const products: ProductCardProps[] = [
     description: 'Выгодное комбо для настоящих гурманов: бургер, картошка фри,стрипсы и прохладительный напиток. Идеальный выбор для сытного обеда или ужина.',
     categoryEn: "combos",
     categoryRu: "комбо",
+    categoryImg: '/images/icons/combo.png',
     composition: [
       'Бургер "Мясная бомба"',
       'Картошка фри',
@@ -314,3 +331,20 @@ export const products: ProductCardProps[] = [
     imageUrl: "/images/combo-4.jpg",
   },
 ];
+
+// export const categoryUrls = {
+// 	burgers: '/images/icons/burger.png',
+// 	snacks: '/images/icons/snacks.png',
+// 	'hot-dogs': '/images/icons/hot-dog.png',
+// 	combos: '/images/icons/combo.png',
+// 	shawarma: '/images/icons/shawarma.png',
+// 	pizza: '/images/icons/pizza.png',
+// 	wok: '/images/icons/wok.png',
+// 	desserts: '/images/icons/dessert.png',
+// 	sauces: '/images/icons/sauces.png'
+// }
+
+// function getProductObject(products: Product[]) {
+//   return Object.fromEntries(products.map(product => [product.id, product]))
+// }
+// export const productsObject = getProductObject(products)

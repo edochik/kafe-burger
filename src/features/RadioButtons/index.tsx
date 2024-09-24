@@ -1,21 +1,18 @@
 import s from "./RadioButtons.module.scss";
 import { RadioButton } from "../RadioButton";
-import { radioButtonData } from "./radiobuttons";
-interface RadioButtonsProps {
-  setFilterCategory: (value: string) => void;
-  filterCategory: string;
-}
-const RadioButtons = (props: RadioButtonsProps) => {
-  const { setFilterCategory, filterCategory } = props;
+import { getButtonsData } from "./radiobuttons";
+import { products } from "../../shared/data/productData";
+
+
+const RadioButtons = () => {
+  const buttons = getButtonsData(products);
   return (
     <div className={s.radiobuttons}>
       <fieldset className={s.fieldset}>
-        {radioButtonData.map((data, index) => (
+        {buttons.map((data) => (
           <RadioButton
             key={data.id}
             {...data}
-            value={filterCategory}
-            onChange={setFilterCategory}
           />
         ))}
       </fieldset>

@@ -5,45 +5,56 @@
    если код относится только к одному компоненту, то он остается только в папке компонента
    src/
    ├── app/
-   │ ├── providers/ -
-   │ ├── routes/ -
-   │ └── App.tsx +
+   │ ├── App.tsx - приложение
+   │ ├── global.d.ts
+   │ ├── helper.ts - массив путей
+   │ ├── interface.ts - interface путей
+   │ ├── router.tsx - пути приложения
+   │ └── store.ts - хранилище
    ├── pages/
-   │ └── Main/ +
+   │ ├── Main/ + основной контент
+   │ └── NotFoundPage/ + если нет страницы
    ├── widgets/
-   │ ├── Footer/+
+   │ ├── Footer/+ 
    │ ├── Header/+  
-   │ ├── ModalCard/+
-   │ ├── ModalForm/+
-   │ └── Sidebar/+
+   │ ├── Modal/+
+   │ └── ProductPage/+
    ├── features/
-   │ ├── redux/ -
-   │ ├── Cart/+
-   │ ├── ProductCard/+
-   │ ├── ProductCart/+
-   │ ├── ProductList/ +
-   │ ├── RadioButton/+
-   │ └── RadioButtons/ +
+   │ ├── Cart/ корзина
+   │ ├── ProductCard/+ продукт
+   │ ├── ProductCart/+ продукция в корзине
+   │ ├── ProductList/+ список продукции
+   │ ├── RadioButton/+ радио кнопка 
+   │ └── RadioButtons/ + радио кнопки
    ├── entities/
    ├── shared/
-   │ ├── ui // переиспользуемые компоненты
-   │ │ . └── SVGIcons/ +
-   │ │ . └── ToggleProductButton/ +
    │ ├── assets
    │ │ ├── fonts/+ // фон
    │ │ ├── icon/+ // иконки
    │ │ └── images/+ // изображения
+   │ ├── data
+   │ │ └── productData.ts/+ // данные о продукте
+   │ ├── lib
+   │ │ └── hooks+ //
+   │ │ . └── hooks.ts+ // костомные hooks для redux
+   │ ├── ui // переиспользуемые компоненты
+   │ │ . ├── Button/ + 
+   │ │ . ├── Input/ +
+   │ │ . ├── SVGIcons/ +
+   │ │ . ├── ToggleButton/ +
+   │ │ . └── ToggleProductButton/ +
    │ └── style // стили
    │ . ├── fonts.css +
    │ . ├── global.css +
    │ . ├── normalize.css +
    │ . └── variable.css +
-   ├── utils/ ?
+   ├── utils/ 
    └── index.tsx
 
 3. Подключить модульный scss
    в src создать папку |global.d.ts|
    подключаем в index.tsx |import 'normalize.css'|
+
 ```
 declare module '*.scss' {
 	const content: Record<string, string>;
@@ -57,24 +68,34 @@ declare module '*.scss' {
    -normalize +
    -redux-toolkit -
 
-
 # Добавить
+
 # reduxToolkit
+
 # вход для user +
+
 # видит текущий заказ и историю заказов
 
 # вход для admin +
+
 # admin может удалять добавлять изменять продукцию
-# видеть что заказывали user - отменять заказ 
+
+# видеть что заказывали user - отменять заказ
 
 # переключение света на темный/светлый
+
 # sort дорогой дешевый по названию по киллокаллориям
+
 # страница с ошибкой
 
+### Сервер
 
-### Сервер 
 # должен хранить у себя данные по продуктам и их количеству
+
 # данные о пользователях с возможностью Admin и user
+
 # User заказы(в процессе, доставка, выполнен) и выполненные или отменные.
-# Admin должен иметь свою панель где может создавать продукцию исправлять и удалять. 
+
+# Admin должен иметь свою панель где может создавать продукцию исправлять и удалять.
+
 # Действия Admin скорей всего должны оставлять т.е в системе чтобы можно было проверить, что он сделал.

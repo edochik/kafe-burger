@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import s from "./ProductCard.module.scss";
-import { ProductCardProps } from "../../shared/data/productData";
+import { Product } from "../../shared/data/productData";
 import { Button } from "../../shared/ui/Button";
 import { addProductCart } from "../Cart/cartSlice";
-import { useAppDispatch } from "../../shared/lib/hooks/hooks";
-export interface IProductCardProps extends ProductCardProps {
-}
+import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
+export interface IProductCardProps extends Product {}
 const ProductCard = (props: IProductCardProps) => {
   const { id, nameRu, price, weight, imageUrl } = props;
   const dispatch = useAppDispatch();
+  const productsInCart = useAppSelector((state) => state.productsInCart);
+
   const onClickAppProduct = () => {
     dispatch(addProductCart({ id, nameRu, price, weight, imageUrl, count: 1 }));
   };
@@ -22,7 +23,11 @@ const ProductCard = (props: IProductCardProps) => {
       <p className={s.weight}>{weight}г</p>
       <Button
         variant="button_primary"
-        content="Добавить"
+        content={
+          productsInCart.some((product) => product.id === id)
+            ? "Добавлено"
+            : "Добавить"
+        }
         onClick={() => onClickAppProduct()}
       />
     </div>

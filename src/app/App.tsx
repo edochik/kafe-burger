@@ -8,20 +8,12 @@ import { NotFoundPage } from "../pages/NotFoundPage/";
 import { paths } from "./helper";
 
 const App = () => {
-  const [filterCategory, setFilterCategory] = useState("burgers");
   const [path, setPath] = useState("");
 
   return (
     <Router>
       <Header />
-      {paths.includes(path) ? (
-        <Main
-          setFilterCategory={setFilterCategory}
-          filterCategory={filterCategory}
-        />
-      ) : (
-        <NotFoundPage />
-      )}
+      {paths.includes(path) ? <Main /> : <NotFoundPage />}
       <AppRouter setPath={setPath} />
       <Footer />
     </Router>

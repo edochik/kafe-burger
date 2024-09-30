@@ -1,0 +1,94 @@
+@import '../../shared/style/mixin.scss';
+.overlay {
+	@include overlay-style();
+	.modal {
+		display: flex;
+		overflow: hidden;
+		min-height: 460px;
+		@include modal-style();
+		.column:nth-of-type(1) {
+			background-color: var(--color-orange);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.image {
+				width: 200px;
+			}
+		}
+		.column:nth-of-type(2) {
+			padding: 44px 24px 24px 24px;
+			background-color: var(--color-background-main);
+		}
+		.column {
+			min-width: 342px;
+			.title {
+				margin: 0 0 16px 0;
+				font-weight: var(--font-weight-semibold);
+				font-size: var(--font-size-large);
+				line-height: var(--line-height-small);
+			}
+			.form {
+				display: flex;
+				min-height: 340px;
+				flex-direction: column;
+				.wrapper_radio {
+					margin-bottom: 16px;
+					display: flex;
+					flex-direction: column;
+					row-gap: 8px;
+					.label {
+						cursor: pointer;
+						display: flex;
+						align-items: center;
+						.receiving {
+							@include input-hidden();
+						}
+						.input:checked + .radio + .name {
+						}
+						.radio {
+							position: relative;
+							display: inline-block;
+							width: 12px;
+							height: 12px;
+							border: 2px solid #f2f2f3;
+							border-radius: 50%;
+						}
+						.radio:before {
+							@include absoluteCenter();
+							content: '';
+							opacity: 0;
+							border-radius: 50%;
+							width: 6px;
+							height: 6px;
+							background-color: var(--color-black);
+							transition: opacity 0.2s ease-in-out;
+						}
+						.receiving:checked + .radio::before {
+							opacity: 1;
+						}
+						.text {
+							margin-left: 8px;
+							font-size: var(--font-size-small);
+						}
+					}
+				}
+				.wrapper {
+					margin-bottom: 32px;
+					display: flex;
+					column-gap: 8px;
+				}
+				.subtitle {
+					font-weight: var(--font-weight-semibold);
+					margin: 0 0 8px 0;
+				}
+			}
+		}
+		.close {
+			cursor: pointer;
+			position: absolute;
+			content: '';
+			right: 24px;
+			top: 24px;
+		}
+	}
+}

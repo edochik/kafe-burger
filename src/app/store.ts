@@ -5,7 +5,11 @@ import { selectSlice } from '../features/RadioButtons/selectSlice'
 export const store = configureStore({
 	reducer: {
 		productsInCart: cartSlice.reducer,
-		selectProduct: selectSlice.reducer
+		selectProduct: selectSlice.reducer,
+		// historyOrder:
+		// historyDoAmin:
+		// user ? 
+		// admin ? 
 	},
 })
 

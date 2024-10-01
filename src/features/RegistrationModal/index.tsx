@@ -1,12 +1,23 @@
-import s from "./RegistrationModal.module.scss";
-import { useEffect, useRef } from "react";
+import s from "../../shared/style/modal.module.scss";
+import { useEffect, useRef, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../shared/ui/Button";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
-import { Input } from "../../shared/ui/Input/Input";
 
 const RegistrationModal = () => {
+  const [inputValues, setInputValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    floor: "",
+    intercom: "",
+    password: "",
+  });
+  const [repeatPassword, setRepeatPassword] = useState("");
+
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -26,6 +37,10 @@ const RegistrationModal = () => {
   const onClickClose = () => {
     navigate("/");
   };
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    setInputValues((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <div className={s.overlay} onClick={onClickClose}>
@@ -36,26 +51,107 @@ const RegistrationModal = () => {
         <div className={s.column}>
           <h3 className={s.title}>Регистрация</h3>
           <form className={s.form}>
-            <Input
+            <input
+              className={s.input}
+              type="text"
               placeholder="Имя"
+              value={inputValues.firstName}
+              name="firstName"
+              minLength={2}
+              onChange={(e) => handleChangeInput(e)}
               ref={inputRef}
-              style={{ marginBottom: 8 }}
+              aria-label="Имя"
+              required
             />
-            <Input placeholder="Фамилия" style={{ marginBottom: 8 }} />
-            <Input placeholder="Email" style={{ marginBottom: 8 }} />
-            <Input placeholder="Телефон" style={{ marginBottom: 16 }} />
+            <input
+              className={s.input}
+              type="text"
+              placeholder="Фамилия"
+              value={inputValues.lastName}
+              name="lastName"
+              minLength={2}
+              onChange={(e) => handleChangeInput(e)}
+              aria-label="Фамилия"
+              required
+            />
+            <input
+              className={s.input}
+              type="email"
+              placeholder="Email"
+              value={inputValues.email}
+              name="email"
+              onChange={(e) => handleChangeInput(e)}
+              aria-label="почта"
+              required
+            />
+            <input
+              className={s.input}
+              type="text"
+              placeholder="Телефон"
+              value={inputValues.phone}
+              name="phone"
+              minLength={11}
+              maxLength={11}
+              onChange={(e) => handleChangeInput(e)}
+              aria-label="Телефон"
+              required
+            />
             <h4 className={s.subtitle}>Адрес доставки</h4>
-            <Input
+            <input
+              className={s.input}
+              type="text"
               placeholder="Улица, дом, квартира"
-              style={{ marginBottom: 8 }}
+              value={inputValues.address}
+              name="address"
+              onChange={(e) => handleChangeInput(e)}
+              aria-label="Улица, дом, квартира"
+              required
             />
             <div className={s.wrapper}>
-              <Input placeholder="Этаж" />
-              <Input placeholder="Домофон" />
+              <input
+                className={s.input}
+                type="text"
+                placeholder="Этаж"
+                value={inputValues.floor}
+                name="floor"
+                onChange={(e) => handleChangeInput(e)}
+                aria-label="Этаж"
+                required
+              />
+              <input
+                className={s.input}
+                type="text"
+                placeholder="Домофон"
+                value={inputValues.intercom}
+                name="intercom"
+                onChange={(e) => handleChangeInput(e)}
+                aria-label="Домофон"
+                required
+              />
             </div>
             <h4 className={s.subtitle}>Введите пароль</h4>
-            <Input placeholder="Пароль" style={{ marginBottom: 8 }} />
-            <Input placeholder="Повторите пароль" style={{ marginBottom: 8 }} />
+            <input
+              className={s.input}
+              type="password"
+              placeholder="Пароль"
+              value={inputValues.password}
+              name="password"
+              minLength={6}
+              onChange={(e) => handleChangeInput(e)}
+              aria-label="Пароль"
+              required
+            />
+            <input
+              className={s.input}
+              type="password"
+              placeholder="Повторите пароль"
+              value={repeatPassword}
+              name="repeatPassword"
+              minLength={6}
+              onChange={(e) => setRepeatPassword(e.target.value)}
+              aria-label="Повторите пароль"
+              required
+            />
             <Button content="Зарегистрироваться" variant="secondary" />
           </form>
         </div>

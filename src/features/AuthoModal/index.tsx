@@ -1,12 +1,15 @@
-import s from "./AuthorizationModal.module.scss";
+import s from "../../shared/style/modal.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../shared/ui/Button";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
-import { Input } from "../../shared/ui/Input/Input";
 
 const AuthorizationModal = () => {
+  const [inputValues, setInputValues] = useState({
+    login: "",
+    password: "",
+  });
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -26,6 +29,10 @@ const AuthorizationModal = () => {
   const onClickClose = () => {
     navigate("/");
   };
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    setInputValues((prev) => ({ ...prev, [name]: value }));
+  };
   return (
     <div className={s.overlay} onClick={onClickClose}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
@@ -35,12 +42,29 @@ const AuthorizationModal = () => {
         <div className={s.column}>
           <h3 className={s.title}>Авторизация</h3>
           <form className={s.form}>
-            <Input
+            <input
+              className={s.input}
+              type="text"
               placeholder="Логин"
+              name="login"
+              value={inputValues.login}
+              onChange={(e) => handleChangeInput(e)}
+              aria-label="Логин"
+              minLength={4}
               ref={inputRef}
-              style={{ marginBottom: 8 }}
+              required
             />
-            <Input placeholder="Пароль" style={{ marginBottom: 16 }} />
+            <input
+              className={s.input}
+              type="password"
+              placeholder="Пароль"
+              name="password"
+              value={inputValues.password}
+              onChange={(e) => handleChangeInput(e)}
+              aria-label="Пароль"
+              minLength={6}
+              required
+            />
             <Button content="Войти" variant="secondary" />
             <div className={s.bottom} style={{ marginTop: "auto" }}>
               <h3 className={s.title}>Регистрация</h3>

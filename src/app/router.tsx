@@ -1,7 +1,6 @@
 // src/app/router.tsx
 import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 import { ProductPage } from "../widgets/ProductPage";
-import { Modal } from "../widgets/Modal";
 import { NotFoundPage } from "../pages/NotFoundPage/";
 import { useEffect } from "react";
 import { Location } from "./interface.js";

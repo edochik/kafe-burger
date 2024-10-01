@@ -1,6 +1,7 @@
 @import url(./variable.scss);
 @import url(./fonts.scss);
 
+
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -18,4 +19,8 @@ body {
   font-family: var(--font-family);
   font-weight: var(--font-weight-regular);
   overflow-x: hidden;
+}
+
+.special-label {
+  display: none;
 }

@@ -28,6 +28,10 @@
 				line-height: var(--line-height-small);
 			}
 			.form {
+				.input {
+					margin-bottom: 8px;
+					@include input-style();
+				}
 				display: flex;
 				min-height: 340px;
 				flex-direction: column;

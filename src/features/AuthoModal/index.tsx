@@ -2,16 +2,17 @@ import s from "../../shared/style/modal.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../../shared/ui/Button";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
 
 const AuthorizationModal = () => {
-  const [inputValues, setInputValues] = useState({
+  const [formValues, setFormValues] = useState({
     login: "",
     password: "",
   });
+
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -26,12 +27,27 @@ const AuthorizationModal = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [navigate, inputRef]);
+
   const onClickClose = () => {
     navigate("/");
   };
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    setInputValues((prev) => ({ ...prev, [name]: value }));
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+    if (inputRef.current !== null && name === "login") {
+      if (!/^[a-zA-Z]*$/.test(value)) {
+        inputRef.current.setCustomValidity(
+          "Логин может содержать только буквы от a - Z."
+        );
+      } else {
+        inputRef.current.setCustomValidity("");
+      }
+    }
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(formValues);
   };
   return (
     <div className={s.overlay} onClick={onClickClose}>
@@ -41,17 +57,18 @@ const AuthorizationModal = () => {
         </div>
         <div className={s.column}>
           <h3 className={s.title}>Авторизация</h3>
-          <form className={s.form}>
+          <form className={s.form} onSubmit={handleSubmit}>
             <input
               className={s.input}
               type="text"
               placeholder="Логин"
               name="login"
-              value={inputValues.login}
+              value={formValues.login}
               onChange={(e) => handleChangeInput(e)}
               aria-label="Логин"
-              minLength={4}
+              minLength={3}
               ref={inputRef}
+              pattern="[a-zA-Z]*"
               required
             />
             <input
@@ -59,17 +76,19 @@ const AuthorizationModal = () => {
               type="password"
               placeholder="Пароль"
               name="password"
-              value={inputValues.password}
+              value={formValues.password}
               onChange={(e) => handleChangeInput(e)}
               aria-label="Пароль"
               minLength={6}
               required
             />
-            <Button content="Войти" variant="secondary" />
+            <button type="submit" className={s.button}>
+              Войти
+            </button>
             <div className={s.bottom} style={{ marginTop: "auto" }}>
               <h3 className={s.title}>Регистрация</h3>
               <Link to="/registration">
-                <Button content="Регистрация" variant="secondary" />
+                <button className={s.button}>Регистрация</button>
               </Link>
             </div>
           </form>

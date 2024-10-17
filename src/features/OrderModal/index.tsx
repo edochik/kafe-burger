@@ -3,15 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { data } from "./data";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../../shared/ui/Button";
 import { DonutIcon } from "../../shared/ui/SVGIcons/DonutIcon";
 import PhoneInput from "react-phone-input-2";
 import { validationValues } from "./validationValues";
 import { changeReceiving } from "./changeReceiving";
-import { InputValues } from "./interface";
 
 const OrderModal = () => {
-  const [inputValues, setInputValues] = useState<InputValues>({
+  const [formValues, setFormValues] = useState({
     name: "",
     phone: "",
     receiving: "pickup",
@@ -19,6 +17,7 @@ const OrderModal = () => {
     floor: "",
     intercom: "",
   });
+  console.log(formValues);
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   useEffect(() => {
@@ -43,9 +42,15 @@ const OrderModal = () => {
   const handleChangeInput = (
     e: React.ChangeEvent<HTMLInputElement> | string,
     name: string
-  ) => validationValues(e, name, setInputValues);
+  ) => validationValues(e, name, setFormValues);
+
   const handleChangeReceiving = (arg: string) => {
-    changeReceiving(arg, setInputValues);
+    changeReceiving(arg, setFormValues);
+  };
+  
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(event);
   };
 
   return (
@@ -56,12 +61,12 @@ const OrderModal = () => {
         </div>
         <div className={s.column}>
           <h3 className={s.title}>Доставка</h3>
-          <form className={s.form}>
+          <form className={s.form} onSubmit={handleSubmit}>
             <input
               className={s.input}
               type="text"
               placeholder="Ваше имя"
-              value={inputValues.name}
+              value={formValues.name}
               name="name"
               minLength={2}
               onChange={(e) => handleChangeInput(e, "name")}
@@ -71,7 +76,7 @@ const OrderModal = () => {
             />
             <PhoneInput
               country={"ru"}
-              value={inputValues.phone}
+              value={formValues.phone}
               onChange={(e) => handleChangeInput(e, "phone")}
               onlyCountries={["ru"]}
               masks={{ ru: "+.(...) ...-..-.." }}
@@ -80,7 +85,6 @@ const OrderModal = () => {
               disableCountryCode={true}
               inputProps={{
                 required: true,
-                minLength: 11,
               }}
             />
             <div className={s.wrapper_radio}>
@@ -103,13 +107,13 @@ const OrderModal = () => {
                 </label>
               ))}
             </div>
-            {inputValues.receiving !== "pickup" && (
+            {formValues.receiving !== "pickup" && (
               <>
                 <input
                   className={s.input}
                   type="text"
                   placeholder="Улица, дом, квартира"
-                  value={inputValues.address}
+                  value={formValues.address}
                   name="address"
                   onChange={(e) => handleChangeInput(e, "address")}
                   aria-label="Улица, дом, квартира"
@@ -120,7 +124,7 @@ const OrderModal = () => {
                     className={s.input}
                     type="text"
                     placeholder="Этаж"
-                    value={inputValues.floor}
+                    value={formValues.floor}
                     name="floor"
                     onChange={(e) => handleChangeInput(e, "floor")}
                     aria-label="Этаж"
@@ -130,7 +134,7 @@ const OrderModal = () => {
                     className={s.input}
                     type="text"
                     placeholder="Домофон"
-                    value={inputValues.intercom}
+                    value={formValues.intercom}
                     name="intercom"
                     onChange={(e) => handleChangeInput(e, "intercom")}
                     aria-label="Домофон"
@@ -139,11 +143,9 @@ const OrderModal = () => {
                 </div>
               </>
             )}
-            <Button
-              content="оформить заказ"
-              variant="secondary"
-              style={{ marginTop: "auto" }}
-            />
+            <button className={s.button} type="submit">
+              Оформить заказ
+            </button>
           </form>
         </div>
         <Link to="/" className={s.close}>

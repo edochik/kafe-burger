@@ -85,6 +85,14 @@
 					font-weight: var(--font-weight-semibold);
 					margin: 0 0 8px 0;
 				}
+				.button {
+					@include button-style2(
+						var(--button-bg-default-2),
+						var(--color-white),
+						var(--button-bg-hover-1),
+						var(--button-bg-selected)
+					);
+				}
 			}
 		}
 		.close {

@@ -2,11 +2,12 @@ import s from "../../shared/style/modal.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../../shared/ui/Button";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
+import { validationWordCyrilliс, validationWordLatin } from "./validationInput";
+import PhoneInput from "react-phone-input-2";
 
 const RegistrationModal = () => {
-  const [inputValues, setInputValues] = useState({
+  const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -14,15 +15,20 @@ const RegistrationModal = () => {
     address: "",
     floor: "",
     intercom: "",
+    login: "",
     password: "",
+    confirmPassword: "",
   });
-  const [repeatPassword, setRepeatPassword] = useState("");
 
   const navigate = useNavigate();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const refFirstName = useRef<HTMLInputElement>(null);
+  const refLastName = useRef<HTMLInputElement>(null);
+  const refLogin = useRef<HTMLInputElement>(null);
+  const refConfirmPassword = useRef<HTMLInputElement>(null);
+  
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
+    if (refFirstName.current) {
+      refFirstName.current.focus();
     }
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -33,13 +39,48 @@ const RegistrationModal = () => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [navigate, inputRef]);
+  }, [navigate, refFirstName]);
+
   const onClickClose = () => {
     navigate("/");
   };
+
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    setInputValues((prev) => ({ ...prev, [name]: value }));
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+
+    if (refFirstName.current !== null && name === "firstName") {
+      refFirstName.current.setCustomValidity(
+        validationWordCyrilliс(value, "Имя")
+      );
+    }
+    if (refLastName.current !== null && name === "lastName") {
+      refLastName.current.setCustomValidity(
+        validationWordCyrilliс(value, "Фамилия")
+      );
+    }
+    if (refLogin.current !== null && name === "login") {
+      refLogin.current.setCustomValidity(validationWordLatin(value, "Логин"));
+    }
+    //! проблема с обновлением когда вводим ???========================================================
+    //!================================================================================================
+    //!================================================================================================
+    //!================================================================================================
+    if (refConfirmPassword.current !== null && name === "confirmPassword") {
+      const confirmPassword = formValues["confirmPassword"] + value;
+      if (confirmPassword === formValues["password"]) {
+        refConfirmPassword.current.setCustomValidity("");
+      } else {
+        refConfirmPassword.current.setCustomValidity(
+          "Пароли должны быть одинаковые"
+        );
+      }
+    }
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // console.log(event);
   };
 
   return (
@@ -50,16 +91,17 @@ const RegistrationModal = () => {
         </div>
         <div className={s.column}>
           <h3 className={s.title}>Регистрация</h3>
-          <form className={s.form}>
+          <form className={s.form} onSubmit={handleSubmit}>
             <input
               className={s.input}
               type="text"
               placeholder="Имя"
-              value={inputValues.firstName}
+              value={formValues.firstName}
               name="firstName"
               minLength={2}
               onChange={(e) => handleChangeInput(e)}
-              ref={inputRef}
+              ref={refFirstName}
+              pattern="[а-яёА-ЯЁ]*"
               aria-label="Имя"
               required
             />
@@ -67,41 +109,45 @@ const RegistrationModal = () => {
               className={s.input}
               type="text"
               placeholder="Фамилия"
-              value={inputValues.lastName}
+              value={formValues.lastName}
               name="lastName"
               minLength={2}
               onChange={(e) => handleChangeInput(e)}
               aria-label="Фамилия"
+              ref={refLastName}
+              pattern="[а-яёА-ЯЁ]*"
               required
             />
             <input
               className={s.input}
               type="email"
               placeholder="Email"
-              value={inputValues.email}
+              value={formValues.email}
               name="email"
               onChange={(e) => handleChangeInput(e)}
               aria-label="почта"
               required
             />
-            <input
-              className={s.input}
-              type="text"
+            <PhoneInput
+              country={"ru"}
+              value={formValues.phone}
+              onChange={(e) => setFormValues((prev) => ({ ...prev, phone: e }))}
+              onlyCountries={["ru"]}
+              masks={{ ru: "+.(...) ...-..-.." }}
+              inputClass={s.input}
               placeholder="Телефон"
-              value={inputValues.phone}
-              name="phone"
-              minLength={11}
-              maxLength={11}
-              onChange={(e) => handleChangeInput(e)}
-              aria-label="Телефон"
-              required
+              disableCountryCode={true}
+              inputProps={{
+                required: true,
+                minLength: 11,
+              }}
             />
             <h4 className={s.subtitle}>Адрес доставки</h4>
             <input
               className={s.input}
               type="text"
               placeholder="Улица, дом, квартира"
-              value={inputValues.address}
+              value={formValues.address}
               name="address"
               onChange={(e) => handleChangeInput(e)}
               aria-label="Улица, дом, квартира"
@@ -112,7 +158,7 @@ const RegistrationModal = () => {
                 className={s.input}
                 type="text"
                 placeholder="Этаж"
-                value={inputValues.floor}
+                value={formValues.floor}
                 name="floor"
                 onChange={(e) => handleChangeInput(e)}
                 aria-label="Этаж"
@@ -122,19 +168,32 @@ const RegistrationModal = () => {
                 className={s.input}
                 type="text"
                 placeholder="Домофон"
-                value={inputValues.intercom}
+                value={formValues.intercom}
                 name="intercom"
                 onChange={(e) => handleChangeInput(e)}
                 aria-label="Домофон"
                 required
               />
             </div>
+            <h4 className={s.subtitle}>Введите логин</h4>
+            <input
+              className={s.input}
+              type="text"
+              placeholder="Логин"
+              value={formValues.login}
+              name="login"
+              minLength={4}
+              onChange={(e) => handleChangeInput(e)}
+              ref={refLogin}
+              aria-label="Логин"
+              required
+            />
             <h4 className={s.subtitle}>Введите пароль</h4>
             <input
               className={s.input}
               type="password"
               placeholder="Пароль"
-              value={inputValues.password}
+              value={formValues.password}
               name="password"
               minLength={6}
               onChange={(e) => handleChangeInput(e)}
@@ -145,14 +204,17 @@ const RegistrationModal = () => {
               className={s.input}
               type="password"
               placeholder="Повторите пароль"
-              value={repeatPassword}
-              name="repeatPassword"
+              value={formValues.confirmPassword}
+              name="confirmPassword"
               minLength={6}
-              onChange={(e) => setRepeatPassword(e.target.value)}
+              onChange={(e) => handleChangeInput(e)}
               aria-label="Повторите пароль"
+              ref={refConfirmPassword}
               required
             />
-            <Button content="Зарегистрироваться" variant="secondary" />
+            <button type="submit" className={s.button}>
+              Зарегистрироваться
+            </button>
           </form>
         </div>
         <Link to="/" className={s.close}>

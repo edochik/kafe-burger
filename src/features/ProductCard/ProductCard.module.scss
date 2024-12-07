@@ -33,7 +33,12 @@
 		color: var(--color-gray-dark);
 	}
 	.button {
-		@include button-style();
+		@include button-style(
+			var(--button-bg-default-1),
+			var(--color-black),
+			var(--button-bg-hover-1),
+			var(--button-bg-selected)
+		);
 		background-color: var(--button-bg-default-1);
 		color: var(--color-black);
 		&:hover {

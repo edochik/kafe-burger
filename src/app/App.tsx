@@ -13,7 +13,13 @@ const App = () => {
   return (
     <Router>
       <Header />
-      {paths.includes(path) ? <Main /> : <NotFoundPage />}
+      {path.includes("product") ? (
+        <Main />
+      ) : paths.includes(path) ? (
+        <Main />
+      ) : (
+        <NotFoundPage />
+      )}
       <AppRouter setPath={setPath} />
       <Footer />
     </Router>

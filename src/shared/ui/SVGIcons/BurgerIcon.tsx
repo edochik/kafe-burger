@@ -1,9 +1,12 @@
-const BurgerIcon = () => {
+interface BurgerIconProps {
+  size: string;
+}
+const BurgerIcon = (props: BurgerIconProps) => {
+  const { size } = props;
   return (
     <svg
-      width="326"
-      height="326"
-      viewBox="0 0 326 326"
+      width={size}
+      height={size}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

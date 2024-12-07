@@ -1,4 +1,4 @@
-import { Product } from "../../shared/data/productData";
+import { Product } from "../../shared/domain/Product.js";
 
 
 export interface PartialData {

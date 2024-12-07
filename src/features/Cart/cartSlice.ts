@@ -8,7 +8,20 @@ export interface ProductCartProps {
 	count: number;
 }
 
-const initialState: ProductCartProps[] = []
+const extractCartLocalStorage = () => {
+	const data = localStorage.getItem('cartYourMeal');
+	try {
+		if (data === null) {
+			return []
+		}
+		const cart = JSON.parse(data);
+		return cart
+	} catch (error) {
+		return []
+	}
+}
+
+const initialState: ProductCartProps[] = extractCartLocalStorage()
 
 export const cartSlice = createSlice({
 	name: 'cart',

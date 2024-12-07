@@ -20,7 +20,7 @@ export const AppRouter = (props: AppRouterProps) => {
 
   return (
     <Routes>
-      <Route path="/*" element={<NotFoundPage />} />
+      {/* <Route path="/*" element={<NotFoundPage />} /> */}
       <Route path="/" element={<Outlet />} />
       <Route path="/product/:id" element={<ProductPage />} />
       <Route path="/order" element={<OrderModal />} />

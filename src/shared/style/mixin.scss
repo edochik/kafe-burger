@@ -37,33 +37,7 @@
 	appearance: none;
 }
 
-@mixin button-style {
-	position: relative;
-	padding: 12px 0;
-	display: inline-block;
-	width: 100%;
-	text-align: center;
-	border: none;
-	cursor: pointer;
-	border-radius: 12px;
-	text-decoration: none;
-	transition:
-		background-color 0.3s ease-in-out,
-		color 0.3s ease-in-out;
-	&:hover {
-		background-color: var(--button-bg-hover-1);
-	}
-	&:active {
-		background-color: var(--button-bg-selected);
-		top: 1px;
-	}
-	&:disabled {
-		background-color: var(--button-bg-disabled);
-		color: var(--button-color-disabled);
-	}
-}
-
-@mixin button-style2($background-color-main, $color-main, $background-color-hover, $background-color-active) {
+@mixin button-style($background-color-main, $color-main, $background-color-hover, $background-color-active) {
 	position: relative;
 	padding: 12px 0;
 	display: inline-block;
@@ -91,21 +65,6 @@
 		color: var(--button-color-disabled);
 	}
 }
-
-// .button {
-// 	@include button-style();
-// 	&:hover {
-// 		color: var(--color-white);
-// 	}
-// }
-// .button_primary {
-// 	background-color: var(--button-bg-default-1);
-// 	color: var(--button-color-default-1);
-// }
-// .button_secondary {
-// 	background-color: var(--button-bg-default-2);
-// 	color: var(--button-color-default-2);
-// }
 
 @mixin absoluteCenter() {
 	position: absolute;

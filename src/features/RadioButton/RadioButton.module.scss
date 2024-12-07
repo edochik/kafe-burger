@@ -14,6 +14,7 @@
 		@include input-hidden();
 	}
 	.input:checked + .radio + .name {
+		
 	}
 	.radio {
 		position: absolute;
@@ -39,6 +40,8 @@
 
 	.input:checked + .radio::before {
 		opacity: 1;
+		
+		
 	}
 	.name {
 		z-index: 9;

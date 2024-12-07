@@ -17,7 +17,6 @@ const OrderModal = () => {
     floor: "",
     intercom: "",
   });
-  console.log(formValues);
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   useEffect(() => {

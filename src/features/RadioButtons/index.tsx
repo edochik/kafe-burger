@@ -1,9 +1,11 @@
 import s from "./RadioButtons.module.scss";
 import { RadioButton } from "../RadioButton";
 import { getPartialData } from "./radiobuttons";
-import { products } from "../../shared/data/productData";
+import { useAppSelector } from "../../shared/lib/hooks/hooks";
+// import { products } from "../../shared/data/productData";
 
 const RadioButtons = () => {
+  const products = useAppSelector((state) => state.products.products);
   const buttons = getPartialData(products);
   return (
     <div className={s.radiobuttons}>

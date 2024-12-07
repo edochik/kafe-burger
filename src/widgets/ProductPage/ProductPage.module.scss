@@ -57,7 +57,12 @@
 			}
 			.button {
 				grid-area: button;
-				@include button-style();
+				@include button-style(
+					var(--button-bg-default-2),
+					var(--color-white),
+					var(--button-bg-hover-1),
+					var(--button-bg-selected)
+				);
 			}
 			.inner {
 				grid-area: inner;

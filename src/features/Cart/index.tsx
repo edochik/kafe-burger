@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ProductCart } from "../ProductCart/";
 import s from "./Cart.module.scss";
-import { Button } from "../../shared/ui/Button/";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 
 const Cart = () => {
@@ -33,7 +32,7 @@ const Cart = () => {
               <p className={s.total}>{totalPrice}₽</p>
             </div>
             <Link className={s.link} to="/order">
-              <Button content="оформить заказ" variant="secondary" />
+              <button className={s.button}>Оформить заказ</button>
             </Link>
             <p className={s.info}>Бесплатная доставка</p>
           </>

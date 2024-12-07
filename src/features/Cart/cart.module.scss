@@ -1,6 +1,5 @@
 @import '../../shared/style/mixin.scss';
 .cart {
-	
 	border-radius: 18px;
 	padding: 24px 16px;
 	width: 300px;
@@ -50,6 +49,14 @@
 	.link {
 		margin-bottom: 8px;
 		display: block;
+		.button {
+			@include button-style(
+				var(--button-bg-default-2),
+				var(--color-white),
+				var(--button-bg-hover-1),
+				var(--button-bg-selected)
+			);
+		}
 	}
 	.info {
 		position: relative;

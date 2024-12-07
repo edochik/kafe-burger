@@ -3,18 +3,22 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { ToggleProductButton } from "../../shared/ui/ToggleProductButton";
 import { useEffect } from "react";
-import { products } from "../../shared/data/productData";
-import { Button } from "../../shared/ui/Button/";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { addProductCart } from "../../features/Cart/cartSlice";
+import {
+  addProductCart,
+  incrementProduct,
+} from "../../features/Cart/cartSlice";
 
 const ProductPage = () => {
   const navigate = useNavigate();
   const { id: productId } = useParams();
   const dispatch = useAppDispatch();
+  const products = useAppSelector((state) => state.products.products);
   const count = useAppSelector((state) => state.productsInCart).filter(
     (product) => product.id === Number(productId)
   )[0]?.count;
+
+  const productsInCart = useAppSelector((state) => state.productsInCart);
 
   const product = products.filter(
     (product) => product.id === Number(productId)
@@ -31,8 +35,14 @@ const ProductPage = () => {
     imageUrl,
   } = product[0];
 
-  const onClickAppProduct = () => {
-    dispatch(addProductCart({ id, nameRu, price, weight, imageUrl, count: 1 }));
+  const onClickAppProduct = (id: number) => {
+    if (!productsInCart.some((product) => product.id === id)) {
+      dispatch(
+        addProductCart({ id, nameRu, price, weight, imageUrl, count: 1 })
+      );
+    } else {
+      dispatch(incrementProduct(id));
+    }
   };
 
   useEffect(() => {
@@ -49,7 +59,6 @@ const ProductPage = () => {
   const handleCloseProductPage = () => {
     navigate("/");
   };
-
   return (
     <div className={s.overlay} onClick={handleCloseProductPage}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
@@ -64,7 +73,7 @@ const ProductPage = () => {
             <p className={s.description}>{description}</p>
             <p className={s.composition}>Состав:</p>
             <ul className={s.list}>
-              {composition.map((item, index) => (
+              {composition.split("|").map((item, index) => (
                 <li key={index} className={s.item}>
                   {item}
                 </li>
@@ -74,11 +83,9 @@ const ProductPage = () => {
               {weight}г, ккал {kilocalories}
             </p>
           </div>
-          <Button
-            variant="secondary"
-            content={count ? "Добавлено" : "Добавить"}
-            onClick={onClickAppProduct}
-          />
+          <button className={s.button} onClick={() => onClickAppProduct(id)}>
+            Добавить
+          </button>
           <div className={s.inner}>
             {count && (
               <ToggleProductButton count={count} id={Number(productId)} />

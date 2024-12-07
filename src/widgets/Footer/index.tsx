@@ -13,15 +13,15 @@ const Footer = () => {
           />
         </a>
         <div>
-          <div>© YouMeal, 2022</div>
+          <div>© YouMeal, 2024</div>
           <div>Design: Anastasia Ilina</div>
         </div>
       </div>
       <div className={s.column}>
         <div className={s.inner}>
           <p className={s.text}>Номер для заказа</p>
-          <a className={s.phone} href="tel:+79308333811">
-            +7(930)833-38-11
+          <a className={s.phone} href="tel:+79999999999">
+            +7(999)999-99-99
           </a>
         </div>
         <div className={s.inner}>

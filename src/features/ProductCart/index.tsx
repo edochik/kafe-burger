@@ -6,7 +6,7 @@ const ProductCart = (props: ProductCartProps) => {
   const { id, nameRu, price, weight, imageUrl, count } = props;
 
   return (
-    <div className={s.productcart}>
+    <li className={s.productcart}>
       <img className={s.image} src={imageUrl} alt={`фотография ${nameRu}`} />
       <h4 className={s.title}>{nameRu}</h4>
       <p className={s.weight}>{weight}г</p>
@@ -14,7 +14,7 @@ const ProductCart = (props: ProductCartProps) => {
       <div className={s.button}>
         <ToggleProductButton count={count} id={id} />
       </div>
-    </div>
+    </li>
   );
 };
 

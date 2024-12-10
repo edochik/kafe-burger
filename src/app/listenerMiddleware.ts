@@ -17,8 +17,7 @@ startAppListening({
 		decrementProduct
 	),
 	effect: async (action, listenerApi) => {
-		const { productsInCart } = listenerApi.getState()
-		//  cart = localStorage.getItem('cartYourMeal');
-		localStorage.setItem('cartYourMeal', JSON.stringify(productsInCart))
+		const { cart } = listenerApi.getState()
+		localStorage.setItem('cartYourMeal', JSON.stringify(cart))
 	}
 })

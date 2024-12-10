@@ -1,10 +1,16 @@
 import s from "../../shared/style/modal.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
 import PhoneInput from "react-phone-input-2";
 import classNames from "classnames";
+import { fetchRegister } from "./fetchRegisterUser";
+import { useFocusAndEscape } from "../../shared/hooks/useFocusAndEscape";
+interface ServerError {
+  message: string;
+  field?: string;
+}
 
 const RegistrationModal = () => {
   const [formValues, setFormValues] = useState({
@@ -18,31 +24,17 @@ const RegistrationModal = () => {
     login: "",
     password: "",
   });
-  const [confirmPassword, setConfirmPassword] = useState(""); // поля пароля
-  const [isMatchPassword, setIsMatchPassword] = useState(true); // проверка пароля
-  const [isValuesEmpty, setIsValuesEmpty] = useState(true); // если значение пустое хотя бы одно
+  const [confirmPassword, setConfirmPassword] = useState(""); // второй ввод пароля
+  const [isMatchPassword, setIsMatchPassword] = useState(false); // проверка пароля
+  const [isValuesEmpty, setIsValuesEmpty] = useState(false); // если значение пустое хотя бы одно
   const [errorServer, setErrorServer] = useState(""); // ошибка на сервере информация
-  const [inputField, setInputField] = useState(""); // подсвечивание ошибки с сервер
+  const [reasonError, setReasonError] = useState(""); // подсвечивание ошибки с сервер
   const [isUserRegister, setIsUserRegister] = useState(false); // пользователь зарегистрировался
   const [isDisable, setIsDisable] = useState(false); // при отправке кнопка становится disabled
 
   const navigate = useNavigate();
-  const refFirstName = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    if (refFirstName.current) {
-      refFirstName.current.focus();
-    }
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsUserRegister(false);
-        navigate("/");
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [navigate, refFirstName]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  useFocusAndEscape(inputRef);
 
   const handleChangeInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -51,37 +43,20 @@ const RegistrationModal = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsMatchPassword(true);
-    setIsValuesEmpty(true);
+    setIsMatchPassword(false);
+    setIsValuesEmpty(false);
     setErrorServer("");
     if (Object.values(formValues).some((value) => value.length === 0)) {
-      setIsValuesEmpty(false);
+      setIsValuesEmpty(true);
       return;
     }
     setIsDisable(true);
     if (formValues.password === confirmPassword) {
       try {
-        const response = await fetch(
-          "https://chip-patch-papaya.glitch.me/registr",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              ...formValues,
-            }),
-          }
-        );
-        if (!response.ok) {
-          const error = await response.json();
-          setErrorServer(error.message);
-          setInputField(error.field);
-          return;
-        }
+        await fetchRegister(formValues);
         setErrorServer("");
         setConfirmPassword("");
-        setInputField("");
+        setReasonError("");
         setFormValues((prev) => {
           const result = Object.create(null);
           for (const elem in prev) {
@@ -91,11 +66,16 @@ const RegistrationModal = () => {
         });
         setIsUserRegister(true);
       } catch (error) {
+        const serverError = error as ServerError;
+        setErrorServer(serverError.message);
+        if (serverError.field) {
+          setReasonError(serverError.field);
+        }
       } finally {
         setIsDisable(false);
       }
     } else {
-      setIsMatchPassword(false);
+      setIsMatchPassword(true);
     }
   };
 
@@ -113,12 +93,12 @@ const RegistrationModal = () => {
                 <input
                   className={s.input}
                   type="text"
-                  placeholder="Имя"
+                  placeholder="Имя" 
                   value={formValues.firstName}
                   name="firstName"
                   minLength={2}
                   onChange={(e) => handleChangeInput(e)}
-                  ref={refFirstName}
+                  ref={inputRef}
                   pattern="[а-яёА-ЯЁ]*"
                   aria-label="Имя"
                   required
@@ -156,7 +136,7 @@ const RegistrationModal = () => {
                 <input
                   className={classNames({
                     [s.input]: true,
-                    [s.error]: inputField === "email",
+                    [s.error]: reasonError === "email",
                   })}
                   type="email"
                   placeholder="Email"
@@ -219,12 +199,13 @@ const RegistrationModal = () => {
                 <input
                   className={classNames({
                     [s.input]: true,
-                    [s.error]: inputField === "login",
+                    [s.error]: reasonError === "login",
                   })}
                   type="text"
                   placeholder="Логин"
                   value={formValues.login}
                   name="login"
+                  autoComplete="username"
                   minLength={4}
                   onChange={(e) => handleChangeInput(e)}
                   aria-label="Логин"
@@ -245,12 +226,13 @@ const RegistrationModal = () => {
                 <input
                   className={classNames({
                     [s.input]: true,
-                    [s.error]: inputField === "password",
+                    [s.error]: reasonError === "password",
                   })}
                   type="password"
                   placeholder="Пароль"
                   value={formValues.password}
                   name="password"
+                  autoComplete="new-password"
                   minLength={6}
                   onChange={(e) => handleChangeInput(e)}
                   aria-label="Пароль"
@@ -259,21 +241,22 @@ const RegistrationModal = () => {
                 <input
                   className={classNames({
                     [s.input]: true,
-                    [s.error]: inputField === "password",
+                    [s.error]: reasonError === "password",
                   })}
                   type="password"
                   placeholder="Повторите пароль"
                   value={confirmPassword}
                   name="confirmPassword"
+                  autoComplete="current-password"
                   minLength={6}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   aria-label="Повторите пароль"
                   required
                 />
-                {!isMatchPassword && (
+                {isMatchPassword && (
                   <div className={s.message}>Пароли должны совпадать</div>
                 )}
-                {!isValuesEmpty && (
+                {isValuesEmpty && (
                   <div className={s.message}>
                     Одно или несколько полей пустые
                   </div>

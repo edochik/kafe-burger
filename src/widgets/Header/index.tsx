@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
 import s from "./header.module.scss";
 import { LogoIcon } from "../../shared/ui/SVGIcons/LogoIcon";
 import { BurgerIcon } from "../../shared/ui/SVGIcons/BurgerIcon";
+import { RenderLinkOrUser } from "../../features/RenderLinkOrUser/";
+
 const Header = () => {
   return (
     <header className={s.header}>
@@ -13,12 +14,9 @@ const Header = () => {
             optionalColor={"#FFA132"}
           />
         </a>
-        <Link className={s.link} to="/authorization">
-          Войти
-        </Link>
+        <RenderLinkOrUser/>
       </div>
       <div className={s.wrapper}>
-        {/* //!размер не увеличивается */}
         <BurgerIcon size="326" />
         <div className={s.info}>
           <h1 className={s.title}>

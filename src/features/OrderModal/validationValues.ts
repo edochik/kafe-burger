@@ -16,7 +16,7 @@ export function validationValues(
 	if (name === "floor" && /^[0-9]*$/.test(value)) {
 		fn((prev) => ({ ...prev, [name]: value }));
 	}
-	if (name === "address" || name === "intercom") {
+	if (name === "address" || name === "apartment") {
 		fn((prev) => ({ ...prev, [name]: value }));
 	}
 }

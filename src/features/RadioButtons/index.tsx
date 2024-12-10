@@ -8,7 +8,7 @@ const RadioButtons = () => {
   const products = useAppSelector((state) => state.products.products);
   const buttons = getPartialData(products);
   return (
-    <div className={s.radiobuttons}>
+    <div className={s.RadioButtons}>
       <fieldset className={s.fieldset}>
         {buttons.map((data) => (
           <RadioButton key={data.id} {...data} />

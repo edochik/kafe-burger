@@ -5,8 +5,9 @@ import { data } from "./data";
 import { Link, useNavigate } from "react-router-dom";
 import { DonutIcon } from "../../shared/ui/SVGIcons/DonutIcon";
 import PhoneInput from "react-phone-input-2";
-import { validationValues } from "./validationValues";
 import { changeReceiving } from "./changeReceiving";
+import { useAppSelector } from "../../shared/lib/hooks/hooks";
+import { useFocusAndEscape } from "../../shared/hooks/useFocusAndEscape";
 
 const OrderModal = () => {
   const [formValues, setFormValues] = useState({
@@ -15,45 +16,28 @@ const OrderModal = () => {
     receiving: "pickup",
     address: "",
     floor: "",
-    intercom: "",
+    apartment: "",
   });
+  const test = useAppSelector((state) => state.user);
+  console.log(test);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        navigate("/");
-      }
-    };
 
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [navigate, inputRef]);
-  const onClickClose = () => {
-    navigate("/");
+  useFocusAndEscape(inputRef);
+
+  const handleChangeInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleChangeInput = (
-    e: React.ChangeEvent<HTMLInputElement> | string,
-    name: string
-  ) => validationValues(e, name, setFormValues);
-
-  const handleChangeReceiving = (arg: string) => {
-    changeReceiving(arg, setFormValues);
-  };
-  
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(event);
   };
 
   return (
-    <div className={s.overlay} onClick={onClickClose}>
+    <div className={s.overlay} onClick={() => navigate("/")}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
         <div className={s.column}>
           <DonutIcon />
@@ -68,7 +52,7 @@ const OrderModal = () => {
               value={formValues.name}
               name="name"
               minLength={2}
-              onChange={(e) => handleChangeInput(e, "name")}
+              onChange={(e) => handleChangeInput(e)}
               aria-label="Ваше имя"
               ref={inputRef}
               required
@@ -76,7 +60,7 @@ const OrderModal = () => {
             <PhoneInput
               country={"ru"}
               value={formValues.phone}
-              onChange={(e) => handleChangeInput(e, "phone")}
+              onChange={(e) => setFormValues((prev) => ({ ...prev, phone: e }))}
               onlyCountries={["ru"]}
               masks={{ ru: "+.(...) ...-..-.." }}
               inputClass={s.input}
@@ -84,6 +68,7 @@ const OrderModal = () => {
               disableCountryCode={true}
               inputProps={{
                 required: true,
+                minLength: 11,
               }}
             />
             <div className={s.wrapper_radio}>
@@ -91,7 +76,7 @@ const OrderModal = () => {
                 <label
                   key={item.id}
                   className={s.label}
-                  onClick={() => handleChangeReceiving(item.nameEn)}
+                  onClick={() => changeReceiving(item.nameEn, setFormValues)}
                 >
                   <input
                     className={s.receiving}
@@ -114,7 +99,7 @@ const OrderModal = () => {
                   placeholder="Улица, дом, квартира"
                   value={formValues.address}
                   name="address"
-                  onChange={(e) => handleChangeInput(e, "address")}
+                  onChange={(e) => handleChangeInput(e)}
                   aria-label="Улица, дом, квартира"
                   required
                 />
@@ -125,18 +110,18 @@ const OrderModal = () => {
                     placeholder="Этаж"
                     value={formValues.floor}
                     name="floor"
-                    onChange={(e) => handleChangeInput(e, "floor")}
+                    onChange={(e) => handleChangeInput(e)}
                     aria-label="Этаж"
                     required
                   />
                   <input
                     className={s.input}
                     type="text"
-                    placeholder="Домофон"
-                    value={formValues.intercom}
-                    name="intercom"
-                    onChange={(e) => handleChangeInput(e, "intercom")}
-                    aria-label="Домофон"
+                    placeholder="Квартира"
+                    value={formValues.apartment}
+                    name="apartment"
+                    onChange={(e) => handleChangeInput(e)}
+                    aria-label="Квартира"
                     required
                   />
                 </div>

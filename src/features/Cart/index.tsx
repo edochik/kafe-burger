@@ -4,9 +4,9 @@ import s from "./Cart.module.scss";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 
 const Cart = () => {
-  const productsInCart = useAppSelector((state) => state.productsInCart);
-  const totalCount = productsInCart.reduce((acc, item) => acc + item.count, 0);
-  const totalPrice = productsInCart.reduce(
+  const cart = useAppSelector((state) => state.cart);
+  const totalCount = cart.reduce((acc, item) => acc + item.count, 0);
+  const totalPrice = cart.reduce(
     (acc, item) => acc + item.price * item.count,
     0
   );
@@ -18,15 +18,15 @@ const Cart = () => {
           <h3 className={s.title}>Корзина</h3>
           <p className={s.count}>{totalCount}</p>
         </div>
-        {productsInCart.length === 0 ? (
+        {cart.length === 0 ? (
           <>Тут пока пусто :(</>
         ) : (
           <>
-            <div className={s.carts}>
-              {productsInCart.map((product) => (
+            <ul className={s.carts}>
+              {cart.map((product) => (
                 <ProductCart key={product.id} {...product} />
               ))}
-            </div>
+            </ul>
             <div className={s.wrapper_total}>
               <p className={s.text}>Итого</p>
               <p className={s.total}>{totalPrice}₽</p>

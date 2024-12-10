@@ -8,10 +8,13 @@ const ProductList = () => {
   const filterProduct = products.filter(
     (product) => product.categoryEn === category
   );
-  const rawCategory =
-    filterProduct.length === 0 ? "...Загрузка" : filterProduct[0].categoryRu;
-  const categoryName =
-    rawCategory[0].toLocaleUpperCase() + rawCategory.slice(1);
+
+  if (filterProduct.length === 0) {
+    return <div className={s.loader}></div>;
+  }
+
+  const categoryRu = filterProduct[0]?.categoryRu;
+  const categoryName = categoryRu[0].toUpperCase() + categoryRu.slice(1);
 
   return (
     <section className={s.section}>

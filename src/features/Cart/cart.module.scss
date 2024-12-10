@@ -25,6 +25,7 @@
 		}
 	}
 	.carts {
+		@include list-reset();
 		> * {
 			border-bottom: 1px solid #f2f2f3;
 		}

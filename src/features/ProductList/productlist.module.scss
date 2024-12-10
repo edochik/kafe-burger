@@ -1,3 +1,5 @@
+@import '../../shared/style/mixin.scss';
+
 .section {
 	.title {
 		margin: 0 0 24px 0;
@@ -6,10 +8,12 @@
 		font-weight: var(--font-weight-semibold);
 	}
 	.list {
-		margin: 0;
-		padding: 0;
+		@include list-reset();
 		display: flex;
 		flex-wrap: wrap;
 		gap: 16px;
 	}
+}
+.loader {
+	@include loader();
 }

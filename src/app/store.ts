@@ -2,24 +2,25 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listenerMiddleware } from './listenerMiddleware';
 import { cartSlice } from '../features/Cart/cartSlice';
 import { selectSlice } from '../features/RadioButtons/selectSlice';
-import { fetchInitialProductThunk } from '../features/ProductList/thunk';
+import { fetchInitialProductThunk } from '../features/ProductList/fetchInitialProductThunk';
 import { productSlice } from '../features/ProductList/productSlice';
+import { userSlice } from '../entities/user/userSlice';
+import { fetchUserVerificationThunk } from '../entities/user/fetchUserVerificationThunk';
 
 export const store = configureStore({
 	reducer: {
-		productsInCart: cartSlice.reducer,
+		cart: cartSlice.reducer,
 		selectProduct: selectSlice.reducer,
 		products: productSlice.reducer,
-		// userData: userSlice.reducer
+		user: userSlice.reducer,
 		// historyOrder:
 		// historyDoAmin:
-		// user ? 
-		// admin ? 
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().prepend(listenerMiddleware.middleware),
 })
 store.dispatch(fetchInitialProductThunk());
+store.dispatch(fetchUserVerificationThunk());
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

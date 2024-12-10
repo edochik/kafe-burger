@@ -10,8 +10,8 @@ interface User {
   password: string;
 }
 
-export async function registerUser(data: User) {
-  const response = await fetch("https://chip-patch-papaya.glitch.me/regist", {
+export async function fetchRegister(data: User) {
+  const response = await fetch("https://chip-patch-papaya.glitch.me/api/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export async function registerUser(data: User) {
   });
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error);
+    throw error;
   }
   return response.json();
 }

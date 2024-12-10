@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Product } from "../../shared/domain/Product";
-import { fetchInitialProductThunk } from "./thunk";
+import { fetchInitialProductThunk } from "./fetchInitialProductThunk";
 
 interface InitialState {
 	loading: "idle" | "pending" | "succeeded" | "failed";

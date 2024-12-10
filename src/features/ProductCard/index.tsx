@@ -9,10 +9,10 @@ export interface ProductCardProps extends Product {}
 const ProductCard = (props: ProductCardProps) => {
   const { id, nameRu, price, weight, imageUrl } = props;
   const dispatch = useAppDispatch();
-  const productsInCart = useAppSelector((state) => state.productsInCart);
+  const cart = useAppSelector((state) => state.cart);
 
   const onClickAppProduct = (id: number) => {
-    if (!productsInCart.some((product) => product.id === id)) {
+    if (!cart.some((product) => product.id === id)) {
       dispatch(
         addProductCart({ id, nameRu, price, weight, imageUrl, count: 1 })
       );
@@ -20,7 +20,7 @@ const ProductCard = (props: ProductCardProps) => {
       dispatch(incrementProduct(id));
     }
   };
-  
+
   return (
     <li className={s.productcard}>
       <Link to={`/product/${id}`}>

@@ -4,5 +4,5 @@ export interface InputValues {
 	receiving: string;
 	floor: string;
 	address: string;
-	intercom: string;
+	apartment: string;
 }

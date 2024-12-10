@@ -6,17 +6,18 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Main } from "../pages/Main/";
 import { NotFoundPage } from "../pages/NotFoundPage/";
 import { paths } from "./helper";
+import { Profile } from "../features/Profile/";
 
 const App = () => {
   const [path, setPath] = useState("");
-
+  console.log(path);
   return (
     <Router>
       <Header />
-      {path.includes("product") ? (
+      {paths.includes(path) || path.includes("product") ? (
         <Main />
-      ) : paths.includes(path) ? (
-        <Main />
+      ) : path.includes("profile") ? (
+        <Profile />
       ) : (
         <NotFoundPage />
       )}

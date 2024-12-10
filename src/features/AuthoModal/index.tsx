@@ -3,54 +3,54 @@ import { useEffect, useRef, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
+import { fetchAuthorization } from "./fetchAuthorization";
+import classNames from "classnames";
+import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
+import { registerUser } from "../../entities/user/userSlice";
+import { useFocusAndEscape } from "../../shared/hooks/useFocusAndEscape";
+interface ServerError {
+  message: string;
+  field?: string;
+}
 
 const AuthorizationModal = () => {
   const [formValues, setFormValues] = useState({
     login: "",
     password: "",
   });
-
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [errorServer, setErrorServer] = useState("");
+  const [reasonError, setReasonError] = useState("");
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        navigate("/");
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [navigate, inputRef]);
+  useFocusAndEscape(inputRef);
 
-  const onClickClose = () => {
-    navigate("/");
-  };
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
-    if (inputRef.current !== null && name === "login") {
-      if (!/^[a-zA-Z]*$/.test(value)) {
-        inputRef.current.setCustomValidity(
-          "Логин может содержать только буквы от a - Z."
-        );
-      } else {
-        inputRef.current.setCustomValidity("");
-      }
-    }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(formValues);
+    setIsDisabled(true);
+    try {
+      const response = await fetchAuthorization(formValues);
+      const user = response.user;
+      dispatch(registerUser({ ...user }));
+    } catch (error) {
+      const serverError = error as ServerError;
+      setErrorServer(serverError.message);
+      if (serverError.field) {
+        setReasonError(serverError.field);
+      }
+    } finally {
+      setIsDisabled(false);
+    }
   };
   return (
-    <div className={s.overlay} onClick={onClickClose}>
+    <div className={s.overlay} onClick={() => navigate("/")}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
         <div className={s.column}>
           <UserIcon />
@@ -59,7 +59,10 @@ const AuthorizationModal = () => {
           <h3 className={s.title}>Авторизация</h3>
           <form className={s.form} onSubmit={handleSubmit}>
             <input
-              className={s.input}
+              className={classNames({
+                [s.input]: true,
+                [s.error]: reasonError === "login",
+              })}
               type="text"
               placeholder="Логин"
               name="login"
@@ -72,7 +75,10 @@ const AuthorizationModal = () => {
               required
             />
             <input
-              className={s.input}
+              className={classNames({
+                [s.input]: true,
+                [s.error]: reasonError === "password",
+              })}
               type="password"
               placeholder="Пароль"
               name="password"
@@ -82,7 +88,8 @@ const AuthorizationModal = () => {
               minLength={6}
               required
             />
-            <button type="submit" className={s.button}>
+            {errorServer && <div className={s.message}>{errorServer}</div>}
+            <button type="submit" className={s.button} disabled={isDisabled}>
               Войти
             </button>
             <div className={s.bottom} style={{ marginTop: "auto" }}>

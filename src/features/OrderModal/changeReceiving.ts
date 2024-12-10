@@ -9,7 +9,7 @@ export function changeReceiving(arg: string, callback: Callback) {
 			receiving: arg,
 			address: "",
 			floor: "",
-			intercom: "",
+			apartment: "",
 		}));
 	}
 	callback((prev) => ({ ...prev, receiving: arg }));

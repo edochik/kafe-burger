@@ -14,11 +14,11 @@ const ProductPage = () => {
   const { id: productId } = useParams();
   const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.products.products);
-  const count = useAppSelector((state) => state.productsInCart).filter(
+  const count = useAppSelector((state) => state.cart).filter(
     (product) => product.id === Number(productId)
   )[0]?.count;
 
-  const productsInCart = useAppSelector((state) => state.productsInCart);
+  const cart = useAppSelector((state) => state.cart);
 
   const product = products.filter(
     (product) => product.id === Number(productId)
@@ -36,7 +36,7 @@ const ProductPage = () => {
   } = product[0];
 
   const onClickAppProduct = (id: number) => {
-    if (!productsInCart.some((product) => product.id === id)) {
+    if (!cart.some((product) => product.id === id)) {
       dispatch(
         addProductCart({ id, nameRu, price, weight, imageUrl, count: 1 })
       );

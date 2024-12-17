@@ -1,10 +1,11 @@
+@import '../../shared/style/mixin.scss';
+@import '../../shared/style/variable.scss';
+
 .main {
-	background-color: var(--color-background-main);
+	background-color: $color-background-main;
 	padding-bottom: 50px;
 	.wrapper {
-		max-width: var(--with-container);
-		padding: var(--padding-body);
-		margin: var(--margin-0-auto);
+		@include container();
 		display: flex;
 		gap: 30px;
 	}

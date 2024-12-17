@@ -1,4 +1,5 @@
-@import '../../shared/style/mixin.scss';
+@import './mixin.scss';
+@import './variable.scss';
 .overlay {
 	@include overlay-style();
 	.modal {
@@ -7,7 +8,7 @@
 		min-height: 460px;
 		@include modal-style();
 		.column:nth-of-type(1) {
-			background-color: var(--color-orange);
+			background-color: $color-orange;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -17,7 +18,7 @@
 		}
 		.column:nth-of-type(2) {
 			padding: 44px 24px 24px 24px;
-			background-color: var(--color-background-main);
+			background-color: $color-background-main;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -28,21 +29,16 @@
 				text-align: center;
 			}
 			.button {
-				@include button-style(
-					var(--button-bg-default-2),
-					var(--color-white),
-					var(--button-bg-hover-1),
-					var(--button-bg-selected)
-				);
+				@include button-style($button-bg-default-2, $color-white, $button-bg-hover-1, $button-bg-selected);
 			}
 		}
 		.column {
 			min-width: 342px;
 			.title {
 				margin: 0 0 16px 0;
-				font-weight: var(--font-weight-semibold);
-				font-size: var(--font-size-large);
-				line-height: var(--line-height-small);
+				font-weight: $font-weight-semibold;
+				font-size: $font-size-large;
+				line-height: $line-height-small;
 			}
 			.form {
 				display: flex;
@@ -92,7 +88,7 @@
 							border-radius: 50%;
 							width: 6px;
 							height: 6px;
-							background-color: var(--color-black);
+							background-color: $color-black;
 							transition: opacity 0.2s ease-in-out;
 						}
 						.receiving:checked + .radio::before {
@@ -100,7 +96,7 @@
 						}
 						.text {
 							margin-left: 8px;
-							font-size: var(--font-size-small);
+							font-size: $font-size-small;
 						}
 					}
 				}
@@ -110,16 +106,11 @@
 					column-gap: 8px;
 				}
 				.subtitle {
-					font-weight: var(--font-weight-semibold);
+					font-weight: $font-weight-semibold;
 					margin: 0 0 8px 0;
 				}
 				.button {
-					@include button-style(
-						var(--button-bg-default-2),
-						var(--color-white),
-						var(--button-bg-hover-1),
-						var(--button-bg-selected)
-					);
+					@include button-style($button-bg-default-2, $color-white, $button-bg-hover-1, $button-bg-selected);
 				}
 			}
 		}

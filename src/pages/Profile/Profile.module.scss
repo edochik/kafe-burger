@@ -1,0 +1,67 @@
+@import '../../shared/style/mixin.scss';
+@import '../../shared/style/variable.scss';
+
+.Profile {
+  background-color: $color-background-main;
+  padding: 50px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .list {
+    @include list-reset();
+    display: flex;
+    row-gap: 10px;
+    flex-direction: column;
+    padding: 24px;
+    text-decoration: none;
+    color: $color-orange;
+    font-weight: $font-weight-extrabold;
+    background-color: $button-color-default-2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(254, 95, 0, 0);
+    border-radius: 15px;
+    font-size: 30px;
+    margin-bottom: 20px;
+    .item {
+      .label {
+        .input {
+          color: $color-orange;
+          font-size: 30px;
+          font-weight: $font-weight-extrabold;
+          border: none;
+          &:focus {
+            outline: 3px solid gray;
+            border-radius: 5px;
+          }
+        }
+      }
+    }
+  }
+  > label {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    .span {
+      display: inline-block;
+      color: $color-gray-dark;
+      font-weight: $font-weight-extrabold;
+      font-size: 30px;
+    }
+    .input {
+      @include input-style();
+    }
+  }
+  .button {
+    margin-bottom: 10px;
+    @include button-style($button-bg-default-2, $color-white, $button-bg-hover-1, $button-bg-selected);
+    width: unset;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .link {
+    text-decoration: none;
+    color: $color-orange;
+    font-size: $font-size-xxlarge;
+  }
+}

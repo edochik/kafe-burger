@@ -1,3 +1,5 @@
+@import '../../shared/style/variable.scss';
+
 .productcart {
 	padding: 16px 0;
 	display: grid;
@@ -15,7 +17,7 @@
 	.title,
 	.weight,
 	.price {
-		font-size: var(--font-size-small);
+		font-size: $font-size-small;
 	}
 	.title {
 		margin: 0;
@@ -26,7 +28,7 @@
 		margin: 0;
 		grid-area: weight;
 		align-self: center;
-		color: var(--color-gray-dark);
+		color: $color-gray-dark;
 	}
 	.price {
 		margin: 0;

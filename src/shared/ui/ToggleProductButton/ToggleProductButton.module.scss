@@ -1,13 +1,13 @@
+@import '../../../shared/style/variable.scss';
+
 .toggleproductbutton {
-	// width: 84px;
 	height: 40px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	// column-gap: 8px;
 	border-radius: 12px;
 	overflow: hidden;
-	background-color: var(--button-bg-default-1);
+	background-color: $button-bg-default-1;
 	.plus,
 	.minus,
 	.count {
@@ -18,7 +18,7 @@
 		height: 40px;
 		transition: background-color 0.3s ease-in-out;
 		&:active {
-			background-color: var(--color-gray-dark);
+			background-color: $color-gray-dark;
 		}
 	}
 	.plus {

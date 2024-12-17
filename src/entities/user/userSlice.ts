@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchUserVerificationThunk } from "./fetchUserVerificationThunk";
 
 export interface User {
-	id: string;
+	id: number | null;
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -14,8 +14,8 @@ export interface User {
 	isAuthorization: boolean;
 }
 
-const initialState: User = {
-	id: '',
+export const initialState: User = {
+	id: null,
 	firstName: '',
 	lastName: '',
 	email: '',
@@ -35,6 +35,10 @@ export const userSlice = createSlice({
 			return {
 				...action.payload, isAuthorization: true
 			}
+		},
+		updateUser: (state, action: PayloadAction<{ key: keyof User; value: string }>) => {
+			const { key, value } = action.payload;
+			(state[key] as string) = value;
 		}
 	},
 	extraReducers: (builder) => {
@@ -54,4 +58,4 @@ export const userSlice = createSlice({
 	}
 })
 
-export const { registerUser } = userSlice.actions;
+export const { registerUser, updateUser } = userSlice.actions;

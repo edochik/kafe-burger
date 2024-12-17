@@ -1,7 +1,9 @@
+@import '../../shared/style/variable.scss';
+
 .RadioButtons {
-	padding: var(--padding-body);
-	max-width: var(--with-container);
-	margin: var(--margin-0-auto);
+	padding: $padding-body;
+	max-width: $with-container;
+	margin: $margin-0-auto;
 	padding-top: 40px;
 	padding-bottom: 50px;
 	.fieldset {

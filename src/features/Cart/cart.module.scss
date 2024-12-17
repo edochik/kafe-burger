@@ -1,9 +1,11 @@
-@import '../../shared/style/mixin.scss';
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
+
 .cart {
 	border-radius: 18px;
 	padding: 24px 16px;
 	width: 300px;
-	background-color: var(--color-white);
+	background-color: var.$color-white;
 	.wrapper_cart {
 		margin-bottom: 12px;
 		display: flex;
@@ -11,21 +13,21 @@
 		align-items: center;
 		.title {
 			margin: 0;
-			font-weight: var(--font-weight-semibold);
-			font-size: var(--font-size-large);
-			line-height: var(--line-height-small);
+			font-weight: var.$font-weight-semibold;
+			font-size: var.$font-size-large;
+			line-height: var.$line-height-small;
 		}
 		.count {
 			margin: 0;
 			padding: 2px 14px;
-			font-size: var(--font-size-small);
-			background-color: var(--color-gray-dark-light);
+			font-size: var.$font-size-small;
+			background-color: var.$color-gray-dark-light;
 			border-radius: 6px;
-			line-height: var(--line-height-medium);
+			line-height: var.$line-height-medium;
 		}
 	}
 	.carts {
-		@include list-reset();
+		@include mix.list-reset();
 		> * {
 			border-bottom: 1px solid #f2f2f3;
 		}
@@ -40,30 +42,25 @@
 		align-items: center;
 		.text {
 			margin: 0;
-			line-height: var(--line-height-large);
+			line-height: line-height-large;
 		}
 		.total {
 			margin: 0;
-			line-height: var(--line-height-large);
+			line-height: line-height-large;
 		}
 	}
 	.link {
 		margin-bottom: 8px;
 		display: block;
 		.button {
-			@include button-style(
-				var(--button-bg-default-2),
-				var(--color-white),
-				var(--button-bg-hover-1),
-				var(--button-bg-selected)
-			);
+			@include mix.button-style(button-bg-default-2, color-white, button-bg-hover-1, button-bg-selected);
 		}
 	}
 	.info {
 		position: relative;
 		margin: 0 0 0 32px;
 		&:before {
-			@include absoluteCenter();
+			@include mix.absoluteCenter();
 			content: '';
 			background-image: url('../../shared/assets/icon/delivery.png');
 			width: 24px;

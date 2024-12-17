@@ -11,16 +11,16 @@ interface User {
 }
 
 export async function fetchRegister(data: User) {
-  const response = await fetch("https://chip-patch-papaya.glitch.me/api/register", {
+  const request = await fetch("https://chip-patch-papaya.glitch.me/api/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ ...data }),
   });
-  if (!response.ok) {
-    const error = await response.json();
+  if (!request.ok) {
+    const error = await request.json();
     throw error;
   }
-  return response.json();
+  return request.json();
 }

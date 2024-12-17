@@ -1,11 +1,12 @@
 @import '../../shared/style/mixin.scss';
+@import '../../shared/style/variable.scss';
 
 .section {
 	.title {
 		margin: 0 0 24px 0;
-		font-size: var(--font-size-xxlarge);
-		line-height: var(--line-height-medium);
-		font-weight: var(--font-weight-semibold);
+		font-size: $font-size-xxlarge;
+		line-height: $line-height-medium;
+		font-weight: $font-weight-semibold;
 	}
 	.list {
 		@include list-reset();

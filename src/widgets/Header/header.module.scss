@@ -1,9 +1,11 @@
+@use '../../shared/style/variable.scss' as var;
+
 .header {
 	position: relative;
 	padding: 24px 0 60px 0;
 	display: flex;
 	flex-direction: column;
-	background-color: var(--color-background-main);
+	background-color: var.$color-background-main;
 	.top {
 		z-index: 9;
 		margin: 0 auto;
@@ -15,7 +17,6 @@
 				width: 152px;
 			}
 		}
-	
 	}
 	.wrapper {
 		z-index: 9;
@@ -26,14 +27,14 @@
 		}
 		.info {
 			.title {
-				font-size: var(--font-size-xxxlarge);
-				color: var(--color-white);
+				font-size: var.$font-size-xxxlarge;
+				color: var.$color-white;
 			}
 			.color {
-				color: var(--color-accent);
+				color: var.$color-accent;
 			}
 			.delivery {
-				color: var(--color-white);
+				color: var.$color-white;
 			}
 		}
 	}

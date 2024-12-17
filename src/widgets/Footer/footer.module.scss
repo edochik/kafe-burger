@@ -1,11 +1,12 @@
 @import '../../shared/style/mixin.scss';
+@import '../../shared/style/variable.scss';
 
 .footer {
 	display: flex;
-	padding: var(--padding-body);
+	padding: $padding-body;
 	justify-content: space-between;
-	max-width: var(--with-container);
-	margin: var(--margin-0-auto);
+	max-width: $with-container;
+	margin: $margin-0-auto;
 	padding-top: 50px;
 	padding-bottom: 50px;
 	.column:first-child {
@@ -22,7 +23,7 @@
 		column-gap: 125px;
 		.inner:first-child {
 			.text {
-				font-size: var(--font-size-large);
+				font-size: $font-size-large;
 				margin: 0 0 24px 0;
 			}
 			.phone {
@@ -35,7 +36,7 @@
 		}
 		.inner:last-of-type {
 			.text {
-				font-size: var(--font-size-large);
+				font-size: $font-size-large;
 				margin: 0 0 24px 0;
 			}
 			.list {

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchUser } from "../../shared/api/fetchUser";
+
 
 export const fetchUserVerificationThunk = createAsyncThunk(
 	"fetchUserVerificationThunk",

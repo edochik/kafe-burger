@@ -1,16 +1,17 @@
 @import '../../shared/style/mixin.scss';
+@import '../../shared/style/variable.scss';
 
 .overlay {
 	@include overlay-style();
 	.modal {
 		@include modal-style();
 		padding: 24px 24px 36px 24px;
-		background-color: var(--color-white);
+		background-color: $color-white;
 		.title {
 			margin: 0 0 24px 0;
-			font-weight: var(--font-weight-semibold);
-			font-size: var(--font-size-xxlarge);
-			line-height: var(--line-height-medium);
+			font-weight: $font-weight-semibold;
+			font-size: $font-size-xxlarge;
+			line-height: $line-height-medium;
 		}
 		.box {
 			display: grid;
@@ -27,12 +28,12 @@
 				grid-area: info;
 				.description {
 					margin: 0 0 10px 0;
-					line-height: var(--line-height-large);
+					line-height: $line-height-large;
 				}
 				.composition {
-					font-weight: var(--font-weight-semibold);
-					font-size: var(--font-size-small);
-					line-height: var(--line-height-large);
+					font-weight: $font-weight-semibold;
+					font-size: $font-size-small;
+					line-height: $line-height-large;
 					margin: 0 0 4px 0;
 				}
 				.list {
@@ -41,8 +42,8 @@
 					padding: 0;
 					.item {
 						margin-bottom: 2px;
-						font-size: var(--font-size-small);
-						line-height: var(--line-height-large);
+						font-size: $font-size-small;
+						line-height: $line-height-large;
 					}
 					:last-child {
 						margin-bottom: 0;
@@ -50,19 +51,14 @@
 				}
 				.nutritional_info {
 					margin: 0;
-					font-size: var(--font-size-small);
-					line-height: var(--line-height-large);
-					color: var(--color-gray-dark);
+					font-size: $font-size-small;
+					line-height: $line-height-large;
+					color: $color-gray-dark;
 				}
 			}
 			.button {
 				grid-area: button;
-				@include button-style(
-					var(--button-bg-default-2),
-					var(--color-white),
-					var(--button-bg-hover-1),
-					var(--button-bg-selected)
-				);
+				@include button-style($button-bg-default-2, $color-white, $button-bg-hover-1, $button-bg-selected);
 			}
 			.inner {
 				grid-area: inner;
@@ -71,9 +67,9 @@
 				justify-content: space-between;
 				.price {
 					margin: 0 0 0 auto;
-					font-size: var(--font-size-large);
-					font-weight: var(--font-weight-semibold);
-					line-height: var(--line-height-large);
+					font-size: $font-size-large;
+					font-weight: $font-weight-semibold;
+					line-height: $line-height-large;
 				}
 			}
 		}

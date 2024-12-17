@@ -1,4 +1,6 @@
 @import '../../shared/style/mixin.scss';
+@import '../../shared/style/variable.scss';
+
 .label {
 	cursor: pointer;
 	position: relative;
@@ -14,7 +16,6 @@
 		@include input-hidden();
 	}
 	.input:checked + .radio + .name {
-		
 	}
 	.radio {
 		position: absolute;
@@ -32,7 +33,7 @@
 		opacity: 0;
 		content: '';
 		inset: 0;
-		background-color: var(--button-bg-default-3);
+		background-color: $button-bg-default-3;
 		transition:
 			color 0.3s ease-in-out,
 			background-color 0.3s ease-in-out;
@@ -40,8 +41,6 @@
 
 	.input:checked + .radio::before {
 		opacity: 1;
-		
-		
 	}
 	.name {
 		z-index: 9;
@@ -60,9 +59,9 @@
 		transition:
 			color 0.3s ease-in-out,
 			background-color 0.3s ease-in-out;
-		background-color: var(--button-bg-hover-2);
+		background-color: $button-bg-hover-2;
 	}
 	&:hover {
-		color: var(--button-color-default-2);
+		color: $button-color-default-2;
 	}
 }

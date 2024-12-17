@@ -24,6 +24,7 @@ const RegistrationModal = () => {
     login: "",
     password: "",
   });
+  console.log(formValues);
   const [confirmPassword, setConfirmPassword] = useState(""); // второй ввод пароля
   const [isMatchPassword, setIsMatchPassword] = useState(false); // проверка пароля
   const [isValuesEmpty, setIsValuesEmpty] = useState(false); // если значение пустое хотя бы одно
@@ -93,7 +94,7 @@ const RegistrationModal = () => {
                 <input
                   className={s.input}
                   type="text"
-                  placeholder="Имя" 
+                  placeholder="Имя"
                   value={formValues.firstName}
                   name="firstName"
                   minLength={2}

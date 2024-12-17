@@ -1,7 +1,8 @@
 @import '../../shared/style/mixin.scss';
+@import '../../shared/style/variable.scss';
 
 .productcard {
-	background-color: var(--color-white);
+	background-color: $color-white;
 	padding: 12px;
 	border-radius: 18px;
 	display: flex;
@@ -17,32 +18,27 @@
 	}
 	.price {
 		margin: 0 0 8px 0;
-		font-size: var(--font-size-large);
-		line-height: var(--line-height-small);
-		font-weight: var(--font-weight-semibold);
+		font-size: $font-size-large;
+		line-height: $line-height-small;
+		font-weight: $font-weight-semibold;
 	}
 	.title {
 		margin: 0 0 29px 0;
-		line-height: var(--line-height-large);
-		font-weight: var(--font-weight-regular);
+		line-height: $line-height-large;
+		font-weight: $font-weight-regular;
 	}
 	.weight {
 		margin: 0 0 8px 0;
-		line-height: var(--line-height-large);
-		font-weight: var(--font-weight-semibold);
-		color: var(--color-gray-dark);
+		line-height: $line-height-large;
+		font-weight: $font-weight-semibold;
+		color: $color-gray-dark;
 	}
 	.button {
-		@include button-style(
-			var(--button-bg-default-1),
-			var(--color-black),
-			var(--button-bg-hover-1),
-			var(--button-bg-selected)
-		);
-		background-color: var(--button-bg-default-1);
-		color: var(--color-black);
+		@include button-style(button-bg-default-1, color-black, button-bg-hover-1, button-bg-selected);
+		background-color: $button-bg-default-1;
+		color: $color-black;
 		&:hover {
-			color: var(--color-white);
+			color: color-white;
 		}
 	}
 	&:hover {

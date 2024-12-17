@@ -27,6 +27,7 @@ const RenderLinkOrUser = () => {
       window.removeEventListener("scroll", scroll);
     };
   }, [toggle]);
+
   if (isAuthorization === false) {
     return (
       <Link className={s.link} to="/authorization">
@@ -47,11 +48,14 @@ const RenderLinkOrUser = () => {
       </button>
       {toggle && (
         <ul className={s.list} ref={ref}>
-          <li className={s.item}>
-            <a href="#!">Профиль</a>
+          <li className={s.item} onClick={() => setToggle(false)}>
+            <Link to="/profile">Профиль</Link>
           </li>
           <li className={s.item}>
             <a href="#!">Заказы</a>
+          </li>
+          <li className={s.item}>
+            <a href="#!">Выйти</a>
           </li>
         </ul>
       )}

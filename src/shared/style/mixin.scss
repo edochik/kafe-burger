@@ -1,4 +1,4 @@
-@import './variable.scss';
+@use './variable.scss' as var;
 
 @mixin input-style() {
 	width: 100%;
@@ -18,9 +18,9 @@
 }
 
 @mixin container() {
-	max-width: $with-container;
-	padding: $padding-body;
-	margin: $margin-0-auto;
+	max-width: var.$with-container;
+	padding: var.$padding-body;
+	margin: var.$margin-0-auto;
 }
 
 @mixin overlay-style() {
@@ -73,8 +73,8 @@
 		top: 1px;
 	}
 	&:disabled {
-		background-color: $button-bg-disabled;
-		color: $button-color-disabled;
+		background-color: var.$button-bg-disabled;
+		color: var.$button-color-disabled;
 	}
 }
 

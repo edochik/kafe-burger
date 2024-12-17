@@ -1,4 +1,4 @@
-@import '../../../shared/style/variable.scss';
+@use '../../../shared/style/variable.scss' as var;
 
 .toggleproductbutton {
 	height: 40px;
@@ -7,7 +7,7 @@
 	align-items: center;
 	border-radius: 12px;
 	overflow: hidden;
-	background-color: $button-bg-default-1;
+	background-color: var.$button-bg-default-1;
 	.plus,
 	.minus,
 	.count {
@@ -18,7 +18,7 @@
 		height: 40px;
 		transition: background-color 0.3s ease-in-out;
 		&:active {
-			background-color: $color-gray-dark;
+			background-color: var.$color-gray-dark;
 		}
 	}
 	.plus {

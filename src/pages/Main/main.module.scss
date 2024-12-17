@@ -1,11 +1,11 @@
-@import '../../shared/style/mixin.scss';
-@import '../../shared/style/variable.scss';
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
 
 .main {
-	background-color: $color-background-main;
+	background-color: var.$color-background-main;
 	padding-bottom: 50px;
 	.wrapper {
-		@include container();
+		@include mix.container();
 		display: flex;
 		gap: 30px;
 	}

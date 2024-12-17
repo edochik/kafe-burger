@@ -1,14 +1,14 @@
-@import './mixin.scss';
-@import './variable.scss';
+@use './mixin.scss' as mix;
+@use './variable.scss' as var;
 .overlay {
-	@include overlay-style();
+	@include mix.overlay-style();
 	.modal {
 		display: flex;
 		overflow: hidden;
 		min-height: 460px;
-		@include modal-style();
+		@include mix.modal-style();
 		.column:nth-of-type(1) {
-			background-color: $color-orange;
+			background-color: var.$color-orange;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -18,7 +18,7 @@
 		}
 		.column:nth-of-type(2) {
 			padding: 44px 24px 24px 24px;
-			background-color: $color-background-main;
+			background-color: var.$color-background-main;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -29,16 +29,16 @@
 				text-align: center;
 			}
 			.button {
-				@include button-style($button-bg-default-2, $color-white, $button-bg-hover-1, $button-bg-selected);
+				@include mix.button-style(var.$button-bg-default-2, var.$color-white, var.$button-bg-hover-1, var.$button-bg-selected);
 			}
 		}
 		.column {
 			min-width: 342px;
 			.title {
 				margin: 0 0 16px 0;
-				font-weight: $font-weight-semibold;
-				font-size: $font-size-large;
-				line-height: $line-height-small;
+				font-weight: var.$font-weight-semibold;
+				font-size: var.$font-size-large;
+				line-height: var.$line-height-small;
 			}
 			.form {
 				display: flex;
@@ -46,7 +46,7 @@
 				flex-direction: column;
 				.input {
 					margin-bottom: 8px;
-					@include input-style();
+					@include mix.input-style();
 				}
 				.error {
 					transition: all 0.3s ease-in-out;
@@ -69,7 +69,7 @@
 						display: flex;
 						align-items: center;
 						.receiving {
-							@include input-hidden();
+							@include mix.input-hidden();
 						}
 						.input:checked + .radio + .name {
 						}
@@ -82,13 +82,13 @@
 							border-radius: 50%;
 						}
 						.radio:before {
-							@include absoluteCenter();
+							@include mix.absoluteCenter();
 							content: '';
 							opacity: 0;
 							border-radius: 50%;
 							width: 6px;
 							height: 6px;
-							background-color: $color-black;
+							background-color: var.$color-black;
 							transition: opacity 0.2s ease-in-out;
 						}
 						.receiving:checked + .radio::before {
@@ -96,7 +96,7 @@
 						}
 						.text {
 							margin-left: 8px;
-							font-size: $font-size-small;
+							font-size: var.$font-size-small;
 						}
 					}
 				}
@@ -106,11 +106,11 @@
 					column-gap: 8px;
 				}
 				.subtitle {
-					font-weight: $font-weight-semibold;
+					font-weight: var.$font-weight-semibold;
 					margin: 0 0 8px 0;
 				}
 				.button {
-					@include button-style($button-bg-default-2, $color-white, $button-bg-hover-1, $button-bg-selected);
+					@include mix.button-style(var.$button-bg-default-2, var.$color-white, var.$button-bg-hover-1, var.$button-bg-selected);
 				}
 			}
 		}

@@ -1,23 +1,23 @@
-@import '../../shared/style/mixin.scss';
-@import '../../shared/style/variable.scss';
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
 
 .Profile {
-  background-color: $color-background-main;
+  background-color: var.$color-background-main;
   padding: 50px 0;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   .list {
-    @include list-reset();
+    @include mix.list-reset();
     display: flex;
     row-gap: 10px;
     flex-direction: column;
     padding: 24px;
     text-decoration: none;
-    color: $color-orange;
-    font-weight: $font-weight-extrabold;
-    background-color: $button-color-default-2;
+    color: var.$color-orange;
+    font-weight: var.$font-weight-extrabold;
+    background-color: var.$button-color-default-2;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(254, 95, 0, 0);
     border-radius: 15px;
@@ -26,9 +26,9 @@
     .item {
       .label {
         .input {
-          color: $color-orange;
+          color: var.$color-orange;
           font-size: 30px;
-          font-weight: $font-weight-extrabold;
+          font-weight: var.$font-weight-extrabold;
           border: none;
           &:focus {
             outline: 3px solid gray;
@@ -44,24 +44,24 @@
     align-items: center;
     .span {
       display: inline-block;
-      color: $color-gray-dark;
-      font-weight: $font-weight-extrabold;
+      color: var.$color-gray-dark;
+      font-weight: var.$font-weight-extrabold;
       font-size: 30px;
     }
     .input {
-      @include input-style();
+      @include mix.input-style();
     }
   }
   .button {
     margin-bottom: 10px;
-    @include button-style($button-bg-default-2, $color-white, $button-bg-hover-1, $button-bg-selected);
+    @include mix.button-style(var.$button-bg-default-2, var.$color-white, var.$button-bg-hover-1, var.$button-bg-selected);
     width: unset;
     padding-right: 10px;
     padding-left: 10px;
   }
   .link {
     text-decoration: none;
-    color: $color-orange;
-    font-size: $font-size-xxlarge;
+    color: var.$color-orange;
+    font-size: var.$font-size-xxlarge;
   }
 }

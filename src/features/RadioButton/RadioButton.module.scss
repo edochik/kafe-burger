@@ -1,5 +1,5 @@
-@import '../../shared/style/mixin.scss';
-@import '../../shared/style/variable.scss';
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
 
 .label {
 	cursor: pointer;
@@ -13,7 +13,7 @@
 		color 0.3s ease-in-out,
 		background-color 0.3s ease-in-out;
 	.input {
-		@include input-hidden();
+		@include mix.input-hidden();
 	}
 	.input:checked + .radio + .name {
 	}
@@ -33,7 +33,7 @@
 		opacity: 0;
 		content: '';
 		inset: 0;
-		background-color: $button-bg-default-3;
+		background-color: var.$button-bg-default-3;
 		transition:
 			color 0.3s ease-in-out,
 			background-color 0.3s ease-in-out;
@@ -59,9 +59,9 @@
 		transition:
 			color 0.3s ease-in-out,
 			background-color 0.3s ease-in-out;
-		background-color: $button-bg-hover-2;
+		background-color: var.$button-bg-hover-2;
 	}
 	&:hover {
-		color: $button-color-default-2;
+		color: var.$button-color-default-2;
 	}
 }

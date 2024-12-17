@@ -1,9 +1,9 @@
-@import '../../shared/style/variable.scss';
+@use '../../shared/style/variable.scss' as var;
 
 .NotFoundPage {
 	padding: 100px 0;
 	text-align: center;
-	background-color: $color-background-main;
+	background-color: var.$color-background-main;
 	.title {
 		margin: 0;
 		font-size: 200px;
@@ -11,11 +11,11 @@
 	}
 	.text {
 		margin: 0;
-		font-size: $font-size-xlarge;
+		font-size: var.$font-size-xlarge;
 	}
 	.link {
 		text-decoration: none;
-		color: $color-orange;
-		font-size: $font-size-xxlarge;
+		color: var.$color-orange;
+		font-size: var.$font-size-xxlarge;
 	}
 }

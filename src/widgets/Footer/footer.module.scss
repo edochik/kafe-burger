@@ -1,12 +1,12 @@
-@import '../../shared/style/mixin.scss';
-@import '../../shared/style/variable.scss';
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
 
 .footer {
 	display: flex;
-	padding: $padding-body;
+	padding: var.$padding-body;
 	justify-content: space-between;
-	max-width: $with-container;
-	margin: $margin-0-auto;
+	max-width: var.$with-container;
+	margin: var.$margin-0-auto;
 	padding-top: 50px;
 	padding-bottom: 50px;
 	.column:first-child {
@@ -23,7 +23,7 @@
 		column-gap: 125px;
 		.inner:first-child {
 			.text {
-				font-size: $font-size-large;
+				font-size: var.$font-size-large;
 				margin: 0 0 24px 0;
 			}
 			.phone {
@@ -36,11 +36,11 @@
 		}
 		.inner:last-of-type {
 			.text {
-				font-size: $font-size-large;
+				font-size: var.$font-size-large;
 				margin: 0 0 24px 0;
 			}
 			.list {
-				@include list-reset();
+				@include mix.list-reset();
 				display: flex;
 				column-gap: 16px;
 				.item {

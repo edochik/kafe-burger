@@ -1,20 +1,20 @@
-@import '../../shared/style/mixin.scss';
-@import '../../shared/style/variable.scss';
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
 
 .section {
 	.title {
 		margin: 0 0 24px 0;
-		font-size: $font-size-xxlarge;
-		line-height: $line-height-medium;
-		font-weight: $font-weight-semibold;
+		font-size: var.$font-size-xxlarge;
+		line-height: var.$line-height-medium;
+		font-weight: var.$font-weight-semibold;
 	}
 	.list {
-		@include list-reset();
+		@include mix.list-reset();
 		display: flex;
 		flex-wrap: wrap;
 		gap: 16px;
 	}
 }
 .loader {
-	@include loader();
+	@include mix.loader();
 }

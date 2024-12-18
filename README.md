@@ -125,3 +125,50 @@ catalog/
 └── server.js // Основной серверный файл (логика и маршруты)
 
 Сервер на glitch работает
+
+1.Регистрация пользователя
+
+- не успешно
+  { message: 'пароль меньше 6 символов', reason: 'password'}
+
+{
+status: 'error',
+message: 'пароль меньше 6 символов',
+field: 'login', // не обязательные поля
+data: {} // не обязательные поля
+}
+
+{ message: 'такая почта уже существует', reason: 'email'}
+{ message: 'такой логин уже существует', reason: 'login'}
+{ message: 'ошибка сервера', reason: 'server'}
+{ message: 'Все поля должны быть заполнеными', reason:'empty value'}
+
+- успешно
+  { message: 'Пользователь создан'}
+  const [status,setStatus] = useState(null)
+  {
+  status: 'success',
+  message: 'Пользователь создан',
+  }
+
+  2.Авторизация пользователя
+
+- не успешно
+  { message: 'Такого логина уже нет', reason: 'login'}
+  { message: 'Введите корректный пароль', reason: 'password'}
+  -успешно
+  { message: 'Успешная авторизация', user}
+
+{
+status: 'success',
+message: 'Пользователь создан',
+data: user
+}
+
+3. Обновление данных пользователя
+
+- не успешно
+  { message: 'Введите корректный пароль', reason: 'password'}
+- успешно
+  { message: 'данные обновлены', user}
+

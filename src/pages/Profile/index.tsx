@@ -45,6 +45,7 @@ const Profile = () => {
       );
       if (!request.ok) {
         const error = await request.json();
+
         throw error;
       }
       // return response.json();
@@ -81,6 +82,7 @@ const Profile = () => {
           return null;
         })}
       </ul>
+      {error && <div>{error}</div>}
       <label className={s.label}>
         <span className={s.span}>Подтвердите:&nbsp;</span>
         <input

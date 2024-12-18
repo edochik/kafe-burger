@@ -24,3 +24,4 @@ export async function fetchRegister(data: User) {
   }
   return request.json();
 }
+

@@ -39,6 +39,17 @@ export const userSlice = createSlice({
 		updateUser: (state, action: PayloadAction<{ key: keyof User; value: string }>) => {
 			const { key, value } = action.payload;
 			(state[key] as string) = value;
+		},
+		logoutUser: (state) => {
+			for (const key in state) {
+				if (key === 'isAuthorization') {
+					state[key] = false;
+				} else if (key === 'id') {
+					state[key] = null;
+				} else {
+					(state[key as keyof User] as string) = '';
+				}
+			}
 		}
 	},
 	extraReducers: (builder) => {
@@ -58,4 +69,4 @@ export const userSlice = createSlice({
 	}
 })
 
-export const { registerUser, updateUser } = userSlice.actions;
+export const { registerUser, updateUser, logoutUser } = userSlice.actions;

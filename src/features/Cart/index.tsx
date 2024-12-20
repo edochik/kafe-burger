@@ -31,8 +31,8 @@ const Cart = () => {
               <p className={s.text}>Итого</p>
               <p className={s.total}>{totalPrice}₽</p>
             </div>
-            <Link className={s.link} to="/order">
-              <button className={s.button}>Оформить заказ</button>
+            <Link className={s.button} to="/order">
+              Оформить заказ
             </Link>
             <p className={s.info}>Бесплатная доставка</p>
           </>

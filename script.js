@@ -323,6 +323,149 @@
 // 	}
 // ]
 
+const { type } = require("@testing-library/user-event/dist/type/index");
 
-// должна быть проверка человек вошел или нет 
-// если вошел то в заказе указывается логин, если нет то анонимный
+// const order = {
+// 	1: {
+// 		user: 'anonymous',
+// 		order: [{
+// 			"id": 1,
+// 			"nameRu": "Мясная бомба",
+// 			"price": 689,
+// 			"weight": 520,
+// 			"imageUrl": "https://cdn.glitch.global/97e8a68a-3077-4f20-8d34-d87ee1e9f749/meat-bomb.jpg?v=1733422600824",
+// 			"count": 1
+// 		},
+// 		{
+// 			"id": 3,
+// 			"nameRu": "Сытный",
+// 			"price": 450,
+// 			"weight": 580,
+// 			"imageUrl": "https://cdn.glitch.global/97e8a68a-3077-4f20-8d34-d87ee1e9f749/hearty.jpg?v=1733422573162",
+// 			"count": 1
+// 		},
+// 		{
+// 			"id": 2,
+// 			"nameRu": "Супер сырный",
+// 			"price": 639,
+// 			"weight": 512,
+// 			"imageUrl": "https://cdn.glitch.global/97e8a68a-3077-4f20-8d34-d87ee1e9f749/super-cheesy.jpg?v=1733422618824",
+// 			"count": 1
+// 		}
+// 		]
+// 	},
+// 	2: {
+// 		user: 'userId',
+// 		order: [{
+// 			"id": 1,
+// 			"nameRu": "Мясная бомба",
+// 			"price": 689,
+// 			"weight": 520,
+// 			"imageUrl": "https://cdn.glitch.global/97e8a68a-3077-4f20-8d34-d87ee1e9f749/meat-bomb.jpg?v=1733422600824",
+// 			"count": 1
+// 		},
+// 		{
+// 			"id": 3,
+// 			"nameRu": "Сытный",
+// 			"price": 450,
+// 			"weight": 580,
+// 			"imageUrl": "https://cdn.glitch.global/97e8a68a-3077-4f20-8d34-d87ee1e9f749/hearty.jpg?v=1733422573162",
+// 			"count": 1
+// 		},
+// 		{
+// 			"id": 2,
+// 			"nameRu": "Супер сырный",
+// 			"price": 639,
+// 			"weight": 512,
+// 			"imageUrl": "https://cdn.glitch.global/97e8a68a-3077-4f20-8d34-d87ee1e9f749/super-cheesy.jpg?v=1733422618824",
+// 			"count": 1
+// 		}
+// 		]
+// 	}
+// }
+
+// ??
+
+const formFields = [
+	{
+		name: 'firstName',
+		type: 'text',
+		label: 'Имя',
+		required: true,
+		minLength: 2,
+		pattern: "[а-яёА-ЯЁ]*",
+		onInvalidMessage: 'Имя должно содержать только кириллические буквы.'
+	},
+	{
+		name: 'lastName',
+		type: 'text',
+		label: 'Фамилия',
+		required: true,
+		minLength: 2,
+		pattern: "[а-яёА-ЯЁ]*",
+		onInvalidMessage: 'Фамилия должна содержать только кириллические буквы.'
+	},
+	{
+		name: 'lastName',
+		type: 'email',
+		label: 'Почта',
+		required: true,
+		minLength: 2,
+		pattern: "",
+		onInvalidMessage: ''
+	},
+	{
+		name: 'phone',
+		type: 'phone',
+		label: 'Телефон',
+		required: true,
+		minLength: "??",
+		pattern: "",
+		onInvalidMessage: ''
+	},
+	{
+		name: 'address',
+		type: 'text',
+		label: 'Улица, дом, квартира',
+		required: true,
+		minLength: 1,
+		pattern: "",
+		onInvalidMessage: ''
+	},
+	{
+		name: 'floor',
+		type: 'text',
+		label: 'Этаж',
+		required: true,
+		minLength: 1,
+		pattern: "",
+		onInvalidMessage: ''
+	},
+	{
+		name: 'apartment',
+		type: 'text',
+		label: 'Квартира',
+		required: true,
+		minLength: 1,
+		pattern: "",
+		onInvalidMessage: ''
+	},
+	{
+		name: 'login',
+		type: 'text',
+		label: 'Логин',
+		required: true,
+		minLength: 3,
+		pattern: "[a-zA-Z]*",
+		onInvalidMessage: 'Логин должен содержать только латинские буквы.'
+	},
+	{
+		name: 'password',
+		type: 'text',
+		label: 'Пароль',
+		required: true,
+		minLength: 6,
+		pattern: "",
+		onInvalidMessage: ''
+	},
+]

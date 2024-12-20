@@ -1,0 +1,7 @@
+@use '../../style/mixin.scss' as mix;
+.error {
+	@include mix.color-message(tomato, yellow);
+}
+.success {
+	@include mix.color-message(white, green);
+}

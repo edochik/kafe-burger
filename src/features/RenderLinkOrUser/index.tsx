@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import s from "./RenderLinkOrUser.module.scss";
 import classNames from "classnames";
-import { useAppSelector } from "../../shared/lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEffect, useRef, useState } from "react";
+import { logoutUser } from "../../entities/user/userSlice";
 
 const RenderLinkOrUser = () => {
   const { isAuthorization, login } = useAppSelector((state) => state.user);
   const [toggle, setToggle] = useState(false);
+  const dispatch = useAppDispatch();
+
   const ref = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -35,6 +38,27 @@ const RenderLinkOrUser = () => {
       </Link>
     );
   }
+
+  const userLogout = async () => {
+    try {
+      const response = await fetch(
+        "https://chip-patch-papaya.glitch.me/api/logout",
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.errorDetail);
+      }
+      dispatch(logoutUser());
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message); 
+      }
+    }
+  };
   return (
     <div className={s.RenderLinkOrUser}>
       <button
@@ -55,7 +79,9 @@ const RenderLinkOrUser = () => {
             <a href="#!">Заказы</a>
           </li>
           <li className={s.item}>
-            <a href="#!">Выйти</a>
+            <Link to="/" onClick={() => userLogout()}>
+              Выйти
+            </Link>
           </li>
         </ul>
       )}

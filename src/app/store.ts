@@ -13,8 +13,6 @@ export const store = configureStore({
 		selectProduct: selectSlice.reducer,
 		products: productSlice.reducer,
 		user: userSlice.reducer,
-		// historyOrder:
-		// historyDoAmin:
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().prepend(listenerMiddleware.middleware),

@@ -1,5 +1,5 @@
 import s from "../../shared/style/modal.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { data } from "./data";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,18 +8,22 @@ import PhoneInput from "react-phone-input-2";
 import { changeReceiving } from "./changeReceiving";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useFocusAndEscape } from "../../shared/hooks/useFocusAndEscape";
+import { fetchRequest } from "../../utils/fetchRequest";
+import { User } from "../../entities/user/userSlice.js";
 
 const OrderModal = () => {
+  const { id, firstName, phone, address, floor, apartment } = useAppSelector(
+    (state) => state.user
+  );
+  
   const [formValues, setFormValues] = useState({
-    name: "",
-    phone: "",
+    firstName: firstName ? firstName : "",
+    phone: phone ? phone : "",
     receiving: "pickup",
-    address: "",
-    floor: "",
-    apartment: "",
+    address: address ? address : "",
+    floor: floor ? floor : "",
+    apartment: apartment ? apartment : "",
   });
-  const test = useAppSelector((state) => state.user);
-  console.log(test);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -31,9 +35,20 @@ const OrderModal = () => {
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(event);
+    try {
+      interface UpdateUser extends Omit<User, "receiving"> {
+        receiving?: string;
+      }
+      const response = await fetchRequest<Partial<UpdateUser>>(
+        { id, ...formValues },
+        "/order",
+        "PUT"
+      );
+    } catch (error) {
+      
+    }
   };
 
   return (
@@ -49,7 +64,7 @@ const OrderModal = () => {
               className={s.input}
               type="text"
               placeholder="Ваше имя"
-              value={formValues.name}
+              value={formValues.firstName}
               name="name"
               minLength={2}
               onChange={(e) => handleChangeInput(e)}

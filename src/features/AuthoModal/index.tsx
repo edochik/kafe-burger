@@ -3,15 +3,15 @@ import { useEffect, useRef, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
-import { fetchAuthorization } from "./fetchAuthorization";
 import classNames from "classnames";
-import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
+import { useAppDispatch } from "../../shared/lib/hooks/hooks";
 import { registerUser } from "../../entities/user/userSlice";
 import { useFocusAndEscape } from "../../shared/hooks/useFocusAndEscape";
-interface ServerError {
-  message: string;
-  field?: string;
-}
+import { fetchRequest } from "../../utils/fetchRequest";
+import { Data } from "./interface";
+import { IResponseServer } from "../../shared/domain/responseServer";
+import { ResponseServer } from "../../shared/ui/ResponseServer";
+import { handleInvalidInput } from "../../utils/handleInvalidInput";
 
 const AuthorizationModal = () => {
   const [formValues, setFormValues] = useState({
@@ -19,12 +19,13 @@ const AuthorizationModal = () => {
     password: "",
   });
   const [isDisabled, setIsDisabled] = useState(false);
-  const [errorServer, setErrorServer] = useState("");
-  const [reasonError, setReasonError] = useState("");
+  const [responseServer, serResponseServer] = useState<IResponseServer | null>(
+    null
+  );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
-
+  useEffect(() => serResponseServer(null), [formValues]);
   useFocusAndEscape(inputRef);
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,15 +37,16 @@ const AuthorizationModal = () => {
     event.preventDefault();
     setIsDisabled(true);
     try {
-      const response = await fetchAuthorization(formValues);
+      const response: Data = await fetchRequest<Partial<Data>>(
+        formValues,
+        "/auth",
+        "POST"
+      );
       const user = response.user;
       dispatch(registerUser({ ...user }));
     } catch (error) {
-      const serverError = error as ServerError;
-      setErrorServer(serverError.message);
-      if (serverError.field) {
-        setReasonError(serverError.field);
-      }
+      const serverError = error as IResponseServer;
+      serResponseServer(serverError);
     } finally {
       setIsDisabled(false);
     }
@@ -61,7 +63,7 @@ const AuthorizationModal = () => {
             <input
               className={classNames({
                 [s.input]: true,
-                [s.error]: reasonError === "login",
+                [s.input_error]: responseServer?.field === "login",
               })}
               type="text"
               placeholder="Логин"
@@ -72,26 +74,33 @@ const AuthorizationModal = () => {
               minLength={3}
               ref={inputRef}
               pattern="[a-zA-Z]*"
+              onInvalid={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleInvalidInput(
+                  e,
+                  "Логин должен содержать только латинские буквы."
+                )
+              }
               required
             />
             <input
               className={classNames({
                 [s.input]: true,
-                [s.error]: reasonError === "password",
+                [s.input_error]: responseServer?.field === "password",
               })}
               type="password"
               placeholder="Пароль"
               name="password"
               value={formValues.password}
+              autoComplete="current-password"
               onChange={(e) => handleChangeInput(e)}
               aria-label="Пароль"
               minLength={6}
               required
             />
-            {errorServer && <div className={s.message}>{errorServer}</div>}
             <button type="submit" className={s.button} disabled={isDisabled}>
               Войти
             </button>
+            {responseServer && <ResponseServer {...responseServer} />}
             <div className={s.bottom} style={{ marginTop: "auto" }}>
               <h3 className={s.title}>Регистрация</h3>
               <Link to="/registration">

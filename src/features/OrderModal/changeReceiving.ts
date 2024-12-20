@@ -1,4 +1,11 @@
-import { InputValues } from "./interface";
+export interface InputValues {
+	phone: string;
+	firstName: string;
+	receiving: string;
+	floor: string;
+	address: string;
+	apartment: string;
+}
 
 type Callback = React.Dispatch<React.SetStateAction<InputValues>>;
 

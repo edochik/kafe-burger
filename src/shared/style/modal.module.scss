@@ -48,16 +48,11 @@
 					margin-bottom: 8px;
 					@include mix.input-style();
 				}
-				.error {
-					transition: all 0.3s ease-in-out;
-					box-shadow: 0px 0px 20px red;
+				.input_error {
+					@include mix.input-error();
 				}
-				.message {
-					margin-bottom: 20px;
-					color: tomato;
-					font-weight: 700;
-					font-size: 16px;
-					background-color: yellow;
+				.error {
+						@include mix.color-message(tomato, yellow);
 				}
 				.wrapper_radio {
 					margin-bottom: 16px;

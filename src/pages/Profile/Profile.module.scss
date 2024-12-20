@@ -35,6 +35,9 @@
             border-radius: 5px;
           }
         }
+        .gray {
+          color: gray;
+        }
       }
     }
   }
@@ -54,7 +57,12 @@
   }
   .button {
     margin-bottom: 10px;
-    @include mix.button-style(var.$button-bg-default-2, var.$color-white, var.$button-bg-hover-1, var.$button-bg-selected);
+    @include mix.button-style(
+      var.$button-bg-default-2,
+      var.$color-white,
+      var.$button-bg-hover-1,
+      var.$button-bg-selected
+    );
     width: unset;
     padding-right: 10px;
     padding-left: 10px;
@@ -63,5 +71,14 @@
     text-decoration: none;
     color: var.$color-orange;
     font-size: var.$font-size-xxlarge;
+  }
+  // .error {
+  //   @include mix.color-message(tomato, yellow);
+  // }
+  // .success {
+  //   @include mix.color-message(white, green);
+  // }
+  .input_error {
+    @include mix.input-error();
   }
 }

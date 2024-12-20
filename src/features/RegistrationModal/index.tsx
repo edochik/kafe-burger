@@ -1,16 +1,16 @@
 import s from "../../shared/style/modal.module.scss";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
 import PhoneInput from "react-phone-input-2";
 import classNames from "classnames";
-import { fetchRegister } from "./fetchRegisterUser";
 import { useFocusAndEscape } from "../../shared/hooks/useFocusAndEscape";
-interface ServerError {
-  message: string;
-  field?: string;
-}
+import { fetchRequest } from "../../utils/fetchRequest";
+import { User } from "../../entities/user/userSlice";
+import { IResponseServer } from "../../shared/domain/responseServer";
+import { ResponseServer } from "../../shared/ui/ResponseServer/";
+import { handleInvalidInput } from "../../utils/handleInvalidInput";
 
 const RegistrationModal = () => {
   const [formValues, setFormValues] = useState({
@@ -24,59 +24,62 @@ const RegistrationModal = () => {
     login: "",
     password: "",
   });
-  console.log(formValues);
+
   const [confirmPassword, setConfirmPassword] = useState(""); // второй ввод пароля
-  const [isMatchPassword, setIsMatchPassword] = useState(false); // проверка пароля
-  const [isValuesEmpty, setIsValuesEmpty] = useState(false); // если значение пустое хотя бы одно
-  const [errorServer, setErrorServer] = useState(""); // ошибка на сервере информация
-  const [reasonError, setReasonError] = useState(""); // подсвечивание ошибки с сервер
+  const [responseServer, serResponseServer] = useState<IResponseServer | null>(
+    null
+  );
   const [isUserRegister, setIsUserRegister] = useState(false); // пользователь зарегистрировался
   const [isDisable, setIsDisable] = useState(false); // при отправке кнопка становится disabled
-
+  useEffect(() => {
+    serResponseServer(null);
+    setIsDisable(false);
+  }, [formValues, confirmPassword]);
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   useFocusAndEscape(inputRef);
-
-  const handleChangeInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFormValues = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { value, name } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsMatchPassword(false);
-    setIsValuesEmpty(false);
-    setErrorServer("");
+    serResponseServer(null);
     if (Object.values(formValues).some((value) => value.length === 0)) {
-      setIsValuesEmpty(true);
+      serResponseServer({
+        status: "error",
+        message: "Все поля должны быть заполнены",
+      });
+      return;
+    }
+    if (formValues.password !== confirmPassword) {
+      serResponseServer({
+        status: "error",
+        message: "Пароли должны совпадать",
+        field: "password",
+      });
       return;
     }
     setIsDisable(true);
-    if (formValues.password === confirmPassword) {
-      try {
-        await fetchRegister(formValues);
-        setErrorServer("");
-        setConfirmPassword("");
-        setReasonError("");
-        setFormValues((prev) => {
-          const result = Object.create(null);
-          for (const elem in prev) {
-            result[elem] = "";
-          }
-          return result;
-        });
-        setIsUserRegister(true);
-      } catch (error) {
-        const serverError = error as ServerError;
-        setErrorServer(serverError.message);
-        if (serverError.field) {
-          setReasonError(serverError.field);
+    try {
+      await fetchRequest<Partial<User>>(formValues, "/register", "POST");
+      setConfirmPassword("");
+      setFormValues((prev) => {
+        const result = Object.create(null);
+        for (const elem in prev) {
+          result[elem] = "";
         }
-      } finally {
-        setIsDisable(false);
-      }
-    } else {
-      setIsMatchPassword(true);
+        return result;
+      });
+      setIsUserRegister(true);
+    } catch (error) {
+      const serverError = error as IResponseServer;
+      serResponseServer(serverError);
+    } finally {
+      setIsDisable(false);
     }
   };
 
@@ -98,20 +101,17 @@ const RegistrationModal = () => {
                   value={formValues.firstName}
                   name="firstName"
                   minLength={2}
-                  onChange={(e) => handleChangeInput(e)}
+                  onChange={(e) => handleChangeFormValues(e)}
                   ref={inputRef}
                   pattern="[а-яёА-ЯЁ]*"
                   aria-label="Имя"
                   required
-                  onInvalid={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    if (!/^[а-яёА-ЯЁ]+$/.test(e.target.value)) {
-                      e.target.setCustomValidity(
-                        "Имя должно содержать только кириллические буквы."
-                      );
-                    } else {
-                      e.target.setCustomValidity("");
-                    }
-                  }}
+                  onInvalid={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleInvalidInput(
+                      e,
+                      "Имя должно содержать только кириллические буквы."
+                    )
+                  }
                 />
                 <input
                   className={s.input}
@@ -120,30 +120,27 @@ const RegistrationModal = () => {
                   value={formValues.lastName}
                   name="lastName"
                   minLength={2}
-                  onChange={(e) => handleChangeInput(e)}
+                  onChange={(e) => handleChangeFormValues(e)}
                   aria-label="Фамилия"
                   pattern="[а-яёА-ЯЁ]*"
-                  onInvalid={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    if (!/^[а-яёА-ЯЁ]+$/.test(e.target.value)) {
-                      e.target.setCustomValidity(
-                        "Фамилия должна содержать только кириллические буквы."
-                      );
-                    } else {
-                      e.target.setCustomValidity("");
-                    }
-                  }}
+                  onInvalid={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleInvalidInput(
+                      e,
+                      "Фамилия должна содержать только кириллические буквы."
+                    )
+                  }
                   required
                 />
                 <input
                   className={classNames({
                     [s.input]: true,
-                    [s.error]: reasonError === "email",
+                    [s.input_error]: responseServer?.field === "email",
                   })}
                   type="email"
                   placeholder="Email"
                   value={formValues.email}
                   name="email"
-                  onChange={(e) => handleChangeInput(e)}
+                  onChange={(e) => handleChangeFormValues(e)}
                   aria-label="почта"
                   required
                 />
@@ -170,7 +167,7 @@ const RegistrationModal = () => {
                   placeholder="Улица, дом, квартира"
                   value={formValues.address}
                   name="address"
-                  onChange={(e) => handleChangeInput(e)}
+                  onChange={(e) => handleChangeFormValues(e)}
                   aria-label="Улица, дом, квартира"
                   required
                 />
@@ -181,7 +178,7 @@ const RegistrationModal = () => {
                     placeholder="Этаж"
                     value={formValues.floor}
                     name="floor"
-                    onChange={(e) => handleChangeInput(e)}
+                    onChange={(e) => handleChangeFormValues(e)}
                     aria-label="Этаж"
                     required
                   />
@@ -191,7 +188,7 @@ const RegistrationModal = () => {
                     placeholder="Квартира"
                     value={formValues.apartment}
                     name="apartment"
-                    onChange={(e) => handleChangeInput(e)}
+                    onChange={(e) => handleChangeFormValues(e)}
                     aria-label="Квартира"
                     required
                   />
@@ -200,7 +197,7 @@ const RegistrationModal = () => {
                 <input
                   className={classNames({
                     [s.input]: true,
-                    [s.error]: reasonError === "login",
+                    [s.input_error]: responseServer?.field === "login",
                   })}
                   type="text"
                   placeholder="Логин"
@@ -208,26 +205,22 @@ const RegistrationModal = () => {
                   name="login"
                   autoComplete="username"
                   minLength={4}
-                  onChange={(e) => handleChangeInput(e)}
+                  onChange={(e) => handleChangeFormValues(e)}
                   aria-label="Логин"
                   pattern="[a-zA-Z]*"
-                  title="Логин должен содержать только латинские буквы"
+                  onInvalid={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleInvalidInput(
+                      e,
+                      "Логин должен содержать только латинские буквы."
+                    )
+                  }
                   required
-                  onInvalid={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    if (!/^[a-zA-Z]+$/.test(e.target.value)) {
-                      e.target.setCustomValidity(
-                        "Логин должен содержать только латинские буквы."
-                      );
-                    } else {
-                      e.target.setCustomValidity("");
-                    }
-                  }}
                 />
                 <h4 className={s.subtitle}>Введите пароль</h4>
                 <input
                   className={classNames({
                     [s.input]: true,
-                    [s.error]: reasonError === "password",
+                    [s.input_error]: responseServer?.field === "password",
                   })}
                   type="password"
                   placeholder="Пароль"
@@ -235,14 +228,14 @@ const RegistrationModal = () => {
                   name="password"
                   autoComplete="new-password"
                   minLength={6}
-                  onChange={(e) => handleChangeInput(e)}
+                  onChange={(e) => handleChangeFormValues(e)}
                   aria-label="Пароль"
                   required
                 />
                 <input
                   className={classNames({
                     [s.input]: true,
-                    [s.error]: reasonError === "password",
+                    [s.input_error]: responseServer?.field === "password",
                   })}
                   type="password"
                   placeholder="Повторите пароль"
@@ -254,15 +247,7 @@ const RegistrationModal = () => {
                   aria-label="Повторите пароль"
                   required
                 />
-                {isMatchPassword && (
-                  <div className={s.message}>Пароли должны совпадать</div>
-                )}
-                {isValuesEmpty && (
-                  <div className={s.message}>
-                    Одно или несколько полей пустые
-                  </div>
-                )}
-                {errorServer && <div className={s.message}>{errorServer}</div>}
+                {responseServer && <ResponseServer {...responseServer} />}
                 <button type="submit" className={s.button} disabled={isDisable}>
                   Зарегистрироваться
                 </button>

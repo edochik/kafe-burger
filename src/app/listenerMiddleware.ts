@@ -37,8 +37,9 @@ startAppListening({
 startAppListening({
 	matcher: isAnyOf(fetchUserVerificationThunk.fulfilled, registerUser),
 	effect: async (action, listenerApi) => {
-		const { user } = listenerApi.getState();
-		const userId = user.id;
+
+		const { profile: user } = listenerApi.getState();
+		const userId = user.data.user.id;
 		if (typeof userId === 'number') {
 			await listenerApi.dispatch(fetchHistoryOrdersThunk(userId));
 		}

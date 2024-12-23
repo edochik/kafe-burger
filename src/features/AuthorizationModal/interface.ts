@@ -1,4 +1,4 @@
-import { User } from "../../entities/user/userSlice.js"
+import { User } from "../../entities/user/types.js"
 
 export interface Data {
 	login: string,

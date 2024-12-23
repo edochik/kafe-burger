@@ -1,6 +1,6 @@
 import { API } from "../../../shared/api/api";
 import { fetchDataUniversal } from "../../../shared/api/helper";
-import { User } from "../userSlice.js";
+import { User } from "../types";
 
 
 const API_VERIFICATION = `${API}auth/verify`

@@ -10,7 +10,7 @@ import { NotFoundPage } from "../pages/NotFoundPage/";
 import { HistoryOrders } from "../pages/HistoryOrders/";
 
 export const AppRouter = () => {
-  const isAuth = useAppSelector((state) => state.user.isAuthorization);
+  const isAuth = useAppSelector((state) => state.profile.isAuthorization);
   return (
     <Routes>
       <Route path="/" element={<Main />}>

@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import s from "./Profile.module.scss";
-import { updateUser, User } from "../../entities/user/userSlice";
+import { updateUser } from "../../entities/user/userSlice";
 import { useEffect, useState } from "react";
 import { fetchRequest } from "../../utils/fetchRequest";
 import classNames from "classnames";
 import { ResponseServer } from "../../shared/ui/ResponseServer";
 import { IResponseServer } from "../../shared/domain/responseServer";
+import { User } from "../../entities/user/types.js";
 
 const translateField: Partial<User> = {
   firstName: "Имя",
@@ -21,14 +22,14 @@ const translateField: Partial<User> = {
 
 const Profile = () => {
   const [password, setPassword] = useState("");
-  const [responseServer, serResponseServer] = useState<IResponseServer | null>(
+  const [responseServer, setResponseServer] = useState<IResponseServer | null>(
     null
   );
   const [isDisabled, setDisabled] = useState(false);
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.profile);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    serResponseServer(null);
+    setResponseServer(null);
   }, [password, user]);
 
   const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,10 +50,10 @@ const Profile = () => {
         "/account/update",
         "PUT"
       );
-      serResponseServer(response);
+      setResponseServer(response);
     } catch (error) {
       const serverError = error as IResponseServer;
-      serResponseServer(serverError);
+      setResponseServer(serverError);
     } finally {
       setDisabled(false);
     }

@@ -7,16 +7,17 @@ import PhoneInput from "react-phone-input-2";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
 import { fetchRequest } from "../../utils/fetchRequest";
-import { updateUser, User } from "../../entities/user/userSlice";
+import { updateUser } from "../../entities/user/userSlice";
 import { IResponseServer } from "../../shared/domain/responseServer";
 import { clearCart } from "../Cart/cartSlice";
 import { deliveryMethods } from "./DeliveryMethods";
+import { User } from "../../entities/user/types.js";
 
 const OrderModal = () => {
   const { id, firstName, phone, address, floor, apartment } = useAppSelector(
-    (state) => state.user
+    (state) => state.profile.data.user
   );
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.profile);
   const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   const [deliveryMethod, setDeliveryMethod] = useState("pickup");
@@ -25,7 +26,7 @@ const OrderModal = () => {
   );
   const [isDisabled, setIsDisabled] = useState(false);
   const navigate = useNavigate();
-  useEscapeHandler()
+  useEscapeHandler();
   const handleChangeInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     dispatch(updateUser({ key: name as keyof User, value }));

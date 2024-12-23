@@ -6,7 +6,10 @@ import { useEffect, useRef, useState } from "react";
 import { logoutUser } from "../../entities/user/userSlice";
 
 const RenderLinkOrUser = () => {
-  const { isAuthorization, login } = useAppSelector((state) => state.user);
+  const isAuthorization = useAppSelector(
+    (state) => state.profile.isAuthorization
+  );
+  const login = useAppSelector((state) => state.profile.data.user.login);
   const [toggle, setToggle] = useState(false);
   const dispatch = useAppDispatch();
   const ref = useRef<HTMLUListElement>(null);

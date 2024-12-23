@@ -13,7 +13,7 @@ export const store = configureStore({
 		cart: cartSlice.reducer,
 		selectProduct: selectSlice.reducer,
 		products: productSlice.reducer,
-		user: userSlice.reducer,
+		profile: userSlice.reducer,
 		historyOrder: historyOrdersSlice.reducer
 	},
 	middleware: (getDefaultMiddleware) =>

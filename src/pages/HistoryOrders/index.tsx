@@ -11,7 +11,9 @@ const HistoryOrders = () => {
     deliveryMethods.map((method) => [method.nameEn, method.nameRu])
   );
 
-  const isAuthorization = useAppSelector((state) => state.user.isAuthorization);
+  const isAuthorization = useAppSelector(
+    (state) => state.profile.isAuthorization
+  );
   if (!isAuthorization) {
     return (
       <div className={s.HistoryOrders}>

@@ -9,7 +9,6 @@ const RenderLinkOrUser = () => {
   const { isAuthorization, login } = useAppSelector((state) => state.user);
   const [toggle, setToggle] = useState(false);
   const dispatch = useAppDispatch();
-
   const ref = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -55,7 +54,7 @@ const RenderLinkOrUser = () => {
       dispatch(logoutUser());
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message); 
+        console.log(error.message);
       }
     }
   };
@@ -76,7 +75,7 @@ const RenderLinkOrUser = () => {
             <Link to="/profile">Профиль</Link>
           </li>
           <li className={s.item}>
-            <a href="#!">Заказы</a>
+            <Link to="/history-order">Заказы</Link>
           </li>
           <li className={s.item}>
             <Link to="/" onClick={() => userLogout()}>

@@ -1,12 +1,13 @@
-import { Routes, Route, Outlet, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { ProductPage } from "../widgets/ProductPage";
 import { RegistrationModal } from "../features/RegistrationModal";
 import { OrderModal } from "../features/OrderModal";
-import { AuthorizationModal } from "../features/AuthoModal";
+import { AuthorizationModal } from "../features/AuthorizationModal";
 import { useAppSelector } from "../shared/lib/hooks/hooks";
 import { Main } from "../pages/Main";
 import { Profile } from "../pages/Profile";
 import { NotFoundPage } from "../pages/NotFoundPage/";
+import { HistoryOrders } from "../pages/HistoryOrders/";
 
 export const AppRouter = () => {
   const isAuth = useAppSelector((state) => state.user.isAuthorization);
@@ -28,6 +29,7 @@ export const AppRouter = () => {
           }
         />
       </Route>
+      <Route path="/history-order" element={<HistoryOrders />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

@@ -5,7 +5,7 @@ const NotFoundPage = () => {
     <div className={s.NotFoundPage}>
       <h1 className={s.title}>404</h1>
       <p className={s.text}>страница не найдена</p>
-      <Link className={s.link} to="/">
+      <Link className={s.go_back} to="/">
         🏃‍♂️ Вернуться обратно
       </Link>
     </div>

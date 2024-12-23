@@ -1,53 +1,59 @@
 import s from "../../shared/style/modal.module.scss";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
-import { data } from "./data";
 import { Link, useNavigate } from "react-router-dom";
 import { DonutIcon } from "../../shared/ui/SVGIcons/DonutIcon";
 import PhoneInput from "react-phone-input-2";
-import { changeReceiving } from "./changeReceiving";
-import { useAppSelector } from "../../shared/lib/hooks/hooks";
-import { useFocusAndEscape } from "../../shared/hooks/useFocusAndEscape";
+import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
+import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
 import { fetchRequest } from "../../utils/fetchRequest";
-import { User } from "../../entities/user/userSlice.js";
+import { updateUser, User } from "../../entities/user/userSlice";
+import { IResponseServer } from "../../shared/domain/responseServer";
+import { clearCart } from "../Cart/cartSlice";
+import { deliveryMethods } from "./DeliveryMethods";
 
 const OrderModal = () => {
   const { id, firstName, phone, address, floor, apartment } = useAppSelector(
     (state) => state.user
   );
-  
-  const [formValues, setFormValues] = useState({
-    firstName: firstName ? firstName : "",
-    phone: phone ? phone : "",
-    receiving: "pickup",
-    address: address ? address : "",
-    floor: floor ? floor : "",
-    apartment: apartment ? apartment : "",
-  });
-
-  const inputRef = useRef<HTMLInputElement>(null);
+  const user = useAppSelector((state) => state.user);
+  const cart = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+  const [deliveryMethod, setDeliveryMethod] = useState("pickup");
+  const [responseServer, serResponseServer] = useState<IResponseServer | null>(
+    null
+  );
+  const [isDisabled, setIsDisabled] = useState(false);
   const navigate = useNavigate();
-
-  useFocusAndEscape(inputRef);
-
+  useEscapeHandler()
   const handleChangeInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
+    dispatch(updateUser({ key: name as keyof User, value }));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (cart.length === 0) {
+      return;
+    }
+    setIsDisabled(true);
     try {
-      interface UpdateUser extends Omit<User, "receiving"> {
-        receiving?: string;
-      }
-      const response = await fetchRequest<Partial<UpdateUser>>(
-        { id, ...formValues },
+      const order = cart.map((item) => {
+        const { id, count } = item;
+        return { id, count };
+      });
+      const response = await fetchRequest(
+        { user: { ...user, deliveryMethod }, order },
         "/order",
-        "PUT"
+        "POST"
       );
+      serResponseServer(response);
+      dispatch(clearCart());
     } catch (error) {
-      
+      const serverError = error as IResponseServer;
+      serResponseServer(serverError);
+    } finally {
+      setIsDisabled(false);
     }
   };
 
@@ -57,96 +63,113 @@ const OrderModal = () => {
         <div className={s.column}>
           <DonutIcon />
         </div>
-        <div className={s.column}>
-          <h3 className={s.title}>Доставка</h3>
-          <form className={s.form} onSubmit={handleSubmit}>
-            <input
-              className={s.input}
-              type="text"
-              placeholder="Ваше имя"
-              value={formValues.firstName}
-              name="name"
-              minLength={2}
-              onChange={(e) => handleChangeInput(e)}
-              aria-label="Ваше имя"
-              ref={inputRef}
-              required
-            />
-            <PhoneInput
-              country={"ru"}
-              value={formValues.phone}
-              onChange={(e) => setFormValues((prev) => ({ ...prev, phone: e }))}
-              onlyCountries={["ru"]}
-              masks={{ ru: "+.(...) ...-..-.." }}
-              inputClass={s.input}
-              placeholder="Телефон"
-              disableCountryCode={true}
-              inputProps={{
-                required: true,
-                minLength: 11,
-              }}
-            />
-            <div className={s.wrapper_radio}>
-              {data.map((item, index) => (
-                <label
-                  key={item.id}
-                  className={s.label}
-                  onClick={() => changeReceiving(item.nameEn, setFormValues)}
+        {responseServer?.status === "success" ? (
+          <div className={s.column}>
+            <div className={s.text}>№ заказа: {responseServer.orderId}</div>
+            <div className={s.text}>Сумма заказа: {responseServer.total} ₽</div>
+          </div>
+        ) : (
+          <div className={s.column}>
+            <h3 className={s.title}>Доставка</h3>
+            <form className={s.form} onSubmit={handleSubmit}>
+              <input
+                className={s.input}
+                type="text"
+                placeholder="Ваше имя"
+                value={firstName}
+                name="firstName"
+                minLength={2}
+                onChange={(e) => handleChangeInput(e)}
+                aria-label="Ваше имя"
+                autoFocus
+                required
+              />
+              <PhoneInput
+                country={"ru"}
+                value={phone}
+                onlyCountries={["ru"]}
+                masks={{ ru: "+.(...) ...-..-.." }}
+                inputClass={s.input}
+                placeholder="Телефон"
+                disableCountryCode={true}
+                onChange={(e: string) => {
+                  dispatch(updateUser({ key: phone as keyof User, value: e })); // Передача корректного объекта
+                }}
+                inputProps={{
+                  required: true,
+                  minLength: 11,
+                }}
+              />
+              <div className={s.wrapper_radio}>
+                {deliveryMethods.map((item, index) => (
+                  <label
+                    key={item.id}
+                    className={s.label}
+                    onClick={() => setDeliveryMethod(item.nameEn)}
+                  >
+                    <input
+                      className={s.receiving}
+                      name="receiving"
+                      type="radio"
+                      value={item.nameEn}
+                      defaultChecked={index === 0}
+                      required
+                    />
+                    <span className={s.radio}></span>
+                    <span className={s.span}>{item.nameRu}</span>
+                  </label>
+                ))}
+              </div>
+              {deliveryMethod !== "pickup" && (
+                <>
+                  <input
+                    className={s.input}
+                    type="text"
+                    placeholder="Улица, дом, квартира"
+                    value={address}
+                    name="address"
+                    onChange={(e) => handleChangeInput(e)}
+                    aria-label="Улица, дом, квартира"
+                    required
+                  />
+                  <div className={s.wrapper}>
+                    <input
+                      className={s.input}
+                      type="text"
+                      placeholder="Этаж"
+                      value={floor}
+                      name="floor"
+                      onChange={(e) => handleChangeInput(e)}
+                      aria-label="Этаж"
+                      required
+                    />
+                    <input
+                      className={s.input}
+                      type="text"
+                      placeholder="Квартира"
+                      value={apartment}
+                      name="apartment"
+                      onChange={(e) => handleChangeInput(e)}
+                      aria-label="Квартира"
+                      required
+                    />
+                  </div>
+                </>
+              )}
+              {cart.length === 0 ? (
+                <div className={s.info}>В корзине пока пусто :(</div>
+              ) : (
+                <button
+                  className={s.button}
+                  type="submit"
+                  disabled={isDisabled}
                 >
-                  <input
-                    className={s.receiving}
-                    name="receiving"
-                    type="radio"
-                    value={item.nameEn}
-                    defaultChecked={index === 0}
-                    required
-                  />
-                  <span className={s.radio}></span>
-                  <span className={s.text}>{item.nameRu}</span>
-                </label>
-              ))}
-            </div>
-            {formValues.receiving !== "pickup" && (
-              <>
-                <input
-                  className={s.input}
-                  type="text"
-                  placeholder="Улица, дом, квартира"
-                  value={formValues.address}
-                  name="address"
-                  onChange={(e) => handleChangeInput(e)}
-                  aria-label="Улица, дом, квартира"
-                  required
-                />
-                <div className={s.wrapper}>
-                  <input
-                    className={s.input}
-                    type="text"
-                    placeholder="Этаж"
-                    value={formValues.floor}
-                    name="floor"
-                    onChange={(e) => handleChangeInput(e)}
-                    aria-label="Этаж"
-                    required
-                  />
-                  <input
-                    className={s.input}
-                    type="text"
-                    placeholder="Квартира"
-                    value={formValues.apartment}
-                    name="apartment"
-                    onChange={(e) => handleChangeInput(e)}
-                    aria-label="Квартира"
-                    required
-                  />
-                </div>
-              </>
-            )}
-            <button className={s.button} type="submit">
-              Оформить заказ
-            </button>
-          </form>
-        </div>
+                  Оформить заказ
+                </button>
+              )}
+            </form>
+          </div>
+        )}
         <Link to="/" className={s.close}>
           <CloseIcon />
         </Link>

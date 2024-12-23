@@ -106,7 +106,7 @@ const Profile = () => {
       <button type="submit" className={s.button} disabled={isDisabled}>
         Изменить профиль
       </button>
-      <Link className={s.link} to="/">
+      <Link className={s.go_back} to="/">
         🏃‍♂️ Вернуться обратно
       </Link>
     </form>

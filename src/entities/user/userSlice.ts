@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchUserVerificationThunk } from "./fetchUserVerificationThunk";
+import { fetchUserVerificationThunk } from "./thunks/fetchUserVerificationThunk";
 
 export interface User {
 	id: number | null;
@@ -55,9 +55,7 @@ export const userSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchUserVerificationThunk.fulfilled, (state, action) => {
-				if (action.payload.user === undefined) {
-					return
-				}
+				if (action.payload.user === undefined) return
 				const { user } = action.payload;
 				return {
 					...user, isAuthorization: true

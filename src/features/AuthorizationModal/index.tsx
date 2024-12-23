@@ -1,12 +1,12 @@
 import s from "../../shared/style/modal.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
 import classNames from "classnames";
 import { useAppDispatch } from "../../shared/lib/hooks/hooks";
 import { registerUser } from "../../entities/user/userSlice";
-import { useFocusAndEscape } from "../../shared/hooks/useFocusAndEscape";
+import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
 import { fetchRequest } from "../../utils/fetchRequest";
 import { Data } from "./interface";
 import { IResponseServer } from "../../shared/domain/responseServer";
@@ -24,10 +24,8 @@ const AuthorizationModal = () => {
   );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => serResponseServer(null), [formValues]);
-  useFocusAndEscape(inputRef);
-
+  useEscapeHandler();
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
@@ -51,6 +49,7 @@ const AuthorizationModal = () => {
       setIsDisabled(false);
     }
   };
+  
   return (
     <div className={s.overlay} onClick={() => navigate("/")}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
@@ -72,7 +71,7 @@ const AuthorizationModal = () => {
               onChange={(e) => handleChangeInput(e)}
               aria-label="Логин"
               minLength={3}
-              ref={inputRef}
+              autoFocus
               pattern="[a-zA-Z]*"
               onInvalid={(e: React.ChangeEvent<HTMLInputElement>) =>
                 handleInvalidInput(

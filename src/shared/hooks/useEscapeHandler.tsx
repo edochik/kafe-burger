@@ -1,12 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const useFocusAndEscape = (ref: React.RefObject<HTMLElement>) => {
+const useEscapeHandler = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    if (ref.current) {
-      ref.current.focus();
-    }
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         navigate("/");
@@ -16,7 +13,7 @@ const useFocusAndEscape = (ref: React.RefObject<HTMLElement>) => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [navigate, ref]);
+  }, [navigate]);
 };
 
-export { useFocusAndEscape };
+export { useEscapeHandler };

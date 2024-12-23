@@ -39,6 +39,9 @@ export const cartSlice = createSlice({
 				}
 			})
 		},
+		clearCart: (state) => {
+			state.length = 0; 
+		},
 		decrementProduct: (state, action: PayloadAction<number>) => {
 			const product = state.find(product => product.id === action.payload);
 			if (product) {
@@ -53,5 +56,5 @@ export const cartSlice = createSlice({
 	// extraReducer
 })
 
-export const { addProductCart, incrementProduct, decrementProduct } = cartSlice.actions
+export const { addProductCart, incrementProduct, decrementProduct, clearCart } = cartSlice.actions
 

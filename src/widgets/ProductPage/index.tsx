@@ -2,12 +2,12 @@ import s from "./ProductPage.module.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { ToggleProductButton } from "../../shared/ui/ToggleProductButton";
-import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import {
   addProductCart,
   incrementProduct,
 } from "../../features/Cart/cartSlice";
+import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
 
 const ProductPage = () => {
   const navigate = useNavigate();
@@ -44,23 +44,10 @@ const ProductPage = () => {
       dispatch(incrementProduct(id));
     }
   };
+  useEscapeHandler();
 
-  useEffect(() => {
-    const handleCloseProductPage = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        navigate("/");
-      }
-    };
-    document.addEventListener("keydown", handleCloseProductPage);
-    return () => {
-      document.removeEventListener("keydown", handleCloseProductPage);
-    };
-  }, [navigate]);
-  const handleCloseProductPage = () => {
-    navigate("/");
-  };
   return (
-    <div className={s.overlay} onClick={handleCloseProductPage}>
+    <div className={s.overlay} onClick={() => navigate("/")}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
         <h2 className={s.title}>{nameRu}</h2>
         <div className={s.box}>

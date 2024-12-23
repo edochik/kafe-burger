@@ -42,11 +42,11 @@
 		align-items: center;
 		.text {
 			margin: 0;
-			line-height: line-height-large;
+			line-height: var.$line-height-large;
 		}
 		.total {
 			margin: 0;
-			line-height: line-height-large;
+			line-height: var.$line-height-large;
 		}
 	}
 	.button {

@@ -1,13 +1,13 @@
 import s from "../../shared/style/modal.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
 import PhoneInput from "react-phone-input-2";
 import classNames from "classnames";
-import { useFocusAndEscape } from "../../shared/hooks/useFocusAndEscape";
+import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
 import { fetchRequest } from "../../utils/fetchRequest";
-import { User } from "../../entities/user/userSlice";
+// import { User } from "../../entities/user/userSlice";
 import { IResponseServer } from "../../shared/domain/responseServer";
 import { ResponseServer } from "../../shared/ui/ResponseServer/";
 import { handleInvalidInput } from "../../utils/handleInvalidInput";
@@ -24,20 +24,18 @@ const RegistrationModal = () => {
     login: "",
     password: "",
   });
-
-  const [confirmPassword, setConfirmPassword] = useState(""); // второй ввод пароля
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [responseServer, serResponseServer] = useState<IResponseServer | null>(
     null
   );
-  const [isUserRegister, setIsUserRegister] = useState(false); // пользователь зарегистрировался
-  const [isDisable, setIsDisable] = useState(false); // при отправке кнопка становится disabled
+  const [isUserRegister, setIsUserRegister] = useState(false);
+  const [isDisable, setIsDisable] = useState(false);
+  const navigate = useNavigate();
+  useEscapeHandler();
   useEffect(() => {
     serResponseServer(null);
     setIsDisable(false);
   }, [formValues, confirmPassword]);
-  const navigate = useNavigate();
-  const inputRef = useRef<HTMLInputElement>(null);
-  useFocusAndEscape(inputRef);
   const handleChangeFormValues = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -65,7 +63,7 @@ const RegistrationModal = () => {
     }
     setIsDisable(true);
     try {
-      await fetchRequest<Partial<User>>(formValues, "/register", "POST");
+      await fetchRequest(formValues, "/register", "POST");
       setConfirmPassword("");
       setFormValues((prev) => {
         const result = Object.create(null);
@@ -102,7 +100,7 @@ const RegistrationModal = () => {
                   name="firstName"
                   minLength={2}
                   onChange={(e) => handleChangeFormValues(e)}
-                  ref={inputRef}
+                  autoFocus
                   pattern="[а-яёА-ЯЁ]*"
                   aria-label="Имя"
                   required

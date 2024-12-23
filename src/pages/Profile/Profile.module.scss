@@ -67,17 +67,9 @@
     padding-right: 10px;
     padding-left: 10px;
   }
-  .link {
-    text-decoration: none;
-    color: var.$color-orange;
-    font-size: var.$font-size-xxlarge;
+  .go_back {
+    @include mix.go-back();
   }
-  // .error {
-  //   @include mix.color-message(tomato, yellow);
-  // }
-  // .success {
-  //   @include mix.color-message(white, green);
-  // }
   .input_error {
     @include mix.input-error();
   }

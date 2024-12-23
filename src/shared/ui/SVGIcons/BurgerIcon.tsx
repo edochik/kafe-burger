@@ -1,6 +1,7 @@
 interface BurgerIconProps {
   size: string;
 }
+
 const BurgerIcon = (props: BurgerIconProps) => {
   const { size } = props;
   return (

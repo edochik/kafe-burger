@@ -2,10 +2,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listenerMiddleware } from './listenerMiddleware';
 import { cartSlice } from '../features/Cart/cartSlice';
 import { selectSlice } from '../features/RadioButtons/selectSlice';
-import { fetchInitialProductThunk } from '../features/ProductList/fetchInitialProductThunk';
 import { productSlice } from '../features/ProductList/productSlice';
 import { userSlice } from '../entities/user/userSlice';
-import { fetchUserVerificationThunk } from '../entities/user/fetchUserVerificationThunk';
+import { fetchUserVerificationThunk } from '../entities/user/thunks/fetchUserVerificationThunk';
+import { fetchInitialProductsThunk } from '../features/ProductList/fetchInitialProductsThunk';
+import { historyOrdersSlice } from '../features/RenderLinkOrUser/historyOrdersSlice';
 
 export const store = configureStore({
 	reducer: {
@@ -13,11 +14,13 @@ export const store = configureStore({
 		selectProduct: selectSlice.reducer,
 		products: productSlice.reducer,
 		user: userSlice.reducer,
+		historyOrder: historyOrdersSlice.reducer
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().prepend(listenerMiddleware.middleware),
-})
-store.dispatch(fetchInitialProductThunk());
+});
+
+store.dispatch(fetchInitialProductsThunk());
 store.dispatch(fetchUserVerificationThunk());
 
 export type RootState = ReturnType<typeof store.getState>

@@ -29,16 +29,25 @@
 				text-align: center;
 			}
 			.button {
-				@include mix.button-style(var.$button-bg-default-2, var.$color-white, var.$button-bg-hover-1, var.$button-bg-selected);
+				@include mix.button-style(
+					var.$button-bg-default-2,
+					var.$color-white,
+					var.$button-bg-hover-1,
+					var.$button-bg-selected
+				);
 			}
 		}
 		.column {
+			.text {
+				margin-bottom: 20px;
+				font-size: 26px;
+				font-weight: 700;
+			}
 			min-width: 342px;
 			.title {
 				margin: 0 0 16px 0;
 				font-weight: var.$font-weight-semibold;
 				font-size: var.$font-size-large;
-				line-height: var.$line-height-small;
 			}
 			.form {
 				display: flex;
@@ -52,7 +61,7 @@
 					@include mix.input-error();
 				}
 				.error {
-						@include mix.color-message(tomato, yellow);
+					@include mix.color-message(tomato, yellow);
 				}
 				.wrapper_radio {
 					margin-bottom: 16px;
@@ -89,9 +98,10 @@
 						.receiving:checked + .radio::before {
 							opacity: 1;
 						}
-						.text {
-							margin-left: 8px;
-							font-size: var.$font-size-small;
+						.span {
+							margin-left: 10px;
+							font-size: var.$font-size-medium;
+							font-weight: 700;
 						}
 					}
 				}
@@ -105,7 +115,16 @@
 					margin: 0 0 8px 0;
 				}
 				.button {
-					@include mix.button-style(var.$button-bg-default-2, var.$color-white, var.$button-bg-hover-1, var.$button-bg-selected);
+					@include mix.button-style(
+						var.$button-bg-default-2,
+						var.$color-white,
+						var.$button-bg-hover-1,
+						var.$button-bg-selected
+					);
+				}
+				.info {
+					font-size: 30px;
+					font-weight: 700;
 				}
 			}
 		}

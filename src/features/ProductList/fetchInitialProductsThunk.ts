@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchProducts } from "../../shared/api/fetchProducts";
 
-export const fetchInitialProductThunk = createAsyncThunk(
+export const fetchInitialProductsThunk = createAsyncThunk(
 	"fetchInitialProductThunk",
 	async () => {
 		try {

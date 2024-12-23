@@ -54,9 +54,11 @@ export const userSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchUserVerificationThunk.fulfilled, (state, action) => {
-				if (action.payload.user === undefined) return
-				const { user } = action.payload;
+			.addCase(fetchUserVerificationThunk.fulfilled, (state, action: PayloadAction<User | null>) => {
+				if (action.payload === null) {
+					return
+				}
+				const user = action.payload;
 				return {
 					...user, isAuthorization: true
 				};

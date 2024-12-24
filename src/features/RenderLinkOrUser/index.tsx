@@ -3,7 +3,8 @@ import s from "./RenderLinkOrUser.module.scss";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEffect, useRef, useState } from "react";
-import { logoutUser } from "../../entities/user/userSlice";
+// import { logoutUser } from "../../entities/user/userSlice";
+import { fetchLogoutThunk } from "../../entities/user/thunks/fetchLogoutThunk";
 
 const RenderLinkOrUser = () => {
   const isAuthorization = useAppSelector(
@@ -41,26 +42,6 @@ const RenderLinkOrUser = () => {
     );
   }
 
-  const userLogout = async () => {
-    try {
-      const response = await fetch(
-        "https://chip-patch-papaya.glitch.me/api/logout",
-        {
-          method: "POST",
-          credentials: "include",
-        }
-      );
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.errorDetail);
-      }
-      dispatch(logoutUser());
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      }
-    }
-  };
   return (
     <div className={s.RenderLinkOrUser}>
       <button
@@ -81,7 +62,7 @@ const RenderLinkOrUser = () => {
             <Link to="/history-order">Заказы</Link>
           </li>
           <li className={s.item}>
-            <Link to="/" onClick={() => userLogout()}>
+            <Link to="/" onClick={() => dispatch(fetchLogoutThunk())}>
               Выйти
             </Link>
           </li>

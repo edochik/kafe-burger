@@ -5,13 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
 import classNames from "classnames";
 import { useAppDispatch } from "../../shared/lib/hooks/hooks";
-import { registerUser } from "../../entities/user/userSlice";
 import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
-import { fetchRequest } from "../../utils/fetchRequest";
-import { Data } from "./interface";
 import { IResponseServer } from "../../shared/domain/responseServer";
 import { ResponseServer } from "../../shared/ui/ResponseServer";
 import { handleInvalidInput } from "../../utils/handleInvalidInput";
+import { fetchAuthorizationThunk } from "../../entities/user/thunks/fetchAuthorizationThunk";
 
 const AuthorizationModal = () => {
   const [formValues, setFormValues] = useState({
@@ -22,6 +20,7 @@ const AuthorizationModal = () => {
   const [responseServer, serResponseServer] = useState<IResponseServer | null>(
     null
   );
+  console.log(isDisabled);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   useEffect(() => serResponseServer(null), [formValues]);
@@ -34,22 +33,18 @@ const AuthorizationModal = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsDisabled(true);
+    // console.log("setIsDisabled(true)");
     try {
-      const response: Data = await fetchRequest<Partial<Data>>(
-        formValues,
-        "/auth",
-        "POST"
-      );
-      const user = response.user;
-      dispatch(registerUser({ ...user }));
+      dispatch(fetchAuthorizationThunk(formValues));
     } catch (error) {
       const serverError = error as IResponseServer;
       serResponseServer(serverError);
     } finally {
+      // console.log('setIsDisabled(false)');
       setIsDisabled(false);
     }
   };
-  
+
   return (
     <div className={s.overlay} onClick={() => navigate("/")}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>

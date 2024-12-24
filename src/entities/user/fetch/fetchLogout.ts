@@ -1,33 +1,13 @@
-import { API } from "../../../shared/api/api.js";
+import { API } from "../../../shared/api/api";
+import { fetchDataUniversal } from "../../../shared/api/helper";
 
 const API_LOGOUT = `${API}logout`
 
 
 export async function fetchLogout() {
-	const data = await fetch(API_LOGOUT, {
+	const options: RequestInit = {
 		method: "POST",
-		credentials: "include",
-	});
-
+		credentials: "include"
+	}
+	const response = await fetchDataUniversal(API_LOGOUT, options);
 }
-
-// const userLogout = async () => {
-// 		try {
-// 			const response = await fetch(
-// 				"https://chip-patch-papaya.glitch.me/api/logout",
-// 				{
-// 					method: "POST",
-// 					credentials: "include",
-// 				}
-// 			);
-// 			if (!response.ok) {
-// 				const errorData = await response.json();
-// 				throw new Error(errorData.errorDetail);
-// 			}
-// 			dispatch(logoutUser());
-// 		} catch (error) {
-// 			if (error instanceof Error) {
-// 				console.log(error.message);
-// 			}
-// 		}
-// 	};

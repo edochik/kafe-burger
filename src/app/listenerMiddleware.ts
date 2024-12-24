@@ -4,7 +4,7 @@ import { selectCategory } from "../features/RadioButtons/selectSlice";
 import { addProductCart, clearCart, decrementProduct, incrementProduct } from "../features/Cart/cartSlice";
 import { fetchUserVerificationThunk } from "../entities/user/thunks/fetchUserVerificationThunk";
 import { fetchHistoryOrdersThunk } from "../features/RenderLinkOrUser/fetchHistoryOrdersThunk";
-import { registerUser } from "../entities/user/userSlice";
+import { fetchAuthorizationThunk } from "../entities/user/thunks/fetchAuthorizationThunk";
 
 export const listenerMiddleware = createListenerMiddleware();
 export const startAppListening = listenerMiddleware.startListening.withTypes<
@@ -35,7 +35,7 @@ startAppListening({
 });
 
 startAppListening({
-	matcher: isAnyOf(fetchUserVerificationThunk.fulfilled, registerUser),
+	matcher: isAnyOf(fetchUserVerificationThunk.fulfilled, fetchAuthorizationThunk.fulfilled),
 	effect: async (action, listenerApi) => {
 
 		const { profile: user } = listenerApi.getState();

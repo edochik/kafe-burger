@@ -3,7 +3,7 @@ import { listenerMiddleware } from './listenerMiddleware';
 import { cartSlice } from '../features/Cart/cartSlice';
 import { selectSlice } from '../features/RadioButtons/selectSlice';
 import { productSlice } from '../features/ProductList/productSlice';
-import { userSlice } from '../entities/user/userSlice';
+import { profileSlice } from '../entities/user/userSlice';
 import { fetchUserVerificationThunk } from '../entities/user/thunks/fetchUserVerificationThunk';
 import { fetchInitialProductsThunk } from '../features/ProductList/fetchInitialProductsThunk';
 import { historyOrdersSlice } from '../features/RenderLinkOrUser/historyOrdersSlice';
@@ -13,7 +13,7 @@ export const store = configureStore({
 		cart: cartSlice.reducer,
 		selectProduct: selectSlice.reducer,
 		products: productSlice.reducer,
-		profile: userSlice.reducer,
+		profile: profileSlice.reducer,
 		historyOrder: historyOrdersSlice.reducer
 	},
 	middleware: (getDefaultMiddleware) =>

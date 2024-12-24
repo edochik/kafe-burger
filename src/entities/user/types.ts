@@ -40,3 +40,8 @@ export interface InitialStateUser {
 		// orderDetails: OrderDetails[]
 	}
 }
+
+export interface AuthorizationRequest {
+	login: string;
+	password: string;
+}

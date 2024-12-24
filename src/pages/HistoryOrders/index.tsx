@@ -47,7 +47,6 @@ const HistoryOrders = () => {
           </thead>
           <tbody className={s.tbody}>
             {orders.map((order) => {
-              console.log(order);
               const { id, deliveryMethod, address, apartment, floor, total } =
                 order;
               return (

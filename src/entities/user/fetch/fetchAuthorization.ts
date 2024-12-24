@@ -1,8 +1,8 @@
 import { API } from "../../../shared/api/api";
 import { fetchDataUniversal } from "../../../shared/api/helper";
-import { AuthorizationRequest, User } from "../types";
+import { AuthorizationRequest, ServerSuccess } from "../types";
 
-const API_AUTHORIZATION = `${API}/auth`;
+const API_AUTHORIZATION = `${API}auth`;
 
 export async function fetchAuthorization(data: AuthorizationRequest) {
 	const options: RequestInit = {
@@ -13,6 +13,6 @@ export async function fetchAuthorization(data: AuthorizationRequest) {
 		body: JSON.stringify({ ...data }),
 		credentials: 'include',
 	}
-	const response: User = await fetchDataUniversal(API_AUTHORIZATION, options);
+	const response: ServerSuccess = await fetchDataUniversal(API_AUTHORIZATION, options);
 	return response;
 }

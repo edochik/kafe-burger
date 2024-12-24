@@ -1,3 +1,5 @@
+import { IResponseServer } from "../../shared/domain/responseServer.js";
+
 export interface OrderDetails {
 	id: number,
 	orderId: number,
@@ -32,7 +34,8 @@ export interface User {
 
 export interface InitialStateUser {
 	loading: "idle" | "pending" | "succeeded" | "failed";
-	error: string | null;
+	error: null | IResponseServer;
+	message: null | IResponseServer;
 	isAuthorization: boolean;
 	data: {
 		user: User,
@@ -44,4 +47,10 @@ export interface InitialStateUser {
 export interface AuthorizationRequest {
 	login: string;
 	password: string;
+}
+
+export interface ServerSuccess {
+	status: 'success',
+	message: string,
+	user: User
 }

@@ -26,7 +26,10 @@ const Profile = () => {
     null
   );
   const [isDisabled, setDisabled] = useState(false);
-  const user = useAppSelector((state) => state.profile);
+  const user = useAppSelector((state) => state.profile.data.user);
+  const isAuthorization = useAppSelector(
+    (state) => state.profile.isAuthorization
+  );
   const dispatch = useAppDispatch();
   useEffect(() => {
     setResponseServer(null);
@@ -41,12 +44,11 @@ const Profile = () => {
     event.preventDefault();
     setDisabled(true);
     try {
-      const { isAuthorization, ...rest } = user;
       interface UpdateUser extends Omit<User, "password"> {
         password?: string;
       }
       const response = await fetchRequest<Partial<UpdateUser>>(
-        { ...rest, password },
+        { ...user, password },
         "/account/update",
         "PUT"
       );

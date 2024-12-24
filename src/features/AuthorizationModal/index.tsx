@@ -4,45 +4,31 @@ import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
 import classNames from "classnames";
-import { useAppDispatch } from "../../shared/lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
-import { IResponseServer } from "../../shared/domain/responseServer";
 import { ResponseServer } from "../../shared/ui/ResponseServer";
 import { handleInvalidInput } from "../../utils/handleInvalidInput";
 import { fetchAuthorizationThunk } from "../../entities/user/thunks/fetchAuthorizationThunk";
+import { resetError } from "../../entities/user/userSlice";
 
 const AuthorizationModal = () => {
   const [formValues, setFormValues] = useState({
     login: "",
     password: "",
   });
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [responseServer, serResponseServer] = useState<IResponseServer | null>(
-    null
-  );
-  console.log(isDisabled);
+  const status = useAppSelector((state) => state.profile.loading);
+  const errorServer = useAppSelector((state) => state.profile.error);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  useEffect(() => serResponseServer(null), [formValues]);
+  useEffect(() => {
+    if (errorServer !== null) {
+      dispatch(resetError());
+    }
+  }, [formValues]); // eslint-disable-line react-hooks/exhaustive-deps
   useEscapeHandler();
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsDisabled(true);
-    // console.log("setIsDisabled(true)");
-    try {
-      dispatch(fetchAuthorizationThunk(formValues));
-    } catch (error) {
-      const serverError = error as IResponseServer;
-      serResponseServer(serverError);
-    } finally {
-      // console.log('setIsDisabled(false)');
-      setIsDisabled(false);
-    }
   };
 
   return (
@@ -53,11 +39,17 @@ const AuthorizationModal = () => {
         </div>
         <div className={s.column}>
           <h3 className={s.title}>Авторизация</h3>
-          <form className={s.form} onSubmit={handleSubmit}>
+          <form
+            className={s.form}
+            onSubmit={(event) => {
+              event.preventDefault();
+              dispatch(fetchAuthorizationThunk(formValues));
+            }}
+          >
             <input
               className={classNames({
                 [s.input]: true,
-                [s.input_error]: responseServer?.field === "login",
+                [s.input_error]: errorServer?.field === "login",
               })}
               type="text"
               placeholder="Логин"
@@ -79,7 +71,7 @@ const AuthorizationModal = () => {
             <input
               className={classNames({
                 [s.input]: true,
-                [s.input_error]: responseServer?.field === "password",
+                [s.input_error]: errorServer?.field === "password",
               })}
               type="password"
               placeholder="Пароль"
@@ -91,10 +83,14 @@ const AuthorizationModal = () => {
               minLength={6}
               required
             />
-            <button type="submit" className={s.button} disabled={isDisabled}>
+            <button
+              type="submit"
+              className={s.button}
+              disabled={status === "pending"}
+            >
               Войти
             </button>
-            {responseServer && <ResponseServer {...responseServer} />}
+            {errorServer && <ResponseServer {...errorServer} />}
             <div className={s.bottom} style={{ marginTop: "auto" }}>
               <h3 className={s.title}>Регистрация</h3>
               <Link to="/registration">

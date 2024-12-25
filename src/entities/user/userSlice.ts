@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchUserVerificationThunk } from "./thunks/fetchUserVerificationThunk";
-import { InitialStateUser, ServerSuccess, User } from "./types";
+import { InitialStateUser, SuccessServer, User } from "./types";
 import { fetchAuthorizationThunk } from "./thunks/fetchAuthorizationThunk";
 import { fetchLogoutThunk } from "./thunks/fetchLogoutThunk";
-import { IResponseServer } from "../../shared/domain/responseServer.js";
+import { fetchUpdateUserThunk } from "./thunks/fetchUpdateUserThunk";
 
 export const initialState: InitialStateUser = {
 	loading: "idle",
-	error: null,
-	message: null,
+	errorServer: null,
+	successServer: null,
 	isAuthorization: false,
 	data: {
 		user: {
@@ -32,7 +32,10 @@ export const profileSlice = createSlice({
 	initialState,
 	reducers: {
 		resetError: (state) => {
-			state.error = null
+			state.errorServer = null
+		},
+		resetMessage: (state) => {
+			state.successServer = null
 		},
 		updateUser: (state, action: PayloadAction<{ key: keyof User; value: string }>) => {
 			const { key, value } = action.payload;
@@ -44,41 +47,35 @@ export const profileSlice = createSlice({
 			.addCase(fetchAuthorizationThunk.pending, (state) => {
 				state.loading = "pending";
 			})
-			.addCase(fetchAuthorizationThunk.fulfilled, (state, action: PayloadAction<ServerSuccess>) => {
-				console.log('succeeded');
+			.addCase(fetchAuthorizationThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
 				state.loading = "succeeded";
 				state.isAuthorization = true;
 				state.data.user = { ...action.payload.user };
 			})
 			.addCase(fetchAuthorizationThunk.rejected, (state, action) => {
-				console.log('failed');
 				state.loading = "failed";
 				state.isAuthorization = false;
-				state.error = action.payload ?? { status: "error", message: "Unknown error" };
+				state.errorServer = action.payload ?? { status: "error", message: "Unknown error" };
 			})
-			
+
 			.addCase(fetchUserVerificationThunk.pending, (state) => {
 				state.loading = "pending";
 			})
-			.addCase(fetchUserVerificationThunk.fulfilled, (state, action: PayloadAction<User | null>) => {
+			.addCase(fetchUserVerificationThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
 				state.loading = "succeeded";
-				if (action.payload === null) {
-					return
-				}
 				state.isAuthorization = true;
-				state.data.user = {
-					...action.payload,
-				};
+				state.data.user = { ...action.payload.user };
 			})
-			.addCase(fetchUserVerificationThunk.rejected, (state) => {
+			.addCase(fetchUserVerificationThunk.rejected, (state, action) => {
 				state.loading = "failed";
 				state.isAuthorization = false;
+				state.errorServer = action.payload ?? { status: "error", message: "Unknown error" };
 			})
 
 			.addCase(fetchLogoutThunk.pending, (state) => {
 				state.loading = "pending";
 			})
-			.addCase(fetchLogoutThunk.fulfilled, (state) => {
+			.addCase(fetchLogoutThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
 				state.loading = "succeeded";
 				state.isAuthorization = false;
 				for (const key in state) {
@@ -91,9 +88,23 @@ export const profileSlice = createSlice({
 			})
 			.addCase(fetchLogoutThunk.rejected, (state) => {
 				state.loading = "failed";
+			})
+
+			.addCase(fetchUpdateUserThunk.pending, (state) => {
+				state.loading = "pending";
+			})
+			.addCase(fetchUpdateUserThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+				console.log(action.payload);
+				state.loading = "succeeded";
+				state.isAuthorization = true;
+				state.successServer = action.payload
+			})
+			.addCase(fetchUpdateUserThunk.rejected, (state, action) => {
+				state.loading = "failed";
 				state.isAuthorization = false;
+				state.errorServer = action.payload ?? { status: "error", message: "Unknown error" };
 			})
 	}
 })
 
-export const { updateUser, resetError } = profileSlice.actions;
+export const { updateUser, resetError, resetMessage } = profileSlice.actions;

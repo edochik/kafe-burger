@@ -5,8 +5,6 @@ import { useAppSelector } from "../../shared/lib/hooks/hooks";
 const ProductList = () => {
   const category = useAppSelector((state) => state.selectProduct);
   const products = useAppSelector((state) => state.products.products);
-  const profile = useAppSelector((state) => state.profile);
-  console.log(profile);
   const filterProduct = products.filter(
     (product) => product.categoryEn === category
   );

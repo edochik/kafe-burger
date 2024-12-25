@@ -34,8 +34,8 @@ export interface User {
 
 export interface InitialStateUser {
 	loading: "idle" | "pending" | "succeeded" | "failed";
-	error: null | IResponseServer;
-	message: null | IResponseServer;
+	errorServer: null | IResponseServer;
+	successServer: null | IResponseServer;
 	isAuthorization: boolean;
 	data: {
 		user: User,
@@ -49,8 +49,13 @@ export interface AuthorizationRequest {
 	password: string;
 }
 
-export interface ServerSuccess {
+export interface SuccessServer {
 	status: 'success',
 	message: string,
 	user: User
 }
+
+export interface UpdateUser extends Omit<User, "password"> {
+	password: string;
+}
+

@@ -17,7 +17,7 @@ const AuthorizationModal = () => {
     password: "",
   });
   const status = useAppSelector((state) => state.profile.loading);
-  const errorServer = useAppSelector((state) => state.profile.error);
+  const errorServer = useAppSelector((state) => state.profile.errorServer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   useEffect(() => {

@@ -1,5 +1,6 @@
 import { API } from "../../../shared/api/api";
 import { fetchDataUniversal } from "../../../shared/api/helper";
+import { SuccessServer } from "../types";
 
 const API_LOGOUT = `${API}logout`
 
@@ -9,5 +10,7 @@ export async function fetchLogout() {
 		method: "POST",
 		credentials: "include"
 	}
-	const response = await fetchDataUniversal(API_LOGOUT, options);
+	const response: SuccessServer = await fetchDataUniversal(API_LOGOUT, options);
+	return response
 }
+

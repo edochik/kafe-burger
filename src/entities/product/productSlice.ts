@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Product } from "../../shared/domain/Product";
-import { fetchInitialProductsThunk } from "./fetchInitialProductsThunk";
+import { fetchInitialProductsThunk } from "./thunk/fetchInitialProductsThunk";
 
 interface InitialState {
 	loading: "idle" | "pending" | "succeeded" | "failed";
@@ -23,7 +23,7 @@ export const productSlice = createSlice({
 			.addCase(fetchInitialProductsThunk.pending, (state) => {
 				state.loading = 'pending';
 			})
-			.addCase(fetchInitialProductsThunk.fulfilled, (state, action) => {
+			.addCase(fetchInitialProductsThunk.fulfilled, (state, action: PayloadAction<Product[]>) => {
 				state.loading = 'succeeded';
 				state.products = action.payload
 			})

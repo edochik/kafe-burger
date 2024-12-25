@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import s from "./Profile.module.scss";
-import { updateUser } from "../../entities/user/userSlice";
+import {
+  resetError,
+  resetMessage,
+  updateUser,
+} from "../../entities/user/userSlice";
 import { useEffect, useState } from "react";
-import { fetchRequest } from "../../utils/fetchRequest";
 import classNames from "classnames";
 import { ResponseServer } from "../../shared/ui/ResponseServer";
-import { IResponseServer } from "../../shared/domain/responseServer";
 import { User } from "../../entities/user/types.js";
+import { fetchUpdateUserThunk } from "../../entities/user/thunks/fetchUpdateUserThunk";
 
 const translateField: Partial<User> = {
   firstName: "Имя",
@@ -22,46 +25,35 @@ const translateField: Partial<User> = {
 
 const Profile = () => {
   const [password, setPassword] = useState("");
-  const [responseServer, setResponseServer] = useState<IResponseServer | null>(
-    null
-  );
-  const [isDisabled, setDisabled] = useState(false);
   const user = useAppSelector((state) => state.profile.data.user);
-  const isAuthorization = useAppSelector(
-    (state) => state.profile.isAuthorization
-  );
+  const {
+    loading,
+    errorServer: error,
+    successServer: message,
+  } = useAppSelector((state) => state.profile);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    setResponseServer(null);
-  }, [password, user]);
+    if (error !== null) {
+      dispatch(resetError());
+    }
+    if (message !== null) {
+      dispatch(resetMessage());
+    }
+  }, [user, password]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     dispatch(updateUser({ key: name as keyof User, value }));
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setDisabled(true);
-    try {
-      interface UpdateUser extends Omit<User, "password"> {
-        password?: string;
-      }
-      const response = await fetchRequest<Partial<UpdateUser>>(
-        { ...user, password },
-        "/account/update",
-        "PUT"
-      );
-      setResponseServer(response);
-    } catch (error) {
-      const serverError = error as IResponseServer;
-      setResponseServer(serverError);
-    } finally {
-      setDisabled(false);
-    }
-  };
   return (
-    <form className={s.Profile} onSubmit={handleSubmit}>
+    <form
+      className={s.Profile}
+      onSubmit={(event) => {
+        event.preventDefault();
+        dispatch(fetchUpdateUserThunk({ ...user, password }));
+      }}
+    >
       <ul className={s.list}>
         {Object.entries(user).map(([key, value]) => {
           if (key in translateField) {
@@ -89,13 +81,14 @@ const Profile = () => {
           return null;
         })}
       </ul>
-      {responseServer && <ResponseServer {...responseServer} />}
+      {error && <ResponseServer {...error} />}
+      {message && <ResponseServer {...message} />}
       <label className={s.label}>
         <span className={s.span}>Подтвердите:&nbsp;</span>
         <input
           className={classNames({
             [s.input]: true,
-            [s.input_error]: responseServer?.field === "password",
+            [s.input_error]: error?.field === "password",
           })}
           type="password"
           name="password"
@@ -106,7 +99,11 @@ const Profile = () => {
           required
         />
       </label>
-      <button type="submit" className={s.button} disabled={isDisabled}>
+      <button
+        type="submit"
+        className={s.button}
+        disabled={loading === "pending"}
+      >
         Изменить профиль
       </button>
       <Link className={s.go_back} to="/">

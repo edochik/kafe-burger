@@ -2,10 +2,10 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listenerMiddleware } from './listenerMiddleware';
 import { cartSlice } from '../features/Cart/cartSlice';
 import { selectSlice } from '../features/RadioButtons/selectSlice';
-import { productSlice } from '../features/ProductList/productSlice';
+import { productSlice } from '../entities/product/productSlice';
 import { profileSlice } from '../entities/user/userSlice';
 import { fetchUserVerificationThunk } from '../entities/user/thunks/fetchUserVerificationThunk';
-import { fetchInitialProductsThunk } from '../features/ProductList/fetchInitialProductsThunk';
+import { fetchInitialProductsThunk } from '../entities/product/thunk/fetchInitialProductsThunk';
 import { historyOrdersSlice } from '../features/RenderLinkOrUser/historyOrdersSlice';
 
 export const store = configureStore({

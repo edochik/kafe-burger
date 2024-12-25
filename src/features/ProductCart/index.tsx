@@ -1,8 +1,8 @@
 import { ToggleProductButton } from "../../shared/ui/ToggleProductButton/";
-import { ProductCartProps } from "../Cart/cartSlice";
+import { ICart } from "../Cart/cartSlice";
 import s from "./ProductCart.module.scss";
 
-const ProductCart = (props: ProductCartProps) => {
+const ProductCart = (props: ICart) => {
   const { id, nameRu, price, weight, imageUrl, count } = props;
 
   return (

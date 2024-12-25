@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-export interface ProductCartProps {
+export interface ICart {
 	id: number;
 	nameRu: string;
 	price: number;
@@ -14,20 +14,20 @@ const extractCartLocalStorage = () => {
 		if (data === null) {
 			return []
 		}
-		const cart = JSON.parse(data);
+		const cart: ICart[] = JSON.parse(data);
 		return cart
 	} catch (error) {
 		return []
 	}
 }
 
-const initialState: ProductCartProps[] = extractCartLocalStorage()
+const initialState: ICart[] = extractCartLocalStorage()
 
 export const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		addProductCart: (state, action: PayloadAction<ProductCartProps>) => {
+		addProductCart: (state, action: PayloadAction<ICart>) => {
 			if (!state.some(product => product.id === action.payload.id)) {
 				state.push(action.payload)
 			}
@@ -40,7 +40,7 @@ export const cartSlice = createSlice({
 			})
 		},
 		clearCart: (state) => {
-			state.length = 0; 
+			state.length = 0;
 		},
 		decrementProduct: (state, action: PayloadAction<number>) => {
 			const product = state.find(product => product.id === action.payload);

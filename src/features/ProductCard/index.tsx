@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import s from "./ProductCard.module.scss";
-import { addProductCart, incrementProduct } from "../Cart/cartSlice";
+import {
+  addProductCart,
+  incrementProduct,
+} from "../../entities/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { Product } from "../../shared/domain/Product.js";
 
@@ -9,7 +12,7 @@ export interface ProductCardProps extends Product {}
 const ProductCard = (props: ProductCardProps) => {
   const { id, nameRu, price, weight, imageUrl } = props;
   const dispatch = useAppDispatch();
-  const cart = useAppSelector((state) => state.cart);
+  const cart = useAppSelector((state) => state.cart.cart);
 
   const onClickAppProduct = (id: number) => {
     if (!cart.some((product) => product.id === id)) {
@@ -22,7 +25,7 @@ const ProductCard = (props: ProductCardProps) => {
   };
 
   return (
-    <li className={s.productcard}>
+    <li className={s.ProductCard}>
       <Link to={`/product/${id}`}>
         <img className={s.image} src={imageUrl} alt={nameRu} />
       </Link>

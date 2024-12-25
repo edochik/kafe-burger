@@ -1,7 +1,7 @@
 import {
   decrementProduct,
   incrementProduct,
-} from "../../../features/Cart/cartSlice";
+} from "../../../entities/cart/cartSlice";
 import { useAppDispatch } from "../../lib/hooks/hooks";
 import s from "./ToggleProductButton.module.scss";
 interface ToggleProductButtonProps {
@@ -13,7 +13,7 @@ const ToggleProductButton = (props: ToggleProductButtonProps) => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className={s.toggleproductbutton}>
+    <div className={s.ToggleProductButton}>
       <button
         className={s.minus}
         onClick={() => dispatch(decrementProduct(id))}

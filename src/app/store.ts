@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { listenerMiddleware } from './listenerMiddleware';
-import { cartSlice } from '../features/Cart/cartSlice';
+import { cartSlice } from '../entities/cart/cartSlice';
 import { selectSlice } from '../features/RadioButtons/selectSlice';
 import { productSlice } from '../entities/product/productSlice';
 import { profileSlice } from '../entities/user/userSlice';

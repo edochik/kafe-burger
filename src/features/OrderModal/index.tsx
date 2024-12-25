@@ -6,27 +6,22 @@ import { DonutIcon } from "../../shared/ui/SVGIcons/DonutIcon";
 import PhoneInput from "react-phone-input-2";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
-import { fetchRequest } from "../../utils/fetchRequest";
 import { updateUser } from "../../entities/user/userSlice";
-import { IResponseServer } from "../../shared/domain/responseServer";
-import { clearCart } from "../Cart/cartSlice";
 import { deliveryMethods } from "./DeliveryMethods";
 import { User } from "../../entities/user/types.js";
+import { fetchOrderThunk } from "../../entities/cart/thunk/fetchOrderThunk";
 
 const OrderModal = () => {
-  const { id, firstName, phone, address, floor, apartment } = useAppSelector(
-    (state) => state.profile.data.user
+  const user = useAppSelector((state) => state.profile.data.user);
+  const { cart, errorServer, successServer, loading } = useAppSelector(
+    (state) => state.cart
   );
-  const user = useAppSelector((state) => state.profile);
-  const cart = useAppSelector((state) => state.cart);
+  const { id, firstName, phone, address, floor, apartment } = user;
   const dispatch = useAppDispatch();
-  const [deliveryMethod, setDeliveryMethod] = useState("pickup");
-  const [responseServer, serResponseServer] = useState<IResponseServer | null>(
-    null
-  );
-  const [isDisabled, setIsDisabled] = useState(false);
   const navigate = useNavigate();
+  const [deliveryMethod, setDeliveryMethod] = useState("pickup");
   useEscapeHandler();
+
   const handleChangeInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     dispatch(updateUser({ key: name as keyof User, value }));
@@ -34,28 +29,11 @@ const OrderModal = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (cart.length === 0) {
-      return;
-    }
-    setIsDisabled(true);
-    try {
-      const order = cart.map((item) => {
-        const { id, count } = item;
-        return { id, count };
-      });
-      const response = await fetchRequest(
-        { user: { ...user, deliveryMethod }, order },
-        "/order",
-        "POST"
-      );
-      serResponseServer(response);
-      dispatch(clearCart());
-    } catch (error) {
-      const serverError = error as IResponseServer;
-      serResponseServer(serverError);
-    } finally {
-      setIsDisabled(false);
-    }
+    const order = cart.map((item) => {
+      const { id, count } = item;
+      return { id, count };
+    });
+    dispatch(fetchOrderThunk({ user, deliveryMethod, order }));
   };
 
   return (
@@ -64,10 +42,10 @@ const OrderModal = () => {
         <div className={s.column}>
           <DonutIcon />
         </div>
-        {responseServer?.status === "success" ? (
+        {successServer?.status === "success" ? (
           <div className={s.column}>
-            <div className={s.text}>№ заказа: {responseServer.orderId}</div>
-            <div className={s.text}>Сумма заказа: {responseServer.total} ₽</div>
+            <div className={s.text}>№ заказа: {successServer.orderId}</div>
+            <div className={s.text}>Сумма заказа: {successServer.total} ₽</div>
           </div>
         ) : (
           <div className={s.column}>
@@ -163,7 +141,7 @@ const OrderModal = () => {
                 <button
                   className={s.button}
                   type="submit"
-                  disabled={isDisabled}
+                  disabled={loading === "pending"}
                 >
                   Оформить заказ
                 </button>

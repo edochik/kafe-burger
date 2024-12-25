@@ -4,7 +4,7 @@ import s from "./Cart.module.scss";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 
 const Cart = () => {
-  const cart = useAppSelector((state) => state.cart);
+  const cart = useAppSelector((state) => state.cart.cart);
   const totalCount = cart.reduce((acc, item) => acc + item.count, 0);
   const totalPrice = cart.reduce(
     (acc, item) => acc + item.price * item.count,

@@ -1,7 +1,7 @@
 @use '../../shared/style/mixin.scss' as mix;
 @use '../../shared/style/variable.scss' as var;
 
-.productcard {
+.ProductCard {
 	background-color: var.$color-white;
 	padding: 12px;
 	border-radius: 18px;

@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import {
   addProductCart,
   incrementProduct,
-} from "../../features/Cart/cartSlice";
+} from "../../entities/cart/cartSlice";
 import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
 
 const ProductPage = () => {
@@ -14,11 +14,11 @@ const ProductPage = () => {
   const { id: productId } = useParams();
   const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.products.products);
-  const count = useAppSelector((state) => state.cart).filter(
+  const count = useAppSelector((state) => state.cart.cart).filter(
     (product) => product.id === Number(productId)
   )[0]?.count;
 
-  const cart = useAppSelector((state) => state.cart);
+  const cart = useAppSelector((state) => state.cart.cart);
 
   const product = products.filter(
     (product) => product.id === Number(productId)

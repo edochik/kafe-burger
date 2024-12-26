@@ -2,7 +2,7 @@ import { Product } from "../../shared/domain/Product.js";
 
 
 export interface PartialData {
-	id: string, // сделал стрингой так как наврятли смогу использовать сервер Https  или Crypto.randomUUID()
+	id: string, 
 	categoryEn: string,
 	categoryRu: string,
 	categoryImg: string

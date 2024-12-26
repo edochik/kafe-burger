@@ -1,13 +1,13 @@
 import { IResponseServer } from "../../shared/domain/responseServer.js";
+import { LoadingStatus } from "../../shared/types/loading.js";
 
-export interface OrderDetails {
+export interface IOrderDetails {
 	id: number,
 	orderId: number,
 	price: number,
 	productId: number,
 	count: number
 }
-
 export interface Order {
 	id: number,
 	userId: number,
@@ -33,7 +33,7 @@ export interface User {
 }
 
 export interface InitialStateUser {
-	loading: "idle" | "pending" | "succeeded" | "failed";
+	loading: LoadingStatus;
 	errorServer: null | IResponseServer;
 	successServer: null | IResponseServer;
 	isAuthorization: boolean;

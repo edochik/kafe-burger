@@ -1,67 +1,52 @@
 import { Link } from "react-router-dom";
-import { deliveryMethods } from "../../features/OrderModal/DeliveryMethods";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 import s from "./HistoryOrders.module.scss";
+import { IOrderDetails } from "../../entities/user/types";
+import { OrderDetails } from "../../features/OrderDetails/";
 
 const HistoryOrders = () => {
   const { orders, orderDetails } = useAppSelector(
     (state) => state.historyOrder
   );
-  const methods = Object.fromEntries(
-    deliveryMethods.map((method) => [method.nameEn, method.nameRu])
-  );
-
-  const isAuthorization = useAppSelector(
-    (state) => state.profile.isAuthorization
-  );
-  if (!isAuthorization) {
-    return (
-      <div className={s.HistoryOrders}>
-        <div className={s.container}>
-          <h2 className={s.title}>История заказов</h2>
-          <div className={s.loader}></div>
-        </div>
-      </div>
-    );
+  const { isAuthorization } = useAppSelector((state) => state.profile);
+  const detailsMap: Map<number, IOrderDetails[]> = new Map();
+  for (const order of orderDetails) {
+    const orderId = order.orderId;
+    if (!detailsMap.has(orderId)) {
+      detailsMap.set(orderId, []);
+    }
+    const key = detailsMap.get(orderId);
+    key?.push(order);
   }
+
+  const formatOrders = orders.map((order) => {
+    const { createdAt, ...rest } = order;
+    const date = new Date(order.createdAt);
+    const formatDate = date.toLocaleDateString("ru-RU", {
+      day: "numeric",
+      month: "long",
+    });
+    return { ...rest, date: formatDate };
+  });
+
   return (
     <div className={s.HistoryOrders}>
       <div className={s.container}>
-        <table className={s.table}>
-          <caption className={s.caption}>История заказов</caption>
-          <thead className={s.thead}>
-            <tr className={s.tr}>
-              <th className={s.th} scope="col">
-                №
-              </th>
-              <th className={s.th} scope="col">
-                Способ доставки
-              </th>
-              <th className={s.th} scope="col">
-                Адрес доставки
-              </th>
-              <th className={s.th} scope="col">
-                Стоимость
-              </th>
-            </tr>
-          </thead>
-          <tbody className={s.tbody}>
-            {orders.map((order) => {
-              const { id, deliveryMethod, address, apartment, floor, total } =
-                order;
-              return (
-                <tr className={s.tr} key={id}>
-                  <th className={s.th}>{id}</th>
-                  <td className={s.td}>{methods[deliveryMethod]}</td>
-                  <td className={s.td}>
-                    {address} этаж {floor} квартира {apartment}
-                  </td>
-                  <td className={s.td}>{total} ₽</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <ul className={s.orders}>
+          {formatOrders.map((order) => {
+            const { id, date, total } = order;
+            const values = detailsMap.get(id);
+            return (
+              <li className={s.order} key={order.id}>
+                <p className={s.date}>
+                  Заказ от {date} №{id}
+                </p>
+                <p className={s.total}>оплачено {total} ₽</p>
+                {values && <OrderDetails values={values} />}
+              </li>
+            );
+          })}
+        </ul>
         <Link className={s.go_back} to="/">
           🏃‍♂️ Вернуться обратно
         </Link>
@@ -71,21 +56,3 @@ const HistoryOrders = () => {
 };
 
 export { HistoryOrders };
-
-//  Заказ Способ доставки Место доставки  Продукт
-
-//                                         burger  кол-во 1 шт цена 689 сумма заказа общая
-
-//   1      самовывоз      ---------       burger  кол-во 1 шт цена 689 сумма заказа общая
-
-//                                         burger  кол-во 1 шт цена 689 сумма заказа общая
-
-//   2      доставка       улица и т.д
-
-//   Заказ Способ  доставки Место доставки
-//   1      самовывоз      ---------
-
-//   детали заказа
-//   burger  кол-во 1 шт цена 689 сумма заказа общая
-//   burger  кол-во 1 шт цена 689 сумма заказа общая
-//   burger  кол-во 1 шт цена 689 сумма заказа общая

@@ -26,9 +26,6 @@ export const cartSlice = createSlice({
 				}
 			})
 		},
-		clearCart: (state) => {
-			state.cart.length = 0;
-		},
 		setCartFromLocalStorage: (state, action: PayloadAction<Cart[]>) => {
 			state.isAppLoaded = true
 			state.cart = action.payload
@@ -42,6 +39,9 @@ export const cartSlice = createSlice({
 					product.count -= 1
 				}
 			}
+		},
+		updateSuccessServer: (state) => {
+			state.successServer = null
 		}
 	},
 	extraReducers: (builder) => {
@@ -66,6 +66,6 @@ export const {
 	addProductCart,
 	incrementProduct,
 	decrementProduct,
-	clearCart,
-	setCartFromLocalStorage } = cartSlice.actions
+	setCartFromLocalStorage, 
+	updateSuccessServer } = cartSlice.actions
 

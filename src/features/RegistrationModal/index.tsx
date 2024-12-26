@@ -7,7 +7,6 @@ import PhoneInput from "react-phone-input-2";
 import classNames from "classnames";
 import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
 import { fetchRequest } from "../../utils/fetchRequest";
-// import { User } from "../../entities/user/userSlice";
 import { IResponseServer } from "../../shared/domain/responseServer";
 import { ResponseServer } from "../../shared/ui/ResponseServer/";
 import { handleInvalidInput } from "../../utils/handleInvalidInput";

@@ -41,6 +41,15 @@ export const profileSlice = createSlice({
 			const { key, value } = action.payload;
 			(state.data.user[key] as string) = value;
 		},
+		userClear: (state) => {
+			for (const key in state.data.user) {
+				if (key === 'id') {
+					state.data.user[key] = null;
+				} else {
+					(state.data.user[key as keyof User] as string) = '';
+				}
+			}
+		}
 	},
 	extraReducers: (builder) => {
 		builder
@@ -78,7 +87,7 @@ export const profileSlice = createSlice({
 			.addCase(fetchLogoutThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
 				state.loading = "succeeded";
 				state.isAuthorization = false;
-				for (const key in state) {
+				for (const key in state.data.user) {
 					if (key === 'id') {
 						state.data.user[key] = null;
 					} else {
@@ -94,7 +103,6 @@ export const profileSlice = createSlice({
 				state.loading = "pending";
 			})
 			.addCase(fetchUpdateUserThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
-				console.log(action.payload);
 				state.loading = "succeeded";
 				state.isAuthorization = true;
 				state.successServer = action.payload
@@ -107,4 +115,4 @@ export const profileSlice = createSlice({
 	}
 })
 
-export const { updateUser, resetError, resetMessage } = profileSlice.actions;
+export const { updateUser, resetError, resetMessage, userClear } = profileSlice.actions;

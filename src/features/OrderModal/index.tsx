@@ -1,19 +1,20 @@
 import s from "../../shared/style/modal.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
 import { DonutIcon } from "../../shared/ui/SVGIcons/DonutIcon";
 import PhoneInput from "react-phone-input-2";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
-import { updateUser } from "../../entities/user/userSlice";
+import { updateUser, userClear } from "../../entities/user/userSlice";
 import { deliveryMethods } from "./DeliveryMethods";
 import { User } from "../../entities/user/types.js";
 import { fetchOrderThunk } from "../../entities/cart/thunk/fetchOrderThunk";
+import { updateSuccessServer } from "../../entities/cart/cartSlice";
 
 const OrderModal = () => {
-  const user = useAppSelector((state) => state.profile.data.user);
-  const { cart, errorServer, successServer, loading } = useAppSelector(
+  const { user } = useAppSelector((state) => state.profile.data);
+  const { cart, successServer, loading } = useAppSelector(
     (state) => state.cart
   );
   const { id, firstName, phone, address, floor, apartment } = user;
@@ -21,6 +22,11 @@ const OrderModal = () => {
   const navigate = useNavigate();
   const [deliveryMethod, setDeliveryMethod] = useState("pickup");
   useEscapeHandler();
+  useEffect(() => {
+    if (successServer !== null) {
+      dispatch(updateSuccessServer());
+    }
+  }, [navigate]);
 
   const handleChangeInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -34,6 +40,7 @@ const OrderModal = () => {
       return { id, count };
     });
     dispatch(fetchOrderThunk({ user, deliveryMethod, order }));
+    dispatch(userClear());
   };
 
   return (
@@ -72,7 +79,7 @@ const OrderModal = () => {
                 placeholder="Телефон"
                 disableCountryCode={true}
                 onChange={(e: string) => {
-                  dispatch(updateUser({ key: phone as keyof User, value: e })); // Передача корректного объекта
+                  dispatch(updateUser({ key: phone as keyof User, value: e }));
                 }}
                 inputProps={{
                   required: true,

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchHistoryOrdersThunk } from "./fetchHistoryOrdersThunk";
+import { LoadingStatus } from "../../shared/types/loading.js";
 
 interface OrderDetails {
 	id: number,
@@ -20,7 +21,7 @@ interface Order {
 	total: number
 }
 interface InitialState {
-	loading: "idle" | "pending" | "succeeded" | "failed";
+	loading: LoadingStatus;
 	error: string | null;
 	orderDetails: OrderDetails[],
 	orders: Order[],

@@ -1,0 +1,35 @@
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
+.OrderDetails {
+	@include mix.list-reset();
+	padding: 25px;
+	background-color: var.$color-gray-dark;
+	border-top-right-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	.order {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		.image {
+			width: 45px;
+			height: 45px;
+			border-radius: 15px;
+		}
+		.name_ru {
+			margin: 0;
+			font-weight: var.$font-weight-bold;
+		}
+		.wrapper {
+			margin-left: auto;
+			display: flex;
+			align-items: center;
+			column-gap: 20px;
+			.price {
+				font-weight: var.$font-weight-bold;
+				margin: 0;
+			}
+		}
+	}
+}

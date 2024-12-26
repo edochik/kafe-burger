@@ -3,14 +3,11 @@ import s from "./RenderLinkOrUser.module.scss";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEffect, useRef, useState } from "react";
-// import { logoutUser } from "../../entities/user/userSlice";
 import { fetchLogoutThunk } from "../../entities/user/thunks/fetchLogoutThunk";
 
 const RenderLinkOrUser = () => {
-  const isAuthorization = useAppSelector(
-    (state) => state.profile.isAuthorization
-  );
-  const login = useAppSelector((state) => state.profile.data.user.login);
+  const { isAuthorization } = useAppSelector((state) => state.profile);
+  const { login } = useAppSelector((state) => state.profile.data.user);
   const [toggle, setToggle] = useState(false);
   const dispatch = useAppDispatch();
   const ref = useRef<HTMLUListElement>(null);
@@ -62,7 +59,13 @@ const RenderLinkOrUser = () => {
             <Link to="/history-order">Заказы</Link>
           </li>
           <li className={s.item}>
-            <Link to="/" onClick={() => dispatch(fetchLogoutThunk())}>
+            <Link
+              to="/"
+              onClick={() => {
+                // dispatch(clearUser());
+                dispatch(fetchLogoutThunk());
+              }}
+            >
               Выйти
             </Link>
           </li>

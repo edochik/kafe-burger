@@ -10,6 +10,7 @@ export const fetchHistoryOrdersThunk = createAsyncThunk(
 			const result = await response.json();
 			return result;
 		} catch (error) {
+			
 		}
 	}
 )

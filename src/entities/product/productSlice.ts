@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Product } from "../../shared/domain/Product";
 import { fetchInitialProductsThunk } from "./thunk/fetchInitialProductsThunk";
+import { LoadingStatus } from "../../shared/types/loading.js";
 
 interface InitialState {
-	loading: "idle" | "pending" | "succeeded" | "failed";
+	loading: LoadingStatus;
 	error: string | null;
 	products: Product[]
 }

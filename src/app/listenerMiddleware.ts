@@ -1,11 +1,12 @@
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "./store";
 import { selectCategory } from "../features/RadioButtons/selectSlice";
-import { addProductCart, clearCart, decrementProduct, incrementProduct, setCartFromLocalStorage } from "../entities/cart/cartSlice";
+import { addProductCart, decrementProduct, incrementProduct, setCartFromLocalStorage } from "../entities/cart/cartSlice";
 import { fetchUserVerificationThunk } from "../entities/user/thunks/fetchUserVerificationThunk";
 import { fetchHistoryOrdersThunk } from "../features/RenderLinkOrUser/fetchHistoryOrdersThunk";
 import { fetchAuthorizationThunk } from "../entities/user/thunks/fetchAuthorizationThunk";
 import { Cart } from "../entities/cart/types";
+import { fetchOrderThunk } from "../entities/cart/thunk/fetchOrderThunk";
 
 export const listenerMiddleware = createListenerMiddleware();
 export const startAppListening = listenerMiddleware.startListening.withTypes<
@@ -30,10 +31,14 @@ startAppListening({
 // очистка корзины в localStorage
 startAppListening({
 	matcher: isAnyOf(
-		clearCart,
+		fetchOrderThunk.fulfilled,
 	),
 	effect: async (action, listenerApi) => {
-		localStorage.removeItem('cartYourMeal')
+		const { id } = listenerApi.getState()?.profile?.data?.user
+		localStorage.removeItem('cartYourMeal');
+		if (id !== null) {
+			await listenerApi.dispatch(fetchHistoryOrdersThunk(id))
+		}
 	}
 });
 
@@ -49,8 +54,6 @@ startAppListening({
 		}
 	}
 });
-
-
 
 //загрузка данных с локал стораж при перезагрузке страницы
 startAppListening({

@@ -1,4 +1,5 @@
 import { IResponseServer } from "../../shared/domain/responseServer.js";
+import { LoadingStatus } from "../../shared/types/loading.js";
 import { User } from "../user/types.js";
 
 export interface Cart {
@@ -11,13 +12,12 @@ export interface Cart {
 }
 
 export interface initialStateCart {
-	loading: "idle" | "pending" | "succeeded" | "failed";
+	loading: LoadingStatus;
 	errorServer: null | IResponseServer;
 	successServer: null | IResponseServer;
 	isAppLoaded: boolean;
 	cart: Cart[];
 }
-
 
 export interface OrderPayload {
 	user: User;
@@ -25,5 +25,5 @@ export interface OrderPayload {
 	order: {
 		count: number,
 		id: number
-	}[]; 
+	}[];
 }

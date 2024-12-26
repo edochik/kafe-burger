@@ -9,7 +9,7 @@ export const fetchAuthorizationThunk = createAsyncThunk<
 	AuthorizationRequest,
 	{ rejectValue: IResponseServer }
 >(
-	"fetchRegistrationThunk",
+	"fetchAuthorizationThunk",
 	async (data, { rejectWithValue }) => {
 		try {
 			const response = await fetchAuthorization(data);

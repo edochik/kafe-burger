@@ -58,7 +58,12 @@
 			}
 			.button {
 				grid-area: button;
-				@include mix.button-style(var.$button-bg-default-2, var.$color-white, var.$button-bg-hover-1, var.$button-bg-selected);
+				@include mix.button-style(
+					var.$button-bg-default-2,
+					var.$color-white,
+					var.$button-bg-hover-1,
+					var.$button-bg-selected
+				);
 			}
 			.inner {
 				grid-area: inner;
@@ -79,6 +84,9 @@
 			content: '';
 			right: 22px;
 			top: 22px;
+		}
+		.loader {
+			@include mix.loader();
 		}
 	}
 }

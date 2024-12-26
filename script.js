@@ -469,5 +469,3 @@ const formFields = [
 		onInvalidMessage: ''
 	},
 ]
-
-

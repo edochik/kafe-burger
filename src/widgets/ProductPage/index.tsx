@@ -13,16 +13,25 @@ const ProductPage = () => {
   const navigate = useNavigate();
   const { id: productId } = useParams();
   const dispatch = useAppDispatch();
-  const products = useAppSelector((state) => state.products.products);
-  const count = useAppSelector((state) => state.cart.cart).filter(
-    (product) => product.id === Number(productId)
-  )[0]?.count;
-
-  const cart = useAppSelector((state) => state.cart.cart);
-
-  const product = products.filter(
+  const loading = useAppSelector((state) => state.products.loading);
+  const product = useAppSelector((state) => state.products.products).filter(
     (product) => product.id === Number(productId)
   );
+  const count = useAppSelector((state) => state.cart.cart).find(
+    (product) => product.id === Number(productId)
+  )?.count;
+  const { cart } = useAppSelector((state) => state.cart);
+  useEscapeHandler();
+
+  if (loading === "pending") {
+    return (
+      <div className={s.overlay} onClick={() => navigate("/")}>
+        <div className={s.modal}>
+          <div className={s.loader}></div>
+        </div>
+      </div>
+    );
+  }
 
   const {
     id,
@@ -35,7 +44,7 @@ const ProductPage = () => {
     imageUrl,
   } = product[0];
 
-  const onClickAppProduct = (id: number) => {
+  const onClickAddProduct = (id: number) => {
     if (!cart.some((product) => product.id === id)) {
       dispatch(
         addProductCart({ id, nameRu, price, weight, imageUrl, count: 1 })
@@ -44,7 +53,6 @@ const ProductPage = () => {
       dispatch(incrementProduct(id));
     }
   };
-  useEscapeHandler();
 
   return (
     <div className={s.overlay} onClick={() => navigate("/")}>
@@ -70,7 +78,7 @@ const ProductPage = () => {
               {weight}г, ккал {kilocalories}
             </p>
           </div>
-          <button className={s.button} onClick={() => onClickAppProduct(id)}>
+          <button className={s.button} onClick={() => onClickAddProduct(id)}>
             Добавить
           </button>
           <div className={s.inner}>

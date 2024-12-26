@@ -11,6 +11,7 @@ import { HistoryOrders } from "../pages/HistoryOrders/";
 
 export const AppRouter = () => {
   const isAuth = useAppSelector((state) => state.profile.isAuthorization);
+  const products = useAppSelector((state) => state.products.products);
   return (
     <Routes>
       <Route path="/" element={<Main />}>

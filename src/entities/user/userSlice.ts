@@ -4,6 +4,7 @@ import { InitialStateUser, SuccessServer, User } from "./types";
 import { fetchAuthorizationThunk } from "./thunks/fetchAuthorizationThunk";
 import { fetchLogoutThunk } from "./thunks/fetchLogoutThunk";
 import { fetchUpdateUserThunk } from "./thunks/fetchUpdateUserThunk";
+import { fetchRegistrationThunk } from "./thunks/fetchRegistrationThunk";
 
 export const initialState: InitialStateUser = {
 	loading: "idle",
@@ -40,15 +41,6 @@ export const profileSlice = createSlice({
 		updateUser: (state, action: PayloadAction<{ key: keyof User; value: string }>) => {
 			const { key, value } = action.payload;
 			(state.data.user[key] as string) = value;
-		},
-		userClear: (state) => {
-			for (const key in state.data.user) {
-				if (key === 'id') {
-					state.data.user[key] = null;
-				} else {
-					(state.data.user[key as keyof User] as string) = '';
-				}
-			}
 		}
 	},
 	extraReducers: (builder) => {
@@ -112,7 +104,20 @@ export const profileSlice = createSlice({
 				state.isAuthorization = false;
 				state.errorServer = action.payload ?? { status: "error", message: "Unknown error" };
 			})
+
+			.addCase(fetchRegistrationThunk.pending, (state) => {
+				state.loading = "pending";
+
+			})
+			.addCase(fetchRegistrationThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+				state.loading = "succeeded";
+				state.successServer = action.payload
+			})
+			.addCase(fetchRegistrationThunk.rejected, (state, action) => {
+				state.loading = "failed";
+				state.errorServer = action.payload ?? { status: "error", message: "Unknown error" };
+			})
 	}
 })
 
-export const { updateUser, resetError, resetMessage, userClear } = profileSlice.actions;
+export const { updateUser, resetError, resetMessage } = profileSlice.actions;

@@ -6,13 +6,14 @@ import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
 import PhoneInput from "react-phone-input-2";
 import classNames from "classnames";
 import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
-import { fetchRequest } from "../../utils/fetchRequest";
-import { IResponseServer } from "../../shared/domain/responseServer";
-import { ResponseServer } from "../../shared/ui/ResponseServer/";
 import { handleInvalidInput } from "../../utils/handleInvalidInput";
+import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
+import { fetchRegistrationThunk } from "../../entities/user/thunks/fetchRegistrationThunk";
+import { ResponseServer } from "../../shared/ui/ResponseServer/";
+import { resetError, resetMessage } from "../../entities/user/userSlice";
 
 const RegistrationModal = () => {
-  const [formValues, setFormValues] = useState({
+  const [dataUser, setDataUser] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -24,60 +25,40 @@ const RegistrationModal = () => {
     password: "",
   });
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [responseServer, serResponseServer] = useState<IResponseServer | null>(
-    null
+  const { errorServer, successServer, loading } = useAppSelector(
+    (state) => state.profile
   );
-  const [isUserRegister, setIsUserRegister] = useState(false);
-  const [isDisable, setIsDisable] = useState(false);
+  const [clientError, setClientError] = useState<null | string>(null);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   useEscapeHandler();
   useEffect(() => {
-    serResponseServer(null);
-    setIsDisable(false);
-  }, [formValues, confirmPassword]);
-  const handleChangeFormValues = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+    if (errorServer !== null) {
+      dispatch(resetError());
+    }
+    if (successServer !== null) {
+      dispatch(resetMessage());
+    }
+    setClientError(null);
+  }, [dataUser, confirmPassword]);
+
+  const handleUpdateUser = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
+    setDataUser((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    serResponseServer(null);
-    if (Object.values(formValues).some((value) => value.length === 0)) {
-      serResponseServer({
-        status: "error",
-        message: "Все поля должны быть заполнены",
-      });
+    setClientError(null);
+    if (Object.values(dataUser).some((value) => value.length === 0)) {
+      setClientError("Все поля должны быть заполнены");
       return;
     }
-    if (formValues.password !== confirmPassword) {
-      serResponseServer({
-        status: "error",
-        message: "Пароли должны совпадать",
-        field: "password",
-      });
+    if (dataUser.password !== confirmPassword) {
+      setClientError("Пароли должны совпадать");
       return;
     }
-    setIsDisable(true);
-    try {
-      await fetchRequest(formValues, "/register", "POST");
-      setConfirmPassword("");
-      setFormValues((prev) => {
-        const result = Object.create(null);
-        for (const elem in prev) {
-          result[elem] = "";
-        }
-        return result;
-      });
-      setIsUserRegister(true);
-    } catch (error) {
-      const serverError = error as IResponseServer;
-      serResponseServer(serverError);
-    } finally {
-      setIsDisable(false);
-    }
+    dispatch(fetchRegistrationThunk({ ...dataUser }));
   };
 
   return (
@@ -87,7 +68,7 @@ const RegistrationModal = () => {
           <UserIcon />
         </div>
         <div className={s.column}>
-          {!isUserRegister ? (
+          {!successServer ? (
             <>
               <h3 className={s.title}>Регистрация</h3>
               <form className={s.form} onSubmit={handleSubmit}>
@@ -95,10 +76,10 @@ const RegistrationModal = () => {
                   className={s.input}
                   type="text"
                   placeholder="Имя"
-                  value={formValues.firstName}
+                  value={dataUser.firstName}
                   name="firstName"
                   minLength={2}
-                  onChange={(e) => handleChangeFormValues(e)}
+                  onChange={(e) => handleUpdateUser(e)}
                   autoFocus
                   pattern="[а-яёА-ЯЁ]*"
                   aria-label="Имя"
@@ -114,10 +95,10 @@ const RegistrationModal = () => {
                   className={s.input}
                   type="text"
                   placeholder="Фамилия"
-                  value={formValues.lastName}
+                  value={dataUser.lastName}
                   name="lastName"
                   minLength={2}
-                  onChange={(e) => handleChangeFormValues(e)}
+                  onChange={(e) => handleUpdateUser(e)}
                   aria-label="Фамилия"
                   pattern="[а-яёА-ЯЁ]*"
                   onInvalid={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -131,21 +112,21 @@ const RegistrationModal = () => {
                 <input
                   className={classNames({
                     [s.input]: true,
-                    [s.input_error]: responseServer?.field === "email",
+                    [s.input_error]: errorServer?.field === "email",
                   })}
                   type="email"
                   placeholder="Email"
-                  value={formValues.email}
+                  value={dataUser.email}
                   name="email"
-                  onChange={(e) => handleChangeFormValues(e)}
+                  onChange={(e) => handleUpdateUser(e)}
                   aria-label="почта"
                   required
                 />
                 <PhoneInput
                   country={"ru"}
-                  value={formValues.phone}
+                  value={dataUser.phone}
                   onChange={(e) =>
-                    setFormValues((prev) => ({ ...prev, phone: e }))
+                    setDataUser((prev) => ({ ...prev, phone: e }))
                   }
                   onlyCountries={["ru"]}
                   masks={{ ru: "+.(...) ...-..-.." }}
@@ -162,9 +143,9 @@ const RegistrationModal = () => {
                   className={s.input}
                   type="text"
                   placeholder="Улица, дом, квартира"
-                  value={formValues.address}
+                  value={dataUser.address}
                   name="address"
-                  onChange={(e) => handleChangeFormValues(e)}
+                  onChange={(e) => handleUpdateUser(e)}
                   aria-label="Улица, дом, квартира"
                   required
                 />
@@ -173,9 +154,9 @@ const RegistrationModal = () => {
                     className={s.input}
                     type="text"
                     placeholder="Этаж"
-                    value={formValues.floor}
+                    value={dataUser.floor}
                     name="floor"
-                    onChange={(e) => handleChangeFormValues(e)}
+                    onChange={(e) => handleUpdateUser(e)}
                     aria-label="Этаж"
                     required
                   />
@@ -183,9 +164,9 @@ const RegistrationModal = () => {
                     className={s.input}
                     type="text"
                     placeholder="Квартира"
-                    value={formValues.apartment}
+                    value={dataUser.apartment}
                     name="apartment"
-                    onChange={(e) => handleChangeFormValues(e)}
+                    onChange={(e) => handleUpdateUser(e)}
                     aria-label="Квартира"
                     required
                   />
@@ -194,15 +175,15 @@ const RegistrationModal = () => {
                 <input
                   className={classNames({
                     [s.input]: true,
-                    [s.input_error]: responseServer?.field === "login",
+                    [s.input_error]: errorServer?.field === "login",
                   })}
                   type="text"
                   placeholder="Логин"
-                  value={formValues.login}
+                  value={dataUser.login}
                   name="login"
                   autoComplete="username"
                   minLength={4}
-                  onChange={(e) => handleChangeFormValues(e)}
+                  onChange={(e) => handleUpdateUser(e)}
                   aria-label="Логин"
                   pattern="[a-zA-Z]*"
                   onInvalid={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -217,22 +198,22 @@ const RegistrationModal = () => {
                 <input
                   className={classNames({
                     [s.input]: true,
-                    [s.input_error]: responseServer?.field === "password",
+                    [s.input_error]: errorServer?.field === "password",
                   })}
                   type="password"
                   placeholder="Пароль"
-                  value={formValues.password}
+                  value={dataUser.password}
                   name="password"
                   autoComplete="new-password"
                   minLength={6}
-                  onChange={(e) => handleChangeFormValues(e)}
+                  onChange={(e) => handleUpdateUser(e)}
                   aria-label="Пароль"
                   required
                 />
                 <input
                   className={classNames({
                     [s.input]: true,
-                    [s.input_error]: responseServer?.field === "password",
+                    [s.input_error]: errorServer?.field === "password",
                   })}
                   type="password"
                   placeholder="Повторите пароль"
@@ -244,15 +225,19 @@ const RegistrationModal = () => {
                   aria-label="Повторите пароль"
                   required
                 />
-                {responseServer && <ResponseServer {...responseServer} />}
-                <button type="submit" className={s.button} disabled={isDisable}>
+                {errorServer && <ResponseServer {...errorServer} />}
+                <button
+                  type="submit"
+                  className={s.button}
+                  disabled={loading === "pending"}
+                >
                   Зарегистрироваться
                 </button>
               </form>
             </>
           ) : (
             <>
-              <div className={s.register}>Пользователь зарегистрирован</div>
+              <div className={s.register}>{successServer.message}</div>
               <Link className={s.link} to="/authorization">
                 <button className={s.button}>Войти</button>
               </Link>

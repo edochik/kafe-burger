@@ -6,7 +6,7 @@ import { DonutIcon } from "../../shared/ui/SVGIcons/DonutIcon";
 import PhoneInput from "react-phone-input-2";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
-import { updateUser, userClear } from "../../entities/user/userSlice";
+import { updateUser } from "../../entities/user/userSlice";
 import { deliveryMethods } from "./DeliveryMethods";
 import { User } from "../../entities/user/types.js";
 import { fetchOrderThunk } from "../../entities/cart/thunk/fetchOrderThunk";
@@ -28,19 +28,18 @@ const OrderModal = () => {
     }
   }, [navigate]);
 
-  const handleChangeInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpdateUser = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     dispatch(updateUser({ key: name as keyof User, value }));
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const order = cart.map((item) => {
       const { id, count } = item;
       return { id, count };
     });
     dispatch(fetchOrderThunk({ user, deliveryMethod, order }));
-    dispatch(userClear());
   };
 
   return (
@@ -65,7 +64,7 @@ const OrderModal = () => {
                 value={firstName}
                 name="firstName"
                 minLength={2}
-                onChange={(e) => handleChangeInput(e)}
+                onChange={(e) => handleUpdateUser(e)}
                 aria-label="Ваше имя"
                 autoFocus
                 required
@@ -114,7 +113,7 @@ const OrderModal = () => {
                     placeholder="Улица, дом, квартира"
                     value={address}
                     name="address"
-                    onChange={(e) => handleChangeInput(e)}
+                    onChange={(e) => handleUpdateUser(e)}
                     aria-label="Улица, дом, квартира"
                     required
                   />
@@ -125,7 +124,7 @@ const OrderModal = () => {
                       placeholder="Этаж"
                       value={floor}
                       name="floor"
-                      onChange={(e) => handleChangeInput(e)}
+                      onChange={(e) => handleUpdateUser(e)}
                       aria-label="Этаж"
                       required
                     />
@@ -135,7 +134,7 @@ const OrderModal = () => {
                       placeholder="Квартира"
                       value={apartment}
                       name="apartment"
-                      onChange={(e) => handleChangeInput(e)}
+                      onChange={(e) => handleUpdateUser(e)}
                       aria-label="Квартира"
                       required
                     />

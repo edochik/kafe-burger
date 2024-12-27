@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { DonutIcon } from "../../shared/ui/SVGIcons/DonutIcon";
 import PhoneInput from "react-phone-input-2";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
+import { useEscapeHandler } from "../../shared/lib/hooks/useEscapeHandler";
 import { updateUser } from "../../entities/user/userSlice";
 import { deliveryMethods } from "./DeliveryMethods";
 import { User } from "../../entities/user/types.js";
@@ -26,7 +26,7 @@ const OrderModal = () => {
     if (successServer !== null) {
       dispatch(updateSuccessServer());
     }
-  }, [navigate]);
+  }, [navigate]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleUpdateUser = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;

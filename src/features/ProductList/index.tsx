@@ -1,20 +1,21 @@
 import s from "./ProductList.module.scss";
 import { ProductCard } from "../ProductCard";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
+import { LoaderSection } from "./LoaderSection";
 
 const ProductList = () => {
   const category = useAppSelector((state) => state.selectProduct);
-  const products = useAppSelector((state) => state.products.products);
+  const { products, loading } = useAppSelector((state) => state.products);
   const filterProduct = products.filter(
     (product) => product.categoryEn === category
   );
-
-  if (filterProduct.length === 0) {
-    return <div className={s.loader}></div>;
+  if (loading === "pending") {
+    return <LoaderSection />;
   }
 
-  const categoryRu = filterProduct[0]?.categoryRu;
-  const categoryName = categoryRu[0].toUpperCase() + categoryRu.slice(1);
+  const categoryRu: string = filterProduct[0]?.categoryRu;
+  const categoryName: string =
+    categoryRu[0].toUpperCase() + categoryRu.slice(1);
 
   return (
     <section className={s.section}>

@@ -5,9 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
+import { useEscapeHandler } from "../../shared/lib/hooks/useEscapeHandler";
 import { ResponseServer } from "../../shared/ui/ResponseServer";
-import { handleInvalidInput } from "../../utils/handleInvalidInput";
+import { handleInvalidInput } from "../../shared/lib/utils/handleInvalidInput";
 import { fetchAuthorizationThunk } from "../../entities/user/thunks/fetchAuthorizationThunk";
 import { resetError } from "../../entities/user/userSlice";
 

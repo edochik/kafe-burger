@@ -5,25 +5,15 @@ import {
   incrementProduct,
 } from "../../entities/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { Product } from "../../shared/domain/Product.js";
+import { Product } from "../../shared/domain/Product";
+import { addProductToCart } from "../../shared/lib/utils/addProductToCart";
 
 export interface ProductCardProps extends Product {}
 
-const ProductCard = (props: ProductCardProps) => {
-  const { id, nameRu, price, weight, imageUrl } = props;
+const ProductCard = (product: ProductCardProps) => {
+  const { id, nameRu, price, weight, imageUrl } = product;
   const dispatch = useAppDispatch();
-  const cart = useAppSelector((state) => state.cart.cart);
-
-  const onClickAppProduct = (id: number) => {
-    if (!cart.some((product) => product.id === id)) {
-      dispatch(
-        addProductCart({ id, nameRu, price, weight, imageUrl, count: 1 })
-      );
-    } else {
-      dispatch(incrementProduct(id));
-    }
-  };
-
+  const { cart } = useAppSelector((state) => state.cart);
   return (
     <li className={s.ProductCard}>
       <Link to={`/product/${id}`}>
@@ -32,7 +22,10 @@ const ProductCard = (props: ProductCardProps) => {
       <p className={s.price}>{price}₽</p>
       <h3 className={s.title}>{nameRu}</h3>
       <p className={s.weight}>{weight}г</p>
-      <button className={s.button} onClick={() => onClickAppProduct(id)}>
+      <button
+        className={s.button}
+        onClick={() => addProductToCart(dispatch, cart, product)}
+      >
         Добавить
       </button>
     </li>

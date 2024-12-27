@@ -13,8 +13,9 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 16px;
+		.SkeletonLoaderCard {
+			background-color: white;
+			border-radius: 15px;
+		}
 	}
-}
-.loader {
-	@include mix.loader();
 }

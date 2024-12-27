@@ -3,11 +3,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { ToggleProductButton } from "../../shared/ui/ToggleProductButton";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import {
-  addProductCart,
-  incrementProduct,
-} from "../../entities/cart/cartSlice";
-import { useEscapeHandler } from "../../shared/hooks/useEscapeHandler";
+import { useEscapeHandler } from "../../shared/lib/hooks/useEscapeHandler";
+import { addProductToCart } from "../../shared/lib/utils/addProductToCart";
 
 const ProductPage = () => {
   const navigate = useNavigate();
@@ -44,16 +41,6 @@ const ProductPage = () => {
     imageUrl,
   } = product[0];
 
-  const onClickAddProduct = (id: number) => {
-    if (!cart.some((product) => product.id === id)) {
-      dispatch(
-        addProductCart({ id, nameRu, price, weight, imageUrl, count: 1 })
-      );
-    } else {
-      dispatch(incrementProduct(id));
-    }
-  };
-
   return (
     <div className={s.overlay} onClick={() => navigate("/")}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
@@ -78,7 +65,10 @@ const ProductPage = () => {
               {weight}г, ккал {kilocalories}
             </p>
           </div>
-          <button className={s.button} onClick={() => onClickAddProduct(id)}>
+          <button
+            className={s.button}
+            onClick={() => addProductToCart(dispatch, cart, product[0])}
+          >
             Добавить
           </button>
           <div className={s.inner}>

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { fetchHistoryOrdersThunk } from "./fetchHistoryOrdersThunk";
 import { LoadingStatus } from "../../shared/types/loading.js";
 
@@ -26,6 +26,7 @@ interface InitialState {
 	orderDetails: OrderDetails[],
 	orders: Order[],
 }
+
 const initialState: InitialState = {
 	loading: 'idle',
 	error: null,

@@ -3,7 +3,7 @@ import { AppDispatch, RootState } from "./store";
 import { selectCategory } from "../features/RadioButtons/selectSlice";
 import { addProductCart, decrementProduct, incrementProduct, setCartFromLocalStorage } from "../entities/cart/cartSlice";
 import { fetchUserVerificationThunk } from "../entities/user/thunks/fetchUserVerificationThunk";
-import { fetchHistoryOrdersThunk } from "../features/RenderLinkOrUser/fetchHistoryOrdersThunk";
+import { fetchHistoryOrdersThunk } from "../pages/HistoryOrders/fetchHistoryOrdersThunk";
 import { fetchAuthorizationThunk } from "../entities/user/thunks/fetchAuthorizationThunk";
 import { Cart } from "../entities/cart/types";
 import { fetchOrderThunk } from "../entities/cart/thunk/fetchOrderThunk";

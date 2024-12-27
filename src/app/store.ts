@@ -6,7 +6,7 @@ import { productSlice } from '../entities/product/productSlice';
 import { profileSlice } from '../entities/user/userSlice';
 import { fetchUserVerificationThunk } from '../entities/user/thunks/fetchUserVerificationThunk';
 import { fetchInitialProductsThunk } from '../entities/product/thunk/fetchInitialProductsThunk';
-import { historyOrdersSlice } from '../features/RenderLinkOrUser/historyOrdersSlice';
+import { historyOrdersSlice } from '../pages/HistoryOrders/historyOrdersSlice';
 
 export const store = configureStore({
 	reducer: {

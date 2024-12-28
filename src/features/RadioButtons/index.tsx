@@ -1,11 +1,9 @@
 import s from "./RadioButtons.module.scss";
 import { RadioButton } from "../RadioButton";
-import { getCategoryProducts } from "./getCategoryProducts";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 
 const RadioButtons = () => {
-  const products = useAppSelector((state) => state.products.products);
-  const categories = getCategoryProducts(products);
+  const categories = useAppSelector((state) => state.categories.categories);
   return (
     <div className={s.RadioButtons}>
       <fieldset className={s.fieldset}>

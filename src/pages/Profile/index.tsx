@@ -25,7 +25,7 @@ const translateField: Partial<User> = {
 
 const Profile = () => {
   const [password, setPassword] = useState("");
-  const user = useAppSelector((state) => state.profile.data.user);
+  const { user } = useAppSelector((state) => state.profile.data);
   const {
     loading,
     errorServer: error,

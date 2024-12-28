@@ -4,12 +4,16 @@ import { ProductList } from "../../features/ProductList/";
 import { Cart } from "../../features/Cart/";
 import { Outlet } from "react-router-dom";
 import { NotFoundPage } from "../NotFoundPage/";
+import { Sort } from "../../features/Sort/";
 
 const Main = () => {
   return (
     <>
       <main className={s.main}>
-        <RadioButtons />
+        <div className={s.header}>
+          <RadioButtons />
+          <Sort />
+        </div>
         <div className={s.wrapper}>
           {/* <NotFoundPage /> */}
           <Cart />

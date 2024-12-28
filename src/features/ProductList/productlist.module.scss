@@ -12,7 +12,8 @@
 		@include mix.list-reset();
 		display: flex;
 		flex-wrap: wrap;
-		gap: 16px;
+		row-gap: 20px;
+		justify-content: space-between;
 		.SkeletonLoaderCard {
 			background-color: white;
 			border-radius: 15px;

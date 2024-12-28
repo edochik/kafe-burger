@@ -1,16 +1,16 @@
-import { Product } from "../../shared/domain/Product.js";
+import { Product } from "../../shared/domain/Product";
 
 
-export interface CategoryProducts {
+export interface Categories {
 	id: string,
 	categoryEn: string,
 	categoryRu: string,
 	categoryImg: string
 }
 
-export function getCategoryProducts(list: Product[]) {
+export function getCategories(list: Product[]): Categories[] {
 	const map = new Set()
-	const result: CategoryProducts[] = [];
+	const result: Categories[] = [];
 	list.forEach(item => {
 		if (!map.has(item.categoryEn)) {
 			map.add(item.categoryEn)

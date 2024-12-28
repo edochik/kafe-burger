@@ -4,32 +4,15 @@ import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEffect, useRef, useState } from "react";
 import { fetchLogoutThunk } from "../../entities/user/thunks/fetchLogoutThunk";
+import { useCloseHandler } from "../../shared/lib/hooks/useCloseHandler";
 
 const RenderLinkOrUser = () => {
   const { isAuthorization } = useAppSelector((state) => state.profile);
   const { login } = useAppSelector((state) => state.profile.data.user);
   const [toggle, setToggle] = useState(false);
   const dispatch = useAppDispatch();
-  const ref = useRef<HTMLUListElement>(null);
-
-  useEffect(() => {
-    const onClickOutside = (event: MouseEvent) => {
-      if (!ref.current?.contains(event.target as Node)) {
-        setToggle(false);
-      }
-    };
-    const scroll = () => {
-      if (toggle) {
-        setToggle(false);
-      }
-    };
-    document.addEventListener("mousedown", onClickOutside);
-    window.addEventListener("scroll", scroll);
-    return () => {
-      document.removeEventListener("mousedown", onClickOutside);
-      window.removeEventListener("scroll", scroll);
-    };
-  }, [toggle]);
+  const ref = useRef<HTMLDivElement>(null);
+  useCloseHandler(toggle, setToggle, ref);
 
   if (isAuthorization === false) {
     return (
@@ -40,18 +23,18 @@ const RenderLinkOrUser = () => {
   }
 
   return (
-    <div className={s.RenderLinkOrUser}>
+    <div className={s.RenderLinkOrUser} ref={ref}>
       <button
         className={classNames({
           [s.link]: true,
           [s.connect]: isAuthorization,
         })}
-        onClick={() => setToggle(!toggle)}
+        onClick={() => setToggle((prev) => !prev)}
       >
         {login}
       </button>
       {toggle && (
-        <ul className={s.list} ref={ref}>
+        <ul className={s.list}>
           <li className={s.item} onClick={() => setToggle(false)}>
             <Link to="/profile">Профиль</Link>
           </li>

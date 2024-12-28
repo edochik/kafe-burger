@@ -2,9 +2,7 @@
 @use '../../shared/style/variable.scss' as var;
 
 .RadioButtons {
-	@include mix.container();
-	padding-top: 40px;
-	padding-bottom: 50px;
+
 	.fieldset {
 		border: none;
 		padding: 0;

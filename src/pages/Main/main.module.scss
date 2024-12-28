@@ -2,9 +2,16 @@
 @use '../../shared/style/variable.scss' as var;
 
 .main {
+	@include mix.container();
 	padding-bottom: 50px;
+	.header {
+		padding-top: 40px;
+		padding-bottom: 50px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 	.wrapper {
-		@include mix.container();
 		display: flex;
 		gap: 30px;
 	}

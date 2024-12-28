@@ -1,3 +1,4 @@
+@use '../../../shared/style/mixin.scss' as mix;
 @use '../../../shared/style/variable.scss' as var;
 
 .ToggleProductButton {
@@ -12,16 +13,12 @@
 	.minus,
 	.count {
 		width: 28px;
-		cursor: pointer;
-		border: none;
-		background-color: inherit;
+		@include mix.button-reset();
 		height: 40px;
 		transition: background-color 0.3s ease-in-out;
 		&:active {
 			background-color: var.$color-gray-dark;
 		}
-	}
-	.plus {
 	}
 	.count {
 		margin: 0;
@@ -29,7 +26,5 @@
 		&:hover {
 			background-color: unset;
 		}
-	}
-	.minus {
 	}
 }

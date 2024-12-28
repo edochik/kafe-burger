@@ -1,24 +1,37 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Product } from "../../shared/domain/Product";
 import { fetchInitialProductsThunk } from "./thunk/fetchInitialProductsThunk";
-import { LoadingStatus } from "../../shared/types/loading.js";
+import { LoadingStatus } from "../../shared/types/loading";
+import { sortFunctions } from "./sortFunctions";
+
 
 interface InitialState {
 	loading: LoadingStatus;
 	error: string | null;
-	products: Product[]
+	products: Product[],
+	sortBy: string,
 }
 
 const initialState: InitialState = {
 	loading: 'idle',
 	error: null,
-	products: []
+	products: [],
+	sortBy: 'default'
 }
 
 export const productSlice = createSlice({
 	name: 'product',
 	initialState,
-	reducers: {},
+	reducers: {
+		setSortBy: (state, action) => {
+			const criteria = action.payload
+			state.sortBy = criteria;
+			if (criteria === 'default') {
+				return 
+			}
+			state.products = sortFunctions[criteria]?.(state.products)
+		}
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchInitialProductsThunk.pending, (state) => {
@@ -34,3 +47,5 @@ export const productSlice = createSlice({
 			})
 	}
 })
+
+export const { setSortBy } = productSlice.actions

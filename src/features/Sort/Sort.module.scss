@@ -1,0 +1,46 @@
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
+
+.Sort {
+	position: relative;
+	.sort_btn {
+		font-weight: var.$font-weight-bold;
+		display: inline-block;
+		@include mix.button-reset();
+		display: flex;
+		> p {
+			margin: 0;
+		}
+		:last-child {
+			margin: 0 0 0 10px;
+			font-weight: 400;
+		}
+	}
+
+	.list {
+		position: absolute;
+		right: 0;
+		left: 0;
+		top: 26px;
+		@include mix.list-reset();
+		display: inline-block;
+		border-radius: 15px;
+		overflow: hidden;
+		background-color: var.$color-white;
+		.item {
+			.button {
+				@include mix.button-reset();
+				font-weight: var.$font-weight-bold;
+				padding: 10px 15px;
+				width: 100%;
+				transition:
+					background-color 0.3s ease-in-out,
+					color 0.3s ease-in-out;
+				&:hover {
+					background-color: var.$color-orange;
+					color: var.$color-white;
+				}
+			}
+		}
+	}
+}

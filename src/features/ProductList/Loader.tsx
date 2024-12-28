@@ -2,7 +2,7 @@ import React from "react";
 import s from "./ProductList.module.scss";
 import { SkeletonLoaderCard } from "../../shared/ui/SVGIcons/SkeletonLoaderCard";
 
-const LoaderSection = () => {
+const Loader = () => {
   return (
     <section className={s.section}>
       <h2 className={s.title}>...загрузка</h2>
@@ -17,4 +17,4 @@ const LoaderSection = () => {
   );
 };
 
-export { LoaderSection };
+export { Loader };

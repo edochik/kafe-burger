@@ -1,16 +1,18 @@
 import s from "./ProductList.module.scss";
 import { ProductCard } from "../ProductCard";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
-import { LoaderSection } from "./LoaderSection";
+import { Loader } from "./Loader";
 
 const ProductList = () => {
-  const category = useAppSelector((state) => state.selectProduct);
+  const selectProduct = useAppSelector(
+    (state) => state.categories.selectCategory
+  );
   const { products, loading } = useAppSelector((state) => state.products);
   const filterProduct = products.filter(
-    (product) => product.categoryEn === category
+    (product) => product.categoryEn === selectProduct
   );
   if (loading === "pending") {
-    return <LoaderSection />;
+    return <Loader />;
   }
 
   const categoryRu: string = filterProduct[0]?.categoryRu;

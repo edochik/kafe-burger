@@ -1,12 +1,15 @@
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "./store";
-import { selectCategory } from "../features/RadioButtons/selectSlice";
+import { setCategories, setSelectCategory } from "../features/RadioButtons/categoriesSlice";
 import { addProductCart, decrementProduct, incrementProduct, setCartFromLocalStorage } from "../entities/cart/cartSlice";
 import { fetchUserVerificationThunk } from "../entities/user/thunks/fetchUserVerificationThunk";
 import { fetchHistoryOrdersThunk } from "../pages/HistoryOrders/fetchHistoryOrdersThunk";
 import { fetchAuthorizationThunk } from "../entities/user/thunks/fetchAuthorizationThunk";
 import { Cart } from "../entities/cart/types";
 import { fetchOrderThunk } from "../entities/cart/thunk/fetchOrderThunk";
+import { setSortBy } from "../entities/product/productSlice";
+import { fetchInitialProductsThunk } from "../entities/product/thunk/fetchInitialProductsThunk";
+import { getCategories } from "../features/RadioButtons/getCategories";
 
 export const listenerMiddleware = createListenerMiddleware();
 export const startAppListening = listenerMiddleware.startListening.withTypes<
@@ -17,7 +20,7 @@ export const startAppListening = listenerMiddleware.startListening.withTypes<
 // обновление состояния при изменение корзины
 startAppListening({
 	matcher: isAnyOf(
-		selectCategory,
+		setSelectCategory,
 		addProductCart,
 		incrementProduct,
 		decrementProduct
@@ -71,5 +74,28 @@ startAppListening({
 				listenerApi.dispatch(setCartFromLocalStorage([]));
 			}
 		}
+	}
+});
+
+// для сортировки если по default делаем запрос на сервер 
+startAppListening({
+	matcher: isAnyOf(setSortBy),
+	effect: async (action, listenerApi) => {
+		const state = listenerApi.getState();
+		const criteriaDefault = state.products.sortBy;
+		if (criteriaDefault === 'default') {
+			listenerApi.dispatch(fetchInitialProductsThunk())
+		}
+	}
+});
+
+
+startAppListening({
+	matcher: isAnyOf(fetchInitialProductsThunk.fulfilled),
+	effect: async (action, listenerApi) => {
+		const state = listenerApi.getState();
+		const { products } = state.products
+		const categories = getCategories(products)
+		listenerApi.dispatch(setCategories(categories))
 	}
 });

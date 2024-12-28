@@ -1,6 +1,6 @@
 import { API } from "../../../shared/api/api";
 import { fetchDataUniversal } from "../../../shared/api/helper";
-import { SuccessServer } from "../../user/types";
+import { SuccessServer } from "../../profile/types";
 import { OrderPayload } from "../types";
 
 const API_ORDER = `${API}order`;

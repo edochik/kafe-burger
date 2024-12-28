@@ -8,9 +8,9 @@ import classNames from "classnames";
 import { useEscapeHandler } from "../../shared/lib/hooks/useEscapeHandler";
 import { handleInvalidInput } from "../../shared/lib/utils/handleInvalidInput";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { fetchRegistrationThunk } from "../../entities/user/thunks/fetchRegistrationThunk";
+import { fetchRegistrationThunk } from "../../entities/profile/thunks/fetchRegistrationThunk";
 import { ResponseServer } from "../../shared/ui/ResponseServer/";
-import { resetError, resetMessage } from "../../entities/user/userSlice";
+import { resetError, resetMessage } from "../../entities/profile/userSlice";
 
 const RegistrationModal = () => {
   const [dataUser, setDataUser] = useState({

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchOrder } from "../fetch/fetchOrder";
-import { SuccessServer } from "../../user/types";
+import { SuccessServer } from "../../profile/types";
 import { OrderPayload } from "../types";
 import { IResponseServer } from "../../../shared/domain/responseServer";
 

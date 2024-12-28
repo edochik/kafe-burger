@@ -1,15 +1,15 @@
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "./store";
-import { setCategories, setSelectCategory } from "../features/RadioButtons/categoriesSlice";
+import { setCategories, setSelectCategory } from "../entities/categories/categoriesSlice";
 import { addProductCart, decrementProduct, incrementProduct, setCartFromLocalStorage } from "../entities/cart/cartSlice";
-import { fetchUserVerificationThunk } from "../entities/user/thunks/fetchUserVerificationThunk";
 import { fetchHistoryOrdersThunk } from "../pages/HistoryOrders/fetchHistoryOrdersThunk";
-import { fetchAuthorizationThunk } from "../entities/user/thunks/fetchAuthorizationThunk";
 import { Cart } from "../entities/cart/types";
 import { fetchOrderThunk } from "../entities/cart/thunk/fetchOrderThunk";
 import { setSortBy } from "../entities/product/productSlice";
 import { fetchInitialProductsThunk } from "../entities/product/thunk/fetchInitialProductsThunk";
-import { getCategories } from "../features/RadioButtons/getCategories";
+import { getCategories } from "../entities/categories/getCategories";
+import { fetchUserVerificationThunk } from "../entities/profile/thunks/fetchUserVerificationThunk";
+import { fetchAuthorizationThunk } from "../entities/profile/thunks/fetchAuthorizationThunk";
 
 export const listenerMiddleware = createListenerMiddleware();
 export const startAppListening = listenerMiddleware.startListening.withTypes<

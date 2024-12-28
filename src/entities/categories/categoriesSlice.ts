@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Categories } from "./getCategories.js";
+import { Categories } from "./types";
 
 
 interface InitialState {

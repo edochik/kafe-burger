@@ -1,12 +1,6 @@
 import { Product } from "../../shared/domain/Product";
+import { Categories } from "./types";
 
-
-export interface Categories {
-	id: string,
-	categoryEn: string,
-	categoryRu: string,
-	categoryImg: string
-}
 
 export function getCategories(list: Product[]): Categories[] {
 	const map = new Set()

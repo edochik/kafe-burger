@@ -1,6 +1,6 @@
-import { IResponseServer } from "../../shared/domain/responseServer.js";
-import { LoadingStatus } from "../../shared/types/loading.js";
-import { User } from "../user/types.js";
+import { IResponseServer } from "../../shared/domain/responseServer";
+import { LoadingStatus } from "../../shared/types/loading";
+import { User } from "../profile/types";
 
 export interface Cart {
 	id: number;

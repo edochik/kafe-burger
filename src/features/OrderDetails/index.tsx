@@ -1,4 +1,4 @@
-import { IOrderDetails } from "../../entities/user/types";
+import { IOrderDetails } from "../../entities/profile/types";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 import s from "./OrderDetails.module.scss";
 
@@ -11,7 +11,7 @@ const OrderDetails = ({ values }: OrderDetailsProps) => {
   const productsDictionary = Object.fromEntries(
     products.map((product) => [product.id, product])
   );
-  
+
   return (
     <ul className={s.OrderDetails}>
       {values.map((value) => {

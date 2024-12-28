@@ -3,7 +3,7 @@ import s from "./RenderLinkOrUser.module.scss";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEffect, useRef, useState } from "react";
-import { fetchLogoutThunk } from "../../entities/user/thunks/fetchLogoutThunk";
+import { fetchLogoutThunk } from "../../entities/profile/thunks/fetchLogoutThunk";
 import { useCloseHandler } from "../../shared/lib/hooks/useCloseHandler";
 
 const RenderLinkOrUser = () => {

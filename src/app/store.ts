@@ -2,11 +2,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listenerMiddleware } from './listenerMiddleware';
 import { cartSlice } from '../entities/cart/cartSlice';
 import { productSlice } from '../entities/product/productSlice';
-import { profileSlice } from '../entities/user/userSlice';
-import { fetchUserVerificationThunk } from '../entities/user/thunks/fetchUserVerificationThunk';
 import { fetchInitialProductsThunk } from '../entities/product/thunk/fetchInitialProductsThunk';
 import { historyOrdersSlice } from '../pages/HistoryOrders/historyOrdersSlice';
-import { categoriesSlice } from '../features/RadioButtons/categoriesSlice';
+import { categoriesSlice } from '../entities/categories/categoriesSlice';
+import { fetchUserVerificationThunk } from '../entities/profile/thunks/fetchUserVerificationThunk';
+import { profileSlice } from '../entities/profile/userSlice';
 
 export const store = configureStore({
 	reducer: {

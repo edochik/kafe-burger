@@ -1,4 +1,4 @@
-import { IOrderDetails } from "../../entities/user/types";
+import { IOrderDetails } from "../../entities/profile/types";
 
 export function getDetailsMap(orderDetails: IOrderDetails[]) {
 	const detailsMap: Map<number, IOrderDetails[]> = new Map();

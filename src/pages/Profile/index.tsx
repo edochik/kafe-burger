@@ -5,12 +5,12 @@ import {
   resetError,
   resetMessage,
   updateUser,
-} from "../../entities/user/userSlice";
+} from "../../entities/profile/userSlice";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { ResponseServer } from "../../shared/ui/ResponseServer";
-import { User } from "../../entities/user/types.js";
-import { fetchUpdateUserThunk } from "../../entities/user/thunks/fetchUpdateUserThunk";
+import { User } from "../../entities/profile/types.js";
+import { fetchUpdateUserThunk } from "../../entities/profile/thunks/fetchUpdateUserThunk";
 
 const translateField: Partial<User> = {
   firstName: "Имя",

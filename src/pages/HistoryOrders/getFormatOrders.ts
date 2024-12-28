@@ -1,4 +1,4 @@
-import { Order } from "../../entities/user/types.js";
+import { Order } from "../../entities/profile/types.js";
 
 export function getFormatOrders(orders: Order[]) {
 	return orders.map((order) => {

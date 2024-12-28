@@ -6,9 +6,9 @@ import { DonutIcon } from "../../shared/ui/SVGIcons/DonutIcon";
 import PhoneInput from "react-phone-input-2";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEscapeHandler } from "../../shared/lib/hooks/useEscapeHandler";
-import { updateUser } from "../../entities/user/userSlice";
+import { updateUser } from "../../entities/profile/userSlice";
 import { deliveryMethods } from "./DeliveryMethods";
-import { User } from "../../entities/user/types.js";
+import { User } from "../../entities/profile/types.js";
 import { fetchOrderThunk } from "../../entities/cart/thunk/fetchOrderThunk";
 import { updateSuccessServer } from "../../entities/cart/cartSlice";
 

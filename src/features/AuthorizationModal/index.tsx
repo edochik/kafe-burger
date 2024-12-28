@@ -8,8 +8,8 @@ import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEscapeHandler } from "../../shared/lib/hooks/useEscapeHandler";
 import { ResponseServer } from "../../shared/ui/ResponseServer";
 import { handleInvalidInput } from "../../shared/lib/utils/handleInvalidInput";
-import { fetchAuthorizationThunk } from "../../entities/user/thunks/fetchAuthorizationThunk";
-import { resetError } from "../../entities/user/userSlice";
+import { fetchAuthorizationThunk } from "../../entities/profile/thunks/fetchAuthorizationThunk";
+import { resetError } from "../../entities/profile/userSlice";
 
 const AuthorizationModal = () => {
   const [formValues, setFormValues] = useState({

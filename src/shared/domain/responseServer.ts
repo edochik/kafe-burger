@@ -5,4 +5,5 @@ export interface IResponseServer {
 	field?: string;
 	orderId?: number;
 	total?: number;
+	code?: number;
 }

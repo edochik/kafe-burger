@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { PartialData } from "../RadioButtons/radiobuttons";
+import { CategoryProducts } from "../RadioButtons/getCategoryProducts";
 import { selectCategory } from "../RadioButtons/selectSlice";
 import s from "./RadioButton.module.scss";
 
-const RadioButton = (props: PartialData) => {
+const RadioButton = (props: CategoryProducts) => {
   const { id, categoryEn, categoryRu, categoryImg } = props;
   const defaultValue = useAppSelector((state) => state.selectProduct);
   const dispatch = useAppDispatch();

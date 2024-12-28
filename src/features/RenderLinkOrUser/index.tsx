@@ -59,13 +59,7 @@ const RenderLinkOrUser = () => {
             <Link to="/history-order">Заказы</Link>
           </li>
           <li className={s.item}>
-            <Link
-              to="/"
-              onClick={() => {
-                // dispatch(clearUser());
-                dispatch(fetchLogoutThunk());
-              }}
-            >
+            <Link to="/" onClick={() => dispatch(fetchLogoutThunk())}>
               Выйти
             </Link>
           </li>

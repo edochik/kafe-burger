@@ -63,11 +63,17 @@ export const profileSlice = createSlice({
 				state.loading = "pending";
 			})
 			.addCase(fetchUserVerificationThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+
 				state.loading = "succeeded";
 				state.isAuthorization = true;
 				state.data.user = { ...action.payload.user };
 			})
 			.addCase(fetchUserVerificationThunk.rejected, (state, action) => {
+				const { code } = action.payload!;
+				if (code === 401) {
+					state.loading = "failed";
+					return
+				}
 				state.loading = "failed";
 				state.isAuthorization = false;
 				state.errorServer = action.payload ?? { status: "error", message: "Unknown error" };

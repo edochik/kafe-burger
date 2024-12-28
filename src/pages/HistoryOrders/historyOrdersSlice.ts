@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchHistoryOrdersThunk } from "./fetchHistoryOrdersThunk";
-import { LoadingStatus } from "../../shared/types/loading.js";
+import { LoadingStatus } from "../../shared/types/loading";
 
 interface OrderDetails {
 	id: number,

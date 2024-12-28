@@ -2,7 +2,6 @@
 @use '../../shared/style/variable.scss' as var;
 
 .main {
-	background-color: var.$color-background-main;
 	padding-bottom: 50px;
 	.wrapper {
 		@include mix.container();

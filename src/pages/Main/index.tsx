@@ -2,15 +2,16 @@ import s from "./main.module.scss";
 import { RadioButtons } from "../../features/RadioButtons/";
 import { ProductList } from "../../features/ProductList/";
 import { Cart } from "../../features/Cart/";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { NotFoundPage } from "../NotFoundPage/";
 
 const Main = () => {
-  const { pathname } = useLocation();
   return (
     <>
       <main className={s.main}>
         <RadioButtons />
         <div className={s.wrapper}>
+          {/* <NotFoundPage /> */}
           <Cart />
           <ProductList />
         </div>

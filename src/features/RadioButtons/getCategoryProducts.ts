@@ -1,16 +1,16 @@
 import { Product } from "../../shared/domain/Product.js";
 
 
-export interface PartialData {
-	id: string, 
+export interface CategoryProducts {
+	id: string,
 	categoryEn: string,
 	categoryRu: string,
 	categoryImg: string
 }
 
-export function getPartialData(list: Product[]) {
+export function getCategoryProducts(list: Product[]) {
 	const map = new Set()
-	const result: PartialData[] = [];
+	const result: CategoryProducts[] = [];
 	list.forEach(item => {
 		if (!map.has(item.categoryEn)) {
 			map.add(item.categoryEn)

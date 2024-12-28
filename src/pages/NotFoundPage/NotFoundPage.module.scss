@@ -4,17 +4,37 @@
 .NotFoundPage {
 	padding: 100px 0;
 	text-align: center;
-	background-color: var.$color-background-main;
-	.title {
-		margin: 0;
-		font-size: 200px;
-		line-height: 0.7;
-	}
-	.text {
-		margin: 0;
-		font-size: var.$font-size-xlarge;
-	}
-	.go_back {
-		@include mix.go-back();
+	.container {
+		display: grid;
+		column-gap: 40px;
+		margin: auto;
+		max-width: 825px;
+		grid-template-columns: 445px 340px;
+		grid-template-rows: auto;
+		grid-template-areas:
+			'title images'
+			'text images'
+			'go_back images';
+		.title {
+			align-self: end;
+			grid-area: title;
+			margin: 0 0 10px 0;
+			font-size: var.$font-size-xxlarge;
+			line-height: 0.7;
+		}
+		.text {
+			align-self: center;
+			grid-area: text;
+			margin: 0;
+			color: var.$color-gray-dark;
+			font-size: var.$font-size-large;
+		}
+		.go_back {
+			grid-area: go_back;
+			@include mix.go-back();
+		}
+		.images {
+			grid-area: images;
+		}
 	}
 }

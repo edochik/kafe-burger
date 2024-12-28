@@ -16,8 +16,10 @@ const AuthorizationModal = () => {
     login: "",
     password: "",
   });
-  const status = useAppSelector((state) => state.profile.loading);
+  const loading = useAppSelector((state) => state.profile.loading);
   const errorServer = useAppSelector((state) => state.profile.errorServer);
+  const test = useAppSelector((state) => state.profile);
+  console.log(test);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -86,7 +88,7 @@ const AuthorizationModal = () => {
             <button
               type="submit"
               className={s.button}
-              disabled={status === "pending"}
+              disabled={loading === "pending"}
             >
               Войти
             </button>

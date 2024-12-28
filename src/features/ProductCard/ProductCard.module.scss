@@ -34,9 +34,15 @@
 		color: var.$color-gray-dark;
 	}
 	.button {
-		@include mix.button-style(button-bg-default-1, color-black, button-bg-hover-1, button-bg-selected);
+		@include mix.button-style(
+			var.$button-bg-default-1,
+			var.$color-black,
+			var.$button-bg-hover-1,
+			var.$button-bg-selected
+		);
 		background-color: var.$button-bg-default-1;
 		color: var.$color-black;
+		font-weight: var.$font-weight-bold;
 		&:hover {
 			color: color-white;
 		}

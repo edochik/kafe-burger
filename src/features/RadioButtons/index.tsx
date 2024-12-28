@@ -1,17 +1,16 @@
 import s from "./RadioButtons.module.scss";
 import { RadioButton } from "../RadioButton";
-import { getPartialData } from "./radiobuttons";
+import { getCategoryProducts } from "./getCategoryProducts";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
-// import { products } from "../../shared/data/productData";
 
 const RadioButtons = () => {
   const products = useAppSelector((state) => state.products.products);
-  const buttons = getPartialData(products);
+  const categories = getCategoryProducts(products);
   return (
     <div className={s.RadioButtons}>
       <fieldset className={s.fieldset}>
-        {buttons.map((data) => (
-          <RadioButton key={data.id} {...data} />
+        {categories.map((category) => (
+          <RadioButton key={category.id} {...category} />
         ))}
       </fieldset>
     </div>

@@ -1,39 +1,21 @@
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 import s from "./HistoryOrders.module.scss";
-import { IOrderDetails } from "../../entities/user/types";
 import { OrderDetails } from "../../features/OrderDetails/";
+import { getDetailsMap } from "./getDetailsMap";
+import { getFormatOrders } from "./getFormatOrders";
 
 const HistoryOrders = () => {
   const { orders, orderDetails } = useAppSelector(
     (state) => state.historyOrder
   );
-  const { isAuthorization } = useAppSelector((state) => state.profile);
-  const detailsMap: Map<number, IOrderDetails[]> = new Map();
-  for (const order of orderDetails) {
-    const orderId = order.orderId;
-    if (!detailsMap.has(orderId)) {
-      detailsMap.set(orderId, []);
-    }
-    const key = detailsMap.get(orderId);
-    key?.push(order);
-  }
-
-  const formatOrders = orders.map((order) => {
-    const { createdAt, ...rest } = order;
-    const date = new Date(order.createdAt);
-    const formatDate = date.toLocaleDateString("ru-RU", {
-      day: "numeric",
-      month: "long",
-    });
-    return { ...rest, date: formatDate };
-  });
-
+  const detailsMap = getDetailsMap(orderDetails);
+  const formatOrders = getFormatOrders(orders);
   return (
     <div className={s.HistoryOrders}>
       <div className={s.container}>
         <ul className={s.orders}>
-          {formatOrders.map((order) => {
+          {formatOrders.reverse().map((order) => {
             const { id, date, total } = order;
             const values = detailsMap.get(id);
             return (

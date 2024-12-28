@@ -52,7 +52,7 @@ export interface AuthorizationRequest {
 export interface SuccessServer {
 	status: 'success',
 	message: string,
-	user: User
+	user: User,
 }
 
 export interface UpdateUser extends Omit<User, "password"> {

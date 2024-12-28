@@ -2,58 +2,60 @@
 @use '../../shared/style/variable.scss' as var;
 
 .footer {
-	display: flex;
-	padding: var.$padding-body;
-	justify-content: space-between;
-	@include mix.container();
+	background-color: var.$color-white;
 	padding-top: 50px;
 	padding-bottom: 50px;
-	.column:first-child {
-		.logo {
-			display: inline-block;
-			margin-bottom: 54px;
-			> img {
-				width: 300px;
-			}
-		}
-	}
-	.column:last-child {
+	.container {
 		display: flex;
-		column-gap: 125px;
-		.inner:first-child {
-			.text {
-				font-size: var.$font-size-large;
-				margin: 0 0 24px 0;
-			}
-			.phone {
-				color: inherit;
-				line-height: 1.3;
-				text-decoration: none;
-				font-size: 20px;
-				font-weight: 700;
+		justify-content: space-between;
+		@include mix.container();
+		.column:first-child {
+			.logo {
+				display: inline-block;
+				margin-bottom: 54px;
+				> img {
+					width: 300px;
+				}
 			}
 		}
-		.inner:last-of-type {
-			.text {
-				font-size: var.$font-size-large;
-				margin: 0 0 24px 0;
+		.column:last-child {
+			display: flex;
+			column-gap: 125px;
+			.inner:first-child {
+				.text {
+					font-size: var.$font-size-large;
+					margin: 0 0 24px 0;
+				}
+				.phone {
+					color: inherit;
+					line-height: 1.3;
+					text-decoration: none;
+					font-size: 20px;
+					font-weight: 700;
+				}
 			}
-			.list {
-				@include mix.list-reset();
-				display: flex;
-				column-gap: 16px;
-				.item {
-					.link {
-						transition: opacity 0.3s ease-in-out;
-						opacity: 1;
-						.image {
-							transition: transform 0.3s ease-in-out;
-							&:hover {
-								transform: scale(1.3);
+			.inner:last-of-type {
+				.text {
+					font-size: var.$font-size-large;
+					margin: 0 0 24px 0;
+				}
+				.list {
+					@include mix.list-reset();
+					display: flex;
+					column-gap: 16px;
+					.item {
+						.link {
+							transition: opacity 0.3s ease-in-out;
+							opacity: 1;
+							.image {
+								transition: transform 0.3s ease-in-out;
+								&:hover {
+									transform: scale(1.3);
+								}
 							}
-						}
-						&:hover {
-							opacity: 0.5;
+							&:hover {
+								opacity: 0.5;
+							}
 						}
 					}
 				}

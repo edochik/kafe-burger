@@ -1,6 +1,6 @@
-import { IOrderDetails } from "../../entities/profile/types";
+import { IOrderDetails } from "../../entities/profile/types.js";
 
-export function getDetailsMap(orderDetails: IOrderDetails[]) {
+export function getOrderDetailsMap(orderDetails: IOrderDetails[]) {
 	const detailsMap: Map<number, IOrderDetails[]> = new Map();
 	for (const order of orderDetails) {
 		const orderId = order.orderId;

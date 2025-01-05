@@ -4,7 +4,6 @@
 	@include mix.list-reset();
 	padding: 25px;
 	background-color: var.$color-gray-dark;
-	border-top-right-radius: 15px;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
@@ -15,7 +14,7 @@
 		.image {
 			width: 45px;
 			height: 45px;
-			border-radius: 15px;
+			border-radius: var.$border-radius-default;
 		}
 		.name_ru {
 			margin: 0;

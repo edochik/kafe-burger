@@ -16,7 +16,7 @@
 		justify-content: space-between;
 		.SkeletonLoaderCard {
 			background-color: white;
-			border-radius: 15px;
+			border-radius: var.$border-radius-default;
 		}
 	}
 }

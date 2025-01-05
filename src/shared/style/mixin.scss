@@ -87,6 +87,8 @@
 	&:disabled {
 		background-color: var.$button-bg-disabled;
 		color: var.$button-color-disabled;
+		position: static;
+		cursor: unset;
 	}
 }
 
@@ -100,7 +102,7 @@
 @mixin color-message($color, $background-color) {
 	margin: 20px 0;
 	padding: 10px 15px;
-	border-radius: 15px;
+	border-radius: var.$border-radius-default;
 	color: $color;
 	font-weight: 700;
 	font-size: 16px;
@@ -111,6 +113,7 @@
 	transition: all 0.3s ease-in-out;
 	box-shadow: 0px 0px 20px red;
 }
+
 @mixin loader() {
 	position: relative;
 	width: 120px;

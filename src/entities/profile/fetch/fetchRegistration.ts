@@ -1,8 +1,7 @@
 import { API } from "../../../shared/api/api";
-import { fetchDataUniversal } from "../../../shared/api/helper";
+import { fetchData } from "../../../shared/api/helper";
 import { SuccessServer, UpdateUser } from "../types";
-
-const API_REGISTRATION = `${API}register`
+const API_REGISTRATION = `${API}auth/register`
 
 export async function fetchRegistration(data: Partial<UpdateUser>) {
 	const options: RequestInit = {
@@ -12,6 +11,6 @@ export async function fetchRegistration(data: Partial<UpdateUser>) {
 		},
 		body: JSON.stringify({ ...data })
 	}
-	const response: SuccessServer = await fetchDataUniversal(API_REGISTRATION, options);
+	const response: SuccessServer = await fetchData(API_REGISTRATION, options);
 	return response
 }

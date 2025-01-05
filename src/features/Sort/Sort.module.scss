@@ -24,7 +24,7 @@
 		top: 26px;
 		@include mix.list-reset();
 		display: inline-block;
-		border-radius: 15px;
+		border-radius: var.$border-radius-default;
 		overflow: hidden;
 		background-color: var.$color-white;
 		.item {

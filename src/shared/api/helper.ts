@@ -1,6 +1,6 @@
 import { IResponseServer } from "../domain/responseServer";
 
-export async function fetchDataUniversal<T>(url: string, options?: Partial<RequestInit>): Promise<T> {
+export async function fetchData<T>(url: string, options?: Partial<RequestInit>): Promise<T> {
 	const response = await fetch(url, options);
 	if (!response.ok) {
 		const error: IResponseServer = await response.json();

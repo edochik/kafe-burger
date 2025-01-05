@@ -5,6 +5,7 @@ import { fetchAuthorizationThunk } from "./thunks/fetchAuthorizationThunk";
 import { fetchLogoutThunk } from "./thunks/fetchLogoutThunk";
 import { fetchUpdateUserThunk } from "./thunks/fetchUpdateUserThunk";
 import { fetchRegistrationThunk } from "./thunks/fetchRegistrationThunk";
+import { fetchOrdersThunk } from "./thunks/fetchOrdersThunk";
 
 export const initialState: InitialStateUser = {
 	loading: "idle",
@@ -23,8 +24,8 @@ export const initialState: InitialStateUser = {
 			apartment: "",
 			login: "",
 		},
-		// orders: [],
-		// orderDetails: []
+		orders: [],
+		orderDetails: []
 	}
 }
 
@@ -51,7 +52,9 @@ export const profileSlice = createSlice({
 			.addCase(fetchAuthorizationThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
 				state.loading = "succeeded";
 				state.isAuthorization = true;
-				state.data.user = { ...action.payload.user };
+				state.data.user = action.payload.user
+				state.data.orders = action.payload.orders
+				state.data.orderDetails = action.payload.orderDetails
 			})
 			.addCase(fetchAuthorizationThunk.rejected, (state, action) => {
 				state.loading = "failed";
@@ -63,10 +66,11 @@ export const profileSlice = createSlice({
 				state.loading = "pending";
 			})
 			.addCase(fetchUserVerificationThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
-
 				state.loading = "succeeded";
 				state.isAuthorization = true;
-				state.data.user = { ...action.payload.user };
+				state.data.user = action.payload.user;
+				state.data.orders = action.payload.orders
+				state.data.orderDetails = action.payload.orderDetails
 			})
 			.addCase(fetchUserVerificationThunk.rejected, (state, action) => {
 				const { code } = action.payload!;
@@ -76,6 +80,32 @@ export const profileSlice = createSlice({
 				}
 				state.loading = "failed";
 				state.isAuthorization = false;
+				state.errorServer = action.payload ?? { status: "error", message: "Unknown error" };
+			})
+
+			.addCase(fetchUpdateUserThunk.pending, (state) => {
+				state.loading = "pending";
+			})
+			.addCase(fetchUpdateUserThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+				state.loading = "succeeded";
+				state.isAuthorization = true;
+				state.successServer = action.payload
+			})
+			.addCase(fetchUpdateUserThunk.rejected, (state, action) => {
+				state.loading = "failed";
+				state.isAuthorization = false;
+				state.errorServer = action.payload ?? { status: "error", message: "Unknown error" };
+			})
+
+			.addCase(fetchRegistrationThunk.pending, (state) => {
+				state.loading = "pending";
+			})
+			.addCase(fetchRegistrationThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+				state.loading = "succeeded";
+				state.successServer = action.payload
+			})
+			.addCase(fetchRegistrationThunk.rejected, (state, action) => {
+				state.loading = "failed";
 				state.errorServer = action.payload ?? { status: "error", message: "Unknown error" };
 			})
 
@@ -97,32 +127,20 @@ export const profileSlice = createSlice({
 				state.loading = "failed";
 			})
 
-			.addCase(fetchUpdateUserThunk.pending, (state) => {
-				state.loading = "pending";
-			})
-			.addCase(fetchUpdateUserThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
-				state.loading = "succeeded";
-				state.isAuthorization = true;
-				state.successServer = action.payload
-			})
-			.addCase(fetchUpdateUserThunk.rejected, (state, action) => {
-				state.loading = "failed";
-				state.isAuthorization = false;
-				state.errorServer = action.payload ?? { status: "error", message: "Unknown error" };
-			})
-
-			.addCase(fetchRegistrationThunk.pending, (state) => {
+			.addCase(fetchOrdersThunk.pending, (state) => {
 				state.loading = "pending";
 
 			})
-			.addCase(fetchRegistrationThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+			.addCase(fetchOrdersThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
 				state.loading = "succeeded";
-				state.successServer = action.payload
+				state.data.orders = action.payload.orders
+				state.data.orderDetails = action.payload.orderDetails
 			})
-			.addCase(fetchRegistrationThunk.rejected, (state, action) => {
+			.addCase(fetchOrdersThunk.rejected, (state) => {
 				state.loading = "failed";
-				state.errorServer = action.payload ?? { status: "error", message: "Unknown error" };
+
 			})
+
 	}
 })
 

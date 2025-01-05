@@ -8,10 +8,10 @@ import { Main } from "../pages/Main";
 import { Profile } from "../pages/Profile";
 import { NotFoundPage } from "../pages/NotFoundPage/";
 import { HistoryOrders } from "../pages/HistoryOrders/";
+import { CreateProduct } from "../pages/CreateProduct";
 
 export const AppRouter = () => {
   const isAuth = useAppSelector((state) => state.profile.isAuthorization);
-  const products = useAppSelector((state) => state.products.products);
   return (
     <Routes>
       <Route path="/" element={<Main />}>
@@ -32,6 +32,7 @@ export const AppRouter = () => {
       </Route>
       <Route path="/history-order" element={<HistoryOrders />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/create-product" element={<CreateProduct />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

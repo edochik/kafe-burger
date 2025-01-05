@@ -19,7 +19,6 @@ export interface Order {
 	createdAt: string,
 	total: number
 }
-
 export interface User {
 	id: null | number,
 	firstName: string,
@@ -39,8 +38,8 @@ export interface InitialStateUser {
 	isAuthorization: boolean;
 	data: {
 		user: User,
-		// orders: Order[],
-		// orderDetails: OrderDetails[]
+		orders: Order[],
+		orderDetails: IOrderDetails[]
 	}
 }
 
@@ -53,6 +52,8 @@ export interface SuccessServer {
 	status: 'success',
 	message: string,
 	user: User,
+	orders: Order[]
+	orderDetails: IOrderDetails[]
 }
 
 export interface UpdateUser extends Omit<User, "password"> {

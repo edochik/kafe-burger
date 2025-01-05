@@ -6,7 +6,7 @@ import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
 import PhoneInput from "react-phone-input-2";
 import classNames from "classnames";
 import { useEscapeHandler } from "../../shared/lib/hooks/useEscapeHandler";
-import { handleInvalidInput } from "../../shared/lib/utils/handleInvalidInput";
+import { customInvalidMessage } from "../../shared/lib/utils/customInvalidMessage";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { fetchRegistrationThunk } from "../../entities/profile/thunks/fetchRegistrationThunk";
 import { ResponseServer } from "../../shared/ui/ResponseServer/";
@@ -40,9 +40,9 @@ const RegistrationModal = () => {
       dispatch(resetMessage());
     }
     setClientError(null);
-  }, [dataUser, confirmPassword]);
+  }, [dataUser, confirmPassword]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleUpdateUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setDataUser((prev) => ({ ...prev, [name]: value }));
   };
@@ -79,13 +79,13 @@ const RegistrationModal = () => {
                   value={dataUser.firstName}
                   name="firstName"
                   minLength={2}
-                  onChange={(e) => handleUpdateUser(e)}
+                  onChange={(e) => handleInputChange(e)}
                   autoFocus
                   pattern="[а-яёА-ЯЁ]*"
                   aria-label="Имя"
                   required
                   onInvalid={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleInvalidInput(
+                    customInvalidMessage(
                       e,
                       "Имя должно содержать только кириллические буквы."
                     )
@@ -98,11 +98,11 @@ const RegistrationModal = () => {
                   value={dataUser.lastName}
                   name="lastName"
                   minLength={2}
-                  onChange={(e) => handleUpdateUser(e)}
+                  onChange={(e) => handleInputChange(e)}
                   aria-label="Фамилия"
                   pattern="[а-яёА-ЯЁ]*"
                   onInvalid={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleInvalidInput(
+                    customInvalidMessage(
                       e,
                       "Фамилия должна содержать только кириллические буквы."
                     )
@@ -118,7 +118,7 @@ const RegistrationModal = () => {
                   placeholder="Email"
                   value={dataUser.email}
                   name="email"
-                  onChange={(e) => handleUpdateUser(e)}
+                  onChange={(e) => handleInputChange(e)}
                   aria-label="почта"
                   required
                 />
@@ -145,7 +145,7 @@ const RegistrationModal = () => {
                   placeholder="Улица, дом, квартира"
                   value={dataUser.address}
                   name="address"
-                  onChange={(e) => handleUpdateUser(e)}
+                  onChange={(e) => handleInputChange(e)}
                   aria-label="Улица, дом, квартира"
                   required
                 />
@@ -156,7 +156,7 @@ const RegistrationModal = () => {
                     placeholder="Этаж"
                     value={dataUser.floor}
                     name="floor"
-                    onChange={(e) => handleUpdateUser(e)}
+                    onChange={(e) => handleInputChange(e)}
                     aria-label="Этаж"
                     required
                   />
@@ -166,7 +166,7 @@ const RegistrationModal = () => {
                     placeholder="Квартира"
                     value={dataUser.apartment}
                     name="apartment"
-                    onChange={(e) => handleUpdateUser(e)}
+                    onChange={(e) => handleInputChange(e)}
                     aria-label="Квартира"
                     required
                   />
@@ -183,11 +183,11 @@ const RegistrationModal = () => {
                   name="login"
                   autoComplete="username"
                   minLength={4}
-                  onChange={(e) => handleUpdateUser(e)}
+                  onChange={(e) => handleInputChange(e)}
                   aria-label="Логин"
                   pattern="[a-zA-Z]*"
                   onInvalid={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleInvalidInput(
+                    customInvalidMessage(
                       e,
                       "Логин должен содержать только латинские буквы."
                     )
@@ -206,7 +206,7 @@ const RegistrationModal = () => {
                   name="password"
                   autoComplete="new-password"
                   minLength={6}
-                  onChange={(e) => handleUpdateUser(e)}
+                  onChange={(e) => handleInputChange(e)}
                   aria-label="Пароль"
                   required
                 />
@@ -226,6 +226,7 @@ const RegistrationModal = () => {
                   required
                 />
                 {errorServer && <ResponseServer {...errorServer} />}
+                {clientError && <div className={s.error}>{clientError}</div>}
                 <button
                   type="submit"
                   className={s.button}

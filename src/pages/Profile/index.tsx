@@ -65,7 +65,7 @@ const Profile = () => {
                   <input
                     className={classNames({
                       [s.input]: true,
-                      [s.gray]: key === "login",
+                      [s.block]: key === "login",
                     })}
                     type={key === "email" ? "email" : "text"}
                     name={key}

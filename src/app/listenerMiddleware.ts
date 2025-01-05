@@ -2,7 +2,6 @@ import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "./store";
 import { setCategories, setSelectCategory } from "../entities/categories/categoriesSlice";
 import { addProductCart, decrementProduct, incrementProduct, setCartFromLocalStorage } from "../entities/cart/cartSlice";
-import { fetchHistoryOrdersThunk } from "../pages/HistoryOrders/fetchHistoryOrdersThunk";
 import { Cart } from "../entities/cart/types";
 import { fetchOrderThunk } from "../entities/cart/thunk/fetchOrderThunk";
 import { setSortBy } from "../entities/product/productSlice";
@@ -10,6 +9,7 @@ import { fetchInitialProductsThunk } from "../entities/product/thunk/fetchInitia
 import { getCategories } from "../entities/categories/getCategories";
 import { fetchUserVerificationThunk } from "../entities/profile/thunks/fetchUserVerificationThunk";
 import { fetchAuthorizationThunk } from "../entities/profile/thunks/fetchAuthorizationThunk";
+import { fetchOrdersThunk } from "../entities/profile/thunks/fetchOrdersThunk";
 
 export const listenerMiddleware = createListenerMiddleware();
 export const startAppListening = listenerMiddleware.startListening.withTypes<
@@ -40,7 +40,7 @@ startAppListening({
 		const { id } = listenerApi.getState()?.profile?.data?.user
 		localStorage.removeItem('cartYourMeal');
 		if (id !== null) {
-			await listenerApi.dispatch(fetchHistoryOrdersThunk(id))
+			await listenerApi.dispatch(fetchOrdersThunk(id))
 		}
 	}
 });
@@ -53,10 +53,10 @@ startAppListening({
 		const { profile } = listenerApi.getState();
 		const userId = profile.data.user.id;
 		if (typeof userId === 'number') {
-			await listenerApi.dispatch(fetchHistoryOrdersThunk(userId));
+			// await listenerApi.dispatch(fetchHistoryOrdersThunk(userId));
 		}
 	}
-});
+})
 
 //загрузка данных с локал стораж при перезагрузке страницы
 startAppListening({
@@ -89,7 +89,7 @@ startAppListening({
 	}
 });
 
-
+// получаем категории товаров
 startAppListening({
 	matcher: isAnyOf(fetchInitialProductsThunk.fulfilled),
 	effect: async (action, listenerApi) => {

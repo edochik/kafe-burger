@@ -41,6 +41,9 @@ const RenderLinkOrUser = () => {
           <li className={s.item} onClick={() => setToggle(false)}>
             <Link to="/history-order">Заказы</Link>
           </li>
+          <li className={s.item} onClick={() => setToggle(false)}>
+            <Link to="/create-product">Создать</Link>
+          </li>
           <li className={s.item}>
             <Link to="/" onClick={() => dispatch(fetchLogoutThunk())}>
               Выйти

@@ -11,6 +11,7 @@ const ProductList = () => {
   const filterProduct = products.filter(
     (product) => product.categoryEn === selectProduct
   );
+
   if (loading === "pending") {
     return <Loader />;
   }

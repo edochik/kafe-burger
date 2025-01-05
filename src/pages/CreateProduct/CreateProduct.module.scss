@@ -1,0 +1,109 @@
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
+
+.CreateProduct {
+	text-align: center;
+	padding: 50px 0;
+	.container {
+		.title {
+			margin: 0 0 20px 0;
+			font-size: 30px;
+		}
+		@include mix.container();
+		max-width: 960px;
+		.form {
+			padding: 24px;
+			font-weight: var.$font-weight-extrabold;
+			background-color: var.$button-color-default-2;
+			box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+			border: 1px solid rgba(254, 95, 0, 0);
+			border-radius: var.$border-radius-default;
+			font-size: 30px;
+			display: grid;
+			grid-template-areas:
+				'nameRu category'
+				'nameEn imageUrl'
+				'price textarea'
+				'weight textarea'
+				'kilocalories textarea'
+				'composition textarea'
+				'error error'
+				'button button';
+			justify-content: space-between;
+			.label {
+				margin-bottom: 10px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				font-size: 30px;
+				color: var.$color-orange;
+				font-weight: var.$font-weight-extrabold;
+				.textarea {
+					width: 500px;
+					height: 300px;
+					resize: none;
+				}
+				.input,
+				.textarea {
+					outline: 3px solid var.$color-gray-dark-light;
+					border-radius: 5px;
+					&:focus {
+						outline: 3px solid var.$color-gray-dark;
+					}
+				}
+			}
+			:nth-child(1) {
+				grid-area: nameRu;
+			}
+			:nth-child(2) {
+				grid-area: nameEn;
+			}
+			:nth-child(3) {
+				grid-area: price;
+			}
+			:nth-child(4) {
+				grid-area: weight;
+			}
+			:nth-child(5) {
+				grid-area: kilocalories;
+			}
+			:nth-child(6) {
+				grid-area: composition;
+			}
+			:nth-child(7) {
+				grid-area: imageUrl;
+			}
+			:nth-child(8) {
+				grid-area: textarea;
+				align-self: self-end;
+			}
+			:nth-child(9) {
+				grid-area: category;
+			}
+			.button {
+				grid-area: button;
+				margin-bottom: 0;
+				align-self: start;
+				justify-self: center;
+				@include mix.button-style(
+					var.$button-bg-default-2,
+					var.$color-white,
+					var.$button-bg-hover-1,
+					var.$button-bg-selected
+				);
+				width: unset;
+				padding: 12px;
+			}
+			margin-bottom: 30px;
+			.error {
+				grid-area: error;
+				align-self: start;
+				justify-self: center;
+				@include mix.color-message(tomato, yellow);
+			}
+		}
+		.go_back {
+			@include mix.go_back();
+		}
+	}
+}

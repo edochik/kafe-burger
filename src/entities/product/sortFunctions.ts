@@ -1,4 +1,4 @@
-import { Product } from "../../shared/domain/Product.js";
+import { Product } from "./types";
 
 export const sortFunctions: Record<string, (products: Product[]) => Product[]> = {
 	alphabetAsc: (products) => products.sort((a, b) => a.nameRu.localeCompare(b.nameRu)),

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchOrderThunk } from "./thunk/fetchOrderThunk";
 import { Cart, initialStateCart } from "./types";
+import { SuccessServer } from "../profile/types.js";
 
 const initialState: initialStateCart = {
 	loading: "idle",
@@ -49,7 +50,7 @@ export const cartSlice = createSlice({
 			.addCase(fetchOrderThunk.pending, (state) => {
 				state.loading = "pending";
 			})
-			.addCase(fetchOrderThunk.fulfilled, (state, action: PayloadAction<{ status: 'success', message: string }>) => {
+			.addCase(fetchOrderThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
 				state.loading = "succeeded";
 				state.cart.length = 0;
 				state.successServer = action.payload
@@ -66,6 +67,6 @@ export const {
 	addProductCart,
 	incrementProduct,
 	decrementProduct,
-	setCartFromLocalStorage, 
+	setCartFromLocalStorage,
 	updateSuccessServer } = cartSlice.actions
 

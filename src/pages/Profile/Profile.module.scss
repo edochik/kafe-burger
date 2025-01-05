@@ -19,22 +19,21 @@
     background-color: var.$button-color-default-2;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(254, 95, 0, 0);
-    border-radius: 15px;
+    border-radius: var.$border-radius-default;
     font-size: 30px;
     margin-bottom: 20px;
     .item {
       .label {
         .input {
           color: var.$color-orange;
-          font-size: 30px;
           font-weight: var.$font-weight-extrabold;
           border: none;
           &:focus {
-            outline: 3px solid gray;
+            outline: 3px solid var.$color-gray-dark;
             border-radius: 5px;
           }
         }
-        .gray {
+        .block {
           color: gray;
         }
       }

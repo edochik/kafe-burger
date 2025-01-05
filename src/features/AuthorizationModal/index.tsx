@@ -7,7 +7,7 @@ import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEscapeHandler } from "../../shared/lib/hooks/useEscapeHandler";
 import { ResponseServer } from "../../shared/ui/ResponseServer";
-import { handleInvalidInput } from "../../shared/lib/utils/handleInvalidInput";
+import { customInvalidMessage } from "../../shared/lib/utils/customInvalidMessage";
 import { fetchAuthorizationThunk } from "../../entities/profile/thunks/fetchAuthorizationThunk";
 import { resetError } from "../../entities/profile/userSlice";
 
@@ -18,8 +18,6 @@ const AuthorizationModal = () => {
   });
   const loading = useAppSelector((state) => state.profile.loading);
   const errorServer = useAppSelector((state) => state.profile.errorServer);
-  const test = useAppSelector((state) => state.profile);
-  console.log(test);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -28,7 +26,7 @@ const AuthorizationModal = () => {
     }
   }, [formValues]); // eslint-disable-line react-hooks/exhaustive-deps
   useEscapeHandler();
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
@@ -57,13 +55,13 @@ const AuthorizationModal = () => {
               placeholder="Логин"
               name="login"
               value={formValues.login}
-              onChange={(e) => handleChangeInput(e)}
+              onChange={(e) => handleInputChange(e)}
               aria-label="Логин"
               minLength={3}
               autoFocus
               pattern="[a-zA-Z]*"
               onInvalid={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleInvalidInput(
+                customInvalidMessage(
                   e,
                   "Логин должен содержать только латинские буквы."
                 )
@@ -80,7 +78,7 @@ const AuthorizationModal = () => {
               name="password"
               value={formValues.password}
               autoComplete="current-password"
-              onChange={(e) => handleChangeInput(e)}
+              onChange={(e) => handleInputChange(e)}
               aria-label="Пароль"
               minLength={6}
               required

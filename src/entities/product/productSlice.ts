@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Product } from "../../shared/domain/Product";
 import { fetchInitialProductsThunk } from "./thunk/fetchInitialProductsThunk";
 import { LoadingStatus } from "../../shared/types/loading";
 import { sortFunctions } from "./sortFunctions";
+import { Product } from "./types";
 
 
 interface InitialState {
@@ -27,7 +27,7 @@ export const productSlice = createSlice({
 			const criteria = action.payload
 			state.sortBy = criteria;
 			if (criteria === 'default') {
-				return 
+				return
 			}
 			state.products = sortFunctions[criteria]?.(state.products)
 		}

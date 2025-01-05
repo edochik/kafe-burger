@@ -1,4 +1,4 @@
-import { Product } from "../../shared/domain/Product";
+import { Product } from "../product/types";
 import { Categories } from "./types";
 
 

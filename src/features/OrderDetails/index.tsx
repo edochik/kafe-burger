@@ -1,4 +1,4 @@
-import { IOrderDetails } from "../../entities/profile/types";
+import { IOrderDetails } from "../../entities/profile/types.js";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 import s from "./OrderDetails.module.scss";
 
@@ -7,7 +7,7 @@ interface OrderDetailsProps {
 }
 
 const OrderDetails = ({ values }: OrderDetailsProps) => {
-  const products = useAppSelector((state) => state.products.products);
+  const { products } = useAppSelector((state) => state.products);
   const productsDictionary = Object.fromEntries(
     products.map((product) => [product.id, product])
   );

@@ -1,14 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchProducts } from "../fetch/fetchProducts";
+import { ResponseServer } from "../../../shared/types/responseServer";
+import { Product } from "../types";
 
-export const fetchInitialProductsThunk = createAsyncThunk(
+export const fetchInitialProductsThunk = createAsyncThunk<
+	Product[],
+	void,
+	{ rejectValue: ResponseServer }
+>(
 	"fetchInitialProductThunk",
-	async () => {
+	async (_, { rejectWithValue }) => {
 		try {
 			const products = await fetchProducts();
 			return products
 		} catch (error) {
-			return []
+			return rejectWithValue(error as ResponseServer);
 		}
 	}
 )

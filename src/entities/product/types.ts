@@ -12,3 +12,8 @@ export interface Product {
 	kilocalories: number;
 	imageUrl: string;
 }
+
+export interface SuccessServer {
+	status: 'success',
+	message: string,
+}

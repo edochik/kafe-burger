@@ -1,12 +1,13 @@
 
+- [✅] Хорошо
+- [❌] Плохо
    src/
    ├── app/
-   │ ├── App.tsx - приложение
-   │ ├── AppRouter.tsx - Router приложения
-   │ ├── global.d.ts использования scss
-   │ ├── interface.ts - interface путей
-   │ ├── router.tsx - пути приложения
-   │ └── store.ts - Redux/toolkit
+   │ ├── App.tsx - приложение [✅]
+   │ ├── AppRouter.tsx - Router приложения [❌] переделать для разных ролей
+   │ ├── global.d.ts использования scss [✅]
+   │ ├── listenerMiddleware.ts - мидлвара для обработки побочных эффектов [❌] проверить на актуальность
+   │ └── store.ts - Redux/toolkit [❌]
    ├── entities/
    │ ├── cart/ - срез cart
    │ ├── categories/ - срез categories
@@ -15,44 +16,38 @@
    ├── features/
    │ ├── AuthorizationModal/ модальное окно авторизации
    │ ├── Cart/ корзина
+   │ ├── LoginOrUserMenu/ вход или меню пользователя
    │ ├── OrderDetails/ данные о Истории заказов
-   │ ├── OrderModal
-   │ ├── 
-   │ ├── ProductCard/+ продукт
-   │ ├── ProductCart/+ продукция в корзине
-   │ ├── ProductList/+ список продукции
-   │ ├── RadioButton/+ радио кнопка
-   │ └── RadioButtons/ + радио кнопки
+   │ ├── OrderModal/ модальное окно заказ
+   │ ├── Pagination/ пагинация
+   │ ├── ProductCard/ продукт
+   │ ├── ProductCart/ продукция в корзине
+   │ ├── ProductList/ список продукции
+   │ ├── RadioButton/ радио кнопка
+   │ ├── RadioButtons/ радио кнопки
+   │ ├── RegistrationModal/ модальное окно регистрации
+   │ └── Sort/ сортировка кнопки
    ├── pages/
-   │ ├── Main/ + основной контент
-   │ └── NotFoundPage/ + если нет страницы
-   ├── widgets/
-   │ ├── Footer/+
-   │ ├── Header/+  
-   │ ├── Modal/+
-   │ └── ProductPage/+
+   │ ├── CreateProduct/ создать продукцию
+   │ ├── HistoryOrders/ история заказов
+   │ ├── Main/ основной контент
+   │ ├── NotFoundPage/ если нет страницы
+   │ └── Profile/ профиль пользователя
+   ├── services/ пустой???
    ├── shared/
+   │ ├── api / api и функция fetchData 
    │ ├── assets
    │ │ ├── fonts/+ // фон
    │ │ ├── icon/+ // иконки
    │ │ └── images/+ // изображения
-   │ ├── data
-   │ │ └── productData.ts/+ // данные о продукте
-   │ ├── lib
-   │ │ └── hooks+ //
-   │ │ . └── hooks.ts+ // костомные hooks для redux
-   │ ├── ui // переиспользуемые компоненты
-   │ │ . ├── Button/ +
-   │ │ . ├── Input/ +
-   │ │ . ├── SVGIcons/ +
-   │ │ . ├── ToggleButton/ +
-   │ │ . └── ToggleProductButton/ +
-   │ └── style // стили
-   │ . ├── fonts.css +
-   │ . ├── global.css +
-   │ . ├── normalize.css +
-   │ . └── variable.css +
-   ├── utils/
+   │ ├── lib / папка hooks => Типизация hooks и два hook useCloseHandler и useEscapeHandler
+   │ ├── style / fonst, global, mixin, modal.module.scss, variable
+   │ ├── types / global types 
+   │ ├── ui / FormInput, ResponseServer,SVGIcons, ToggleProductButton переиспользуемые фитчи
+   ├── widgets/
+   │ ├── Footer/ 
+   │ ├── Header/  
+   │ └── ProductPage/ страница продукции
    └── index.tsx
 
 3. Подключить модульный scss

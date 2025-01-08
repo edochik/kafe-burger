@@ -1,7 +1,7 @@
 import s from "./header.module.scss";
 import { LogoIcon } from "../../shared/ui/SVGIcons/LogoIcon";
 import { BurgerIcon } from "../../shared/ui/SVGIcons/BurgerIcon";
-import { RenderLinkOrUser } from "../../features/RenderLinkOrUser/";
+import { RenderLinkOrUser } from "../../features/LoginOrUserMenu";
 
 const Header = () => {
   return (

@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import s from "./RenderLinkOrUser.module.scss";
+import s from "./LoginOrUserMenu.module.scss";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useRef, useState } from "react";
 import { fetchLogoutThunk } from "../../entities/profile/thunks/fetchLogoutThunk";
 import { useCloseHandler } from "../../shared/lib/hooks/useCloseHandler";
 
-const RenderLinkOrUser = () => {
+const LoginOrUserMenu = () => {
   const { isAuthorization } = useAppSelector((state) => state.profile);
   const { login } = useAppSelector((state) => state.profile.data.user);
   const [toggle, setToggle] = useState(false);
@@ -61,4 +61,4 @@ const RenderLinkOrUser = () => {
   );
 };
 
-export { RenderLinkOrUser };
+export { LoginOrUserMenu as RenderLinkOrUser };

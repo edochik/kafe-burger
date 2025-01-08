@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { SuccessServer } from "../types";
-import { IResponseServer } from "../../../shared/domain/responseServer";
+import { ResponseServer } from "../../../shared/types/responseServer";
 import { fetchOrders } from "../fetch/fetchOrders";
 
 
 export const fetchOrdersThunk = createAsyncThunk<
 	SuccessServer,
 	number,
-	{ rejectValue: IResponseServer }
+	{ rejectValue: ResponseServer }
 >(
 	"fetchOrdersThunk",
 	async (data, { rejectWithValue }) => {
@@ -15,7 +15,7 @@ export const fetchOrdersThunk = createAsyncThunk<
 			const response = await fetchOrders(data);
 			return response;
 		} catch (error) {
-			return rejectWithValue(error as IResponseServer);
+			return rejectWithValue(error as ResponseServer);
 		}
 	}
 );

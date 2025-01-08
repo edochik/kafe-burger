@@ -10,7 +10,7 @@ import { customInvalidMessage } from "../../shared/lib/utils/customInvalidMessag
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { fetchRegistrationThunk } from "../../entities/profile/thunks/fetchRegistrationThunk";
 import { ResponseServer } from "../../shared/ui/ResponseServer/";
-import { resetError, resetMessage } from "../../entities/profile/userSlice";
+import { resetServerResponsesProfile } from "../../entities/profile/userSlice";
 
 const RegistrationModal = () => {
   const [dataUser, setDataUser] = useState({
@@ -33,11 +33,8 @@ const RegistrationModal = () => {
   const navigate = useNavigate();
   useEscapeHandler();
   useEffect(() => {
-    if (errorServer !== null) {
-      dispatch(resetError());
-    }
-    if (successServer !== null) {
-      dispatch(resetMessage());
+    if (errorServer !== null || successServer !== null) {
+      dispatch(resetServerResponsesProfile());
     }
     setClientError(null);
   }, [dataUser, confirmPassword]); // eslint-disable-line react-hooks/exhaustive-deps

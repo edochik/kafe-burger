@@ -1,7 +1,7 @@
-import { IOrderDetails } from "../../entities/profile/types.js";
+import { OrderDetail } from "../../entities/profile/types.js";
 
-export function getOrderDetailsMap(orderDetails: IOrderDetails[]) {
-	const detailsMap: Map<number, IOrderDetails[]> = new Map();
+export function getOrderDetailsMap(orderDetails: OrderDetail[]) {
+	const detailsMap: Map<number, OrderDetail[]> = new Map();
 	for (const order of orderDetails) {
 		const orderId = order.orderId;
 		if (!detailsMap.has(orderId)) {

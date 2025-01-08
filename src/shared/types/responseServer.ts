@@ -1,5 +1,4 @@
-// надо переделать на ServerError
-export interface IResponseServer {
+export interface ResponseServer {
 	status: 'success' | 'error';
 	message: string;
 	field?: string;

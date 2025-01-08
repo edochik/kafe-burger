@@ -17,3 +17,8 @@ export interface SuccessServer {
 	status: 'success',
 	message: string,
 }
+
+export interface pageInfo {
+	pageSize: number,
+	currentPage: number,
+}

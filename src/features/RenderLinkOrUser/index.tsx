@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import s from "./RenderLinkOrUser.module.scss";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { fetchLogoutThunk } from "../../entities/profile/thunks/fetchLogoutThunk";
 import { useCloseHandler } from "../../shared/lib/hooks/useCloseHandler";
 
@@ -45,7 +45,13 @@ const RenderLinkOrUser = () => {
             <Link to="/create-product">Создать</Link>
           </li>
           <li className={s.item}>
-            <Link to="/" onClick={() => dispatch(fetchLogoutThunk())}>
+            <Link
+              to="/"
+              onClick={() => {
+                setToggle(false);
+                dispatch(fetchLogoutThunk());
+              }}
+            >
               Выйти
             </Link>
           </li>

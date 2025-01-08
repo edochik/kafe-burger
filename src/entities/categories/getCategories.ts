@@ -1,10 +1,10 @@
 import { Product } from "../product/types";
-import { Categories } from "./types";
+import { Category } from "./types";
 
 
-export function getCategories(list: Product[]): Categories[] {
+export function getCategories(list: Product[]): Category[] {
 	const map = new Set()
-	const result: Categories[] = [];
+	const result: Category[] = [];
 	list.forEach(item => {
 		if (!map.has(item.categoryEn)) {
 			map.add(item.categoryEn)

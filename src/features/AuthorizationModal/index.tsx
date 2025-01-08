@@ -9,7 +9,7 @@ import { useEscapeHandler } from "../../shared/lib/hooks/useEscapeHandler";
 import { ResponseServer } from "../../shared/ui/ResponseServer";
 import { customInvalidMessage } from "../../shared/lib/utils/customInvalidMessage";
 import { fetchAuthorizationThunk } from "../../entities/profile/thunks/fetchAuthorizationThunk";
-import { resetError } from "../../entities/profile/userSlice";
+import { resetServerResponsesProfile } from "../../entities/profile/userSlice";
 
 const AuthorizationModal = () => {
   const [formValues, setFormValues] = useState({
@@ -22,7 +22,7 @@ const AuthorizationModal = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (errorServer !== null) {
-      dispatch(resetError());
+      dispatch(resetServerResponsesProfile());
     }
   }, [formValues]); // eslint-disable-line react-hooks/exhaustive-deps
   useEscapeHandler();

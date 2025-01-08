@@ -1,9 +1,9 @@
-import { IOrderDetails } from "../../entities/profile/types.js";
+import { OrderDetail } from "../../entities/profile/types.js";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 import s from "./OrderDetails.module.scss";
 
 interface OrderDetailsProps {
-  values: IOrderDetails[];
+  values: OrderDetail[];
 }
 
 const OrderDetails = ({ values }: OrderDetailsProps) => {

@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { setSelectCategory } from "../../entities/categories/categoriesSlice";
 import s from "./RadioButton.module.scss";
-import { Categories } from "../../entities/categories/types.js";
+import { Category } from "../../entities/categories/types.js";
 
-const RadioButton = (props: Categories) => {
+const RadioButton = (props: Category) => {
   const { id, categoryEn, categoryRu, categoryImg } = props;
   const { selectCategory } = useAppSelector((state) => state.categories);
   const dispatch = useAppDispatch();

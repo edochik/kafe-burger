@@ -1,0 +1,32 @@
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
+
+.Pagination {
+	margin: 10px 0;
+	display: flex;
+	.list {
+		@include mix.list-reset();
+		margin: auto;
+		display: flex;
+		column-gap: 10px;
+		.item {
+			.button {
+				cursor: pointer;
+				display: block;
+				padding: 10px 15px;
+				border-radius: 15px;
+				text-decoration: none;
+				color: black;
+				background-color: var.$button-bg-default-3;
+				font-weight: 700;
+				font-size: 20px;
+				border: none;
+				transition: background-color 0.3s ease-in-out;
+				&:disabled {
+					cursor: unset;
+					background-color: var.$button-bg-default-1;
+				}
+			}
+		}
+	}
+}

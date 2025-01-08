@@ -27,10 +27,12 @@
 				'weight textarea'
 				'kilocalories textarea'
 				'composition textarea'
+				'success success'
 				'error error'
+				'client_error client_error'
 				'button button';
 			justify-content: space-between;
-			.label {
+			label {
 				margin-bottom: 10px;
 				display: flex;
 				flex-direction: column;
@@ -38,13 +40,13 @@
 				font-size: 30px;
 				color: var.$color-orange;
 				font-weight: var.$font-weight-extrabold;
-				.textarea {
+				textarea {
 					width: 500px;
 					height: 300px;
 					resize: none;
 				}
-				.input,
-				.textarea {
+				input,
+				textarea {
 					outline: 3px solid var.$color-gray-dark-light;
 					border-radius: 5px;
 					&:focus {
@@ -52,32 +54,32 @@
 					}
 				}
 			}
-			:nth-child(1) {
+			.nameRu {
 				grid-area: nameRu;
 			}
-			:nth-child(2) {
+			.nameEn {
 				grid-area: nameEn;
 			}
-			:nth-child(3) {
+			.price {
 				grid-area: price;
 			}
-			:nth-child(4) {
+			.weight {
 				grid-area: weight;
 			}
-			:nth-child(5) {
+			.kilocalories {
 				grid-area: kilocalories;
 			}
-			:nth-child(6) {
+			.composition {
 				grid-area: composition;
 			}
-			:nth-child(7) {
+			.imageUrl {
 				grid-area: imageUrl;
 			}
-			:nth-child(8) {
+			.textarea {
 				grid-area: textarea;
 				align-self: self-end;
 			}
-			:nth-child(9) {
+			.select {
 				grid-area: category;
 			}
 			.button {
@@ -97,9 +99,17 @@
 			margin-bottom: 30px;
 			.error {
 				grid-area: error;
-				align-self: start;
+				align-self: center;
 				justify-self: center;
+			}
+			.client_error {
+				grid-area: client_error;
 				@include mix.color-message(tomato, yellow);
+			}
+			.success {
+				grid-area: success;
+				align-self: center;
+				justify-self: center;
 			}
 		}
 		.go_back {

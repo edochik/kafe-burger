@@ -1,4 +1,4 @@
-import { IResponseServer } from "../../shared/domain/responseServer";
+import { ResponseServer } from "../../shared/types/responseServer";
 import { LoadingStatus } from "../../shared/types/loading";
 import { User } from "../profile/types";
 
@@ -11,10 +11,10 @@ export interface Cart {
 	count: number;
 }
 
-export interface initialStateCart {
+export interface InitialState {
 	loading: LoadingStatus;
-	errorServer: null | IResponseServer;
-	successServer: null | IResponseServer;
+	errorServer: null | ResponseServer;
+	successServer: null | ResponseServer;
 	isAppLoaded: boolean;
 	cart: Cart[];
 }

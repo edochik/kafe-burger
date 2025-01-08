@@ -1,7 +1,7 @@
-import { IResponseServer } from "../../shared/domain/responseServer.js";
-import { LoadingStatus } from "../../shared/types/loading.js";
+import { ResponseServer } from "../../shared/types/responseServer";
+import { LoadingStatus } from "../../shared/types/loading";
 
-export interface IOrderDetails {
+export interface OrderDetail {
 	id: number,
 	orderId: number,
 	price: number,
@@ -29,17 +29,18 @@ export interface User {
 	floor: string,
 	apartment: string,
 	login: string,
+	role: string
 }
 
-export interface InitialStateUser {
+export interface InitialState {
 	loading: LoadingStatus;
-	errorServer: null | IResponseServer;
-	successServer: null | IResponseServer;
+	errorServer: null | ResponseServer;
+	successServer: null | ResponseServer;
 	isAuthorization: boolean;
 	data: {
 		user: User,
 		orders: Order[],
-		orderDetails: IOrderDetails[]
+		orderDetails: OrderDetail[]
 	}
 }
 
@@ -53,7 +54,7 @@ export interface SuccessServer {
 	message: string,
 	user: User,
 	orders: Order[]
-	orderDetails: IOrderDetails[]
+	orderDetails: OrderDetail[]
 }
 
 export interface UpdateUser extends Omit<User, "password"> {

@@ -1,86 +1,110 @@
 import { useEffect, useState } from "react";
 import s from "./CreateProduct.module.scss";
-import { useAppSelector } from "../../shared/lib/hooks/hooks";
-import { customInvalidMessage } from "../../shared/lib/utils/customInvalidMessage";
-import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
+import { Link, useLocation } from "react-router-dom";
 import { createProductFields } from "./createProductFields";
 import { FormInput } from "../../shared/ui/FormInput/";
-
-interface FormValues {
-  nameRu: string;
-  nameEn: string;
-  price: string | number;
-  weight: string | number;
-  kilocalories: string | number;
-  imageUrl: string;
-  composition: string;
-  categoryImg: string;
-  description: string;
-  categoryEn: string;
-  categoryRu: string;
-}
+import {
+  resetNewProduct,
+  resetServerResponseProduct,
+  updateProduct,
+} from "../../entities/product/productSlice";
+import { Product } from "../../entities/product/types";
+import { fetchCreateProductThunk } from "../../entities/product/thunk/fetchCreateProductThunk";
+import { numberInput } from "./numberInput";
+import { selectCategory } from "./selectCategory";
+import { ResponseServer } from "../../shared/ui/ResponseServer/";
 
 const CreateProduct = () => {
-  const [formValues, setFormValues] = useState({
-    nameRu: "",
-    nameEn: "",
-    price: "",
-    weight: "",
-    kilocalories: "",
-    imageUrl: "",
-    composition: "",
-    categoryImg: "",
-    description: "",
-    categoryEn: "",
-    categoryRu: "",
-  });
+  const {
+    newProduct,
+    loading,
+    errorServer: error,
+    successServer: success,
+  } = useAppSelector((state) => state.products);
   const [clientError, setClientError] = useState<null | string>(null);
-  useEffect(() => setClientError(null), [formValues]);
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const handleKeyPress = () => {
+      dispatch(resetServerResponseProduct());
+    };
+    if (success !== null) {
+      dispatch(resetNewProduct());
+    }
+    if (clientError !== null) {
+      setClientError(null);
+    }
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [newProduct, success]);
+
+  useEffect(() => {
+    dispatch(resetServerResponseProduct());
+  }, [currentPath, dispatch]);
+
   const { categories } = useAppSelector((state) => state.categories);
-  const dictionaryCategories = Object.fromEntries(
-    categories.map((category) => [category.categoryEn, category])
-  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
-    // проверка по русски, по английски, цифры, текст с разделением
+    if (name === "price" || name === "weight" || name === "kilocalories") {
+      numberInput(name, value, dispatch);
+    } else {
+      dispatch(
+        updateProduct({ key: name as keyof Omit<Product, "id">, value })
+      );
+    }
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
-    if (value === "empty") {
-      setFormValues((prev) => ({
-        ...prev,
-        categoryEn: "",
-        categoryImg: "",
-        categoryRu: "",
-      }));
+    selectCategory(value, dispatch, categories);
+  };
+
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value, name } = e.target;
+    if (!/^[а-яёА-ЯЁ ]*$/.test(value)) {
       return;
     }
-    const { categoryEn, categoryImg, categoryRu } = dictionaryCategories[value];
-    setFormValues((prev) => ({ ...prev, categoryEn, categoryImg, categoryRu }));
+    dispatch(
+      updateProduct({
+        key: name as keyof Omit<Product, "id">,
+        value,
+      })
+    );
   };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setClientError(null);
-    if (Object.values(formValues).some((value) => value.length === 0)) {
+    if (Object.values(newProduct).some((value) => String(value).length === 0)) {
       setClientError("Все поля должны быть заполнены");
       return;
     }
+    if (Object.values(newProduct).some((value) => value === 0)) {
+      setClientError("Стоимость, вес или калорий не может быть равно 0");
+      return;
+    }
+    dispatch(fetchCreateProductThunk(newProduct));
   };
+
   return (
     <section className={s.CreateProduct}>
       <div className={s.container}>
         <h2 className={s.title}>Создать новый продукт</h2>
+        <div className={s.tut}></div>
         <form className={s.form} onSubmit={handleSubmit}>
           {createProductFields.map((element) => {
             const { name, ...spread } = element;
-            const value = formValues[name as keyof FormValues];
+            const value = newProduct[name as keyof Omit<Product, "id">];
             return (
               <FormInput
-                classInput={s.input}
-                classLabel={s.label}
+                key={name}
+                classLabel={`${s[name]}`}
                 name={name}
                 value={value}
                 onChange={(e) => handleInputChange(e)}
@@ -88,25 +112,21 @@ const CreateProduct = () => {
               />
             );
           })}
-          <label className={s.label}>
-            Описание:
+          <label className={s.textarea}>
+            Описание ru:
             <textarea
-              className={s.textarea}
               name="description"
-              value={formValues.description}
-              aria-label="Описание"
+              value={newProduct.description}
+              aria-label="Описание продукта"
               required
-              onChange={(e) => {
-                const { value, name } = e.target;
-                setFormValues((prev) => ({ ...prev, [name]: value }));
-              }}
+              onChange={(e) => handleTextareaChange(e)}
             />
           </label>
-          <label className={s.label}>
+          <label className={s.select}>
             Категория:
             <select
               name="categoryEn"
-              value={formValues.categoryEn}
+              value={newProduct.categoryEn}
               aria-label="Категории"
               onChange={(e) => handleSelectChange(e)}
             >
@@ -114,15 +134,29 @@ const CreateProduct = () => {
               {categories.map((category, index) => {
                 const { categoryEn, categoryRu } = category;
                 return (
-                  <option key={category.id} value={category.categoryEn}>
+                  <option key={category.id} value={categoryEn}>
                     {categoryRu}
                   </option>
                 );
               })}
             </select>
           </label>
-          {clientError && <div className={s.error}>{clientError}</div>}
-          <button className={s.button} type="submit">
+          {clientError && <div className={s.client_error}>{clientError}</div>}
+          {error && (
+            <div className={s.error}>
+              <ResponseServer {...error} />
+            </div>
+          )}
+          {success && (
+            <div className={s.success}>
+              <ResponseServer {...success} />
+            </div>
+          )}
+          <button
+            className={s.button}
+            type="submit"
+            disabled={loading === "pending"}
+          >
             Отправить
           </button>
         </form>

@@ -4,11 +4,11 @@ import { setCategories, setSelectCategory } from "../entities/categories/categor
 import { addProductCart, decrementProduct, incrementProduct, setCartFromLocalStorage } from "../entities/cart/cartSlice";
 import { Cart } from "../entities/cart/types";
 import { fetchOrderThunk } from "../entities/cart/thunk/fetchOrderThunk";
-import { setSortBy } from "../entities/product/productSlice";
+import { defaultPage, setSortBy } from "../entities/product/productSlice";
 import { fetchInitialProductsThunk } from "../entities/product/thunk/fetchInitialProductsThunk";
 import { getCategories } from "../entities/categories/getCategories";
-import { fetchUserVerificationThunk } from "../entities/profile/thunks/fetchUserVerificationThunk";
-import { fetchAuthorizationThunk } from "../entities/profile/thunks/fetchAuthorizationThunk";
+// import { fetchUserVerificationThunk } from "../entities/profile/thunks/fetchUserVerificationThunk";
+// import { fetchAuthorizationThunk } from "../entities/profile/thunks/fetchAuthorizationThunk";
 import { fetchOrdersThunk } from "../entities/profile/thunks/fetchOrdersThunk";
 
 export const listenerMiddleware = createListenerMiddleware();
@@ -45,18 +45,17 @@ startAppListening({
 	}
 });
 
-
 // обновление данных по истории заказа
-startAppListening({
-	matcher: isAnyOf(fetchUserVerificationThunk.fulfilled, fetchAuthorizationThunk.fulfilled),
-	effect: async (action, listenerApi) => {
-		const { profile } = listenerApi.getState();
-		const userId = profile.data.user.id;
-		if (typeof userId === 'number') {
-			// await listenerApi.dispatch(fetchHistoryOrdersThunk(userId));
-		}
-	}
-})
+// startAppListening({
+// 	matcher: isAnyOf(fetchUserVerificationThunk.fulfilled, fetchAuthorizationThunk.fulfilled),
+// 	effect: async (action, listenerApi) => {
+// 		const { profile } = listenerApi.getState();
+// 		const userId = profile.data.user.id;
+// 		if (typeof userId === 'number') {
+// 			// await listenerApi.dispatch(fetchHistoryOrdersThunk(userId));
+// 		}
+// 	}
+// })
 
 //загрузка данных с локал стораж при перезагрузке страницы
 startAppListening({
@@ -99,3 +98,15 @@ startAppListening({
 		listenerApi.dispatch(setCategories(categories))
 	}
 });
+
+// возвращаемся к первой странице если переключились между категориями
+startAppListening({
+	matcher: isAnyOf(setSelectCategory),
+	effect: async (action, listenerApi) => {
+		const state = listenerApi.getState();
+		const { currentPage } = state.products.pageInfo;
+		if (currentPage !== 1) {
+			listenerApi.dispatch(defaultPage())
+		}
+	}
+})

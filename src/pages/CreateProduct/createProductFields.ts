@@ -12,46 +12,48 @@ export const createProductFields: CreateProductFields[] = [{
 	type: 'text',
 	name: 'nameRu',
 	ariaLabel: 'Название продукта кириллица',
-	pattern: "[а-яёА-ЯЁ]*",
-	messageOnInvalid: "Только кириллические буквы"
+	pattern: "[а-яёА-ЯЁ ]*",
+	messageOnInvalid: "Используйте кириллицу"
 }, {
 	text: 'Название en:',
 	type: 'text',
 	name: 'nameEn',
 	ariaLabel: 'Название продукта латиница',
-	pattern: "[a-zA-Z]*",
-	messageOnInvalid: "Только латинские буквы"
+	pattern: "[a-zA-Z ]*",
+	messageOnInvalid: "Используйте латиницу"
 }, {
 	text: 'Стоимость:',
 	type: 'text',
 	name: 'price',
 	ariaLabel: 'стоимость',
 	pattern: "[0-9]*",
-	messageOnInvalid: "Только цифры"
+	messageOnInvalid: "Используйте цифры"
 }, {
 	text: 'Вес:',
 	type: 'text',
 	name: 'weight',
 	ariaLabel: 'Вес продукта',
 	pattern: "[0-9]*",
-	messageOnInvalid: "Только цифры"
+	messageOnInvalid: "Используйте цифры"
 }, {
 	text: 'Калорий:',
 	type: 'text',
 	name: 'kilocalories',
 	ariaLabel: 'Калорийность продукта',
 	pattern: "[0-9]*",
-	messageOnInvalid: "Только цифры"
+	messageOnInvalid: "Используйте цифры"
 }, {
-	text: 'Композиция:',
+	text: 'Композиция ru:',
 	type: 'text',
 	name: 'composition',
 	ariaLabel: 'Ингредиенты',
-	pattern: "[а-яёА-ЯЁ|]*",
-	messageOnInvalid: "Пример: Бургеры|картошка фри|Кола"
+	messageOnInvalid: "Используйте кириллицу. Пример: Бургеры|картошка фри|Кола"
 }, {
-	text: 'Путь картинки:',
+	text: 'Ссылка картинки:',
 	type: 'text',
 	name: 'imageUrl',
-	ariaLabel: 'Фотография с интернета',
+	pattern: "(https?://.*)?\\.(jpg|png|webp)$",
+	ariaLabel: 'Ссылка фотографии',
+	messageOnInvalid: 'URL должен содержать допустимое расширение jpg, png или webp',
 }]
+

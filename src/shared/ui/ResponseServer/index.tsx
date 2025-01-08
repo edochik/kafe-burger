@@ -1,7 +1,7 @@
-import { IResponseServer } from "../../domain/responseServer";
+import { ResponseServer as ResponseServerProps } from "../../types/responseServer";
 import s from "./ResponseServer.module.scss";
 
-const ResponseServer = ({ status, message }: IResponseServer) => {
+const ResponseServer = ({ status, message }: ResponseServerProps) => {
   if (status === "error") {
     return <div className={s.error}>{message}</div>;
   }

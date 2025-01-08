@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchOrderThunk } from "./thunk/fetchOrderThunk";
-import { Cart, initialStateCart } from "./types";
+import { Cart, InitialState } from "./types";
 import { SuccessServer } from "../profile/types.js";
 
-const initialState: initialStateCart = {
+const initialState: InitialState = {
 	loading: "idle",
 	errorServer: null,
 	successServer: null,

@@ -4,8 +4,10 @@ import { ProductList } from "../../features/ProductList/";
 import { Cart } from "../../features/Cart/";
 import { Outlet } from "react-router-dom";
 import { Sort } from "../../features/Sort/";
-
+import { useAppSelector } from "../../shared/lib/hooks/hooks";
 const Main = () => {
+  const user = useAppSelector((state) => state.profile);
+  console.log(user);
   return (
     <>
       <main className={s.main}>

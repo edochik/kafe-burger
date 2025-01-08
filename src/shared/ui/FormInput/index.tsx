@@ -1,7 +1,7 @@
 import { customInvalidMessage } from "../../lib/utils/customInvalidMessage";
 
 interface FormInputProps {
-  classInput: string;
+  // classInput: string;
   classLabel: string;
   text: string;
   type: string;
@@ -10,11 +10,12 @@ interface FormInputProps {
   value: string | number;
   pattern?: string;
   messageOnInvalid?: string;
+  isDisabled?: boolean;
   onChange: (arg: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const FormInput = ({
-  classInput,
+  // classInput,
   classLabel,
   text,
   type,
@@ -24,12 +25,13 @@ const FormInput = ({
   pattern,
   onChange,
   messageOnInvalid,
+  isDisabled,
 }: FormInputProps) => {
   return (
     <label className={classLabel}>
       {text}
       <input
-        className={classInput}
+        // className={classInput}
         type={type}
         name={name}
         aria-label={ariaLabel}
@@ -37,6 +39,7 @@ const FormInput = ({
         onChange={(e) => onChange(e)}
         required
         pattern={pattern}
+        disabled={isDisabled}
         onInvalid={
           messageOnInvalid
             ? (e: React.ChangeEvent<HTMLInputElement>) =>

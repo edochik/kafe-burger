@@ -2,15 +2,13 @@
 @use '../../shared/style/variable.scss' as var;
 
 .Profile {
-  padding: 50px 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  .list {
-    @include mix.list-reset();
+  align-items: center;
+  padding: 50px 0;
+  .form {
+    margin-bottom: 20px;
     display: flex;
-    row-gap: 10px;
     flex-direction: column;
     padding: 24px;
     text-decoration: none;
@@ -20,55 +18,59 @@
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(254, 95, 0, 0);
     border-radius: var.$border-radius-default;
-    font-size: 30px;
-    margin-bottom: 20px;
-    .item {
-      .label {
-        .input {
-          color: var.$color-orange;
-          font-weight: var.$font-weight-extrabold;
-          border: none;
-          &:focus {
-            outline: 3px solid var.$color-gray-dark;
-            border-radius: 5px;
-          }
-        }
-        .block {
-          color: gray;
-        }
+    width: 560px;
+    label {
+      font-size: var.$font-size-large;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+      input {
+        @include mix.input-style();
       }
     }
-  }
-  > label {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    .span {
-      display: inline-block;
+    .success {
+      align-self: center;
+    }
+    .error {
+      align-self: center;
+    }
+    .firstName {
+    }
+    .lastName {
+    }
+    .email {
+    }
+    .phone {
+    }
+    .address {
+    }
+    .floor {
+    }
+    .apartment {
+    }
+    .login {
+    }
+    .input_error {
+      @include mix.input-error();
+    }
+    .label {
       color: var.$color-gray-dark;
-      font-weight: var.$font-weight-extrabold;
-      font-size: 30px;
     }
-    .input {
-      @include mix.input-style();
+    .button {
+      align-self: center;
+      @include mix.button-style(
+        var.$button-bg-default-2,
+        var.$color-white,
+        var.$button-bg-hover-1,
+        var.$button-bg-selected
+      );
+      width: unset;
+      padding-right: 10px;
+      padding-left: 10px;
     }
-  }
-  .button {
-    margin-bottom: 10px;
-    @include mix.button-style(
-      var.$button-bg-default-2,
-      var.$color-white,
-      var.$button-bg-hover-1,
-      var.$button-bg-selected
-    );
-    width: unset;
-    padding-right: 10px;
-    padding-left: 10px;
   }
   .go_back {
     @include mix.go-back();
-  }
-  .input_error {
-    @include mix.input-error();
   }
 }

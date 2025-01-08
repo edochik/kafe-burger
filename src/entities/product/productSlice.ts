@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchInitialProductsThunk } from "./thunk/fetchInitialProductsThunk";
 import { LoadingStatus } from "../../shared/types/loading";
 import { sortFunctions } from "./sortFunctions";
-import { Product, SuccessServer } from "./types";
+import { pageInfo, Product, SuccessServer } from "./types";
 import { fetchCreateProductThunk } from "./thunk/fetchCreateProductThunk";
 import { ResponseServer } from "../../shared/types/responseServer";
 
@@ -10,6 +10,7 @@ interface InitialState {
 	loading: LoadingStatus;
 	errorServer: null | ResponseServer;
 	successServer: null | ResponseServer;
+	pageInfo: pageInfo,
 	products: Product[],
 	newProduct: Omit<Product, "id">,
 	sortBy: string,
@@ -19,6 +20,10 @@ const initialState: InitialState = {
 	loading: 'idle',
 	errorServer: null,
 	successServer: null,
+	pageInfo: {
+		pageSize: 6,
+		currentPage: 1,
+	},
 	products: [],
 	newProduct: {
 		nameRu: "",
@@ -40,6 +45,32 @@ export const productSlice = createSlice({
 	name: 'product',
 	initialState,
 	reducers: {
+		incrementPage: (state) => {
+			state.pageInfo.currentPage += 1
+		},
+		decrementPage: (state) => {
+			state.pageInfo.currentPage -= 1
+		},
+		defaultPage: (state) => {
+			state.pageInfo.currentPage = 1
+		},
+		resetServerResponseProduct: (state) => {
+			state.errorServer = null
+			state.successServer = null
+		},
+		resetNewProduct: (state) => {
+			state.newProduct.nameRu = ""
+			state.newProduct.nameEn = ""
+			state.newProduct.price = 0
+			state.newProduct.weight = 0
+			state.newProduct.kilocalories = 0
+			state.newProduct.imageUrl = ""
+			state.newProduct.composition = ""
+			state.newProduct.categoryImg = ""
+			state.newProduct.description = ""
+			state.newProduct.categoryEn = ""
+			state.newProduct.categoryRu = ""
+		},
 		setSortBy: (state, action) => {
 			const criteria = action.payload
 			state.sortBy = criteria;
@@ -88,4 +119,13 @@ export const productSlice = createSlice({
 	}
 })
 
-export const { setSortBy, updateProduct, updateCategoryProduct } = productSlice.actions
+export const {
+	setSortBy,
+	updateProduct,
+	updateCategoryProduct,
+	resetServerResponseProduct,
+	resetNewProduct,
+	incrementPage,
+	decrementPage,
+	defaultPage
+} = productSlice.actions

@@ -14,6 +14,7 @@ export const store = configureStore({
 		cart: cartSlice.reducer,
 		categories: categoriesSlice.reducer,
 		profile: profileSlice.reducer,
+	
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().prepend(listenerMiddleware.middleware),

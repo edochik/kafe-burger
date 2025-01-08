@@ -2,26 +2,18 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import s from "./Profile.module.scss";
 import {
-  resetError,
-  resetMessage,
+  resetServerResponsesProfile,
   updateUser,
 } from "../../entities/profile/userSlice";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { ResponseServer } from "../../shared/ui/ResponseServer";
-import { User } from "../../entities/profile/types.js";
+import { User } from "../../entities/profile/types";
 import { fetchUpdateUserThunk } from "../../entities/profile/thunks/fetchUpdateUserThunk";
+import { profileFields } from "./profileFields";
+import { FormInput } from "../../shared/ui/FormInput/";
 
-const translateField: Partial<User> = {
-  firstName: "Имя",
-  lastName: "Фамилия",
-  email: "Почта",
-  phone: "Телефон",
-  address: "Адрес",
-  floor: "Этаж",
-  apartment: "Квартира",
-  login: "Логин",
-};
+type UserWithoutId = Omit<User, "id">;
 
 const Profile = () => {
   const [password, setPassword] = useState("");
@@ -29,15 +21,12 @@ const Profile = () => {
   const {
     loading,
     errorServer: error,
-    successServer: message,
+    successServer: success,
   } = useAppSelector((state) => state.profile);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (error !== null) {
-      dispatch(resetError());
-    }
-    if (message !== null) {
-      dispatch(resetMessage());
+    if (error !== null || success !== null) {
+      dispatch(resetServerResponsesProfile());
     }
   }, [user, password]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -47,69 +36,71 @@ const Profile = () => {
   };
 
   return (
-    <form
-      className={s.Profile}
-      onSubmit={(event) => {
-        event.preventDefault();
-        dispatch(fetchUpdateUserThunk({ ...user, password }));
-      }}
-    >
-      <ul className={s.list}>
-        {Object.entries(user).map(([key, value]) => {
-          if (key in translateField) {
-            const translatedKey = translateField[key as keyof User];
-            return (
-              <li className={s.item} key={key}>
-                <label className={s.label}>
-                  {translatedKey}:&nbsp;
-                  <input
-                    className={classNames({
-                      [s.input]: true,
-                      [s.block]: key === "login",
-                    })}
-                    type={key === "email" ? "email" : "text"}
-                    name={key}
-                    value={value || ""}
-                    autoComplete={key === "login" ? "username" : ""}
-                    onChange={(e) => handleChangeUser(e)}
-                    disabled={key === "login"}
-                  />
-                </label>
-              </li>
-            );
-          }
-          return null;
-        })}
-      </ul>
-      {error && <ResponseServer {...error} />}
-      {message && <ResponseServer {...message} />}
-      <label className={s.label}>
-        <span className={s.span}>Подтвердите:&nbsp;</span>
-        <input
-          className={classNames({
-            [s.input]: true,
-            [s.input_error]: error?.field === "password",
-          })}
-          type="password"
-          name="password"
-          placeholder="Пароль"
-          value={password}
-          autoComplete="current-password"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button
-        type="submit"
-        className={s.button}
-        disabled={loading === "pending"}
+    <div className={s.Profile}>
+      <form
+        className={s.form}
+        onSubmit={(event) => {
+          event.preventDefault();
+          dispatch(fetchUpdateUserThunk({ ...user, password }));
+        }}
       >
-        Изменить профиль
-      </button>
+        {profileFields.map((element) => {
+          const { name, text, ...spread } = element;
+          const value = user[name as keyof UserWithoutId];
+          const isDisabled = name === "login";
+          return (
+            <FormInput
+              key={name}
+              classLabel={s[name] || ""}
+              ariaLabel={`${text.slice(0, -1)} пользователя`}
+              name={name}
+              value={value}
+              onChange={(e) => handleChangeUser(e)}
+              text={text}
+              {...spread}
+              isDisabled={isDisabled}
+            />
+          );
+        })}
+        {error && (
+          <div className={s.error}>
+            <ResponseServer {...error} />
+          </div>
+        )}
+        {success && (
+          <div className={s.success}>
+            <ResponseServer {...success} />
+          </div>
+        )}
+        <label className={s.label}>
+          Подтвердить:&nbsp;
+          <input
+            className={classNames({
+              [s.input]: true,
+              [s.input_error]: error?.field === "password",
+            })}
+            type="password"
+            name="password"
+            placeholder="Пароль"
+            value={password}
+            autoComplete="current-password"
+            minLength={6}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        <button
+          type="submit"
+          className={s.button}
+          disabled={loading === "pending"}
+        >
+          Изменить профиль
+        </button>
+      </form>
       <Link className={s.go_back} to="/">
         🏃‍♂️ Вернуться обратно
       </Link>
-    </form>
+    </div>
   );
 };
 

@@ -10,7 +10,7 @@ export const fetchInitialProductsThunk = createAsyncThunk<
 	"fetchInitialProductThunk",
 	async (_, { rejectWithValue }) => {
 		try {
-			const products = await fetchProducts();
+			const products = await fetchProducts<Product[]>();
 			return products
 		} catch (error) {
 			return rejectWithValue(error as ProductErrorServer);

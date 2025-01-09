@@ -1,19 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchLogout } from "../fetch/fetchLogout";
-import { ResponseServer } from "../../../shared/types/responseServer";
-import { SuccessServer } from "../types";
+import { ProfileErrorServer, ProfileSuccessServer } from "../types";
 
 export const fetchLogoutThunk = createAsyncThunk<
-	SuccessServer,
+	ProfileSuccessServer,
 	void,
-	{ rejectValue: ResponseServer }>(
+	{ rejectValue: ProfileErrorServer }>(
 		'fetchLogoutThunk',
 		async (_, { rejectWithValue }) => {
 			try {
-				const response = await fetchLogout();
+				const response = await fetchLogout<ProfileSuccessServer>();
 				return response
 			} catch (error) {
-				return rejectWithValue(error as ResponseServer);
+				return rejectWithValue(error as ProfileErrorServer);
 			}
 		}
 	)

@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEscapeHandler } from "../../shared/lib/hooks/useEscapeHandler";
 import { updateUser } from "../../entities/profile/userSlice";
 import { deliveryMethods } from "./DeliveryMethods";
-import { User } from "../../entities/profile/types.js";
+import { User } from "../../entities/profile/types";
 import { fetchOrderThunk } from "../../entities/cart/thunk/fetchOrderThunk";
 import { resetServerResponsesCart } from "../../entities/cart/cartSlice";
 

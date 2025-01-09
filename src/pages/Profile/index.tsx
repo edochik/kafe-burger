@@ -13,8 +13,6 @@ import { fetchUpdateUserThunk } from "../../entities/profile/thunks/fetchUpdateU
 import { profileFields } from "./profileFields";
 import { FormInput } from "../../shared/ui/FormInput/";
 
-type UserWithoutId = Omit<User, "id">;
-
 const Profile = () => {
   const [password, setPassword] = useState("");
   const { user } = useAppSelector((state) => state.profile.data);
@@ -46,7 +44,7 @@ const Profile = () => {
       >
         {profileFields.map((element) => {
           const { name, text, ...spread } = element;
-          const value = user[name as keyof UserWithoutId];
+          const value = user[name as keyof Omit<User, "id">];
           const isDisabled = name === "login";
           return (
             <FormInput

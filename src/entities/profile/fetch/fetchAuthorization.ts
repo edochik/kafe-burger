@@ -1,11 +1,9 @@
 import { API } from "../../../shared/api/api";
 import { fetchData } from "../../../shared/api/helper";
-import { AuthorizationRequest, SuccessServer } from "../types";
-//https://chip-patch-papaya.glitch.me/api/auth/login
 
 const API_AUTHORIZATION = `${API}auth/login`;
 
-export async function fetchAuthorization(data: AuthorizationRequest) {
+export async function fetchAuthorization<T, K>(data: K): Promise<T> {
 	const options: RequestInit = {
 		method: "POST",
 		headers: {
@@ -14,6 +12,6 @@ export async function fetchAuthorization(data: AuthorizationRequest) {
 		body: JSON.stringify({ ...data }),
 		credentials: 'include',
 	}
-	const response: SuccessServer = await fetchData(API_AUTHORIZATION, options);
+	const response: T = await fetchData(API_AUTHORIZATION, options);
 	return response;
 }

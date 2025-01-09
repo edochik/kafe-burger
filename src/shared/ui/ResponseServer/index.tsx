@@ -1,5 +1,6 @@
-import { ResponseServer as ResponseServerProps } from "../../types/responseServer";
+import { IResponseServer } from "../../types/responseServer";
 import s from "./ResponseServer.module.scss";
+type ResponseServerProps = IResponseServer;
 
 const ResponseServer = ({ status, message }: ResponseServerProps) => {
   if (status === "error") {

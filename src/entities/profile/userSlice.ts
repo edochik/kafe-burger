@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchUserVerificationThunk } from "./thunks/fetchUserVerificationThunk";
-import { InitialState, SuccessServer, User } from "./types";
+import { InitialState, ProfileSuccessServer, User } from "./types";
 import { fetchAuthorizationThunk } from "./thunks/fetchAuthorizationThunk";
 import { fetchLogoutThunk } from "./thunks/fetchLogoutThunk";
 import { fetchUpdateUserThunk } from "./thunks/fetchUpdateUserThunk";
@@ -48,7 +48,7 @@ export const profileSlice = createSlice({
 			.addCase(fetchAuthorizationThunk.pending, (state) => {
 				state.loading = "pending";
 			})
-			.addCase(fetchAuthorizationThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+			.addCase(fetchAuthorizationThunk.fulfilled, (state, action: PayloadAction<ProfileSuccessServer>) => {
 				state.loading = "succeeded";
 				state.isAuthorization = true;
 				const { orderDetails, orders, user } = action.payload
@@ -63,7 +63,7 @@ export const profileSlice = createSlice({
 			.addCase(fetchUserVerificationThunk.pending, (state) => {
 				state.loading = "pending";
 			})
-			.addCase(fetchUserVerificationThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+			.addCase(fetchUserVerificationThunk.fulfilled, (state, action: PayloadAction<ProfileSuccessServer>) => {
 				state.loading = "succeeded";
 				state.isAuthorization = true;
 				const { orderDetails, orders, user } = action.payload
@@ -83,7 +83,7 @@ export const profileSlice = createSlice({
 			.addCase(fetchUpdateUserThunk.pending, (state) => {
 				state.loading = "pending";
 			})
-			.addCase(fetchUpdateUserThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+			.addCase(fetchUpdateUserThunk.fulfilled, (state, action: PayloadAction<ProfileSuccessServer>) => {
 				state.loading = "succeeded";
 				state.isAuthorization = true;
 				state.successServer = action.payload
@@ -97,7 +97,7 @@ export const profileSlice = createSlice({
 			.addCase(fetchRegistrationThunk.pending, (state) => {
 				state.loading = "pending";
 			})
-			.addCase(fetchRegistrationThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+			.addCase(fetchRegistrationThunk.fulfilled, (state, action: PayloadAction<ProfileSuccessServer>) => {
 				state.loading = "succeeded";
 				state.successServer = action.payload
 			})
@@ -109,7 +109,7 @@ export const profileSlice = createSlice({
 			.addCase(fetchLogoutThunk.pending, (state) => {
 				state.loading = "pending";
 			})
-			.addCase(fetchLogoutThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+			.addCase(fetchLogoutThunk.fulfilled, (state, action: PayloadAction<ProfileSuccessServer>) => {
 				state.loading = "succeeded";
 				state.isAuthorization = false;
 				for (const key in state.data.user) {
@@ -127,7 +127,7 @@ export const profileSlice = createSlice({
 			.addCase(fetchOrdersThunk.pending, (state) => {
 				state.loading = "pending";
 			})
-			.addCase(fetchOrdersThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+			.addCase(fetchOrdersThunk.fulfilled, (state, action: PayloadAction<ProfileSuccessServer>) => {
 				state.loading = "succeeded";
 				state.data.orders = action.payload.orders
 				state.data.orderDetails = action.payload.orderDetails

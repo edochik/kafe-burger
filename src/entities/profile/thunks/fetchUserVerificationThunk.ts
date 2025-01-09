@@ -1,18 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchUserVerification } from "../fetch/fetchUserVerification";
-import { ResponseServer } from "../../../shared/types/responseServer";
-import { SuccessServer } from "../types";
+import { ProfileErrorServer, ProfileSuccessServer } from "../types";
 
 export const fetchUserVerificationThunk = createAsyncThunk<
-	SuccessServer,
+	ProfileSuccessServer,
 	void,
-	{ rejectValue: ResponseServer }>(
+	{ rejectValue: ProfileErrorServer }>(
 		"fetchUserVerificationThunk",
 		async (_, { rejectWithValue }) => {
 			try {
-				const response = await fetchUserVerification();
+				const response = await fetchUserVerification<ProfileSuccessServer>();
 				return response;
 			} catch (error) {
-				return rejectWithValue(error as ResponseServer);
+				return rejectWithValue(error as ProfileErrorServer);
 			}
 		})

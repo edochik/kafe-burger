@@ -1,12 +1,10 @@
 import { API } from "../../../shared/api/api";
 import { fetchData } from "../../../shared/api/helper";
-import { SuccessServer } from "../../profile/types";
-import { OrderPayload } from "../types";
 
 const API_ORDER = `${API}orders`;
 
 
-export async function fetchOrder(data: OrderPayload) {
+export async function fetchOrder<T, K>(data: K): Promise<T> {
 	const options: RequestInit = {
 		method: "POST",
 		headers: {
@@ -14,6 +12,6 @@ export async function fetchOrder(data: OrderPayload) {
 		},
 		body: JSON.stringify({ ...data })
 	}
-	const response: SuccessServer = await fetchData(API_ORDER, options);
+	const response: T = await fetchData(API_ORDER, options);
 	return response;
 }

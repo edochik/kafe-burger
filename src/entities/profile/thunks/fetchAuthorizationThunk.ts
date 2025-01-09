@@ -1,21 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { fetchAuthorization } from "../fetch/fetchAuthorization";
-import { AuthorizationRequest, SuccessServer } from "../types";
-import { ResponseServer } from "../../../shared/types/responseServer";
+import { AuthorizationRequest, ProfileErrorServer, ProfileSuccessServer } from "../types";
 
 
 export const fetchAuthorizationThunk = createAsyncThunk<
-	SuccessServer,
+	ProfileSuccessServer,
 	AuthorizationRequest,
-	{ rejectValue: ResponseServer }
+	{ rejectValue: ProfileErrorServer }
 >(
 	"fetchAuthorizationThunk",
 	async (data, { rejectWithValue }) => {
 		try {
-			const response = await fetchAuthorization(data);
+			const response = await fetchAuthorization<ProfileSuccessServer, AuthorizationRequest>(data);
 			return response;
 		} catch (error) {
-			return rejectWithValue(error as ResponseServer);
+			return rejectWithValue(error as ProfileErrorServer);
 		}
 	}
 );
+

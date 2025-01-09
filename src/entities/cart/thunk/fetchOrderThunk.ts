@@ -1,23 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchOrder } from "../fetch/fetchOrder";
-import { CartSuccessServer, OrderPayload } from "../types";
-import { ResponseServer } from "../../../shared/types/responseServer";
-
-
+import { CartErrorServer, CartSuccessServer, OrderPayload } from "../types";
 
 export const fetchOrderThunk = createAsyncThunk<
 	CartSuccessServer,
 	OrderPayload,
-	{ rejectValue: ResponseServer }
+	{ rejectValue: CartErrorServer }
 >(
 
 	'fetchOrderThunk',
 	async (data, { rejectWithValue }) => {
 		try {
-			const response: CartSuccessServer = await fetchOrder(data);
+			const response: CartSuccessServer = await fetchOrder<CartSuccessServer, OrderPayload>(data);
 			return response
 		} catch (error) {
-			return rejectWithValue(error as ResponseServer);
+			return rejectWithValue(error as CartErrorServer);
 		}
 	}
 )

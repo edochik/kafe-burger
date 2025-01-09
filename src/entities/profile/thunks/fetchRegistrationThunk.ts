@@ -1,19 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchRegistration } from "../fetch/fetchRegistration";
-import { ResponseServer } from "../../../shared/types/responseServer";
-import { SuccessServer, UpdateUser } from "../types";
+import { ProfileErrorServer, ProfileSuccessServer, UserForRegistration } from "../types";
 
 export const fetchRegistrationThunk = createAsyncThunk<
-	SuccessServer,
-	Partial<UpdateUser>,
-	{ rejectValue: ResponseServer }
+	ProfileSuccessServer,
+	UserForRegistration,
+	{ rejectValue: ProfileErrorServer }
 >(
 	'fetchRegistrationThunk',
 	async (data, { rejectWithValue }) => {
 		try {
-			const response = await fetchRegistration(data);
+			const response = await fetchRegistration<ProfileSuccessServer, UserForRegistration>(data);
 			return response
 		} catch (error) {
-			return rejectWithValue(error as ResponseServer);
+			return rejectWithValue(error as ProfileErrorServer);
 		}
 	})

@@ -1,6 +1,15 @@
-import { ResponseServer } from "../../shared/types/responseServer";
+import { IResponseServer } from "../../shared/types/responseServer";
 import { LoadingStatus } from "../../shared/types/loading";
 
+export interface ProfileErrorServer extends IResponseServer {
+	field?: string
+	code?: number
+}
+export interface ProfileSuccessServer extends IResponseServer {
+	user: User,
+	orders: Order[]
+	orderDetails: OrderDetail[]
+}
 export interface OrderDetail {
 	id: number,
 	orderId: number,
@@ -34,8 +43,8 @@ export interface User {
 
 export interface InitialState {
 	loading: LoadingStatus;
-	errorServer: null | ResponseServer;
-	successServer: null | ResponseServer;
+	errorServer: null | ProfileErrorServer;
+	successServer: null | ProfileSuccessServer;
 	isAuthorization: boolean;
 	data: {
 		user: User,
@@ -49,15 +58,12 @@ export interface AuthorizationRequest {
 	password: string;
 }
 
-export interface SuccessServer {
-	status: 'success',
-	message: string,
-	user: User,
-	orders: Order[]
-	orderDetails: OrderDetail[]
+export interface UserForUpdate extends User {
+	password: string
 }
 
-export interface UpdateUser extends Omit<User, "password"> {
-	password: string;
+export interface UserForRegistration extends Omit<User, "role" | "id"> {
+
 }
+
 

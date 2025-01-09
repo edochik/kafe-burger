@@ -1,10 +1,9 @@
 import { API } from "../../../shared/api/api";
 import { fetchData } from "../../../shared/api/helper";
-import { SuccessServer, UpdateUser } from "../types";
 
 const API_UPDATE = `${API}account/update`
 
-export async function fetchUpdateUser(data: UpdateUser) {
+export async function fetchUpdateUser<T, K>(data: K): Promise<T> {
 	const options: RequestInit = {
 		method: "PUT",
 		headers: {
@@ -12,6 +11,6 @@ export async function fetchUpdateUser(data: UpdateUser) {
 		},
 		body: JSON.stringify({ ...data })
 	}
-	const response: SuccessServer = await fetchData(API_UPDATE, options);
+	const response: T = await fetchData(API_UPDATE, options);
 	return response;
 }

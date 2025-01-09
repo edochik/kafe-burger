@@ -10,7 +10,7 @@ import { updateUser } from "../../entities/profile/userSlice";
 import { deliveryMethods } from "./DeliveryMethods";
 import { User } from "../../entities/profile/types.js";
 import { fetchOrderThunk } from "../../entities/cart/thunk/fetchOrderThunk";
-import { updateSuccessServer } from "../../entities/cart/cartSlice";
+import { resetServerResponsesCart } from "../../entities/cart/cartSlice";
 
 const OrderModal = () => {
   const { user } = useAppSelector((state) => state.profile.data);
@@ -24,7 +24,7 @@ const OrderModal = () => {
   useEscapeHandler();
   useEffect(() => {
     if (successServer !== null) {
-      dispatch(updateSuccessServer());
+      dispatch(resetServerResponsesCart());
     }
   }, [navigate]); // eslint-disable-line react-hooks/exhaustive-deps
 

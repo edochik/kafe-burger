@@ -6,3 +6,8 @@ export interface ResponseServer {
 	total?: number;
 	code?: number;
 }
+
+export interface IResponseServer {
+	status: 'success' | 'error';
+	message: string;
+}

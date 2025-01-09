@@ -1,13 +1,15 @@
-import { ResponseServer } from "../../shared/types/responseServer";
+import { IResponseServer } from "../../shared/types/responseServer";
 import { LoadingStatus } from "../../shared/types/loading";
 import { User } from "../profile/types";
-export interface InitialState {
-	loading: LoadingStatus;
-	errorServer: null | ResponseServer;
-	successServer: null | ResponseServer;
-	isAppLoaded: boolean;
-	cart: Cart[];
+
+export interface CartErrorServer extends IResponseServer {
+
 }
+export interface CartSuccessServer extends IResponseServer {
+	orderId?: number,
+	total?: number
+}
+
 export interface Cart {
 	id: number;
 	nameRu: string;
@@ -24,4 +26,12 @@ export interface OrderPayload {
 		count: number,
 		id: number
 	}[];
+}
+
+export interface InitialState {
+	loading: LoadingStatus;
+	errorServer: null | CartErrorServer;
+	successServer: null | CartSuccessServer;
+	isAppLoaded: boolean;
+	cart: Cart[];
 }

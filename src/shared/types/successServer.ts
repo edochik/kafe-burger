@@ -1,3 +1,1 @@
-export interface SuccessServer{
-	
-}
+export {}

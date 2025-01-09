@@ -1,6 +1,6 @@
 import { API } from "../../../shared/api/api";
 import { fetchData } from "../../../shared/api/helper";
-import { Product, SuccessServer } from "../types";
+import { Product, ProductSuccessServer } from "../types";
 
 const API_CREATE_PRODUCT = `${API}create/product`
 
@@ -12,6 +12,6 @@ export async function fetchCreateProduct(product: Omit<Product, "id">) {
 		},
 		body: JSON.stringify({ ...product })
 	}
-	const response: SuccessServer = await fetchData(API_CREATE_PRODUCT, options);
+	const response: ProductSuccessServer = await fetchData(API_CREATE_PRODUCT, options);
 	return response
 }

@@ -1,20 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchInitialProductsThunk } from "./thunk/fetchInitialProductsThunk";
-import { LoadingStatus } from "../../shared/types/loading";
 import { sortFunctions } from "./sortFunctions";
-import { pageInfo, Product, SuccessServer } from "./types";
+import { InitialState, Product, ProductSuccessServer } from "./types";
 import { fetchCreateProductThunk } from "./thunk/fetchCreateProductThunk";
-import { ResponseServer } from "../../shared/types/responseServer";
-
-interface InitialState {
-	loading: LoadingStatus;
-	errorServer: null | ResponseServer;
-	successServer: null | ResponseServer;
-	pageInfo: pageInfo,
-	products: Product[],
-	newProduct: Omit<Product, "id">,
-	sortBy: string,
-}
 
 const initialState: InitialState = {
 	loading: 'idle',
@@ -108,7 +96,7 @@ export const productSlice = createSlice({
 			.addCase(fetchCreateProductThunk.pending, (state) => {
 				state.loading = 'pending';
 			})
-			.addCase(fetchCreateProductThunk.fulfilled, (state, action: PayloadAction<SuccessServer>) => {
+			.addCase(fetchCreateProductThunk.fulfilled, (state, action: PayloadAction<ProductSuccessServer>) => {
 				state.loading = 'succeeded';
 				state.successServer = action.payload
 			})

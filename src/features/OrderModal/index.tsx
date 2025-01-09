@@ -141,17 +141,13 @@ const OrderModal = () => {
                   </div>
                 </>
               )}
-              {cart.length === 0 ? (
-                <div className={s.info}>В корзине пока пусто :(</div>
-              ) : (
-                <button
-                  className={s.button}
-                  type="submit"
-                  disabled={loading === "pending"}
-                >
-                  Оформить заказ
-                </button>
-              )}
+              <button
+                className={s.button}
+                type="submit"
+                disabled={loading === "pending"}
+              >
+                Оформить заказ
+              </button>
             </form>
           </div>
         )}

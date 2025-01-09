@@ -7,12 +7,17 @@ import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEscapeHandler } from "../../shared/lib/hooks/useEscapeHandler";
 import { ResponseServer } from "../../shared/ui/ResponseServer";
-import { customInvalidMessage } from "../../shared/lib/utils/customInvalidMessage";
 import { fetchAuthorizationThunk } from "../../entities/profile/thunks/fetchAuthorizationThunk";
 import { resetServerResponsesProfile } from "../../entities/profile/userSlice";
+import { authorizationInputs } from "./authorizationInputs";
+import { FormInput } from "../../shared/ui/FormInput/";
 
+interface formValues {
+  login: string;
+  password: string;
+}
 const AuthorizationModal = () => {
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<formValues>({
     login: "",
     password: "",
   });
@@ -46,43 +51,25 @@ const AuthorizationModal = () => {
               dispatch(fetchAuthorizationThunk(formValues));
             }}
           >
-            <input
-              className={classNames({
-                [s.input]: true,
-                [s.input_error]: errorServer?.field === "login",
-              })}
-              type="text"
-              placeholder="Логин"
-              name="login"
-              value={formValues.login}
-              onChange={(e) => handleInputChange(e)}
-              aria-label="Логин"
-              minLength={3}
-              autoFocus
-              pattern="[a-zA-Z]*"
-              onInvalid={(e: React.ChangeEvent<HTMLInputElement>) =>
-                customInvalidMessage(
-                  e,
-                  "Логин должен содержать только латинские буквы."
-                )
-              }
-              required
-            />
-            <input
-              className={classNames({
-                [s.input]: true,
-                [s.input_error]: errorServer?.field === "password",
-              })}
-              type="password"
-              placeholder="Пароль"
-              name="password"
-              value={formValues.password}
-              autoComplete="current-password"
-              onChange={(e) => handleInputChange(e)}
-              aria-label="Пароль"
-              minLength={6}
-              required
-            />
+            {authorizationInputs.map((fields) => {
+              const { text, name } = fields;
+              const value = formValues[name as keyof formValues];
+              return (
+                <FormInput
+                  key={name}
+                  classInput={classNames({
+                    [s.input]: true,
+                    [s.input_error]: name === errorServer?.field,
+                  })}
+                  value={value}
+                  showLabel={false}
+                  placeholder={text}
+                  onChange={(e) => handleInputChange(e)}
+                  ariaLabel={text}
+                  {...fields}
+                />
+              );
+            })}
             <button
               type="submit"
               className={s.button}

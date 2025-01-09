@@ -1,5 +1,5 @@
 import { LoadingStatus } from "../../shared/types/loading";
-import { IResponseServer } from "../../shared/types/responseServer";
+import { IResponseServer } from "../../shared/types/IResponseServer";
 export interface ProductErrorServer extends IResponseServer {
 
 }

@@ -1,4 +1,4 @@
-import { IResponseServer } from "../../types/responseServer";
+import { IResponseServer } from "../../types/IResponseServer";
 import s from "./ResponseServer.module.scss";
 type ResponseServerProps = IResponseServer;
 

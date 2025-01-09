@@ -9,14 +9,14 @@
    │ ├── listenerMiddleware.ts - мидлвара для обработки побочных эффектов [❌] проверить на актуальность
    │ └── store.ts - Redux/toolkit [❌]
    ├── entities/
-   │ ├── cart/ - срез cart
-   │ ├── categories/ - срез categories
-   │ ├── product/ - срез product
-   │ └── profile/ - срез profile
+   │ ├── cart/ - срез cart [✅]
+   │ ├── categories/ - срез categories [✅] 
+   │ ├── product/ - срез product [✅]
+   │ └── profile/ - срез profile [✅]  [❌]
    ├── features/
-   │ ├── AuthorizationModal/ модальное окно авторизации
-   │ ├── Cart/ корзина
-   │ ├── LoginOrUserMenu/ вход или меню пользователя
+   │ ├── AuthorizationModal/ модальное окно авторизации [✅]
+   │ ├── Cart/ корзина [✅]
+   │ ├── LoginOrUserMenu/ вход или меню пользователя [✅]
    │ ├── OrderDetails/ данные о Истории заказов
    │ ├── OrderModal/ модальное окно заказ
    │ ├── Pagination/ пагинация

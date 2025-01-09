@@ -1,4 +1,4 @@
-import { IResponseServer } from "../../shared/types/responseServer";
+import { IResponseServer } from "../../shared/types/IResponseServer";
 import { LoadingStatus } from "../../shared/types/loading";
 
 export interface ProfileErrorServer extends IResponseServer {

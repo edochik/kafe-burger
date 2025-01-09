@@ -1,4 +1,4 @@
-import { IResponseServer } from "../types/responseServer";
+import { IResponseServer } from "../types/IResponseServer";
 
 export async function fetchData<T, K = IResponseServer>(url: string, options?: RequestInit): Promise<T> {
 	const response = await fetch(url, options);

@@ -9,17 +9,16 @@ import {
 } from "../../entities/product/productSlice";
 
 const ProductList = () => {
-  const selectProduct = useAppSelector(
-    (state) => state.categories.selectCategory
-  );
+  const { selectCategory } = useAppSelector((state) => state.categories);
   const { products, loading, pageInfo } = useAppSelector(
     (state) => state.products
   );
   const { pageSize, currentPage } = pageInfo;
   const filterProduct = products.filter(
-    (product) => product.categoryEn === selectProduct
+    (product) => product.categoryEn === selectCategory
   );
   const lastPage = Math.ceil(filterProduct.length / pageSize);
+
   const dispatch = useAppDispatch();
   if (loading === "pending") {
     return <Loader />;

@@ -3,7 +3,7 @@ import { RadioButton } from "../RadioButton";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 
 const RadioButtons = () => {
-  const categories = useAppSelector((state) => state.categories.categories);
+  const { categories } = useAppSelector((state) => state.categories);
   return (
     <div className={s.RadioButtons}>
       <fieldset className={s.fieldset}>

@@ -98,8 +98,8 @@ const CreateProduct = () => {
         <h2 className={s.title}>Создать новый продукт</h2>
         <div className={s.tut}></div>
         <form className={s.form} onSubmit={handleSubmit}>
-          {createProductFields.map((element) => {
-            const { name, ...spread } = element;
+          {createProductFields.map((field, index) => {
+            const { name, ...spread } = field;
             const value = newProduct[name as keyof Omit<Product, "id">];
             return (
               <FormInput

@@ -1,11 +1,8 @@
-@use './mixin.scss' as mix;
-@use './variable.scss' as var;
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
 .overlay {
 	@include mix.overlay-style();
 	.modal {
-		display: flex;
-		overflow: hidden;
-		min-height: 460px;
 		@include mix.modal-style();
 		.column:nth-of-type(1) {
 			background-color: var.$color-orange;
@@ -21,47 +18,33 @@
 			background-color: var.$color-background-main;
 			display: flex;
 			flex-direction: column;
+			justify-content: space-between;
+		}
+		.column.order {
+			padding: 44px 24px 24px 24px;
+			background-color: var.$color-background-main;
+			display: flex;
 			justify-content: center;
-			.register {
-				margin-bottom: 20px;
-				font-size: 36px;
-				color: green;
-				text-align: center;
-			}
-			.button {
-				@include mix.button-style(
-					var.$button-bg-default-2,
-					var.$color-white,
-					var.$button-bg-hover-1,
-					var.$button-bg-selected
-				);
-			}
+			align-items: center;
+			font-size: 26px;
+			font-weight: 700;
 		}
 		.column {
-			.text {
-				margin-bottom: 20px;
-				font-size: 26px;
-				font-weight: 700;
-			}
-			min-width: 342px;
-			.title {
-				margin: 0 0 16px 0;
-				font-weight: var.$font-weight-semibold;
-				font-size: var.$font-size-large;
-			}
+			width: 50%;
 			.form {
-				display: flex;
-				min-height: 340px;
-				flex-direction: column;
+				.fieldset {
+					@include mix.fieldset-reset();
+					display: flex;
+					flex-direction: column;
+					row-gap: 10px;
+				}
+				.legend {
+					margin: 0 0 16px 0;
+					font-weight: var.$font-weight-semibold;
+					font-size: var.$font-size-large;
+				}
 				.input {
-					margin-bottom: 8px;
 					@include mix.input-style();
-				}
-				.input_error {
-					@include mix.input-error();
-				}
-				.error {
-					@include mix.color-message(tomato, yellow);
 				}
 				.wrapper_radio {
 					margin-bottom: 16px;
@@ -105,27 +88,38 @@
 						}
 					}
 				}
-				.wrapper {
-					margin-bottom: 32px;
+				.delivery {
 					display: flex;
-					column-gap: 8px;
+					flex-wrap: wrap;
+					gap: 8px;
+					> input {
+						margin: 0;
+					}
+					:nth-child(1) {
+						flex: 100% 1 1;
+					}
+					:nth-child(2) {
+						flex: calc(50% - 8px) 1 1;
+					}
+					:nth-child(3) {
+						flex: calc(50% - 8px) 1 1;
+					}
 				}
-				.subtitle {
-					font-weight: var.$font-weight-semibold;
-					margin: 0 0 8px 0;
+				.input_error {
+					@include mix.input-error();
 				}
-				.button {
-					@include mix.button-style(
-						var.$button-bg-default-2,
-						var.$color-white,
-						var.$button-bg-hover-1,
-						var.$button-bg-selected
-					);
+				.error {
+					order: 13;
+					@include mix.color-message(tomato, yellow);
 				}
-				.info {
-					font-size: 30px;
-					font-weight: 700;
-				}
+			}
+			.button {
+				@include mix.button-style(
+					var.$button-bg-default-2,
+					var.$color-white,
+					var.$button-bg-hover-1,
+					var.$button-bg-selected
+				);
 			}
 		}
 		.close {

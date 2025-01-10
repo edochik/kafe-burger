@@ -1,4 +1,5 @@
-import s from "../../shared/style/modal.module.scss";
+import s from "./OrderModal.module.scss";
+// import s from "../../shared/style/modal.module.scss";
 import { useEffect, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,13 +12,17 @@ import { deliveryMethods } from "./DeliveryMethods";
 import { User } from "../../entities/profile/types";
 import { fetchOrderThunk } from "../../entities/cart/thunk/fetchOrderThunk";
 import { resetServerResponsesCart } from "../../entities/cart/cartSlice";
+import { FormInput } from "../../shared/ui/FormInput/";
+import { deliveryInputs } from "./deliveryInputs";
+import classNames from "classnames";
 
 const OrderModal = () => {
   const { user } = useAppSelector((state) => state.profile.data);
   const { cart, successServer, loading } = useAppSelector(
     (state) => state.cart
   );
-  const { id, firstName, phone, address, floor, apartment } = user;
+
+  const { id, firstName, phone } = user;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [deliveryMethod, setDeliveryMethod] = useState("pickup");
@@ -49,105 +54,100 @@ const OrderModal = () => {
           <DonutIcon />
         </div>
         {successServer?.status === "success" ? (
-          <div className={s.column}>
-            <div className={s.text}>№ заказа: {successServer.orderId}</div>
-            <div className={s.text}>Сумма заказа: {successServer.total} ₽</div>
+          <div
+            className={classNames({
+              [s.column]: true,
+              [s.order]: true,
+            })}
+          >
+            <div>№ заказа: {successServer.orderId}</div>
+            <div>Сумма заказа: {successServer.total} ₽</div>
           </div>
         ) : (
           <div className={s.column}>
-            <h3 className={s.title}>Доставка</h3>
             <form className={s.form} onSubmit={handleSubmit}>
-              <input
-                className={s.input}
-                type="text"
-                placeholder="Ваше имя"
-                value={firstName}
-                name="firstName"
-                minLength={2}
-                onChange={(e) => handleUpdateUser(e)}
-                aria-label="Ваше имя"
-                autoFocus
-                required
-              />
-              <PhoneInput
-                country={"ru"}
-                value={phone}
-                onlyCountries={["ru"]}
-                masks={{ ru: "+.(...) ...-..-.." }}
-                inputClass={s.input}
-                placeholder="Телефон"
-                disableCountryCode={true}
-                onChange={(e: string) => {
-                  dispatch(updateUser({ key: phone as keyof User, value: e }));
-                }}
-                inputProps={{
-                  required: true,
-                  minLength: 11,
-                }}
-              />
-              <div className={s.wrapper_radio}>
-                {deliveryMethods.map((item, index) => (
-                  <label
-                    key={item.id}
-                    className={s.label}
-                    onClick={() => setDeliveryMethod(item.nameEn)}
-                  >
-                    <input
-                      className={s.receiving}
-                      name="receiving"
-                      type="radio"
-                      value={item.nameEn}
-                      defaultChecked={index === 0}
-                      required
-                    />
-                    <span className={s.radio}></span>
-                    <span className={s.span}>{item.nameRu}</span>
-                  </label>
-                ))}
-              </div>
-              {deliveryMethod !== "pickup" && (
-                <>
-                  <input
-                    className={s.input}
-                    type="text"
-                    placeholder="Улица, дом, квартира"
-                    value={address}
-                    name="address"
-                    onChange={(e) => handleUpdateUser(e)}
-                    aria-label="Улица, дом, квартира"
-                    required
-                  />
-                  <div className={s.wrapper}>
-                    <input
-                      className={s.input}
-                      type="text"
-                      placeholder="Этаж"
-                      value={floor}
-                      name="floor"
-                      onChange={(e) => handleUpdateUser(e)}
-                      aria-label="Этаж"
-                      required
-                    />
-                    <input
-                      className={s.input}
-                      type="text"
-                      placeholder="Квартира"
-                      value={apartment}
-                      name="apartment"
-                      onChange={(e) => handleUpdateUser(e)}
-                      aria-label="Квартира"
-                      required
-                    />
+              <fieldset className={s.fieldset}>
+                <legend className={s.legend}>Заказать:</legend>
+                <input
+                  className={s.input}
+                  type="text"
+                  placeholder="Ваше имя"
+                  value={firstName}
+                  name="firstName"
+                  minLength={2}
+                  onChange={(e) => handleUpdateUser(e)}
+                  aria-label="Ваше имя"
+                  autoFocus
+                  required
+                />
+                <PhoneInput
+                  country={"ru"}
+                  value={phone}
+                  onlyCountries={["ru"]}
+                  masks={{ ru: "+.(...) ...-..-.." }}
+                  inputClass={s.input}
+                  placeholder="Телефон"
+                  disableCountryCode={true}
+                  onChange={(e: string) => {
+                    console.log(e);
+                    dispatch(
+                      updateUser({ key: "phone" as keyof User, value: e })
+                    );
+                  }}
+                  inputProps={{
+                    required: true,
+                    minLength: 11,
+                  }}
+                />
+                <div className={s.wrapper_radio}>
+                  {deliveryMethods.map((item, index) => (
+                    <label
+                      key={item.id}
+                      className={s.label}
+                      onClick={() => setDeliveryMethod(item.nameEn)}
+                    >
+                      <input
+                        className={s.receiving}
+                        name="receiving"
+                        type="radio"
+                        value={item.nameEn}
+                        defaultChecked={index === 0}
+                        required
+                      />
+                      <span className={s.radio}></span>
+                      <span className={s.span}>{item.nameRu}</span>
+                    </label>
+                  ))}
+                </div>
+                {deliveryMethod !== "pickup" && (
+                  <div className={s.delivery}>
+                    {deliveryInputs.map((field, index) => {
+                      const { name, text } = field;
+                      const value = user[name as keyof Omit<User, "id">];
+                      console.log(name);
+                      return (
+                        <FormInput
+                          key={name}
+                          classInput={s.input}
+                          value={value}
+                          showLabel={false}
+                          placeholder={text}
+                          onChange={(e) => handleUpdateUser(e)}
+                          ariaLabel={text}
+                          {...field}
+                        />
+                      );
+                    })}
                   </div>
-                </>
-              )}
-              <button
-                className={s.button}
-                type="submit"
-                disabled={loading === "pending"}
-              >
-                Оформить заказ
-              </button>
+                )}
+                <button
+                  className={s.button}
+                  type="submit"
+                  disabled={loading === "pending"}
+                >
+                  Оформить заказ
+                </button>
+              </fieldset>
             </form>
           </div>
         )}

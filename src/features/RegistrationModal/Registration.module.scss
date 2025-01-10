@@ -1,0 +1,139 @@
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
+
+.overlay {
+	@include mix.overlay-style();
+	.modal {
+		@include mix.modal-style();
+		.column:nth-of-type(1) {
+			background-color: var.$color-orange;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.image {
+				width: 200px;
+			}
+		}
+		.column:nth-of-type(2) {
+			padding: 44px 24px 24px 24px;
+			background-color: var.$color-background-main;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			.button {
+				@include mix.button-style(
+					var.$button-bg-default-2,
+					var.$color-white,
+					var.$button-bg-hover-1,
+					var.$button-bg-selected
+				);
+			}
+		}
+		.column {
+			.text {
+				margin-bottom: 20px;
+				font-size: 26px;
+				font-weight: 700;
+			}
+			width: 50%;
+			.form {
+				.fieldset {
+					@include mix.fieldset-reset();
+					display: flex;
+					min-height: 340px;
+					flex-direction: row;
+					justify-content: space-between;
+					flex-wrap: wrap;
+					gap: 8px;
+					.legend {
+						margin: 0 0 16px 0;
+						font-weight: var.$font-weight-semibold;
+						font-size: var.$font-size-large;
+					}
+					.input {
+						@include mix.input-style();
+					}
+					.input_error {
+						@include mix.input-error();
+					}
+					.error {
+						order: 13;
+						@include mix.color-message(tomato, yellow);
+					}
+					.subtitle_delivery,
+					.subtitle_login,
+					.subtitle_password,
+					.subtitle {
+						font-weight: var.$font-weight-semibold;
+						margin: 0 0 8px 0;
+					}
+					.button {
+						@include mix.button-style(
+							var.$button-bg-default-2,
+							var.$color-white,
+							var.$button-bg-hover-1,
+							var.$button-bg-selected
+						);
+						margin-top: auto;
+					}
+					.info {
+						font-size: 30px;
+						font-weight: 700;
+					}
+					.firstName {
+						order: 1;
+					}
+					.lastName {
+						order: 2;
+					}
+					.email {
+						order: 3;
+					}
+					.phone {
+						width: 100%;
+						order: 4;
+					}
+					.subtitle_delivery {
+						margin: 8px 0 0 0;
+						order: 5;
+					}
+					.address {
+						order: 6;
+					}
+					.floor,
+					.apartment {
+						order: 7;
+						flex-basis: calc(50% - 6px); /* Каждому элементу даем ширину 50% минус отступ между ними */
+					}
+					.subtitle_login {
+						margin: 8px 0 0 0;
+						order: 8;
+					}
+					.login {
+						order: 9;
+					}
+					.subtitle_password {
+						margin: 8px 0 0 0;
+						order: 10;
+					}
+					.password {
+						order: 11;
+					}
+					.confirm_password {
+						order: 12;
+					}
+					.button {
+						order: 14;
+					}
+				}
+			}
+		}
+		.close {
+			cursor: pointer;
+			position: absolute;
+			content: '';
+			right: 24px;
+			top: 24px;
+		}
+	}
+}

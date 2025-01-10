@@ -1,4 +1,4 @@
-import s from "../../shared/style/modal.module.scss";
+import s from "./AuthorizationModal.module.scss";
 import { useEffect, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";
@@ -35,7 +35,7 @@ const AuthorizationModal = () => {
     const { value, name } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
-
+  //.overlay{ .modal{ .column{ .title{}.form{}}}}
   return (
     <div className={s.overlay} onClick={() => navigate("/")}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
@@ -43,7 +43,6 @@ const AuthorizationModal = () => {
           <UserIcon />
         </div>
         <div className={s.column}>
-          <h3 className={s.title}>Авторизация</h3>
           <form
             className={s.form}
             onSubmit={(event) => {
@@ -51,40 +50,40 @@ const AuthorizationModal = () => {
               dispatch(fetchAuthorizationThunk(formValues));
             }}
           >
-            {authorizationInputs.map((fields) => {
-              const { text, name } = fields;
-              const value = formValues[name as keyof formValues];
-              return (
-                <FormInput
-                  key={name}
-                  classInput={classNames({
-                    [s.input]: true,
-                    [s.input_error]: name === errorServer?.field,
-                  })}
-                  value={value}
-                  showLabel={false}
-                  placeholder={text}
-                  onChange={(e) => handleInputChange(e)}
-                  ariaLabel={text}
-                  {...fields}
-                />
-              );
-            })}
-            <button
-              type="submit"
-              className={s.button}
-              disabled={loading === "pending"}
-            >
-              Войти
-            </button>
-            {errorServer && <ResponseServer {...errorServer} />}
-            <div className={s.bottom} style={{ marginTop: "auto" }}>
-              <h3 className={s.title}>Регистрация</h3>
-              <Link to="/registration">
-                <button className={s.button}>Регистрация</button>
-              </Link>
-            </div>
+            <fieldset className={s.fieldset}>
+              <legend className={s.title}>Авторизация</legend>
+              {authorizationInputs.map((field, index) => {
+                const { text, name } = field;
+                const value = formValues[name as keyof formValues];
+                return (
+                  <FormInput
+                    key={name}
+                    classInput={classNames({
+                      [s.input]: true,
+                      [s.input_error]: name === errorServer?.field,
+                    })}
+                    value={value}
+                    showLabel={false}
+                    placeholder={text}
+                    onChange={(e) => handleInputChange(e)}
+                    ariaLabel={text}
+                    {...field}
+                  />
+                );
+              })}
+              <button
+                type="submit"
+                className={s.button}
+                disabled={loading === "pending"}
+              >
+                Войти
+              </button>
+            </fieldset>
           </form>
+          {errorServer && <ResponseServer {...errorServer} />}
+          <Link to="/registration">
+            <button className={s.button}>Регистрация</button>
+          </Link>
         </div>
         <Link to="/" className={s.close}>
           <CloseIcon></CloseIcon>

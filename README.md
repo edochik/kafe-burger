@@ -17,7 +17,7 @@
    │ ├── AuthorizationModal/ модальное окно авторизации [✅]
    │ ├── Cart/ корзина [✅]
    │ ├── LoginOrUserMenu/ вход или меню пользователя [✅]
-   │ ├── OrderDetails/ данные о Истории заказов
+   │ ├── OrderDetails/ данные о Истории заказов [✅]
    │ ├── OrderModal/ модальное окно заказ
    │ ├── Pagination/ пагинация
    │ ├── ProductCard/ продукт

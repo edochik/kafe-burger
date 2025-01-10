@@ -98,7 +98,9 @@ export const productSlice = createSlice({
 			})
 			.addCase(fetchCreateProductThunk.fulfilled, (state, action: PayloadAction<ProductSuccessServer>) => {
 				state.loading = 'succeeded';
-				state.successServer = action.payload
+				const { products, message, status } = action.payload
+				state.successServer = { status, message }
+				state.products = products!
 			})
 			.addCase(fetchCreateProductThunk.rejected, (state, action) => {
 				state.loading = 'failed';

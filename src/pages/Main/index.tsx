@@ -1,6 +1,6 @@
 import s from "./main.module.scss";
 import { RadioButtons } from "../../features/RadioButtons/";
-import { ProductList } from "../../features/ProductList/";
+import { ProductList } from "../../features/Cards";
 import { Cart } from "../../features/Cart/";
 import { Outlet } from "react-router-dom";
 import { Sort } from "../../features/Sort/";

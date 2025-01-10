@@ -60,16 +60,7 @@ const Profile = () => {
             />
           );
         })}
-        {error && (
-          <div className={s.error}>
-            <ResponseServer {...error} />
-          </div>
-        )}
-        {success && (
-          <div className={s.success}>
-            <ResponseServer {...success} />
-          </div>
-        )}
+
         <label className={s.label}>
           Подтвердить:&nbsp;
           <input
@@ -87,6 +78,8 @@ const Profile = () => {
             required
           />
         </label>
+        {error && <ResponseServer {...error} />}
+        {success && <ResponseServer {...success} />}
         <button
           type="submit"
           className={s.button}

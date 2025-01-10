@@ -132,8 +132,12 @@ const RegistrationModal = () => {
                     aria-label="Повторите пароль"
                     required
                   />
-                  {errorServer && <ResponseServer {...errorServer} />}
-                  {clientError && <div className={s.error}>{clientError}</div>}
+                  {errorServer && (
+                    <div className={s.error}>
+                      <ResponseServer {...errorServer} />
+                    </div>
+                  )}
+                  {clientError && <div className={s.client_error}>{clientError}</div>}
                   <button
                     type="submit"
                     className={s.button}

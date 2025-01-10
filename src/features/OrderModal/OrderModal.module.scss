@@ -105,13 +105,6 @@
 						flex: calc(50% - 8px) 1 1;
 					}
 				}
-				.input_error {
-					@include mix.input-error();
-				}
-				.error {
-					order: 13;
-					@include mix.color-message(tomato, yellow);
-				}
 			}
 			.button {
 				@include mix.button-style(

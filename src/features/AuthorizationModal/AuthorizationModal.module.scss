@@ -48,10 +48,6 @@
 				.input_error {
 					@include mix.input-error();
 				}
-				.error {
-					order: 13;
-					@include mix.color-message(tomato, yellow);
-				}
 			}
 		}
 		.close {

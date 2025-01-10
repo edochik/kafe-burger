@@ -1,7 +1,9 @@
 @use '../../style/mixin.scss' as mix;
 .error {
 	@include mix.color-message(tomato, yellow);
+	align-self: center;
 }
 .success {
 	@include mix.color-message(white, green);
+	align-self: center;
 }

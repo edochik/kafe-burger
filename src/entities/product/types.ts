@@ -4,7 +4,7 @@ export interface ProductErrorServer extends IResponseServer {
 
 }
 export interface ProductSuccessServer extends IResponseServer {
-
+	products?: Product[]
 }
 export interface Product {
 	id: number;

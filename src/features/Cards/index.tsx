@@ -1,14 +1,14 @@
-import s from "./ProductList.module.scss";
-import { ProductCard } from "../ProductCard";
+import s from "./Cards.module.scss";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { Loader } from "./Loader";
-import { Pagination } from "../Pagination/";
+import { Pagination } from "../Pagination";
 import {
   decrementPage,
   incrementPage,
 } from "../../entities/product/productSlice";
+import { Card } from "../Card";
 
-const ProductList = () => {
+const Cards = () => {
   const { selectCategory } = useAppSelector((state) => state.categories);
   const { products, loading, pageInfo } = useAppSelector(
     (state) => state.products
@@ -28,13 +28,13 @@ const ProductList = () => {
     categoryRu[0].toUpperCase() + categoryRu.slice(1);
 
   return (
-    <section className={s.section}>
+    <section className={s.Cards}>
       <h2 className={s.title}>{categoryName}</h2>
       <ul className={s.list}>
         {filterProduct
           .slice((currentPage - 1) * pageSize, pageSize * currentPage)
           .map((product) => (
-            <ProductCard key={product.id} {...product} />
+            <Card key={product.id} {...product} />
           ))}
       </ul>
       {filterProduct.length > 6 && (
@@ -49,4 +49,4 @@ const ProductList = () => {
   );
 };
 
-export { ProductList };
+export { Cards as ProductList };

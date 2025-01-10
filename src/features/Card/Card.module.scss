@@ -1,7 +1,7 @@
 @use '../../shared/style/mixin.scss' as mix;
 @use '../../shared/style/variable.scss' as var;
 
-.ProductCard {
+.Card {
 	background-color: var.$color-white;
 	padding: 12px;
 	border-radius: 18px;
@@ -16,7 +16,7 @@
 		margin: 0 0 16px 0;
 		width: 276px;
 		height: 220px;
-		object-fit: contain;
+		object-fit: cover;
 	}
 	.price {
 		margin: 0 0 8px 0;

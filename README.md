@@ -18,11 +18,11 @@
    │ ├── Cart/ корзина [✅]
    │ ├── LoginOrUserMenu/ вход или меню пользователя [✅]
    │ ├── OrderDetails/ данные о Истории заказов [✅]
-   │ ├── OrderModal/ модальное окно заказ
-   │ ├── Pagination/ пагинация
-   │ ├── ProductCard/ продукт
-   │ ├── ProductCart/ продукция в корзине
-   │ ├── ProductList/ список продукции
+   │ ├── OrderModal/ модальное окно заказ [✅]
+   │ ├── Pagination/ пагинация [✅]
+   │ ├── ProductCard/ продукт [✅]
+   │ ├── CartItem/ продукция в корзине
+   │ ├── Cards/ список продукции
    │ ├── RadioButton/ радио кнопка
    │ ├── RadioButtons/ радио кнопки
    │ ├── RegistrationModal/ модальное окно регистрации

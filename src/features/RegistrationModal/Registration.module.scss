@@ -58,7 +58,12 @@
 					}
 					.error {
 						order: 13;
+						margin: auto;
+					}
+					.client_error {
 						@include mix.color-message(tomato, yellow);
+						order: 13;
+						margin: auto;
 					}
 					.subtitle_delivery,
 					.subtitle_login,
@@ -103,7 +108,7 @@
 					.floor,
 					.apartment {
 						order: 7;
-						flex-basis: calc(50% - 6px); /* Каждому элементу даем ширину 50% минус отступ между ними */
+						flex-basis: calc(50% - 6px);
 					}
 					.subtitle_login {
 						margin: 8px 0 0 0;

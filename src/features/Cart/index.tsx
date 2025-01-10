@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ProductCart } from "../ProductCart/";
+import { CartItem } from "../CartItem";
 import s from "./Cart.module.scss";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 
@@ -24,7 +24,7 @@ const Cart = () => {
           <>
             <ul className={s.carts}>
               {cart.map((product) => (
-                <ProductCart key={product.id} {...product} />
+                <CartItem key={product.id} {...product} />
               ))}
             </ul>
             <div className={s.wrapper_total}>

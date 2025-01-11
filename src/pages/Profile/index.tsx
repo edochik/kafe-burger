@@ -60,7 +60,6 @@ const Profile = () => {
             />
           );
         })}
-
         <label className={s.label}>
           Подтвердить:&nbsp;
           <input

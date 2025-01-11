@@ -9,26 +9,15 @@ const HistoryOrders = () => {
   const { orders, orderDetails } = useAppSelector(
     (state) => state.profile.data
   );
-
-  const { loading } = useAppSelector((state) => state.products);
   const orderDetailsMap = getOrderDetailsMap(orderDetails);
   const formatOrders = getFormatOrders(orders);
-  if (loading === "pending") {
-    return (
-      <div className={s.HistoryOrders}>
-        <div className={s.container}>
-          <div className={s.loader}></div>
-        </div>
-      </div>
-    );
-  }
+
   return (
     <div className={s.HistoryOrders}>
       <div className={s.container}>
         <ul className={s.orders}>
           {formatOrders.reverse().map((order) => {
             const { id, date, total } = order;
-
             const values = orderDetailsMap.get(id);
             return (
               <li className={s.order} key={order.id}>

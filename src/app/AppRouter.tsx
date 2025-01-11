@@ -9,6 +9,7 @@ import { Profile } from "../pages/Profile";
 import { NotFoundPage } from "../pages/NotFoundPage/";
 import { HistoryOrders } from "../pages/HistoryOrders/";
 import { CreateProduct } from "../pages/CreateProduct";
+import { DeleteProduct } from "../pages/DeleteProduct/";
 
 export const AppRouter = () => {
   const isAuth = useAppSelector((state) => state.profile.isAuthorization);
@@ -33,6 +34,7 @@ export const AppRouter = () => {
       <Route path="/history-order" element={<HistoryOrders />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/create-product" element={<CreateProduct />} />
+      <Route path="/delete-product" element={<DeleteProduct />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

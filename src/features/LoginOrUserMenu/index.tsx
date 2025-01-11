@@ -44,6 +44,9 @@ const LoginOrUserMenu = () => {
           <li className={s.item} onClick={() => setToggle(false)}>
             <Link to="/create-product">Создать</Link>
           </li>
+          <li className={s.item} onClick={() => setToggle(false)}>
+            <Link to="/delete-product">Удалить</Link>
+          </li>
           <li className={s.item}>
             <Link
               to="/"

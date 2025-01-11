@@ -1,7 +1,7 @@
 @use '../../shared/style/mixin.scss' as mix;
 @use '../../shared/style/variable.scss' as var;
 
-.main {
+.Main {
 	@include mix.container();
 	padding-bottom: 50px;
 	.header {

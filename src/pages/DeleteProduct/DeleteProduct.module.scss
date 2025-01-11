@@ -1,0 +1,29 @@
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
+
+.DeleteProduct {
+	padding: 50px;
+	.container {
+		@include mix.container();
+		max-width: 960px;
+		.title {
+			margin: 0 0 20px 0;
+			text-align: center;
+			font-size: var.$font-size-xlarge;
+			font-weight: var.$font-weight-extrabold;
+		}
+		.wrapper {
+			display: flex;
+			justify-content: space-around;
+			label {
+				margin-bottom: 10px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				font-size: var.$font-size-large;
+				color: var.$color-orange;
+				font-weight: var.$font-weight-extrabold;
+			}
+		}
+	}
+}

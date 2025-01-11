@@ -6,7 +6,7 @@ interface FormInputProps {
   classInput?: string;
   ariaLabel: string;
   value: string | number;
-  onChange: (arg: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   text?: string;
   classLabel?: string;
   pattern?: string;
@@ -35,7 +35,6 @@ const FormInput = ({
   minLength,
 }: // autoFocus,
 FormInputProps) => {
-  console.log(`${classInput}`);
   const InputComponent = (
     <input
       className={classInput}

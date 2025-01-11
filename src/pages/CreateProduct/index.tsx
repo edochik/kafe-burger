@@ -14,6 +14,7 @@ import { fetchCreateProductThunk } from "../../entities/product/thunk/fetchCreat
 import { numberInput } from "./numberInput";
 import { selectCategory } from "./selectCategory";
 import { ResponseServer } from "../../shared/ui/ResponseServer/";
+import { SelectCategory } from "../../shared/ui/SelectCategory/";
 
 const CreateProduct = () => {
   const {
@@ -23,10 +24,10 @@ const CreateProduct = () => {
     successServer: success,
   } = useAppSelector((state) => state.products);
   const [clientError, setClientError] = useState<null | string>(null);
+
   const location = useLocation();
   const currentPath = location.pathname;
   const dispatch = useAppDispatch();
-
   useEffect(() => {
     const handleKeyPress = () => {
       dispatch(resetServerResponseProduct());
@@ -122,25 +123,15 @@ const CreateProduct = () => {
               onChange={(e) => handleTextareaChange(e)}
             />
           </label>
-          <label className={s.select}>
-            Категория:
-            <select
-              name="categoryEn"
-              value={newProduct.categoryEn}
-              aria-label="Категории"
-              onChange={(e) => handleSelectChange(e)}
-            >
-              <option value="empty">--выбери категорию--</option>
-              {categories.map((category, index) => {
-                const { categoryEn, categoryRu } = category;
-                return (
-                  <option key={category.id} value={categoryEn}>
-                    {categoryRu}
-                  </option>
-                );
-              })}
-            </select>
-          </label>
+          {/* <SelectCategory
+            categories={categories}
+            nameSelect="categoryEn"
+            ariaLabelSelect="Категории"
+            value={newProduct.categoryEn}
+            onChange={(e) => handleSelectChange(e)}
+            textForLabel={"Категория:"}
+            textForEmptyOption={"--выберите категорию--"}
+          /> */}
           {clientError && <div className={s.client_error}>{clientError}</div>}
           {error && (
             <div className={s.error}>

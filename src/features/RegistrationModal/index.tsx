@@ -158,7 +158,7 @@ const RegistrationModal = () => {
           )}
         </div>
         <Link to="/" className={s.close}>
-          <CloseIcon></CloseIcon>
+          <CloseIcon />
         </Link>
       </div>
     </div>

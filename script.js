@@ -387,3 +387,59 @@ const { type } = require("@testing-library/user-event/dist/type/index");
 
 
 
+const test = [
+	{
+		"id": "fdc106f",
+		"categoryEn": "burgers",
+		"categoryRu": "бургеры",
+		"categoryImg": "https://cdn.glitch.global/c00ca76d-9bd4-4773-b94d-c4589749d2e6/burger.png?v=1729703984083"
+	},
+	{
+		"id": "d649d59",
+		"categoryEn": "snacks",
+		"categoryRu": "закуски",
+		"categoryImg": "https://cdn.glitch.global/c00ca76d-9bd4-4773-b94d-c4589749d2e6/snacks.png?v=1729704065326"
+	},
+	{
+		"id": "b41d7ff",
+		"categoryEn": "hot-dogs",
+		"categoryRu": "хот-доги",
+		"categoryImg": "https://cdn.glitch.global/c00ca76d-9bd4-4773-b94d-c4589749d2e6/hot-dog.png?v=1729704065015"
+	},
+	{
+		"id": "01f7dff",
+		"categoryEn": "combos",
+		"categoryRu": "комбо",
+		"categoryImg": "https://cdn.glitch.global/c00ca76d-9bd4-4773-b94d-c4589749d2e6/combo.png?v=1729703987555"
+	},
+	{
+		"id": "cf377e4",
+		"categoryEn": "shawarma",
+		"categoryRu": "шаурма",
+		"categoryImg": "https://cdn.glitch.global/c00ca76d-9bd4-4773-b94d-c4589749d2e6/shawarma.png?v=1729704065015"
+	},
+	{
+		"id": "1c0f81f",
+		"categoryEn": "dessert",
+		"categoryRu": "десерт",
+		"categoryImg": "https://cdn.glitch.global/c00ca76d-9bd4-4773-b94d-c4589749d2e6/dessert.png?v=1729704002871"
+	},
+	{
+		"id": "dda47d6",
+		"categoryEn": "sauces",
+		"categoryRu": "соусы",
+		"categoryImg": "https://cdn.glitch.global/c00ca76d-9bd4-4773-b94d-c4589749d2e6/sauces.png?v=1729704065690"
+	}
+]
+
+// const getValue = (obj, ...keys) => Object.fromEntries(keys.map(key => [key, obj[key]]))
+const getValue = (obj, ...keys) => keys.map(key =>  obj[key])
+
+console.log(getValue({
+	"id": "dda47d6",
+	"categoryEn": "sauces",
+	"categoryRu": "соусы",
+}, 'id', 'categoryEn', 'categoryRu'));
+
+
+

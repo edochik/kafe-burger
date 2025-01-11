@@ -2,12 +2,13 @@
 @use '../../shared/style/variable.scss' as var;
 
 .CreateProduct {
-	text-align: center;
 	padding: 50px 0;
 	.container {
 		.title {
+			text-align: center;
 			margin: 0 0 20px 0;
-			font-size: 30px;
+			font-size: var.$font-size-xlarge;
+			font-weight: var.$font-weight-extrabold;
 		}
 		@include mix.container();
 		max-width: 960px;
@@ -37,11 +38,10 @@
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				font-size: 30px;
+				font-size: var.$font-size-xlarge;
 				color: var.$color-orange;
-				font-weight: var.$font-weight-extrabold;
 				textarea {
-					width: 500px;
+					width: 450px;
 					height: 300px;
 					resize: none;
 				}

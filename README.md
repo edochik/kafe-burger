@@ -20,19 +20,19 @@
    │ ├── OrderDetails/ данные о Истории заказов [✅]
    │ ├── OrderModal/ модальное окно заказ [✅]
    │ ├── Pagination/ пагинация [✅]
-   │ ├── ProductCard/ продукт [✅]
-   │ ├── CartItem/ продукция в корзине
-   │ ├── Cards/ список продукции
-   │ ├── RadioButton/ радио кнопка
-   │ ├── RadioButtons/ радио кнопки
-   │ ├── RegistrationModal/ модальное окно регистрации
-   │ └── Sort/ сортировка кнопки
+   │ ├── Card/ продукт  [✅]
+   │ ├── CartItem/ продукция в корзине  [✅]
+   │ ├── Cards/ список продукции  [✅]
+   │ ├── RadioButton/ радио кнопка  [✅]
+   │ ├── RadioButtons/ радио кнопки  [✅]
+   │ ├── RegistrationModal/ модальное окно регистрации  [✅]
+   │ └── Sort/ сортировка кнопки  [✅]
    ├── pages/
-   │ ├── CreateProduct/ создать продукцию
-   │ ├── HistoryOrders/ история заказов
-   │ ├── Main/ основной контент
-   │ ├── NotFoundPage/ если нет страницы
-   │ └── Profile/ профиль пользователя
+   │ ├── CreateProduct/ создать продукцию [✅]
+   │ ├── HistoryOrders/ история заказов [✅]
+   │ ├── Main/ основной контент [✅]
+   │ ├── NotFoundPage/ если нет страницы [✅]
+   │ └── Profile/ профиль пользователя [✅]
    ├── services/ пустой???
    ├── shared/
    │ ├── api / api и функция fetchData 

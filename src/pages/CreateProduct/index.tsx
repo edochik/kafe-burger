@@ -14,7 +14,7 @@ import { fetchCreateProductThunk } from "../../entities/product/thunk/fetchCreat
 import { numberInput } from "./numberInput";
 import { selectCategory } from "./selectCategory";
 import { ResponseServer } from "../../shared/ui/ResponseServer/";
-import { SelectCategory } from "../../shared/ui/SelectCategory/";
+import { CustomSelect } from "../../shared/ui/CustomSelect";
 
 const CreateProduct = () => {
   const {
@@ -23,11 +23,14 @@ const CreateProduct = () => {
     errorServer: error,
     successServer: success,
   } = useAppSelector((state) => state.products);
+  const { categories } = useAppSelector((state) => state.categories);
   const [clientError, setClientError] = useState<null | string>(null);
-
   const location = useLocation();
   const currentPath = location.pathname;
   const dispatch = useAppDispatch();
+  const idCategory = categories.find(
+    (category) => category.categoryEn === newProduct.categoryEn
+  )?.id;
   useEffect(() => {
     const handleKeyPress = () => {
       dispatch(resetServerResponseProduct());
@@ -47,8 +50,6 @@ const CreateProduct = () => {
   useEffect(() => {
     dispatch(resetServerResponseProduct());
   }, [currentPath, dispatch]);
-
-  const { categories } = useAppSelector((state) => state.categories);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -123,15 +124,17 @@ const CreateProduct = () => {
               onChange={(e) => handleTextareaChange(e)}
             />
           </label>
-          {/* <SelectCategory
-            categories={categories}
+          <CustomSelect
+            list={categories}
             nameSelect="categoryEn"
             ariaLabelSelect="Категории"
-            value={newProduct.categoryEn}
+            value={idCategory}
             onChange={(e) => handleSelectChange(e)}
             textForLabel={"Категория:"}
             textForEmptyOption={"--выберите категорию--"}
-          /> */}
+            keys={["id", "categoryRu"]}
+            getValues={(obj, keys) => keys.map((key) => obj[key])}
+          />
           {clientError && <div className={s.client_error}>{clientError}</div>}
           {error && (
             <div className={s.error}>

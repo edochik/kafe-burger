@@ -3,6 +3,7 @@ import { fetchInitialProductsThunk } from "./thunk/fetchInitialProductsThunk";
 import { sortFunctions } from "./sortFunctions";
 import { InitialState, Product, ProductSuccessServer } from "./types";
 import { fetchCreateProductThunk } from "./thunk/fetchCreateProductThunk";
+import { fetchDeleteProductThunk } from "./thunk/fetchDeleteProductThunk";
 
 const initialState: InitialState = {
 	loading: 'idle',
@@ -85,9 +86,10 @@ export const productSlice = createSlice({
 			.addCase(fetchInitialProductsThunk.pending, (state) => {
 				state.loading = 'pending';
 			})
-			.addCase(fetchInitialProductsThunk.fulfilled, (state, action: PayloadAction<Product[]>) => {
+			.addCase(fetchInitialProductsThunk.fulfilled, (state, action: PayloadAction<ProductSuccessServer>) => {
 				state.loading = 'succeeded';
-				state.products = action.payload
+				const { products } = action.payload
+				state.products = products
 			})
 			.addCase(fetchInitialProductsThunk.rejected, (state) => {
 				state.loading = 'failed';
@@ -100,11 +102,25 @@ export const productSlice = createSlice({
 				state.loading = 'succeeded';
 				const { products, message, status } = action.payload
 				state.successServer = { status, message }
-				state.products = products!
+				state.products = products
 			})
 			.addCase(fetchCreateProductThunk.rejected, (state, action) => {
 				state.loading = 'failed';
 				state.errorServer = action.payload ?? { status: "error", message: "fetchCreateProductThunk error" };
+			})
+
+			.addCase(fetchDeleteProductThunk.pending, (state) => {
+				state.loading = 'pending';
+			})
+			.addCase(fetchDeleteProductThunk.fulfilled, (state, action: PayloadAction<ProductSuccessServer>) => {
+				state.loading = 'succeeded';
+				const { products, message, status } = action.payload
+				state.successServer = { status, message }
+				state.products = products
+			})
+			.addCase(fetchDeleteProductThunk.rejected, (state, action) => {
+				state.loading = 'failed';
+				state.errorServer = action.payload ?? { status: "error", message: "fetchDeleteProductThunk error" };
 			})
 	}
 })

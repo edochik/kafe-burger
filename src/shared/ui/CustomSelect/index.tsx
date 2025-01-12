@@ -1,19 +1,18 @@
-import { Category } from "../../../entities/categories/types";
-import s from "./SelectCategory.module.scss";
+import s from "./CustomSelect.module.scss";
 
-interface SelectCategoryProps {
-  list: Category[];
+interface CustomSelectProps<T, K> {
+  list: T[];
   nameSelect: string;
   ariaLabelSelect: string;
-  value: string;
+  value: string | number | undefined;
   textForEmptyOption: string;
   textForLabel: string;
-  keys: (keyof Category)[];
+  keys: (keyof T)[];
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  getObjectValues: (object: Category, args: (keyof Category)[]) => string[];
+  getValues: (element: T, args: (keyof T)[]) => K[];
 }
 
-const SelectCategory = ({
+const CustomSelect = <T extends object, K extends string | number>({
   list,
   nameSelect,
   ariaLabelSelect,
@@ -22,10 +21,10 @@ const SelectCategory = ({
   textForLabel,
   keys,
   onChange,
-  getObjectValues,
-}: SelectCategoryProps) => {
+  getValues: getObjectValues,
+}: CustomSelectProps<T, K>) => {
   return (
-    <label className={s.SelectCategory}>
+    <label className={s.CustomSelect}>
       {textForLabel}
       <select
         name={nameSelect}
@@ -33,11 +32,11 @@ const SelectCategory = ({
         aria-label={ariaLabelSelect}
         onChange={(e) => onChange(e)}
       >
-        <option value="empty">{textForEmptyOption}</option>
+        <option value="">{textForEmptyOption}</option>
         {list.map((item) => {
-          const [id, optionValue, contentValue] = getObjectValues(item, keys);
+          const [id, contentValue] = getObjectValues(item, keys);
           return (
-            <option key={id} value={optionValue}>
+            <option key={id} value={id}>
               {contentValue}
             </option>
           );
@@ -47,4 +46,4 @@ const SelectCategory = ({
   );
 };
 
-export { SelectCategory };
+export { CustomSelect };

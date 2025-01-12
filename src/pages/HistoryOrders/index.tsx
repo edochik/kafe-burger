@@ -9,9 +9,11 @@ const HistoryOrders = () => {
   const { orders, orderDetails } = useAppSelector(
     (state) => state.profile.data
   );
+  console.log(orders);
+  console.log(orderDetails);
   const orderDetailsMap = getOrderDetailsMap(orderDetails);
   const formatOrders = getFormatOrders(orders);
-
+  
   return (
     <div className={s.HistoryOrders}>
       <div className={s.container}>

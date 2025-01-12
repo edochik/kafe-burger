@@ -4,13 +4,26 @@ import s from "./Cart.module.scss";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 
 const Cart = () => {
-  const cart = useAppSelector((state) => state.cart.cart);
+  const { cart } = useAppSelector((state) => state.cart);
+  const { loading } = useAppSelector((state) => state.products);
   const totalCount = cart.reduce((acc, item) => acc + item.count, 0);
   const totalPrice = cart.reduce(
     (acc, item) => acc + item.price * item.count,
     0
   );
-
+  if (loading === "pending") {
+    return (
+      <aside>
+        <div className={s.cart}>
+          <div className={s.wrapper_cart}>
+            <h3 className={s.title}>Корзина</h3>
+            <p className={s.count}>{totalCount}</p>
+          </div>
+          <div className={s.loader}></div>
+        </div>
+      </aside>
+    );
+  }
   return (
     <aside>
       <div className={s.cart}>

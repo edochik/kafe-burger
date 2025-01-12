@@ -1,5 +1,5 @@
-@use '../../shared/style/mixin.scss' as mix;
-@use '../../shared/style/variable.scss' as var;
+@use '../../style/mixin.scss' as mix;
+@use '../../style/variable.scss' as var;
 
 .footer {
 	background-color: var.$color-white;

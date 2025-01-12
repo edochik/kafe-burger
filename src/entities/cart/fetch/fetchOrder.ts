@@ -1,7 +1,7 @@
-import { API } from "../../../shared/api/api";
+import { API_URL } from "../../../shared/api/api";
 import { fetchData } from "../../../shared/api/helper";
 
-const API_ORDER = `${API}orders`;
+const API_ORDER = `${API_URL}orders`;
 
 
 export async function fetchOrder<T, K>(data: K): Promise<T> {

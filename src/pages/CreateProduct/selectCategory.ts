@@ -7,7 +7,7 @@ export const selectCategory = (
 	dispatch: AppDispatch,
 	categories: Category[]
 ) => {
-	if (value === "empty") {
+	if (value === "") {
 		dispatch(
 			updateCategoryProduct({
 				categoryEn: "",
@@ -18,7 +18,7 @@ export const selectCategory = (
 		return;
 	}
 	const dictionaryCategories = Object.fromEntries(
-		categories.map((category) => [category.categoryEn, category])
+		categories.map((category) => [category.id, category])
 	);
 	const { categoryEn, categoryImg, categoryRu } = dictionaryCategories[value];
 	dispatch(updateCategoryProduct({ categoryEn, categoryImg, categoryRu }));

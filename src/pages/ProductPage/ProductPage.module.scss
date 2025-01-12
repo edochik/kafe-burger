@@ -5,6 +5,7 @@
 	@include mix.overlay-style();
 	.modal {
 		@include mix.modal-style();
+		display: unset;
 		padding: 24px 24px 36px 24px;
 		background-color: var.$color-white;
 		.title {

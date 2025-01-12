@@ -70,4 +70,8 @@
 			left: -32px;
 		}
 	}
+	.loader {
+		// background-color: gray;
+		@include mix.loader();
+	}
 }

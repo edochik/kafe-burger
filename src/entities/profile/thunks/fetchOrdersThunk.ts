@@ -9,9 +9,9 @@ export const fetchOrdersThunk = createAsyncThunk<
 	{ rejectValue: ProfileErrorServer }
 >(
 	"fetchOrdersThunk",
-	async (data, { rejectWithValue }) => {
+	async (userId, { rejectWithValue }) => {
 		try {
-			const response = await fetchOrders<ProfileSuccessServer, number>(data);
+			const response = await fetchOrders<ProfileSuccessServer, number>(userId);
 			return response;
 		} catch (error) {
 			return rejectWithValue(error as ProfileErrorServer);

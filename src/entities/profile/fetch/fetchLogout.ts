@@ -1,7 +1,7 @@
-import { API } from "../../../shared/api/api";
+import { API_URL } from "../../../shared/api/api";
 import { fetchData } from "../../../shared/api/helper";
 
-const API_LOGOUT = `${API}auth/logout`
+const API_LOGOUT = `${API_URL}auth/logout`
 
 export async function fetchLogout<T>(): Promise<T> {
 	const options: RequestInit = {

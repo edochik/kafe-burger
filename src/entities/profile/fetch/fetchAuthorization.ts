@@ -1,7 +1,7 @@
-import { API } from "../../../shared/api/api";
+import { API_URL } from "../../../shared/api/api";
 import { fetchData } from "../../../shared/api/helper";
 
-const API_AUTHORIZATION = `${API}auth/login`;
+const API_AUTHORIZATION = `${API_URL}auth/login`;
 
 export async function fetchAuthorization<T, K>(data: K): Promise<T> {
 	const options: RequestInit = {

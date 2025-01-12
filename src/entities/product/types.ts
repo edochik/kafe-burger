@@ -4,7 +4,7 @@ export interface ProductErrorServer extends IResponseServer {
 
 }
 export interface ProductSuccessServer extends IResponseServer {
-	products?: Product[]
+	products: Product[]
 }
 export interface Product {
 	id: number;
@@ -28,8 +28,8 @@ export interface pageInfo {
 
 export interface InitialState {
 	loading: LoadingStatus;
-	errorServer: null | ProductErrorServer;
-	successServer: null | ProductSuccessServer;
+	errorServer: null | IResponseServer;
+	successServer: null | IResponseServer;
 	pageInfo: pageInfo,
 	products: Product[],
 	newProduct: Omit<Product, "id">,

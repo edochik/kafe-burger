@@ -1,4 +1,4 @@
-import { Footer } from "../widgets/Footer";
+import { Footer } from "../shared/ui/Footer/";
 import { Header } from "../widgets/Header";
 import { AppRouter } from "./AppRouter";
 import { BrowserRouter as Router } from "react-router-dom";

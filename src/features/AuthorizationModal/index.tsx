@@ -82,7 +82,9 @@ const AuthorizationModal = () => {
           </form>
           {errorServer && <ResponseServer {...errorServer} />}
           <Link to="/registration">
-            <button className={s.button}>Регистрация</button>
+            <button className={s.button} disabled={loading === "pending"}>
+              Регистрация
+            </button>
           </Link>
         </div>
         <Link to="/" className={s.close}>

@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { ProductPage } from "../widgets/ProductPage";
+import { ProductPage } from "../pages/ProductPage";
 import { RegistrationModal } from "../features/RegistrationModal";
 import { OrderModal } from "../features/OrderModal";
 import { AuthorizationModal } from "../features/AuthorizationModal";

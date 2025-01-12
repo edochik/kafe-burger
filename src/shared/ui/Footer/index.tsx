@@ -1,4 +1,4 @@
-import { LogoIcon } from "../../shared/ui/SVGIcons/LogoIcon";
+import { LogoIcon } from "../SVGIcons/LogoIcon";
 import s from "./footer.module.scss";
 
 const Footer = () => {

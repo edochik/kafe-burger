@@ -1,7 +1,7 @@
-import { API } from "../../../shared/api/api";
+import { API_PRODUCT } from "../../../shared/api/api";
 import { fetchData } from "../../../shared/api/helper";
 
-const API_CREATE_PRODUCT = `${API}create/product`
+// const API_CREATE_PRODUCT = `${API_URL}/products`
 
 export async function fetchCreateProduct<T, K>(product: K): Promise<T> {
 	const options: RequestInit = {
@@ -11,6 +11,6 @@ export async function fetchCreateProduct<T, K>(product: K): Promise<T> {
 		},
 		body: JSON.stringify({ ...product })
 	}
-	const response: T = await fetchData(API_CREATE_PRODUCT, options);
+	const response: T = await fetchData(API_PRODUCT, options);
 	return response
 }

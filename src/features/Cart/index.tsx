@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CartItem } from "../CartItem";
 import s from "./Cart.module.scss";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 
 const Cart = () => {
   const { cart } = useAppSelector((state) => state.cart);
+  const location = useLocation();
   const { loading } = useAppSelector((state) => state.products);
   const totalCount = cart.reduce((acc, item) => acc + item.count, 0);
   const totalPrice = cart.reduce(
@@ -44,7 +45,11 @@ const Cart = () => {
               <p className={s.text}>Итого</p>
               <p className={s.total}>{totalPrice}₽</p>
             </div>
-            <Link className={s.button} to="/order">
+            <Link
+              className={s.button}
+              to="/order"
+              state={{ modal: true, background: location }}
+            >
               Оформить заказ
             </Link>
             <p className={s.info}>Бесплатная доставка</p>

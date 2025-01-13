@@ -14,27 +14,25 @@ const HistoryOrders = () => {
 
   return (
     <section className={s.HistoryOrders}>
-      <div className={s.container}>
-        <h2 className={s.title}>История заказов: </h2>
-        <ul className={s.orders}>
-          {formatOrders.reverse().map((order) => {
-            const { id, date, total } = order;
-            const values = orderDetailsMap.get(id);
-            return (
-              <li className={s.order} key={order.id}>
-                <p className={s.date}>
-                  Заказ от {date} №{id}
-                </p>
-                <p className={s.total}>оплачено {total} ₽</p>
-                {values && <OrderDetails values={values} />}
-              </li>
-            );
-          })}
-        </ul>
-        <Link className={s.go_back} to="/">
-          🏃‍♂️ Вернуться обратно
-        </Link>
-      </div>
+      <h2 className={s.title}>История заказов: </h2>
+      <ul className={s.orders}>
+        {formatOrders.reverse().map((order) => {
+          const { id, date, total } = order;
+          const values = orderDetailsMap.get(id);
+          return (
+            <li className={s.order} key={order.id}>
+              <p className={s.date}>
+                Заказ от {date} №{id}
+              </p>
+              <p className={s.total}>оплачено {total} ₽</p>
+              {values && <OrderDetails values={values} />}
+            </li>
+          );
+        })}
+      </ul>
+      <Link className={s.go_back} to="/">
+        🏃‍♂️ Вернуться обратно
+      </Link>
     </section>
   );
 };

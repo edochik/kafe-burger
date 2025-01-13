@@ -2,119 +2,118 @@
 @use '../../shared/style/variable.scss' as var;
 
 .CreateProduct {
-	padding: 50px 0;
-	.container {
-		text-align: center;
-		.title {
-			text-align: center;
-			margin: 0 0 20px 0;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	max-width: 960px;
+	margin: auto;
+	.title {
+		margin: 0 0 20px 0;
+		font-size: var.$font-size-xlarge;
+		font-weight: var.$font-weight-extrabold;
+	}
+	.form {
+		padding: 24px;
+		font-weight: var.$font-weight-extrabold;
+		background-color: var.$button-color-default-2;
+		box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+		border: 1px solid rgba(254, 95, 0, 0);
+		border-radius: var.$border-radius-default;
+		font-size: 30px;
+		display: grid;
+		grid-template-areas:
+			'nameRu category'
+			'nameEn imageUrl'
+			'price textarea'
+			'weight textarea'
+			'kilocalories textarea'
+			'composition textarea'
+			'success success'
+			'error error'
+			'client_error client_error'
+			'button button';
+		justify-content: space-between;
+		label {
+			margin-bottom: 10px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 			font-size: var.$font-size-xlarge;
-			font-weight: var.$font-weight-extrabold;
-		}
-		@include mix.container();
-		max-width: 960px;
-		.form {
-			padding: 24px;
-			font-weight: var.$font-weight-extrabold;
-			background-color: var.$button-color-default-2;
-			box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-			border: 1px solid rgba(254, 95, 0, 0);
-			border-radius: var.$border-radius-default;
-			font-size: 30px;
-			display: grid;
-			grid-template-areas:
-				'nameRu category'
-				'nameEn imageUrl'
-				'price textarea'
-				'weight textarea'
-				'kilocalories textarea'
-				'composition textarea'
-				'success success'
-				'error error'
-				'client_error client_error'
-				'button button';
-			justify-content: space-between;
-			label {
-				margin-bottom: 10px;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				font-size: var.$font-size-xlarge;
-				color: var.$color-orange;
-				textarea {
-					width: 450px;
-					height: 300px;
-					resize: none;
-				}
-				input,
-				textarea {
-					outline: 3px solid var.$color-gray-dark-light;
-					border-radius: 5px;
-					&:focus {
-						outline: 3px solid var.$color-gray-dark;
-					}
+			color: var.$color-orange;
+			textarea {
+				width: 450px;
+				height: 300px;
+				resize: none;
+			}
+			input,
+			textarea {
+				outline: 3px solid var.$color-gray-dark-light;
+				border-radius: 5px;
+				&:focus {
+					outline: 3px solid var.$color-gray-dark;
 				}
 			}
-			.nameRu {
-				grid-area: nameRu;
-			}
-			.nameEn {
-				grid-area: nameEn;
-			}
-			.price {
-				grid-area: price;
-			}
-			.weight {
-				grid-area: weight;
-			}
-			.kilocalories {
-				grid-area: kilocalories;
-			}
-			.composition {
-				grid-area: composition;
-			}
-			.imageUrl {
-				grid-area: imageUrl;
-			}
-			.textarea {
-				grid-area: textarea;
-				align-self: self-end;
-			}
-			.select {
-				grid-area: category;
-			}
-			.button {
-				grid-area: button;
-				margin-bottom: 0;
-				align-self: start;
-				justify-self: center;
-				@include mix.button-style(
-					var.$button-bg-default-2,
-					var.$color-white,
-					var.$button-bg-hover-1,
-					var.$button-bg-selected
-				);
-				width: unset;
-				padding: 12px;
-			}
-			margin-bottom: 30px;
-			.error {
-				grid-area: error;
-				align-self: center;
-				justify-self: center;
-			}
-			.client_error {
-				grid-area: client_error;
-				@include mix.color-message(tomato, yellow);
-			}
-			.success {
-				grid-area: success;
-				align-self: center;
-				justify-self: center;
-			}
 		}
-		.go_back {
-			@include mix.go_back();
+		.nameRu {
+			grid-area: nameRu;
 		}
+		.nameEn {
+			grid-area: nameEn;
+		}
+		.price {
+			grid-area: price;
+		}
+		.weight {
+			grid-area: weight;
+		}
+		.kilocalories {
+			grid-area: kilocalories;
+		}
+		.composition {
+			grid-area: composition;
+		}
+		.imageUrl {
+			grid-area: imageUrl;
+		}
+		.textarea {
+			grid-area: textarea;
+			align-self: self-end;
+		}
+		.select {
+			grid-area: category;
+		}
+		.button {
+			grid-area: button;
+			margin-bottom: 0;
+			align-self: start;
+			justify-self: center;
+			@include mix.button-style(
+				var.$button-bg-default-2,
+				var.$color-white,
+				var.$button-bg-hover-1,
+				var.$button-bg-selected
+			);
+			width: unset;
+			padding: 12px;
+		}
+		margin-bottom: 30px;
+		.error {
+			grid-area: error;
+			align-self: center;
+			justify-self: center;
+		}
+		.client_error {
+			grid-area: client_error;
+			@include mix.color-message(tomato, yellow);
+		}
+		.success {
+			grid-area: success;
+			align-self: center;
+			justify-self: center;
+		}
+	}
+	.go_back {
+		@include mix.go_back();
 	}
 }

@@ -96,68 +96,66 @@ const CreateProduct = () => {
 
   return (
     <section className={s.CreateProduct}>
-      <div className={s.container}>
-        <h2 className={s.title}>Создать новый продукт</h2>
-        <div className={s.tut}></div>
-        <form className={s.form} onSubmit={handleSubmit}>
-          {createProductFields.map((field, index) => {
-            const { name, ...spread } = field;
-            const value = newProduct[name as keyof Omit<Product, "id">];
-            return (
-              <FormInput
-                key={name}
-                classLabel={`${s[name]}`}
-                name={name}
-                value={value}
-                onChange={(e) => handleInputChange(e)}
-                {...spread}
-              />
-            );
-          })}
-          <label className={s.textarea}>
-            Описание ru:
-            <textarea
-              name="description"
-              value={newProduct.description}
-              aria-label="Описание продукта"
-              required
-              onChange={(e) => handleTextareaChange(e)}
+      <h2 className={s.title}>Создать новый продукт</h2>
+      <div className={s.tut}></div>
+      <form className={s.form} onSubmit={handleSubmit}>
+        {createProductFields.map((field, index) => {
+          const { name, ...spread } = field;
+          const value = newProduct[name as keyof Omit<Product, "id">];
+          return (
+            <FormInput
+              key={name}
+              classLabel={`${s[name]}`}
+              name={name}
+              value={value}
+              onChange={(e) => handleInputChange(e)}
+              {...spread}
             />
-          </label>
-          <CustomSelect
-            list={categories}
-            nameSelect="categoryEn"
-            ariaLabelSelect="Категории"
-            value={idCategory}
-            onChange={(e) => handleSelectChange(e)}
-            textForLabel={"Категория:"}
-            textForEmptyOption={"--выберите категорию--"}
-            keys={["id", "categoryRu"]}
-            getValues={(obj, keys) => keys.map((key) => obj[key])}
+          );
+        })}
+        <label className={s.textarea}>
+          Описание ru:
+          <textarea
+            name="description"
+            value={newProduct.description}
+            aria-label="Описание продукта"
+            required
+            onChange={(e) => handleTextareaChange(e)}
           />
-          {clientError && <div className={s.client_error}>{clientError}</div>}
-          {error && (
-            <div className={s.error}>
-              <ResponseServer {...error} />
-            </div>
-          )}
-          {success && (
-            <div className={s.success}>
-              <ResponseServer {...success} />
-            </div>
-          )}
-          <button
-            className={s.button}
-            type="submit"
-            disabled={loading === "pending"}
-          >
-            Отправить
-          </button>
-        </form>
-        <Link className={s.go_back} to="/">
-          🏃‍♂️ Вернуться обратно
-        </Link>
-      </div>
+        </label>
+        <CustomSelect
+          list={categories}
+          nameSelect="categoryEn"
+          ariaLabelSelect="Категории"
+          value={idCategory}
+          onChange={(e) => handleSelectChange(e)}
+          textForLabel={"Категория:"}
+          textForEmptyOption={"--выберите категорию--"}
+          keys={["id", "categoryRu"]}
+          getValues={(obj, keys) => keys.map((key) => obj[key])}
+        />
+        {clientError && <div className={s.client_error}>{clientError}</div>}
+        {error && (
+          <div className={s.error}>
+            <ResponseServer {...error} />
+          </div>
+        )}
+        {success && (
+          <div className={s.success}>
+            <ResponseServer {...success} />
+          </div>
+        )}
+        <button
+          className={s.button}
+          type="submit"
+          disabled={loading === "pending"}
+        >
+          Отправить
+        </button>
+      </form>
+      <Link className={s.go_back} to="/">
+        🏃‍♂️ Вернуться обратно
+      </Link>
     </section>
   );
 };

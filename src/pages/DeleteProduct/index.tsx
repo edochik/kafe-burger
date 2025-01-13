@@ -44,47 +44,43 @@ const DeleteProduct = () => {
 
   return (
     <section className={s.DeleteProduct}>
-      <div className={s.container}>
-        <div className={s.wrapper}>
-          <h2 className={s.title}>Удалить продукцию</h2>
-          <CustomSelect
-            list={categories}
-            nameSelect="categories"
-            ariaLabelSelect="Категории"
-            value={categoryId}
-            onChange={(e) => handleCategoryChange(e)}
-            textForLabel={"Категория:"}
-            textForEmptyOption={"--выберите категорию--"}
-            keys={["id", "categoryRu"]}
-            getValues={(obj, keys) => keys.map((key) => obj[key])}
-          />
-          <CustomSelect
-            list={getProductByCategory}
-            nameSelect="products"
-            ariaLabelSelect="Продукция"
-            value={idDeleteProduct}
-            onChange={(e) => handleProductChange(e)}
-            textForLabel={"Название:"}
-            textForEmptyOption={
-              categoryId === "" || categoryId === "empty"
-                ? "--выберите категорию--"
-                : "--выберите продукцию--"
-            }
-            keys={["id", "nameRu"]}
-            getValues={(obj, keys) => keys.map((key) => obj[key])}
-          />
-          {product === undefined ? (
-            <div className={s.empty_card}>
-              <p>выберите категорию</p>
-            </div>
-          ) : (
-            <DeleteProductCard {...product} />
-          )}
-          <Link className={s.go_back} to="/">
-            🏃‍♂️ Вернуться обратно
-          </Link>
+      <h2 className={s.title}>Удалить продукцию</h2>
+      <CustomSelect
+        list={categories}
+        nameSelect="categories"
+        ariaLabelSelect="Категории"
+        value={categoryId}
+        onChange={(e) => handleCategoryChange(e)}
+        textForLabel={"Категория:"}
+        textForEmptyOption={"--выберите категорию--"}
+        keys={["id", "categoryRu"]}
+        getValues={(obj, keys) => keys.map((key) => obj[key])}
+      />
+      <CustomSelect
+        list={getProductByCategory}
+        nameSelect="products"
+        ariaLabelSelect="Продукция"
+        value={idDeleteProduct}
+        onChange={(e) => handleProductChange(e)}
+        textForLabel={"Название:"}
+        textForEmptyOption={
+          categoryId === "" || categoryId === "empty"
+            ? "--выберите категорию--"
+            : "--выберите продукцию--"
+        }
+        keys={["id", "nameRu"]}
+        getValues={(obj, keys) => keys.map((key) => obj[key])}
+      />
+      {product === undefined ? (
+        <div className={s.empty_card}>
+          <p>выберите категорию</p>
         </div>
-      </div>
+      ) : (
+        <DeleteProductCard {...product} />
+      )}
+      <Link className={s.go_back} to="/">
+        🏃‍♂️ Вернуться обратно
+      </Link>
     </section>
   );
 };

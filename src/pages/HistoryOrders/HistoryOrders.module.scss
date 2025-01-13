@@ -3,66 +3,61 @@
 
 .HistoryOrders {
 	text-align: center;
-	.container {
-		@include mix.container();
-		.loader {
-			@include mix.loader();
-		}
-		.title {
-			margin: 0 0 30px 0;
-			padding: 0;
-			font-size: 30px;
-			font-weight: 700;
-		}
-		.loader {
-			margin: auto;
-			@include mix.loader();
-			margin-top: 100px;
-		}
-		.orders {
-			@include mix.list-reset();
-			margin-bottom: 50px;
-			.order {
-				margin-bottom: 10px;
-				display: grid;
-				grid-template-areas:
-					'date detailsOrder'
-					'total detailsOrder';
-				grid-template-columns: 50% 1fr;
-				gap: 10px;
-				box-shadow: 0px 0px 10px 10px var.$color-gray-dark-light;
-				background-color: var.$color-white;
-				border-radius: var.$border-radius-default;
-				overflow: hidden;
-				.date {
-					align-self: center;
-					grid-area: date;
-					margin: 0;
-					color: var.$color-black;
-					font-size: var.$font-size-large;
-					font-weight: var.$font-weight-bold;
-					line-height: var.$line-height-large;
-				}
-				.total {
-					grid-area: total;
-					margin: 0;
-					color: var.$color-black;
-					font-size: var.$font-size-large;
-					font-weight: var.$font-weight-bold;
-					line-height: var.$line-height-large;
-				}
-				:last-child {
-					grid-area: detailsOrder;
-				}
+	.loader {
+		@include mix.loader();
+	}
+	.title {
+		margin: 0 0 30px 0;
+		padding: 0;
+		font-size: 30px;
+		font-weight: 700;
+	}
+	.loader {
+		margin: auto;
+		@include mix.loader();
+		margin-top: 100px;
+	}
+	.orders {
+		@include mix.list-reset();
+		margin-bottom: 50px;
+		.order {
+			margin-bottom: 10px;
+			display: grid;
+			grid-template-areas:
+				'date detailsOrder'
+				'total detailsOrder';
+			grid-template-columns: 50% 1fr;
+			gap: 10px;
+			box-shadow: 0px 0px 10px 10px var.$color-gray-dark-light;
+			background-color: var.$color-white;
+			border-radius: var.$border-radius-default;
+			overflow: hidden;
+			.date {
+				align-self: center;
+				grid-area: date;
+				margin: 0;
+				color: var.$color-black;
+				font-size: var.$font-size-large;
+				font-weight: var.$font-weight-bold;
+				line-height: var.$line-height-large;
+			}
+			.total {
+				grid-area: total;
+				margin: 0;
+				color: var.$color-black;
+				font-size: var.$font-size-large;
+				font-weight: var.$font-weight-bold;
+				line-height: var.$line-height-large;
 			}
 			:last-child {
-				margin-bottom: 0;
+				grid-area: detailsOrder;
 			}
 		}
-		.go_back {
-			@include mix.go-back();
+		:last-child {
+			margin-bottom: 0;
 		}
 	}
-	background-color: #f9f9f9;
-	padding: 50px 0;
+	.go_back {
+		@include mix.go-back();
+	}
 }

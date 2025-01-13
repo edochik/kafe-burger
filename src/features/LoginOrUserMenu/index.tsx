@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import s from "./LoginOrUserMenu.module.scss";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
@@ -9,6 +9,7 @@ import { useCloseHandler } from "../../shared/lib/hooks/useCloseHandler";
 const LoginOrUserMenu = () => {
   const { isAuthorization } = useAppSelector((state) => state.profile);
   const { login } = useAppSelector((state) => state.profile.data.user);
+  const location = useLocation();
   const [toggle, setToggle] = useState(false);
   const dispatch = useAppDispatch();
   const ref = useRef<HTMLDivElement>(null);
@@ -16,7 +17,11 @@ const LoginOrUserMenu = () => {
 
   if (isAuthorization === false) {
     return (
-      <Link className={s.link} to="/authorization">
+      <Link
+        className={s.link}
+        to="/authorization"
+        state={{ modal: true, background: location }}
+      >
         Войти
       </Link>
     );

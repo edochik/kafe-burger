@@ -1,5 +1,4 @@
 import s from "./OrderModal.module.scss";
-// import s from "../../shared/style/modal.module.scss";
 import { useEffect, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { Link, useNavigate } from "react-router-dom";

@@ -1,7 +1,7 @@
 import s from "./AuthorizationModal.module.scss";
 import { useEffect, useState } from "react";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
@@ -21,6 +21,7 @@ const AuthorizationModal = () => {
     login: "",
     password: "",
   });
+  const location = useLocation();
   const loading = useAppSelector((state) => state.profile.loading);
   const errorServer = useAppSelector((state) => state.profile.errorServer);
   const dispatch = useAppDispatch();
@@ -35,7 +36,6 @@ const AuthorizationModal = () => {
     const { value, name } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
-  //.overlay{ .modal{ .column{ .title{}.form{}}}}
   return (
     <div className={s.overlay} onClick={() => navigate("/")}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
@@ -81,7 +81,13 @@ const AuthorizationModal = () => {
             </fieldset>
           </form>
           {errorServer && <ResponseServer {...errorServer} />}
-          <Link to="/registration">
+          <Link
+            to="/registration"
+            state={{
+              modal: true,
+              background: location.state?.background || location,
+            }}
+          >
             <button className={s.button} disabled={loading === "pending"}>
               Регистрация
             </button>

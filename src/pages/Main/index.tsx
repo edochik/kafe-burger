@@ -15,7 +15,7 @@ const Main = () => {
             <RadioButtons />
             <Sort />
           </div>
-          <div className={s.wrapper}>
+          <div className={s.content}>
             <Cart />
             <ProductList />
           </div>

@@ -2,57 +2,51 @@
 @use '../../shared/style/variable.scss' as var;
 
 .DeleteProduct {
-	padding: 50px 0;
-	.container {
-		@include mix.container();
-		.wrapper {
-			display: grid;
-			grid-template-areas:
-				'title title'
-				'selectorFirst Card'
-				'selectorSecond Card'
-				'go_back go_back';
-			grid-template-columns: 50% 50%;
-			row-gap: 20px;
-			.title {
-				grid-area: title;
-				margin: 0 0 20px 0;
-				text-align: center;
-				font-size: var.$font-size-xlarge;
-				font-weight: var.$font-weight-extrabold;
-			}
-			label {
-				margin-bottom: 10px;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				font-size: var.$font-size-large;
-				color: var.$color-orange;
-				font-weight: var.$font-weight-extrabold;
-			}
-			:nth-child(2) {
-				grid-area: selectorFirst;
-			}
-			:nth-child(3) {
-				grid-area: selectorSecond;
-			}
-			:nth-child(4) {
-				grid-area: Card;
-			}
-			.empty_card {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				font-size: var.$font-size-large;
-				font-weight: var.$font-weight-extrabold;
-				border-radius: var.$border-radius-default;
-				background-color: var.$color-white;
-			}
-		}
-		.go_back {
-			grid-area: go_back;
-			justify-self: center;
-			@include mix.go-back();
-		}
+	display: grid;
+	grid-template-areas:
+		'title title'
+		'selectorFirst Card'
+		'selectorSecond Card'
+		'go_back go_back';
+	grid-template-columns: 50% 50%;
+	row-gap: 20px;
+	.title {
+		grid-area: title;
+		margin: 0 0 20px 0;
+		text-align: center;
+		font-size: var.$font-size-xlarge;
+		font-weight: var.$font-weight-extrabold;
 	}
+	label {
+		margin-bottom: 10px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		font-size: var.$font-size-large;
+		color: var.$color-orange;
+		font-weight: var.$font-weight-extrabold;
+	}
+	:nth-child(2) {
+		grid-area: selectorFirst;
+	}
+	:nth-child(3) {
+		grid-area: selectorSecond;
+	}
+	:nth-child(4) {
+		grid-area: Card;
+	}
+	.empty_card {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: var.$font-size-large;
+		font-weight: var.$font-weight-extrabold;
+		border-radius: var.$border-radius-default;
+		background-color: var.$color-white;
+	}
+}
+.go_back {
+	grid-area: go_back;
+	justify-self: center;
+	@include mix.go-back();
 }

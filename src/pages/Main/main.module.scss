@@ -3,6 +3,7 @@
 
 .Main {
 	@include mix.container();
+	padding-top: 50px;
 	padding-bottom: 50px;
 	.header {
 		padding-top: 40px;
@@ -11,7 +12,7 @@
 		justify-content: space-between;
 		align-items: center;
 	}
-	.wrapper {
+	.content {
 		display: flex;
 		gap: 50px;
 	}

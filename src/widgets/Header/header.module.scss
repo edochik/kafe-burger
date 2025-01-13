@@ -1,6 +1,7 @@
 @use '../../shared/style/variable.scss' as var;
+@use '../../shared/style/mixin.scss' as mix;
 
-.header {
+.Header {
 	position: relative;
 	padding: 24px 0 60px 0;
 	display: flex;
@@ -25,8 +26,12 @@
 		.image {
 		}
 		.info {
+			.visually_hidden {
+				@include mix.visually-hidden();
+			}
 			.title {
-				font-size: var.$font-size-xxxlarge;
+				font-size:  var.$font-size-xxxlarge;
+				font-weight: var.$font-weight-extrabold;
 				color: var.$color-white;
 			}
 			.color {

@@ -11,10 +11,11 @@ const HistoryOrders = () => {
   );
   const orderDetailsMap = getOrderDetailsMap(orderDetails);
   const formatOrders = getFormatOrders(orders);
-  
+
   return (
-    <div className={s.HistoryOrders}>
+    <section className={s.HistoryOrders}>
       <div className={s.container}>
+        <h2 className={s.title}>История заказов: </h2>
         <ul className={s.orders}>
           {formatOrders.reverse().map((order) => {
             const { id, date, total } = order;
@@ -34,7 +35,7 @@ const HistoryOrders = () => {
           🏃‍♂️ Вернуться обратно
         </Link>
       </div>
-    </div>
+    </section>
   );
 };
 

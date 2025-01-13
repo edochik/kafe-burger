@@ -323,7 +323,7 @@
 // 	}
 // ]
 
-const { type } = require("@testing-library/user-event/dist/type/index");
+// const { type } = require("@testing-library/user-event/dist/type/index");
 
 // const order = {
 // 	1: {

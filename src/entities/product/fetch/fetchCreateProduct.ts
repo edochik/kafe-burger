@@ -1,8 +1,5 @@
 import { API_PRODUCT } from "../../../shared/api/api";
 import { fetchData } from "../../../shared/api/helper";
-
-// const API_CREATE_PRODUCT = `${API_URL}/products`
-
 export async function fetchCreateProduct<T, K>(product: K): Promise<T> {
 	const options: RequestInit = {
 		method: 'POST',

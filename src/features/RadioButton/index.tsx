@@ -9,7 +9,7 @@ const RadioButton = (props: Category) => {
   const dispatch = useAppDispatch();
   return (
     <label
-      className={s.label}
+      className={s.RadioButton}
       onClick={() => dispatch(setSelectCategory(categoryEn))}
     >
       <input

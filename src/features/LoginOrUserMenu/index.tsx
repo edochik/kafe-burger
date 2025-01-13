@@ -1,19 +1,30 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import s from "./LoginOrUserMenu.module.scss";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchLogoutThunk } from "../../entities/profile/thunks/fetchLogoutThunk";
 import { useCloseHandler } from "../../shared/lib/hooks/useCloseHandler";
 
 const LoginOrUserMenu = () => {
   const { isAuthorization } = useAppSelector((state) => state.profile);
-  const { login } = useAppSelector((state) => state.profile.data.user);
+  const { login, role } = useAppSelector((state) => state.profile.data.user);
   const location = useLocation();
+  const navigate = useNavigate();
+
   const [toggle, setToggle] = useState(false);
   const dispatch = useAppDispatch();
   const ref = useRef<HTMLDivElement>(null);
   useCloseHandler(toggle, setToggle, ref);
+  
+  useEffect(() => {
+    if (
+      isAuthorization && 
+      ["/registration", "/authorization"].includes(location.pathname)
+    ) {
+      navigate("/");
+    }
+  }, [isAuthorization, location, navigate]);
 
   if (isAuthorization === false) {
     return (
@@ -46,12 +57,16 @@ const LoginOrUserMenu = () => {
           <li className={s.item} onClick={() => setToggle(false)}>
             <Link to="/history-order">Заказы</Link>
           </li>
-          <li className={s.item} onClick={() => setToggle(false)}>
-            <Link to="/create-product">Создать</Link>
-          </li>
-          <li className={s.item} onClick={() => setToggle(false)}>
-            <Link to="/delete-product">Удалить</Link>
-          </li>
+          {role === "admin" && (
+            <>
+              <li className={s.item} onClick={() => setToggle(false)}>
+                <Link to="/create-product">Создать</Link>
+              </li>
+              <li className={s.item} onClick={() => setToggle(false)}>
+                <Link to="/delete-product">Удалить</Link>
+              </li>
+            </>
+          )}
           <li className={s.item}>
             <Link
               to="/"

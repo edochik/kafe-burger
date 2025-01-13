@@ -1,4 +1,4 @@
-import s from "./ProductPage.module.scss";
+import s from "./ProductModal.module.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { CloseIcon } from "../../shared/ui/SVGIcons/CloseIcons";
 import { ToggleProductButton } from "../../shared/ui/ToggleProductButton";
@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
 import { useEscapeHandler } from "../../shared/lib/hooks/useEscapeHandler";
 import { addProductToCart } from "../../shared/lib/utils/addProductToCart";
 
-const ProductPage = () => {
+const ProductModal = () => {
   const navigate = useNavigate();
   const { id: productId } = useParams();
   const dispatch = useAppDispatch();
@@ -86,4 +86,4 @@ const ProductPage = () => {
   );
 };
 
-export { ProductPage };
+export { ProductModal as ProductPage };

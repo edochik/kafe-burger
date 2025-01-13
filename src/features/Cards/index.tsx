@@ -7,18 +7,24 @@ import {
   incrementPage,
 } from "../../entities/product/productSlice";
 import { Card } from "../Card";
+import { useEffect } from "react";
 
 const Cards = () => {
   const { selectCategory } = useAppSelector((state) => state.categories);
   const { products, loading, pageInfo } = useAppSelector(
     (state) => state.products
   );
+
   const { pageSize, currentPage } = pageInfo;
   const filterProduct = products.filter(
     (product) => product.categoryEn === selectCategory
   );
   const lastPage = Math.ceil(filterProduct.length / pageSize);
-
+  useEffect(() => {
+    if (lastPage < currentPage) {
+    }
+  }, [lastPage, currentPage]);
+  
   const dispatch = useAppDispatch();
   if (loading === "pending") {
     return <Loader />;

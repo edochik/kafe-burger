@@ -41,10 +41,10 @@ const OrderModal = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const order = cart.map((item) => {
-      const { id, count } = item;
-      return { id, count };
+      const { weight, ...spread } = item;
+      return { ...spread };
     });
-    dispatch(fetchOrderThunk({ user, deliveryMethod, order }));
+    dispatch(fetchOrderThunk({ user, deliveryMethod, order })); // название RU-EN photo
   };
 
   return (

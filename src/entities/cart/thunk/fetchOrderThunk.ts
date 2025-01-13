@@ -7,7 +7,6 @@ export const fetchOrderThunk = createAsyncThunk<
 	OrderPayload,
 	{ rejectValue: CartErrorServer }
 >(
-
 	'fetchOrderThunk',
 	async (data, { rejectWithValue }) => {
 		try {

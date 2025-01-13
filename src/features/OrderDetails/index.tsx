@@ -1,5 +1,4 @@
 import { OrderDetail } from "../../entities/profile/types.js";
-import { useAppSelector } from "../../shared/lib/hooks/hooks";
 import s from "./OrderDetails.module.scss";
 
 interface OrderDetailsProps {
@@ -7,23 +6,16 @@ interface OrderDetailsProps {
 }
 
 const OrderDetails = ({ values }: OrderDetailsProps) => {
-  const { products } = useAppSelector((state) => state.products);
-  const productsDictionary = Object.fromEntries(
-    products.map((product) => [product.id, product])
-  );
   return (
     <ul className={s.OrderDetails}>
       {values.map((value) => {
-        const { id, price, productId, count } = value;
-        const imageUrl = productsDictionary[productId]?.imageUrl;
-        const nameRu = productsDictionary[productId]?.nameRu;
-        const categoryRu = productsDictionary[productId]?.categoryRu;
+        const { id, price, count, imageUrl, nameRu } = value;
         return (
           <li className={s.order} key={id}>
             <img
               className={s.image}
               src={imageUrl}
-              alt={`фотография ${categoryRu} ${nameRu}`}
+              alt={`фотография ${nameRu}`}
             />
             <p className={s.name_ru}>{nameRu ? nameRu : "продукция удалена"}</p>
             <div className={s.wrapper}>

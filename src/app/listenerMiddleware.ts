@@ -7,9 +7,8 @@ import { fetchOrderThunk } from "../entities/cart/thunk/fetchOrderThunk";
 import { defaultPage, setSortBy } from "../entities/product/productSlice";
 import { fetchInitialProductsThunk } from "../entities/product/thunk/fetchInitialProductsThunk";
 import { getCategories } from "../entities/categories/getCategories";
-// import { fetchUserVerificationThunk } from "../entities/profile/thunks/fetchUserVerificationThunk";
-// import { fetchAuthorizationThunk } from "../entities/profile/thunks/fetchAuthorizationThunk";
 import { fetchOrdersThunk } from "../entities/profile/thunks/fetchOrdersThunk";
+import { fetchDeleteProductThunk } from "../entities/product/thunk/fetchDeleteProductThunk";
 
 export const listenerMiddleware = createListenerMiddleware();
 export const startAppListening = listenerMiddleware.startListening.withTypes<
@@ -44,18 +43,6 @@ startAppListening({
 		}
 	}
 });
-
-// обновление данных по истории заказа
-// startAppListening({
-// 	matcher: isAnyOf(fetchUserVerificationThunk.fulfilled, fetchAuthorizationThunk.fulfilled),
-// 	effect: async (action, listenerApi) => {
-// 		const { profile } = listenerApi.getState();
-// 		const userId = profile.data.user.id;
-// 		if (typeof userId === 'number') {
-// 			// await listenerApi.dispatch(fetchHistoryOrdersThunk(userId));
-// 		}
-// 	}
-// })
 
 //загрузка данных с локал стораж при перезагрузке страницы
 startAppListening({
@@ -101,7 +88,7 @@ startAppListening({
 
 // возвращаемся к первой странице если переключились между категориями
 startAppListening({
-	matcher: isAnyOf(setSelectCategory),
+	matcher: isAnyOf(setSelectCategory, fetchDeleteProductThunk.fulfilled),
 	effect: async (action, listenerApi) => {
 		const state = listenerApi.getState();
 		const { currentPage } = state.products.pageInfo;

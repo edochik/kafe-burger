@@ -13,6 +13,7 @@ export interface CartSuccessServer extends IResponseServer {
 export interface Cart {
 	id: number;
 	nameRu: string;
+	nameEn: string;
 	price: number;
 	weight: number;
 	imageUrl: string;

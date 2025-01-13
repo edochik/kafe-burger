@@ -150,7 +150,7 @@ const RegistrationModal = () => {
             </>
           ) : (
             <>
-              <div className={s.register}>{successServer.message}</div>
+              <div className={s.text}>{successServer.message}</div>
               <Link className={s.link} to="/authorization">
                 <button className={s.button}>Войти</button>
               </Link>

@@ -16,6 +16,9 @@ export interface OrderDetail {
 	price: number,
 	productId: number,
 	count: number
+	imageUrl: string,
+	nameRu: string,
+	nameEn: string
 }
 export interface Order {
 	id: number,

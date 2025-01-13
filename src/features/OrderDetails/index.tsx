@@ -11,8 +11,8 @@ const OrderDetails = ({ values }: OrderDetailsProps) => {
   const productsDictionary = Object.fromEntries(
     products.map((product) => [product.id, product])
   );
-  // console.log(products, "products");
-  // console.log(values, "values");
+  console.log(products, "products");
+  console.log(values, "values");
   return (
     <ul className={s.OrderDetails}>
       {values.map((value) => {

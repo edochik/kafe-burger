@@ -39,13 +39,20 @@
 ## Установка и запуск проекта
 
 1. Клонируйте репозиторий:
-   git clone https://github.com/edochik/kafe-burger.git
+
+- `git clone https://github.com/edochik/kafe-burger.git`
+
 2. Перейдите в директорию проекта:
+
+- `cd kafe-burger`
 
 3. Установите зависимости для фронтенда:
 
+- `npm install`
+
 4. API для бэкенда: Сервер используется на платформе Glitch.
- [link](https://glitch.com/edit/#!/kafe-burger)
+   [link](https://glitch.com/edit/#!/kafe-burger)
+
 ### Работа с заказами:
 
 - `GET` https://kafe-burger.glitch.me/api/orders - получить заказы
@@ -70,13 +77,5 @@
 
 5. Запустите фронтенд:
 
-Проект будет доступен по адресу [http://localhost:3000]
+Проект будет доступен по адресу http://localhost:3000
 
----
-
-## Структура проекта
-
-- `frontend/` - Исходный код фронтенда.
-- `backend/` - Исходный код бэкенда.
-
----

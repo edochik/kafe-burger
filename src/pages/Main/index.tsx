@@ -4,7 +4,12 @@ import { ProductList } from "../../features/Cards";
 import { Cart } from "../../features/Cart/";
 import { Outlet, useLocation } from "react-router-dom";
 import { Sort } from "../../features/Sort/";
+import { useAppSelector } from "../../shared/lib/hooks/hooks";
 const Main = () => {
+  const user = useAppSelector((state) => state.profile.data.user);
+  const loading = useAppSelector((state) => state.profile.loading);
+  console.log(user);
+  console.log(loading);
   const location = useLocation();
   const showMainContent = location.pathname === "/";
   return (

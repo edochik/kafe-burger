@@ -10,7 +10,7 @@ import { NotFoundPage } from "../pages/NotFoundPage/";
 import { HistoryOrders } from "../pages/HistoryOrders/";
 import { CreateProduct } from "../pages/CreateProduct";
 import { DeleteProduct } from "../pages/DeleteProduct/";
-import { ProtectedRoute } from "../features/ProtectedRoute/ProtectedRoute";
+import { ProtectedRoute } from "../features/ProtectedRoute";
 
 export const AppRouter = () => {
   const isAuth = useAppSelector((state) => state.profile.isAuthorization);

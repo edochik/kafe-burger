@@ -73,7 +73,7 @@ const DeleteProduct = () => {
       />
       {product === undefined ? (
         <div className={s.empty_card}>
-          <p>выберите категорию</p>
+          <p>Выберите категорию и продукцию</p>
         </div>
       ) : (
         <DeleteProductCard {...product} />

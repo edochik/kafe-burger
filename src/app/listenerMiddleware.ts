@@ -9,7 +9,6 @@ import { fetchInitialProductsThunk } from "../entities/product/thunk/fetchInitia
 import { getCategories } from "../entities/categories/getCategories";
 import { fetchOrdersThunk } from "../entities/profile/thunks/fetchOrdersThunk";
 import { fetchDeleteProductThunk } from "../entities/product/thunk/fetchDeleteProductThunk";
-import { fetchAuthorizationThunk } from "../entities/profile/thunks/fetchAuthorizationThunk";
 
 export const listenerMiddleware = createListenerMiddleware();
 export const startAppListening = listenerMiddleware.startListening.withTypes<
@@ -99,10 +98,3 @@ startAppListening({
 	}
 })
 
-// startAppListening({
-// 	matcher: isAnyOf(fetchAuthorizationThunk.fulfilled),
-// 	effect: async (action, listenerApi) => {
-// 		const state = listenerApi.getState();
-// 		console.log(state);
-// 	}
-// })

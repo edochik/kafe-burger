@@ -1,7 +1,7 @@
 import { API_URL } from "../../../shared/api/api";
 import { fetchData } from "../../../shared/api/helper";
 
-const API_UPDATE = `${API_URL}account/update`
+const API_UPDATE = `${API_URL}account`
 
 export async function fetchUpdateUser<T, K>(data: K): Promise<T> {
 	const options: RequestInit = {

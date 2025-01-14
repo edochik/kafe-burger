@@ -1,7 +1,7 @@
 import { API_URL } from "../../../shared/api/api";
 import { fetchData } from "../../../shared/api/helper";
 
-const API_REGISTRATION = `${API_URL}auth/register`
+const API_REGISTRATION = `${API_URL}account`
 
 export async function fetchRegistration<T, K>(data: K): Promise<T> {
 	const options: RequestInit = {

@@ -15,10 +15,9 @@ const Cart = () => {
   if (loading === "pending") {
     return (
       <aside>
-        <div className={s.cart}>
+        <div className={s.Cart}>
           <div className={s.wrapper_cart}>
             <h3 className={s.title}>Корзина</h3>
-            <p className={s.count}>{totalCount}</p>
           </div>
           <div className={s.loader}></div>
         </div>

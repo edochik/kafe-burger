@@ -24,7 +24,7 @@ const ProductModal = () => {
     return (
       <div className={s.overlay} onClick={() => navigate("/")}>
         <div className={s.modal}>
-          <div className={s.loader}></div>
+          ...Загрузка
         </div>
       </div>
     );

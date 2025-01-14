@@ -30,14 +30,14 @@ const Footer = () => {
             <ul className={s.list}>
               <li className={s.item}>
                 <a className={s.link} href="#!">
-                  <img className={s.image} src="/images/vk.svg" alt="logo vk" />
+                  <img className={s.image} src="./images/vk.svg" alt="logo vk" />
                 </a>
               </li>
               <li className={s.item}>
                 <a className={s.link} href="#!">
                   <img
                     className={s.image}
-                    src="/images/telegram.svg"
+                    src="./images/telegram.svg"
                     alt="logo telegram"
                   />
                 </a>

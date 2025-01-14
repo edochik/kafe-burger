@@ -3,8 +3,10 @@
 **Описание проекта**  
 Веб-приложение для кафе, которое предоставляет возможность пользователям заказывать бургеры, шаурму, салаты и другие блюда с доставкой.
 
-**Основной функционал:**  
+**Основной функционал:**
+
 1. **Для пользователей**:
+
    - Регистрация и авторизация пользователей.
    - Добавление товаров в корзину.
    - Оформление заказов с указанием данных для доставки.
@@ -15,7 +17,8 @@
    - Создание и удаление заказов.
    - Управление доступом и ролями пользователей.
 
-**Используемые технологии:**  
+**Используемые технологии:**
+
 - **Frontend**:  
   Языки: HTML, CSS, Typescript  
   Библиотеки: React, Redux/Toolkit  
@@ -25,7 +28,8 @@
   Сервер: Fastify  
   База данных: SQLite
 
-**Потенциальные улучшения:**  
+**Потенциальные улучшения:**
+
 - Поддержка многоязычности.
 - Мобильная версия приложения (React Native).
 - Расширение функционала для администраторов (например, управление товарами, изменение заказов).
@@ -35,56 +39,38 @@
 ## Установка и запуск проекта
 
 1. Клонируйте репозиторий:
-
-    ```bash
-    git clone https://github.com/your-username/food-delivery.git
-    ```
-
+   git clone https://github.com/edochik/kafe-burger.git
 2. Перейдите в директорию проекта:
-
-    ```bash
-    cd food-delivery
-    ```
 
 3. Установите зависимости для фронтенда:
 
-    ```bash
-    cd frontend
-    npm install
-    ```
+4. API для бэкенда: Сервер используется на платформе Glitch.
+ [link](https://glitch.com/edit/#!/kafe-burger)
+### Работа с заказами:
 
-4. Api бэкенд: 
- Api = 'https://chip-patch-papaya.glitch.me/api/'
- работа с заказами:
- Api GET   https://chip-patch-papaya.glitch.me/api/orders
- Api POST  https://chip-patch-papaya.glitch.me/api/orders
- работа с продукцией:
- Api GET    https://chip-patch-papaya.glitch.me/api/products
- Api POST   https://chip-patch-papaya.glitch.me/api/products
- Api DELETE https://chip-patch-papaya.glitch.me/api/products:id
- работа с пользователем:
- Api https://chip-patch-papaya.glitch.me/api/auth/login // это отдельно
- Api https://chip-patch-papaya.glitch.me/api/auth/verify // это отдельно
- Api https://chip-patch-papaya.glitch.me/api/auth/logout // это отдельно
- это работа с состоянием пользователя
- Api https://chip-patch-papaya.glitch.me/api/auth/register // это создание
- Api https://chip-patch-papaya.glitch.me/api/account/update // это обновление
- 
+- `GET` https://kafe-burger.glitch.me/api/orders - получить заказы
+- `POST` https://kafe-burger.glitch.me/api/orders - создать заказ
+
+### Работа с продукцией:
+
+- `GET` https://kafe-burger.glitch.me/api/products - получить продукцию
+- `POST` https://kafe-burger.glitch.me/api/products - создать новую продукцию
+- `DELETE` https://kafe-burger.glitch.me/api/products:id - удалить продукцию
+
+### Работа с пользователем:
+
+- `POST` https://kafe-burger.glitch.me/api/auth/login - войти под логином
+- `GET` https://kafe-burger.glitch.me/api/auth/verify - проверка регистрации
+- `POST` https://kafe-burger.glitch.me/api/auth/logout - выйти
+
+### Работа с состоянием пользователя:
+
+- `POST` https://kafe-burger.glitch.me/api/account - создать пользователя
+- `PUT` https://kafe-burger.glitch.me/api/account - обновить данные пользователя
+
 5. Запустите фронтенд:
 
-    ```bash
-    cd frontend
-    npm start
-    ```
-
-6. Запустите бэкенд:
-
-    ```bash
-    cd backend
-    npm start
-    ```
-
-Проект будет доступен по адресу [http://localhost:3000](http://localhost:3000).
+Проект будет доступен по адресу [http://localhost:3000]
 
 ---
 
@@ -94,30 +80,3 @@
 - `backend/` - Исходный код бэкенда.
 
 ---
-
-## Как внести изменения
-
-1. Сделайте форк репозитория.
-2. Создайте ветку для вашей фичи или исправления багов:
-
-    ```bash
-    git checkout -b my-feature
-    ```
-
-3. Внесите необходимые изменения.
-4. Протестируйте изменения.
-5. Закоммитьте и отправьте изменения на свой форк:
-
-    ```bash
-    git add .
-    git commit -m "Description of the changes"
-    git push origin my-feature
-    ```
-
-6. Создайте Pull Request.
-
----
-
-## Лицензия
-
-Этот проект лицензируется под лицензией MIT. Подробнее см. файл [LICENSE](LICENSE).

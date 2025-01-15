@@ -1,4 +1,4 @@
-import s from "./OrderModal.module.scss";
+import s from "./Order.module.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DonutIcon } from "../../shared/ui/SVGIcons/DonutIcon";

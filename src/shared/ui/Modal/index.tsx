@@ -5,12 +5,24 @@ import { useEscapeHandler } from "../../lib/hooks/useEscapeHandler";
 
 interface ModalProps {
   leftComponent: React.ReactNode;
-  rightComponent: React.ReactNode;
+  rightComponent?: React.ReactNode;
 }
 
 const Modal = ({ leftComponent, rightComponent }: ModalProps) => {
   const navigate = useNavigate();
   useEscapeHandler();
+  if (rightComponent === null) {
+    return (
+      <div className={s.overlay} onClick={() => navigate("/")}>
+        <div className={s.modal} onClick={(e) => e.stopPropagation()}>
+          {leftComponent}
+          <Link to="/" className={s.close}>
+            <CloseIcon />
+          </Link>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className={s.overlay} onClick={() => navigate("/")}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>

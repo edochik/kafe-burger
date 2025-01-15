@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { ProductPage } from "../pages/ProductModal";
+import { ProductPage } from "../pages/ProductPage";
 import { Registration } from "../features/Registration";
 import { Order } from "../features/Order";
 import { Authorization } from "../features/Authorization";

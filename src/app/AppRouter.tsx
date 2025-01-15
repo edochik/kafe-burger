@@ -57,6 +57,7 @@ export const AppRouter = () => {
             }
           />
           <Route path="not-found" element={<NotFoundPage />} />
+          <Route path="/not-found" element={<NotFoundPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

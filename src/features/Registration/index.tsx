@@ -1,6 +1,6 @@
 import s from "./Registration.module.scss";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
 import PhoneInput from "react-phone-input-2";
 import classNames from "classnames";
@@ -33,6 +33,7 @@ const Registration = () => {
   );
   const [clientError, setClientError] = useState<null | string>(null);
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     if (errorServer !== null || successServer !== null) {
@@ -140,7 +141,14 @@ const Registration = () => {
   const successResult = (
     <div className={s.success}>
       <div className={s.text}>{successServer && successServer.message}</div>
-      <Link className={s.link} to="/authorization">
+      <Link
+        className={s.link}
+        to="/authorization"
+        state={{
+          modal: true,
+          background: location.state?.background || location,
+        }}
+      >
         <button className={s.button}>Войти</button>
       </Link>
     </div>

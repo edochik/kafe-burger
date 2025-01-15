@@ -1,8 +1,8 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ProductPage } from "../pages/ProductModal";
-import { RegistrationModal } from "../features/RegistrationModal";
-import { OrderModal } from "../features/OrderModal";
-import { AuthorizationModal } from "../features/AuthorizationModal";
+import { Registration } from "../features/Registration";
+import { Order } from "../features/Order";
+import { Authorization } from "../features/Authorization";
 import { useAppSelector } from "../shared/lib/hooks/hooks";
 import { Main } from "../pages/Main";
 import { Profile } from "../pages/Profile";
@@ -62,10 +62,10 @@ export const AppRouter = () => {
       </Routes>
       {state?.background && (
         <Routes>
-          <Route path="order" element={<OrderModal />} />
+          <Route path="order" element={<Order />} />
           <Route path="product/:id" element={<ProductPage />} />
-          <Route path="registration" element={<RegistrationModal />} />
-          <Route path="authorization" element={<AuthorizationModal />} />
+          <Route path="registration" element={<Registration />} />
+          <Route path="authorization" element={<Authorization />} />
         </Routes>
       )}
     </>

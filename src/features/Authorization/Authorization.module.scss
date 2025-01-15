@@ -1,0 +1,31 @@
+@use '../../shared/style/mixin.scss' as mix;
+@use '../../shared/style/variable.scss' as var;
+
+.form {
+	.fieldset {
+		@include mix.fieldset-reset();
+		display: flex;
+		flex-direction: column;
+		row-gap: 10px;
+		.title {
+			margin: 0 0 16px 0;
+			font-weight: var.$font-weight-semibold;
+			font-size: var.$font-size-large;
+		}
+	}
+	.input {
+		@include mix.input-style();
+	}
+	.input_error {
+		@include mix.input-error();
+	}
+}
+
+.button {
+	@include mix.button-style(
+		var.$button-bg-default-2,
+		var.$color-white,
+		var.$button-bg-hover-1,
+		var.$button-bg-selected
+	);
+}

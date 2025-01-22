@@ -91,8 +91,9 @@ export const productSlice = createSlice({
 				const { products } = action.payload
 				state.products = products
 			})
-			.addCase(fetchInitialProductsThunk.rejected, (state) => {
+			.addCase(fetchInitialProductsThunk.rejected, (state, action) => {
 				state.loading = 'failed';
+				state.errorServer = action.payload ?? { status: "error", message: "fetchCreateProductThunk error" };
 			})
 
 			.addCase(fetchCreateProductThunk.pending, (state) => {

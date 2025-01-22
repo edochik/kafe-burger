@@ -24,10 +24,17 @@ const Cards = () => {
     if (lastPage < currentPage) {
     }
   }, [lastPage, currentPage]);
-  
+
   const dispatch = useAppDispatch();
   if (loading === "pending") {
     return <Loader />;
+  }
+  if (loading === "failed") {
+    return (
+      <section className={s.Cards}>
+        <div className={s.title}>Ошибка</div>
+      </section>
+    );
   }
   const categoryRu: string = filterProduct[0]?.categoryRu;
   const categoryName: string =

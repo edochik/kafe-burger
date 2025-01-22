@@ -6,10 +6,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Sort } from "../../features/Sort/";
 import { useAppSelector } from "../../shared/lib/hooks/hooks";
 const Main = () => {
-  const user = useAppSelector((state) => state.profile.data.user);
-  const loading = useAppSelector((state) => state.profile.loading);
-  console.log(user);
-  console.log(loading);
+  const stat = useAppSelector((state) => state);
+  console.log(stat);
   const location = useLocation();
   const showMainContent = location.pathname === "/";
   return (

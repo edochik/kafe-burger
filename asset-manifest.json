@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/kafe-burger/static/css/main.a6fa376f.css",
-    "main.js": "/kafe-burger/static/js/main.7742ded3.js",
+    "main.css": "/kafe-burger/static/css/main.ad3fba2a.css",
+    "main.js": "/kafe-burger/static/js/main.584c4eda.js",
     "static/media/Nunito-Regular.ttf": "/kafe-burger/static/media/Nunito-Regular.9d7a6e03c6e3ed49c7ac.ttf",
     "static/media/Nunito-SemiBold.ttf": "/kafe-burger/static/media/Nunito-SemiBold.ae592fe018d712c287a2.ttf",
     "static/media/Nunito-ExtraBold.ttf": "/kafe-burger/static/media/Nunito-ExtraBold.7415babff1752bd4ea44.ttf",
     "index.html": "/kafe-burger/index.html",
-    "main.a6fa376f.css.map": "/kafe-burger/static/css/main.a6fa376f.css.map",
-    "main.7742ded3.js.map": "/kafe-burger/static/js/main.7742ded3.js.map"
+    "main.ad3fba2a.css.map": "/kafe-burger/static/css/main.ad3fba2a.css.map",
+    "main.584c4eda.js.map": "/kafe-burger/static/js/main.584c4eda.js.map"
   },
   "entrypoints": [
-    "static/css/main.a6fa376f.css",
-    "static/js/main.7742ded3.js"
+    "static/css/main.ad3fba2a.css",
+    "static/js/main.584c4eda.js"
   ]
 }

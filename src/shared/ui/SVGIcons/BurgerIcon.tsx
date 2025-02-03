@@ -1,15 +1,17 @@
 interface BurgerIconProps {
-  size: string;
+  className: string;
 }
 
 const BurgerIcon = (props: BurgerIconProps) => {
-  const { size } = props;
+  const { className } = props;
   return (
+    // <div >
     <svg
-      width={size}
-      height={size}
+      // width="227px"
+      className={className}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      // viewBox="0 0 227 227"
     >
       <path
         d="M276.042 146.589C276.042 146.589 299.9 177.704 238.454 218.424C177.006 259.142 91.3402 272.615 74.293 228.766C57.2458 184.915 73.162 197.898 138.66 190.393C204.157 182.888 247.767 114.783 258.305 122.206C268.838 129.631 276.042 146.589 276.042 146.589Z"
@@ -240,6 +242,7 @@ const BurgerIcon = (props: BurgerIconProps) => {
         fill="#F2A40C"
       />
     </svg>
+    // </div>
   );
 };
 

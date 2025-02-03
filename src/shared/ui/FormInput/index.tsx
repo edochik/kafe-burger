@@ -15,7 +15,7 @@ interface FormInputProps {
   showLabel?: boolean;
   placeholder?: string;
   minLength?: number;
-  // autoFocus?: boolean;
+  autoFocus?: boolean;
 }
 
 const FormInput = ({
@@ -33,7 +33,8 @@ const FormInput = ({
   showLabel = true,
   placeholder,
   minLength,
-}: // autoFocus,
+  autoFocus,
+}: 
 FormInputProps) => {
   const InputComponent = (
     <input
@@ -48,7 +49,7 @@ FormInputProps) => {
       required
       pattern={pattern}
       disabled={isDisabled}
-      // autoFocus={autoFocus}
+      autoFocus={autoFocus}
       onInvalid={
         messageOnInvalid
           ? (e: React.ChangeEvent<HTMLInputElement>) =>

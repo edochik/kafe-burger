@@ -65,8 +65,7 @@ const Registration = () => {
     <form className={s.form} onSubmit={handleSubmit}>
       <fieldset className={s.fieldset}>
         <legend className={s.legend}>Регистрация</legend>
-        {registrationInput.map((field, index) => {
-          const { name, text, ...spread } = field;
+        {registrationInput.map(({ name, text, ...spread }, index) => {
           const value = dataUser[name as keyof UserFormData];
           return (
             <FormInput
@@ -82,6 +81,7 @@ const Registration = () => {
               value={value}
               onChange={(e) => handleInputChange(e)}
               showLabel={false}
+              autoFocus={index === 0}
               {...spread}
             />
           );

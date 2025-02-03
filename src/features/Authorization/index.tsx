@@ -25,6 +25,7 @@ const Authorization = () => {
   const loading = useAppSelector((state) => state.profile.loading);
   const errorServer = useAppSelector((state) => state.profile.errorServer);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (errorServer !== null) {
       dispatch(resetServerResponsesProfile());
@@ -47,8 +48,7 @@ const Authorization = () => {
       >
         <fieldset className={s.fieldset}>
           <legend className={s.title}>Авторизация</legend>
-          {authorizationInputs.map((field, index) => {
-            const { text, name } = field;
+          {authorizationInputs.map(({ text, name, ...field }, index) => {
             const value = formValues[name as keyof formValues];
             return (
               <FormInput
@@ -62,6 +62,8 @@ const Authorization = () => {
                 placeholder={text}
                 onChange={(e) => handleInputChange(e)}
                 ariaLabel={text}
+                autoFocus={index === 0}
+                name={name}
                 {...field}
               />
             );

@@ -2,14 +2,15 @@ import s from "./Header.module.scss";
 import { LogoIcon } from "../../shared/ui/SVGIcons/LogoIcon";
 import { BurgerIcon } from "../../shared/ui/SVGIcons/BurgerIcon";
 import { RenderLinkOrUser } from "../../features/LoginOrUserMenu";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className={s.Header}>
       <div className={s.top}>
-        <a className={s.logo} href="#!">
+        <Link className={s.logo} to="/">
           <LogoIcon className={s.logo_icon} optionalClass={s.logo_optional} />
-        </a>
+        </Link>
         <RenderLinkOrUser />
       </div>
       <div className={s.wrapper}>

@@ -1,18 +1,18 @@
+import { Link } from "react-router-dom";
 import { LogoIcon } from "../SVGIcons/LogoIcon";
 import s from "./footer.module.scss";
 
 const Footer = () => {
-  
   return (
     <footer className={s.footer}>
       <div className={s.container}>
         <div className={s.column}>
-          <a className={s.logo} href="#!">
+          <Link className={s.logo} to="/">
             <LogoIcon
-              className={s.logo_icon} 
+              className={s.logo_icon}
               optionalClass={s.optional_class}
-             /> 
-          </a>
+            />
+          </Link>
           <div>
             <div>© YouMeal, 2024</div>
             <div>Design: Anastasia Ilina</div>

@@ -43,3 +43,10 @@ $font-weight-extrabold: 800;
 $color-background-main: #f9f9f9;
 
 $border-radius-default: 15px;
+
+$mobile-small: 320px;  // для очень маленьких экранов
+$mobile-large: 480px;  // для обычных мобильных
+$tablet-small: 650px;  // для небольших планшетов
+$tablet-medium: 720px; // промежуточный размер между 650px и 768px
+$tablet: 768px;        // для стандартных планшетов
+$desktop: 1024px;      // для стандартных десктопов

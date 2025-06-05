@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./ProtectedRoute.module.scss";
 import { Navigate } from "react-router-dom";
-import { useAppSelector } from "../../shared/lib/hooks/hooks";
+import { useAppSelector } from "@shared/lib/hooks/hooks";
 
 interface ProtectedRouteProps {
   element: React.ReactNode;

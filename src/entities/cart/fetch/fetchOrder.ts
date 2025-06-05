@@ -1,5 +1,5 @@
-import { API_URL } from "../../../shared/api/api";
-import { fetchData } from "../../../shared/api/helper";
+import { API_URL } from "@shared/api/api";
+import { fetchData } from "@shared/api/helper";
 
 const API_ORDER = `${API_URL}orders`;
 

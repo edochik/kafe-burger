@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import s from "./DeleteProduct.module.scss";
-import { CustomSelect } from "../../shared/ui/CustomSelect";
-import { useAppSelector } from "../../shared/lib/hooks/hooks";
-import { DeleteProductCard } from "../../features/DeleteProductCard/";
+import { CustomSelect } from "@shared/ui/CustomSelect";
+import { useAppSelector } from "@shared/lib/hooks/hooks";
+import { DeleteProductCard } from "@features/DeleteProductCard/";
 import { Link } from "react-router-dom";
 
 const DeleteProduct = () => {

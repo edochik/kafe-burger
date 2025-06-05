@@ -1,5 +1,5 @@
-import { Cart } from "../../entities/cart/types";
-import { ToggleProductButton } from "../../shared/ui/ToggleProductButton/";
+import { Cart } from "@entities/cart/types";
+import { ToggleProductButton } from "@shared/ui/ToggleProductButton/";
 import s from "./CartItem.module.scss";
 
 const CartItem = (props: Cart) => {

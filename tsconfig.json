@@ -7,7 +7,12 @@
       "@components/*": ["components/*"],
       "@styles/*": ["style/*"],
       "@pages/*": ["pages/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@shared/*": ["shared/*"],
+      "@entities/*": ["entities/*"],
+      "@widgets/*": ["widgets/*"],
+      "@features/*": ["features/*"],
+      "@app/*": ["app/*"],
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

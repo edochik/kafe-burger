@@ -1,6 +1,6 @@
-import { addProductCart, incrementProduct } from "../../../entities/cart/cartSlice";
-import { Cart } from "../../../entities/cart/types";
-import { Product } from "../../../entities/product/types.js";
+import { addProductCart, incrementProduct } from "@entities/cart/cartSlice";
+import { Cart } from "@entities/cart/types";
+import { Product } from "@entities/product/types.js";
 import { useAppDispatch } from "../hooks/hooks";
 
 export function addProductToCart(

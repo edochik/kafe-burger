@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import s from "./Card.module.scss";
-import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { addProductToCart } from "../../shared/lib/utils/addProductToCart";
-import { Product } from "../../entities/product/types";
+import { useAppDispatch, useAppSelector } from "@shared/lib/hooks/hooks";
+import { addProductToCart } from "@shared/lib/utils/addProductToCart";
+import { Product } from "@entities/product/types";
 
 const Card = (product: Product) => {
   const { id, nameRu, price, weight, imageUrl } = product;

@@ -1,17 +1,17 @@
 import s from "./Registration.module.scss";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
+import { UserIcon } from "@shared/ui/SVGIcons/UserIcon";
 import PhoneInput from "react-phone-input-2";
 import classNames from "classnames";
-import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { fetchRegistrationThunk } from "../../entities/profile/thunks/fetchRegistrationThunk";
-import { ResponseServer } from "../../shared/ui/ResponseServer";
-import { resetServerResponsesProfile } from "../../entities/profile/userSlice";
-import { FormInput } from "../../shared/ui/FormInput";
-import { User } from "../../entities/profile/types";
+import { useAppDispatch, useAppSelector } from "@shared/lib/hooks/hooks";
+import { fetchRegistrationThunk } from "@entities/profile/thunks/fetchRegistrationThunk";
+import { ResponseServer } from "@shared/ui/ResponseServer";
+import { resetServerResponsesProfile } from "@entities/profile/userSlice";
+import { FormInput } from "@shared/ui/FormInput";
+import { User } from "@entities/profile/types";
 import { registrationInput } from "./registrationInput";
-import { Modal } from "../../shared/ui/Modal";
+import { Modal } from "@shared/ui/Modal";
 
 type UserFormData = Omit<User, "id" | "role"> & { password: string };
 

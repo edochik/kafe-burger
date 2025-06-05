@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@shared/lib/hooks/hooks";
 import s from "./Profile.module.scss";
 import {
   resetServerResponsesProfile,
   updateUser,
-} from "../../entities/profile/userSlice";
+} from "@entities/profile/userSlice";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
-import { ResponseServer } from "../../shared/ui/ResponseServer";
-import { User } from "../../entities/profile/types";
-import { fetchUpdateUserThunk } from "../../entities/profile/thunks/fetchUpdateUserThunk";
+import { ResponseServer } from "@shared/ui/ResponseServer";
+import { User } from "@entities/profile/types";
+import { fetchUpdateUserThunk } from "@entities/profile/thunks/fetchUpdateUserThunk";
 import { profileFields } from "./profileFields";
-import { FormInput } from "../../shared/ui/FormInput/";
+import { FormInput } from "@shared/ui/FormInput/";
 
 const Profile = () => {
   const [password, setPassword] = useState("");

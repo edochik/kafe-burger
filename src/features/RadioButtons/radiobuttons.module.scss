@@ -1,15 +1,14 @@
-@use '../../shared/style/mixin.scss' as mix;
-@use '../../shared/style/variable.scss' as var;
+@use '@shared/style/mixin.scss' as mix;
+@use '@shared/style/variable.scss' as var;
 
-// https://css-tricks.com/pure-css-horizontal-scrolling/ посмотреть
 .RadioButtons {
 	overflow-x: auto;
 	scroll-behavior: smooth;
-	scrollbar-width: none; /* Скрытие скролла в Firefox */  scroll-direction: horizontal;
-
-	-webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
+	scrollbar-width: none;
+	scroll-direction: horizontal;
+	-webkit-overflow-scrolling: touch;
 	&::-webkit-scrollbar {
-		display: none; /* Скрытие скролла в Chrome, Safari */
+		display: none;
 	}
 
 	.fieldset {

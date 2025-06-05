@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { CartItem } from "../CartItem";
 import s from "./Cart.module.scss";
-import { useAppSelector } from "../../shared/lib/hooks/hooks";
+import { useAppSelector } from "@shared/lib/hooks/hooks";
 
 const Cart = () => {
   const { cart } = useAppSelector((state) => state.cart);

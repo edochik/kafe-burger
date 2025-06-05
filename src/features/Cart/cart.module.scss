@@ -1,5 +1,5 @@
-@use '../../shared/style/mixin.scss' as mix;
-@use '../../shared/style/variable.scss' as var;
+@use '@shared/style/mixin.scss' as mix;
+@use '@shared/style/variable.scss' as var;
 
 .Cart {
 	border-radius: 18px;
@@ -64,7 +64,7 @@
 		&:before {
 			@include mix.absoluteCenter();
 			content: '';
-			background-image: url('../../shared/assets/icon/delivery.png');
+			background-image: url('~@shared/assets/icon/delivery.png');
 			width: 24px;
 			height: 24px;
 			left: -32px;

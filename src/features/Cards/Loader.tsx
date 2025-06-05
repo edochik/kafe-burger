@@ -1,6 +1,5 @@
-import React from "react";
 import s from "./Cards.module.scss";
-import { SkeletonLoaderCard } from "../../shared/ui/SVGIcons/SkeletonLoaderCard";
+import { SkeletonLoaderCard } from "@shared/ui/SVGIcons/SkeletonLoaderCard";
 
 const Loader = () => {
   return (

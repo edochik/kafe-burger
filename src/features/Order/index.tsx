@@ -1,18 +1,18 @@
 import s from "./Order.module.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { DonutIcon } from "../../shared/ui/SVGIcons/DonutIcon";
+import { DonutIcon } from "@shared/ui/SVGIcons/DonutIcon";
 import PhoneInput from "react-phone-input-2";
-import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { updateUser } from "../../entities/profile/userSlice";
+import { useAppDispatch, useAppSelector } from "@shared/lib/hooks/hooks";
+import { updateUser } from "@entities/profile/userSlice";
 import { deliveryMethods } from "./DeliveryMethods";
-import { User } from "../../entities/profile/types";
-import { fetchOrderThunk } from "../../entities/cart/thunk/fetchOrderThunk";
-import { resetServerResponsesCart } from "../../entities/cart/cartSlice";
-import { FormInput } from "../../shared/ui/FormInput";
+import { User } from "@entities/profile/types";
+import { fetchOrderThunk } from "@entities/cart/thunk/fetchOrderThunk";
+import { resetServerResponsesCart } from "@entities/cart/cartSlice";
+import { FormInput } from "@shared/ui/FormInput";
 import { deliveryInputs } from "./deliveryInputs";
 import classNames from "classnames";
-import { Modal } from "../../shared/ui/Modal";
+import { Modal } from "@shared/ui/Modal";
 
 const Order = () => {
   const { user } = useAppSelector((state) => state.profile.data);

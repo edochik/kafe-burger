@@ -1,4 +1,4 @@
-import { OrderDetail } from "../../entities/profile/types.js";
+import { OrderDetail } from "@entities/profile/types.js";
 import s from "./OrderDetails.module.scss";
 
 interface OrderDetailsProps {

@@ -1,4 +1,4 @@
-import { OrderDetail } from "../../entities/profile/types.js";
+import { OrderDetail } from "@entities/profile/types.js";
 
 export function getOrderDetailsMap(orderDetails: OrderDetail[]) {
 	const detailsMap: Map<number, OrderDetail[]> = new Map();

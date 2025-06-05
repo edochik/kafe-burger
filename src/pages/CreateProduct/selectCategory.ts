@@ -1,6 +1,6 @@
-import { AppDispatch } from "../../app/store";
-import { Category } from "../../entities/categories/types";
-import { updateCategoryProduct } from "../../entities/product/productSlice";
+import { AppDispatch } from "@app/store";
+import { Category } from "@entities/categories/types";
+import { updateCategoryProduct } from "@entities/product/productSlice";
 
 export const selectCategory = (
 	value: string,

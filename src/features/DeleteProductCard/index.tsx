@@ -1,6 +1,6 @@
-import { fetchDeleteProductThunk } from "../../entities/product/thunk/fetchDeleteProductThunk";
-import { Product } from "../../entities/product/types";
-import { useAppDispatch } from "../../shared/lib/hooks/hooks";
+import { fetchDeleteProductThunk } from "@entities/product/thunk/fetchDeleteProductThunk";
+import { Product } from "@entities/product/types";
+import { useAppDispatch } from "@shared/lib/hooks/hooks";
 import s from "./DeleteProductCard.module.scss";
 
 const DeleteProductCard = (product: Product) => {

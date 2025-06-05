@@ -1,15 +1,15 @@
 import s from "./Authorization.module.scss";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { UserIcon } from "../../shared/ui/SVGIcons/UserIcon";
+import { UserIcon } from "@shared/ui/SVGIcons/UserIcon";
 import classNames from "classnames";
-import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { ResponseServer } from "../../shared/ui/ResponseServer";
-import { fetchAuthorizationThunk } from "../../entities/profile/thunks/fetchAuthorizationThunk";
-import { resetServerResponsesProfile } from "../../entities/profile/userSlice";
+import { useAppDispatch, useAppSelector } from "@shared/lib/hooks/hooks";
+import { ResponseServer } from "@shared/ui/ResponseServer";
+import { fetchAuthorizationThunk } from "@entities/profile/thunks/fetchAuthorizationThunk";
+import { resetServerResponsesProfile } from "@entities/profile/userSlice";
 import { authorizationInputs } from "./authorizationInputs";
-import { FormInput } from "../../shared/ui/FormInput";
-import { Modal } from "../../shared/ui/Modal";
+import { FormInput } from "@shared/ui/FormInput";
+import { Modal } from "@shared/ui/Modal";
 
 interface formValues {
   login: string;

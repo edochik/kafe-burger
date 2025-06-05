@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import s from "./CreateProduct.module.scss";
-import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@shared/lib/hooks/hooks";
 import { Link, useLocation } from "react-router-dom";
 import { createProductFields } from "./createProductFields";
-import { FormInput } from "../../shared/ui/FormInput/";
+import { FormInput } from "@shared/ui/FormInput/";
 import {
   resetNewProduct,
   resetServerResponseProduct,
   updateProduct,
-} from "../../entities/product/productSlice";
-import { Product } from "../../entities/product/types";
-import { fetchCreateProductThunk } from "../../entities/product/thunk/fetchCreateProductThunk";
+} from "@entities/product/productSlice";
+import { Product } from "@entities/product/types";
+import { fetchCreateProductThunk } from "@entities/product/thunk/fetchCreateProductThunk";
 import { numberInput } from "./numberInput";
 import { selectCategory } from "./selectCategory";
-import { ResponseServer } from "../../shared/ui/ResponseServer/";
-import { CustomSelect } from "../../shared/ui/CustomSelect";
+import { ResponseServer } from "@shared/ui/ResponseServer/";
+import { CustomSelect } from "@shared/ui/CustomSelect";
 
 const CreateProduct = () => {
   const {

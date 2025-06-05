@@ -1,7 +1,7 @@
 import {
   decrementProduct,
   incrementProduct,
-} from "../../../entities/cart/cartSlice";
+} from "@entities/cart/cartSlice";
 import { useAppDispatch } from "../../lib/hooks/hooks";
 import s from "./ToggleProductButton.module.scss";
 interface ToggleProductButtonProps {

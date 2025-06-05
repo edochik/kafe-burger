@@ -1,5 +1,5 @@
-import { IResponseServer } from "../../shared/types/IResponseServer";
-import { LoadingStatus } from "../../shared/types/loading";
+import { IResponseServer } from "@shared/types/IResponseServer";
+import { LoadingStatus } from "@shared/types/loading";
 import { User } from "../profile/types";
 
 export interface CartErrorServer extends IResponseServer {

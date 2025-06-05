@@ -1,6 +1,6 @@
-import { AppDispatch } from "../../app/store";
-import { updateProduct } from "../../entities/product/productSlice";
-import { Product } from "../../entities/product/types";
+import { AppDispatch } from "@app/store";
+import { updateProduct } from "@entities/product/productSlice";
+import { Product } from "@entities/product/types";
 
 export const numberInput = (
 	name: keyof Omit<Product, 'id'>,

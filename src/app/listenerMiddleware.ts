@@ -1,14 +1,14 @@
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "./store";
-import { setCategories, setSelectCategory } from "../entities/categories/categoriesSlice";
-import { addProductCart, decrementProduct, incrementProduct, setCartFromLocalStorage } from "../entities/cart/cartSlice";
-import { Cart } from "../entities/cart/types";
-import { fetchOrderThunk } from "../entities/cart/thunk/fetchOrderThunk";
-import { defaultPage, setSortBy } from "../entities/product/productSlice";
-import { fetchInitialProductsThunk } from "../entities/product/thunk/fetchInitialProductsThunk";
-import { getCategories } from "../entities/categories/getCategories";
-import { fetchOrdersThunk } from "../entities/profile/thunks/fetchOrdersThunk";
-import { fetchDeleteProductThunk } from "../entities/product/thunk/fetchDeleteProductThunk";
+import { setCategories, setSelectCategory } from "@entities/categories/categoriesSlice";
+import { addProductCart, decrementProduct, incrementProduct, setCartFromLocalStorage } from "@entities/cart/cartSlice";
+import { Cart } from "@entities/cart/types";
+import { fetchOrderThunk } from "@entities/cart/thunk/fetchOrderThunk";
+import { defaultPage, setSortBy } from "@entities/product/productSlice";
+import { fetchInitialProductsThunk } from "@entities/product/thunk/fetchInitialProductsThunk";
+import { getCategories } from "@entities/categories/getCategories";
+import { fetchOrdersThunk } from "@entities/profile/thunks/fetchOrdersThunk";
+import { fetchDeleteProductThunk } from "@entities/product/thunk/fetchDeleteProductThunk";
 
 export const listenerMiddleware = createListenerMiddleware();
 export const startAppListening = listenerMiddleware.startListening.withTypes<

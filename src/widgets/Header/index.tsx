@@ -1,7 +1,7 @@
 import s from "./Header.module.scss";
-import { LogoIcon } from "../../shared/ui/SVGIcons/LogoIcon";
-import { BurgerIcon } from "../../shared/ui/SVGIcons/BurgerIcon";
-import { RenderLinkOrUser } from "../../features/LoginOrUserMenu";
+import { LogoIcon } from "@shared/ui/SVGIcons/LogoIcon";
+import { BurgerIcon } from "@shared/ui/SVGIcons/BurgerIcon";
+import { RenderLinkOrUser } from "@features/LoginOrUserMenu";
 import { Link } from "react-router-dom";
 
 const Header = () => {

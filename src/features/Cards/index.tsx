@@ -1,11 +1,11 @@
 import s from "./Cards.module.scss";
-import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@shared/lib/hooks/hooks";
 import { Loader } from "./Loader";
 import { Pagination } from "../Pagination";
 import {
   decrementPage,
   incrementPage,
-} from "../../entities/product/productSlice";
+} from "@entities/product/productSlice";
 import { Card } from "../Card";
 import { useEffect } from "react";
 

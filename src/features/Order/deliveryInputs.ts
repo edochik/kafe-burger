@@ -1,4 +1,4 @@
-import { Input } from "../../shared/types/Input";
+import { Input } from "@shared/types/Input";
 
 export const deliveryInputs: Input[] = [
 	{

@@ -1,10 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import s from "./LoginOrUserMenu.module.scss";
 import classNames from "classnames";
-import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@shared/lib/hooks/hooks";
 import { useEffect, useRef, useState } from "react";
-import { fetchLogoutThunk } from "../../entities/profile/thunks/fetchLogoutThunk";
-import { useCloseHandler } from "../../shared/lib/hooks/useCloseHandler";
+import { fetchLogoutThunk } from "@entities/profile/thunks/fetchLogoutThunk";
+import { useCloseHandler } from "@shared/lib/hooks/useCloseHandler";
 
 const LoginOrUserMenu = () => {
   const { isAuthorization } = useAppSelector((state) => state.profile);

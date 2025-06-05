@@ -1,16 +1,16 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { ProductPage } from "../pages/ProductPage";
-import { Registration } from "../features/Registration";
-import { Order } from "../features/Order";
-import { Authorization } from "../features/Authorization";
+import { ProductPage } from "@pages/ProductPage";
+import { Registration } from "@features/Registration";
+import { Order } from "@features/Order";
+import { Authorization } from "@features/Authorization";
 import { useAppSelector } from "../shared/lib/hooks/hooks";
-import { Main } from "../pages/Main";
-import { Profile } from "../pages/Profile";
-import { NotFoundPage } from "../pages/NotFoundPage/";
-import { HistoryOrders } from "../pages/HistoryOrders/";
-import { CreateProduct } from "../pages/CreateProduct";
-import { DeleteProduct } from "../pages/DeleteProduct/";
-import { ProtectedRoute } from "../features/ProtectedRoute";
+import { Main } from "@pages/Main";
+import { Profile } from "@pages/Profile";
+import { NotFoundPage } from "@pages/NotFoundPage/";
+import { HistoryOrders } from "@pages/HistoryOrders/";
+import { CreateProduct } from "@pages/CreateProduct";
+import { DeleteProduct } from "@pages/DeleteProduct/";
+import { ProtectedRoute } from "@features/ProtectedRoute";
 
 export const AppRouter = () => {
   const isAuth = useAppSelector((state) => state.profile.isAuthorization);

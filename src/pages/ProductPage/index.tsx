@@ -1,9 +1,9 @@
 import s from "./ProductPage.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
-import { ToggleProductButton } from "../../shared/ui/ToggleProductButton";
-import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { addProductToCart } from "../../shared/lib/utils/addProductToCart";
-import { Modal } from "../../shared/ui/Modal";
+import { ToggleProductButton } from "@shared/ui/ToggleProductButton";
+import { useAppDispatch, useAppSelector } from "@shared/lib/hooks/hooks";
+import { addProductToCart } from "@shared/lib/utils/addProductToCart";
+import { Modal } from "@shared/ui/Modal";
 
 const ProductPage = () => {
   const navigate = useNavigate();

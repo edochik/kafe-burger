@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../shared/lib/hooks/hooks";
+import { useAppSelector } from "@shared/lib/hooks/hooks";
 import s from "./HistoryOrders.module.scss";
 import { getOrderDetailsMap } from "./getOrderDetailsMap";
 import { getFormatOrders } from "./getFormatOrders";
-import { OrderDetails } from "../../features/OrderDetails/";
+import { OrderDetails } from "@features/OrderDetails/";
 
 const HistoryOrders = () => {
   const { orders, orderDetails } = useAppSelector(

@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import s from "./Sort.module.scss";
-import { useCloseHandler } from "../../shared/lib/hooks/useCloseHandler";
-import { useAppDispatch, useAppSelector } from "../../shared/lib/hooks/hooks";
-import { setSortBy } from "../../entities/product/productSlice";
+import { useCloseHandler } from "@shared/lib/hooks/useCloseHandler";
+import { useAppDispatch, useAppSelector } from "@shared/lib/hooks/hooks";
+import { setSortBy } from "@entities/product/productSlice";
 
 const sortOptions: Record<string, string> = {
   alphabetAsc: "алфавиту ↑",

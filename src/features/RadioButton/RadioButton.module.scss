@@ -9,9 +9,9 @@
 	display: flex;
 	align-items: center;
 	overflow: hidden;
-	transition:
-		color 0.3s ease-in-out,
-		background-color 0.3s ease-in-out;
+	// transition:
+	// 	color 0.3s ease-in-out,
+	// 	background-color 0.3s ease-in-out;
 	.input {
 		@include mix.input-hidden();
 	}
@@ -23,9 +23,9 @@
 		width: 100%;
 		height: 100%;
 		background-color: white;
-		transition:
-			color 0.3s ease-in-out,
-			background-color 0.3s ease-in-out;
+		// transition:
+		// 	color 0.3s ease-in-out,
+		// 	background-color 0.3s ease-in-out;
 	}
 	.radio::before {
 		display: inline-block;
@@ -34,9 +34,7 @@
 		content: '';
 		inset: 0;
 		background-color: var.$button-bg-default-3;
-		transition:
-			color 0.3s ease-in-out,
-			background-color 0.3s ease-in-out;
+		transition: opacity 0.3s ease-in-out;
 	}
 
 	.input:checked + .radio::before {

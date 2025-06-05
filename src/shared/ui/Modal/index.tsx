@@ -13,22 +13,24 @@ interface ModalProps {
 const paths = ["authorization", "order", "product", "registration"];
 
 const Modal = ({ leftComponent, rightComponent }: ModalProps) => {
-  const [overlay, setOverlay] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
     const cleanPath = location.pathname.replace(/[^a-z]*/gi, (_) => "");
     if (paths.includes(cleanPath)) {
-      setOverlay(true);
+      setIsActive(true);
     }
-  }, [setOverlay, location]);
+  }, [setIsActive, location]);
+
   useEscapeHandler();
+
   if (rightComponent === null) {
     return (
       <div
         className={classNames({
           [s.overlay]: true,
-          [s.active]: overlay,
+          [s.active]: isActive,
         })}
         onClick={() => navigate("/")}
       >
@@ -46,7 +48,7 @@ const Modal = ({ leftComponent, rightComponent }: ModalProps) => {
     <div
       className={classNames({
         [s.overlay]: true,
-        [s.active]: overlay,
+        [s.active]: isActive,
       })}
       onClick={() => navigate("/")}
     >

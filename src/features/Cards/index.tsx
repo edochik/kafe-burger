@@ -2,10 +2,7 @@ import s from "./Cards.module.scss";
 import { useAppDispatch, useAppSelector } from "@shared/lib/hooks/hooks";
 import { Loader } from "./Loader";
 import { Pagination } from "../Pagination";
-import {
-  decrementPage,
-  incrementPage,
-} from "@entities/product/productSlice";
+import { decrementPage, incrementPage } from "@entities/product/productSlice";
 import { Card } from "../Card";
 import { useEffect } from "react";
 
@@ -19,6 +16,7 @@ const Cards = () => {
   const filterProduct = products.filter(
     (product) => product.categoryEn === selectCategory
   );
+  
   const lastPage = Math.ceil(filterProduct.length / pageSize);
   useEffect(() => {
     if (lastPage < currentPage) {
@@ -36,7 +34,9 @@ const Cards = () => {
       </section>
     );
   }
+  
   const categoryRu: string = filterProduct[0]?.categoryRu;
+  
   const categoryName: string =
     categoryRu[0].toUpperCase() + categoryRu.slice(1);
 

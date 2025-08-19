@@ -27,7 +27,7 @@ const ProductPage = () => {
   }
 
   const {
-    id,
+    // id,
     nameRu,
     price,
     description,

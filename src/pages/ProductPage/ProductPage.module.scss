@@ -19,10 +19,13 @@
 		.image {
 			grid-area: image;
 			width: 276px;
+			height: 194px;
+			object-fit: cover;
 			border-radius: 16px;
 		}
 		.info {
 			grid-area: info;
+			min-width: 344px;
 			.description {
 				margin: 0 0 10px 0;
 				line-height: var.$line-height-large;

@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/kafe-burger/static/css/main.4fd05d0a.css",
+    "main.css": "/kafe-burger/static/css/main.97c6b802.css",
     "main.js": "/kafe-burger/static/js/main.c760e3bf.js",
     "static/media/Nunito-Regular.ttf": "/kafe-burger/static/media/Nunito-Regular.9d7a6e03c6e3ed49c7ac.ttf",
     "static/media/Nunito-SemiBold.ttf": "/kafe-burger/static/media/Nunito-SemiBold.ae592fe018d712c287a2.ttf",
     "static/media/Nunito-ExtraBold.ttf": "/kafe-burger/static/media/Nunito-ExtraBold.7415babff1752bd4ea44.ttf",
     "index.html": "/kafe-burger/index.html",
-    "main.4fd05d0a.css.map": "/kafe-burger/static/css/main.4fd05d0a.css.map",
+    "main.97c6b802.css.map": "/kafe-burger/static/css/main.97c6b802.css.map",
     "main.c760e3bf.js.map": "/kafe-burger/static/js/main.c760e3bf.js.map"
   },
   "entrypoints": [
-    "static/css/main.4fd05d0a.css",
+    "static/css/main.97c6b802.css",
     "static/js/main.c760e3bf.js"
   ]
 }

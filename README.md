@@ -49,30 +49,30 @@
 
 - `npm install`
 
-4. API для бэкенда: Сервер используется на платформе Glitch.
-   [link](https://glitch.com/edit/#!/kafe-burger)
+4. API для бэкенда: Сервер используется на платформе Render.
+   [link](https://burger-server-18np.onrender.com/)
 
 ### Работа с заказами:
 
-- `GET` https://kafe-burger.glitch.me/api/orders - получить заказы
-- `POST` https://kafe-burger.glitch.me/api/orders - создать заказ
+- `GET` https://burger-server-18np.onrender.com/api/orders - получить заказы
+- `POST` https://burger-server-18np.onrender.com/orders - создать заказ
 
 ### Работа с продукцией:
 
-- `GET` https://kafe-burger.glitch.me/api/products - получить продукцию
-- `POST` https://kafe-burger.glitch.me/api/products - создать новую продукцию
-- `DELETE` https://kafe-burger.glitch.me/api/products:id - удалить продукцию
+- `GET` https://burger-server-18np.onrender.com/api/products - получить продукцию
+- `POST` https://burger-server-18np.onrender.com/api/products - создать новую продукцию
+- `DELETE` https://burger-server-18np.onrender.com/api/products:id - удалить продукцию
 
 ### Работа с пользователем:
 
-- `POST` https://kafe-burger.glitch.me/api/auth/login - войти под логином
-- `GET` https://kafe-burger.glitch.me/api/auth/verify - проверка регистрации
-- `POST` https://kafe-burger.glitch.me/api/auth/logout - выйти
+- `POST` https://burger-server-18np.onrender.com/api/auth/login - войти под логином
+- `GET` https://burger-server-18np.onrender.com/api/auth/verify - проверка регистрации
+- `POST` https://burger-server-18np.onrender.com/api/auth/logout - выйти
 
 ### Работа с состоянием пользователя:
 
-- `POST` https://kafe-burger.glitch.me/api/account - создать пользователя
-- `PUT` https://kafe-burger.glitch.me/api/account - обновить данные пользователя
+- `POST` https://burger-server-18np.onrender.com/api/account - создать пользователя
+- `PUT` https://burger-server-18np.onrender.com/api/account - обновить данные пользователя
 
 5. Запустите фронтенд:
 
